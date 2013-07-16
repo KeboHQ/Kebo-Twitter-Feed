@@ -37,6 +37,11 @@ require_once( KEBO_TWITTER_PLUGIN_PATH . 'inc/menu.php' );
 require_once( KEBO_TWITTER_PLUGIN_PATH . 'inc/widget.php' );
 
 /**
+ * Include Request for the Twitter Feed.
+ */
+require_once( KEBO_TWITTER_PLUGIN_PATH . 'inc/get_tweets.php' );
+
+/**
  * Register File and Function used to Delete Plugin.
  */
 register_uninstall_hook( KEBO_TWITTER_PLUGIN_PATH . 'uninstall.php', 'kebo_twitter_uninstall' );

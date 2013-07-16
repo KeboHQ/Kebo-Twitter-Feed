@@ -69,6 +69,7 @@ function kebo_twitter_menu_render() {
         
     ?>
     <div class="wrap">
+        
         <?php screen_icon('options-general'); ?>
         <h2><?php echo __('Twitter Feed', 'kebo_twitter'); ?></h2>
             <?php settings_errors(); ?>
@@ -80,6 +81,7 @@ function kebo_twitter_menu_render() {
             submit_button();
             ?>
         </form>
+        
     </div>
     <?php
     

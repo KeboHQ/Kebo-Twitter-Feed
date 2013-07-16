@@ -3,13 +3,21 @@
  * Twitter Feed Widget
  */
 
-add_action( 'widgets_init', function(){
-     register_widget( 'Kebo_Twitter_Feed_Widget' );
-});
+/*
+ * Only register Widget if connection has been made to our Twitter App.
+ */
+if ( false !== ( $twitter_data = get_transient( 'kebo_twitter_connection' ) ) ) {
+    
+    add_action( 'widgets_init', function() {
+        register_widget( 'Kebo_Twitter_Feed_Widget' );
+    });
+            
+}
 
 class Kebo_Twitter_Feed_Widget extends WP_Widget {
 
     function Kebo_Twitter_Feed_Widget() {
+
         $widget_ops = array(
             'classname' => 'kebo_twitter_feed_widget',
             'description' => __('Displays a list of your most recent Tweets.', 'kebo_twitter')
@@ -22,54 +30,91 @@ class Kebo_Twitter_Feed_Widget extends WP_Widget {
      * Outputs Content
      */
     function widget($args, $instance) {
+
+        extract($args, EXTR_SKIP);
         
-            extract( $args, EXTR_SKIP );
-
-            echo $before_widget;
-
-            echo '<h2>Title</h2>';
-            echo '<p>sdgsdgsdgsd</p>';
+        if ( false === ( $tweets = get_transient('kebo_twitter_feed') )) {
             
-            echo $after_widget;
+            $tweets = kebo_twitter_get_tweets();
+        
+        }
+        
+        echo $before_widget;
+        
+        if ( isset( $instance['title'] ) && !empty( $instance['title'] ) ) {
+            
+            echo $before_title;
+            echo $instance['title'];
+            echo $after_title;
+            
+        }
+        
+        if ( 2 == $instance['style'] ) {
+            
+            require_once( KEBO_TWITTER_PLUGIN_PATH . 'views/widget_horizontal.php' );
+            
+        } else {
+            
+            require_once( KEBO_TWITTER_PLUGIN_PATH . 'views/widget_vertical.php' );
+            
+        }
+        
+        echo $after_widget;
     }
-    
+
     /*
      * Outputs Options Form
      */
     function form($instance) {
         ?>
+        
+        <label for="<?php echo $this->get_field_id('title'); ?>">
+            <p><?php echo __('Title', 'kebo_twitter'); ?>: <input style="width: 100%;" type="text" value="<?php echo $instance['title']; ?>" name="<?php echo $this->get_field_name('title'); ?>" id="<?php echo $this->get_field_id('title'); ?>"></p>
+        </label>
 
         <label for="<?php echo $this->get_field_id('style'); ?>">
             <p>
-            <?php echo __( 'Style', 'kebo_twitter' ); ?>
-            <select id="<?php echo $this->get_field_id('style') ?>" name="<?php echo $this->get_field_name('style'); ?>">
-                <option value="1"><?php echo __( 'Vertical List', 'kebo_twitter' ); ?></option>
-                <option value="2"><?php echo __( 'Horizontal Slider', 'kebo_twitter' ); ?></option>
-            </select>
+                <?php echo __('Style', 'kebo_twitter'); ?>:
+                <select id="<?php echo $this->get_field_id('style') ?>" name="<?php echo $this->get_field_name('style'); ?>">
+                    <option value="1" <?php if ( 1 == $instance['style'] ) { echo 'selected="selected"'; } ?>><?php echo __('Vertical List', 'kebo_twitter'); ?></option>
+                    <option value="2" <?php if ( 2 == $instance['style'] ) { echo 'selected="selected"'; } ?>><?php echo __('Horizontal Slider', 'kebo_twitter'); ?></option>
+                </select>
             </p>
         </label>
 
-        <label for="<?php echo $this->get_field_id('num_tweets'); ?>">
-            <p><?php echo __( 'Number Of Tweets', 'kebo_twitter' ); ?> <input  type="text" size="3" value="<?php echo $config['num_tweets']; ?>" name="<?php echo $this->get_field_name('num_tweets'); ?>" id="<?php echo $this->get_field_id('num_tweets'); ?>"></p>
+        <label for="<?php echo $this->get_field_id('count'); ?>">
+            <p><?php echo __('Number Of Tweets', 'kebo_twitter'); ?>: <input type="text" size="2" value="<?php echo $instance['count']; ?>" name="<?php echo $this->get_field_name('count'); ?>" id="<?php echo $this->get_field_id('count'); ?>"><span> <?php echo __('Range 1-50', 'kebo_twitter') ?></span></p>
         </label>
 
         <?php
     }
-    
+
     /*
      * Validates and Updates Options
      */
     function update($new_instance, $old_instance) {
-
+        
+        $instance = array();
+        
         $instance = $old_instance;
-        //update the username
-        $instance['username'] = $new_instance['username'];
-        $instance['title'] = $new_instance['title'];
-        $num = (int) $newinstance['num'];
-        $num = intval($num);
-        $num = ($num > 1) ? $num : 1;
-        $instance['url'] = "http://api.twitter.com/1/statuses/user_timeline.json?screen_name={$newinstance['username']}&count={$num}";
-        $instance['num'] = $num;
+        
+        $instance['title'] = wp_filter_nohtml_kses( $new_instance['title'] );
+        $instance['style'] = wp_filter_nohtml_kses( $new_instance['style'] );
+        
+        if ( is_numeric( $new_instance['count'] ) ) {
+            
+            if ( 50 <= intval( $new_instance['count'] ) ) {
+                $new_instance['count'] = 50;
+            }
+            
+            if ( 1 >= intval( $new_instance['count'] ) ) {
+                $new_instance['count'] = 1;
+            }
+            
+            $instance['count'] = intval( $new_instance['count'] );
+            
+        }
+        
         return $instance;
     }
 

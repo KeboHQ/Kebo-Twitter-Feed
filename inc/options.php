@@ -37,7 +37,7 @@ function kebo_twitter_options_init() {
             <p>Connected as <a class="account" href="<?php echo $twitter_data['account_link']; ?>" target="_blank">@<?php echo $twitter_data['account']; ?></a> <a class="disconnect" title="Disconnect Service" href="<?php echo admin_url('admin.php?page=kebo-twitter&reset=true') ?>">&#10006;</a></p>
 
         <?php endif; ?>
-        
+
         <h3>General Options</h3>
 
         <?php
@@ -124,8 +124,37 @@ function kebo_twitter_options_validate($input) {
 
     $output = array();
 
-    if (isset($input['kebo_twitter_cache_timer']) && !empty($input['kebo_twitter_cache_timer']))
-        $output['kebo_twitter_cache_timer'] = absint(intval($input['kebo_twitter_cache_timer']));
+    if (isset($input['kebo_twitter_cache_timer']) && !empty($input['kebo_twitter_cache_timer'])) {
+        
+        if (is_numeric($input['kebo_twitter_cache_timer'])) {
+            
+            if (5 <= $input['kebo_twitter_cache_timer'] && 60 >= $input['kebo_twitter_cache_timer']) {
+                
+                $output['kebo_twitter_cache_timer'] = intval($input['kebo_twitter_cache_timer']);
+                $type = 'updated';
+                $message = __( 'Successfully updated.', 'kebo_twitter' );
+                
+            } else {
+                
+                $type = 'error';
+                $message = __( 'Value supplied is outside of acceptable range 5-60.', 'kebo_twitter' );
+                
+            }
+            
+        } else {
+            
+            $type = 'error';
+            $message = __( 'Value supplied is not a valid number.', 'kebo_twitter' );
+            
+        }
+    }
+
+    add_settings_error(
+        'kebo_twitter_cache_timer',
+        esc_attr('settings_updated'),
+        $message,
+        $type
+    );
 
     return apply_filters('kebo_twitter_options_validate', $output, $options);
 }
