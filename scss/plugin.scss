@@ -6,56 +6,140 @@
 
 $twitter: #0192c9;
 
-/* Custom Mixins */
+/* Admin Menu Icon */
+#adminmenu .toplevel_page_kebo-twitter div.wp-menu-image {
+        background: url("../imgs/twitter_feed_icons_sprite.png") -92px -34px no-repeat;
+}
+#adminmenu .toplevel_page_kebo-twitter:hover div.wp-menu-image,
+#adminmenu .toplevel_page_kebo-twitter.current div.wp-menu-image,
+#adminmenu .toplevel_page_kebo-twitter.current:hover div.wp-menu-image {
+        background-position: -92px -2px;
+}
 
-
-/* General Styles */
+/* Admin Menu Page */
 
 .social-link {
-    padding: 8px 16px 8px 14px;
-    background: #eee;
-    text-decoration: none;
-    color: #fff;
-    font-size: 16px;
-    display: inline-block;
-    font-weight: normal;
+        padding: 8px 16px 8px 14px;
+        background: #eee;
+        text-decoration: none;
+        color: #fff;
+        font-size: 16px;
+        display: inline-block;
+        font-weight: normal;
 }
 .social-link:hover,
 .social-link:focus,
 .social-link:active {
-    color: #fff;
+        color: #fff;
 }
 .social-link i {
-    margin-right: 8px;
-    font-size: 16px;
+        margin-right: 8px;
+        font-size: 16px;
 }
 .social-link.twitter {
-    background: $twitter;
+        background: $twitter;
 }
 .social-link.twitter:hover {
-    background: darken($twitter, 10%);
+        background: darken($twitter, 10%);
 }
 .social-link.disabled {
-    background: #aaa;
-    text-decoration: none;
-    color: #fff;
-    font-size: 16px;
-    display: inline-block;
-    font-weight: normal;
+        background: #aaa;
+        text-decoration: none;
+        color: #fff;
+        font-size: 16px;
+        display: inline-block;
+        font-weight: normal;
 }
 a.account {
-    text-decoration: none;
+        text-decoration: none;
 }
 .disconnect {
-    text-decoration: none;
-    color: #fff;
-    padding: 1px 3px 2px 3px;
-    background: #dd4b39;
-    border-radius: 9999px;
-    font-size: 9px;
-    font-weight: bold;
+        text-decoration: none;
+        color: #fff;
+        padding: 1px 3px 2px 3px;
+        background: #dd4b39;
+        border-radius: 9999px;
+        font-size: 9px;
+        font-weight: bold;
 }
 .disconnect:hover {
-    background: darken(#dd4b39, 10%);
-    color: #fff;
+        background: darken(#dd4b39, 10%);
+        color: #fff;
+}
+
+/* Twitter Feed General */
+
+.kebo-tweets {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+}
+.kebo-tweets .tweet {
+        margin: 0;
+        padding: 0;
+}
+.kebo-tweets .tweet .date {
+        float: right;
+}
+.kebo-tweets .tweet .text {
+        margin: 5px 0 2px 0;
+}
+.kebo-tweets .tweet .links {
+        text-align: right;
+}
+.kebo-tweets .tweet .links a {
+        background: url('../imgs/twitter_feed_icons_sprite.png') top left no-repeat;
+        width: 20px;
+        height: 14px;
+        display: inline-block;
+}
+
+/* Dark Style */
+.kebo-tweets.dark .tweet .links a {
+        opacity: 0.5;
+}
+.kebo-tweets.dark .tweet .links a:hover {
+        opacity: 0.7;
+}
+.kebo-tweets.dark .tweet .links .reply {
+        background-position: 0px 0px;
+}
+.kebo-tweets.dark .tweet .links .retweet {
+        background-position: -27px 0px;
+}
+.kebo-tweets.dark .tweet .links .favourite {
+        background-position: -54px 0px;
+}
+
+/* Light Style */
+.kebo-tweets.light .tweet .links a {
+        opacity: 1;
+}
+.kebo-tweets.light .tweet .links a:hover {
+        opacity: 0.6;
+}
+.kebo-tweets.light .tweet .links .reply {
+        background-position: 0px -32px;
+}
+.kebo-tweets.light .tweet .links .retweet {
+        background-position: -27px -32px;
+}
+.kebo-tweets.light .tweet .links .favourite {
+        background-position: -54px -32px;
+}
+
+/* Twitter Feed - Horizontal */
+.kebo-tweets.horizontal {
+        
+}
+#kebo-tweet-slider .tweet {
+        display: none;
+        height: auto;
+}
+
+/* Twitter Feed - Vertical */
+.kebo-tweets.vertical .tweet {
+        margin: 0;
+        padding: 10px 0;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 }

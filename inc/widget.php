@@ -33,20 +33,13 @@ class Kebo_Twitter_Feed_Widget extends WP_Widget {
 
         extract($args, EXTR_SKIP);
         
+        /*
+         * Get tweets from transient and refresh is its expired.
+         */
         if ( false === ( $tweets = get_transient('kebo_twitter_feed') )) {
             
             $tweets = kebo_twitter_get_tweets();
         
-        }
-        
-        echo $before_widget;
-        
-        if ( isset( $instance['title'] ) && !empty( $instance['title'] ) ) {
-            
-            echo $before_title;
-            echo $instance['title'];
-            echo $after_title;
-            
         }
         
         if ( 2 == $instance['style'] ) {
@@ -59,7 +52,6 @@ class Kebo_Twitter_Feed_Widget extends WP_Widget {
             
         }
         
-        echo $after_widget;
     }
 
     /*
@@ -82,8 +74,18 @@ class Kebo_Twitter_Feed_Widget extends WP_Widget {
             </p>
         </label>
 
+        <label for="<?php echo $this->get_field_id('theme'); ?>">
+            <p>
+                <?php echo __('Theme', 'kebo_twitter'); ?>:
+                <select style="width: 108px;" id="<?php echo $this->get_field_id('theme') ?>" name="<?php echo $this->get_field_name('theme'); ?>">
+                    <option value="light" <?php if ( 'light' == $instance['theme'] ) { echo 'selected="selected"'; } ?>><?php echo __('Light', 'kebo_twitter'); ?></option>
+                    <option value="dark" <?php if ( 'dark' == $instance['theme'] ) { echo 'selected="selected"'; } ?>><?php echo __('Dark', 'kebo_twitter'); ?></option>
+                </select>
+            </p>
+        </label>
+
         <label for="<?php echo $this->get_field_id('count'); ?>">
-            <p><?php echo __('Number Of Tweets', 'kebo_twitter'); ?>: <input type="text" size="2" value="<?php echo $instance['count']; ?>" name="<?php echo $this->get_field_name('count'); ?>" id="<?php echo $this->get_field_id('count'); ?>"><span> <?php echo __('Range 1-50', 'kebo_twitter') ?></span></p>
+            <p><?php echo __('Number Of Tweets', 'kebo_twitter'); ?>: <input style="width: 28px;" type="text" value="<?php echo $instance['count']; ?>" name="<?php echo $this->get_field_name('count'); ?>" id="<?php echo $this->get_field_id('count'); ?>"><span> <?php echo __('Range 1-50', 'kebo_twitter') ?></span></p>
         </label>
 
         <?php
@@ -100,6 +102,7 @@ class Kebo_Twitter_Feed_Widget extends WP_Widget {
         
         $instance['title'] = wp_filter_nohtml_kses( $new_instance['title'] );
         $instance['style'] = wp_filter_nohtml_kses( $new_instance['style'] );
+        $instance['theme'] = wp_filter_nohtml_kses( $new_instance['theme'] );
         
         if ( is_numeric( $new_instance['count'] ) ) {
             

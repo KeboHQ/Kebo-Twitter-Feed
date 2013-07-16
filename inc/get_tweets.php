@@ -94,3 +94,46 @@ if ( !function_exists( 'get_tweets' ) ) :
     }
     
 endif;
+
+/*
+ * Hooks Output Function to 'wp_footer'.
+ */
+function kebo_twitter_print_js() {
+    
+    add_action( 'wp_footer', 'kebo_twitter_slider_script' );
+    
+}
+
+/*
+ * Outputs Slider Javascript
+ */
+function kebo_twitter_slider_script() {
+    ?>
+
+    <script>
+        jQuery(document).ready(function() {
+
+            jQuery('#kebo-tweet-slider .tweet').eq(0).fadeToggle('1000').delay(10500).fadeToggle('1000');
+            var tcount = 1;
+            var theight = jQuery('#kebo-tweet-slider .tweet').eq(0).outerHeight();
+            jQuery('#kebo-tweet-slider').css({ minHeight : theight, })
+            var initTweets = setInterval(fadeTweets, 11500);
+
+            function fadeTweets() {
+
+                if (tcount == 2) {
+                    tcount = 0;
+                }
+                //theight = jQuery('#kebo-tweet-slider .tweet').eq(tcount).outerHeight();
+                //jQuery('#kebo-tweet-slider').height(theight);
+                jQuery('#kebo-tweet-slider .tweet').eq(tcount).fadeToggle('1000').delay(10500).fadeToggle('1000');
+
+                ++tcount;
+
+            }
+
+        });
+    </script>
+    
+    <?php
+}
