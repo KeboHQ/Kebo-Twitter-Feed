@@ -134,6 +134,9 @@ function kebo_twitter_options_validate($input) {
                 $type = 'updated';
                 $message = __( 'Successfully updated.', 'kebo_twitter' );
                 
+                // On Successful Update, Refresh Tweet List
+                kebo_twitter_get_tweets();
+                
             } else {
                 
                 $type = 'error';

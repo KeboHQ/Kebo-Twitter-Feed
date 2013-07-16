@@ -100,7 +100,7 @@ endif;
  */
 function kebo_twitter_print_js() {
     
-    add_action( 'wp_footer', 'kebo_twitter_slider_script' );
+    add_action( 'wp_footer', 'kebo_twitter_slider_script', 99 );
     
 }
 

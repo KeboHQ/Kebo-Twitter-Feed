@@ -12,6 +12,7 @@ if (isset($instance['title']) && !empty($instance['title'])) {
     echo $before_title;
     echo $instance['title'];
     echo $after_title;
+    
 }
 ?>
 

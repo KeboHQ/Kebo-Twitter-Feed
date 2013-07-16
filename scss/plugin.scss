@@ -73,10 +73,12 @@ a.account {
         margin: 0;
         padding: 0;
         overflow: hidden;
+        list-style: none;
 }
 .kebo-tweets .tweet {
         margin: 0;
         padding: 0;
+        list-style: none;
 }
 .kebo-tweets .tweet .date {
         float: right;
@@ -135,6 +137,7 @@ a.account {
 #kebo-tweet-slider .tweet {
         display: none;
         height: auto;
+        list-style: none;
 }
 
 /* Twitter Feed - Vertical */
@@ -142,4 +145,7 @@ a.account {
         margin: 0;
         padding: 10px 0;
         border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+.kebo-tweets.vertical .tweet:first-of-type {
+        padding-top: 0;
 }
