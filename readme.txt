@@ -3,7 +3,7 @@ Contributors: PeterBooker, lukeketley
 Tags: twitter, tweets, feeds, social, api, oauth, widget
 Requires at least: 3.0.1
 Tested up to: 3.4
-Stable tag: 0.20
+Stable tag: 0.21
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -64,6 +64,9 @@ We store data in an option and transient, both of which are removed when you uni
 3. This is the Widget you can use to display your Twitter Feed.
 
 == Changelog ==
+
+= 0.21 =
+* Bug Fix: Fixed incompatibility with older versions of PHP.
 
 = 0.20 =
 * Note: Improved compatibility, getting ready to make translation possible.
