@@ -8,9 +8,13 @@
  */
 if ( false !== ( $twitter_data = get_transient( 'kebo_twitter_connection' ) ) ) {
     
-    add_action( 'widgets_init', function() {
+    add_action('widgets_init', 'kebo_twitter_register_widget');
+    
+    function kebo_twitter_register_widget() {
+        
         register_widget( 'Kebo_Twitter_Feed_Widget' );
-    });
+        
+    }
             
 }
 
