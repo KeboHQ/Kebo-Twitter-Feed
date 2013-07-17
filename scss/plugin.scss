@@ -70,15 +70,21 @@ a.account {
 /* Twitter Feed General */
 
 .kebo-tweets {
+        overflow: hidden;
         margin: 0;
         padding: 0;
-        overflow: hidden;
         list-style: none;
+        border: none;
+        outline: none;
+        background-image: none;
 }
 .kebo-tweets .tweet {
         margin: 0;
         padding: 0;
         list-style: none;
+        border: none;
+        outline: none;
+        background-image: none;
 }
 .kebo-tweets .tweet .date {
         float: right;

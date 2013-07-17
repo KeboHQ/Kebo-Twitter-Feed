@@ -39,7 +39,7 @@ if (isset($instance['title']) && !empty($instance['title'])) {
 
         <li class="tweet" id="kebo-tweet-slider">
 
-            <div>
+            <div class="meta">
                 <a class="account" href="https://twitter.com/<?php echo $tweet->user->screen_name; ?>" target="_blank">@<?php echo $tweet->user->screen_name; ?></a>
                 <a class="date" href="https://twitter.com/<?php echo $tweet->user->screen_name; ?>/statuses/<?php echo $tweet->id_str; ?>" target="_blank">
                     <time title="<?php echo __('Time posted'); ?>: <?php echo date('dS M Y H:i:s e', strtotime($tweet->created_at)); ?>" datetime="<?php echo date('c', strtotime($tweet->created_at)); ?>" aria-label="<?php echo __('Posted on '); ?><?php echo $created; ?>"><?php echo $created; ?></time>

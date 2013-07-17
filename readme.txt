@@ -1,35 +1,35 @@
 === Kebo Twitter Feed ===
-Contributors: PeterBooker
-Tags: twitter, feeds, social,
+Contributors: PeterBooker, lukeketley
+Tags: twitter, tweets, feeds, social, api, oauth, widget
 Requires at least: 3.0.1
 Tested up to: 3.4
-Stable tag: 0.15
+Stable tag: 0.20
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Connect your site to your Twitter account and display your Twitter Feed on your website effortlessly, in a useful list or stylish slider.
+Connect your site to your Twitter account and display your Twitter Feed on your website effortlessly with a custom widget.
 
 == Description ==
 
 Hassle-free and user-friendly way to add a Twitter Feed to your website. We provide a custom Widget to help you display the Twitter Feed on your website, as well as direct access to the data for developers.
 
-We access your Twitter Feed through you giving permission for our Kebo Twitter App to read your Twitter Feed. Your website can then request an updated list of Tweets at any point through our OAuth request server using the credentials stored on your own site, at no point will we store and log any of your information. You can get more information regarding how we treat your data in our [Privacy Policy](http://kebopowered.com/privacy-policy/ "Kebo Privacy Policy").
+We access your Twitter Feed through you giving permission for our Kebo Twitter App to read your Twitter Feed. Your website can then request an updated list of Tweets at any point through our OAuth request server using the credentials stored on your own site, at no point will we store and log any of your information. You can get more information regarding how we treat your data in our [privacy policy](http://kebopowered.com/privacy-policy/ "Kebo Privacy Policy").
 
-To ensure the reliability of the plugin, when using connections to external services to transmit data, we store the data locally in a text file. This means that if a connection is not possible at any point, we can fallback to the Tweets stored locally and continue to make requests each minute until a request is successful.
+Features include:
 
-We have provided a 'Kebo Twitter Feed' Widget to allow you to easily display the Twitter Feed on your website. You can choose between a Vertical List which fits sidebars perfectly and a Horizontal Slider which works well in sidebars and footers.
-
-Developers have direct access to an object containing all the tweets, functions to display tweets in our List and Slider, as well as other useful hooks.
+* Hassle-free Twitter API handling. We take care of the OAuth Requests for you.
+* Connect your website to Twitter in seconds with no technical knowledge required.
+* Caching used to avoid needless requests every page re-fresh.
+* Local cache backup, in case the connection to Twitter has problems.
+* Handy Widget to display your feed easily.
 
 == Installation ==
 
-This section describes how to install the plugin and get it working.
-
-1. Upload `/kebo-twitter-feed/` to the `/wp-content/plugins/` directory
-2. Activate the plugin through the 'Plugins' menu in WordPress
-3. Then either:
-* Place the `Kebo Twitter Feed` Widget into a Widget area through the `Appearance -> Widgets` menu in WordPress.
-* More coming...
+1. Install using your WordPress Admin or upload /kebo-twitter-feed/ to the /wp-content/plugins/ directory.
+2. Activate the plugin through the 'Plugins' menu in WordPress.
+3. Visit the Kebo Twitter menu at the bottom of your WordPress control panel.
+4. Click on the large 'Connect to Twitter' button and follow the prompts.
+5. Place the 'Kebo Twitter Feed' Widget into a Widget area through the 'Appearance -> Widgets' menu in WordPress.
 
 == Frequently Asked Questions ==
 
@@ -45,56 +45,83 @@ Your website will hold your OAuth2 credentials and a list of your latest tweets.
 
 The Kebo Twitter App only requests Read access to your account. This prevents us from ever creating tweets or sending direct messages on your behalf.
 
-= Another question? =
+= I have found a bug or need help using the plugin, what do I do? =
 
-Another answer.
+Let us know in our [Support Forum](http://wordpress.org/support/plugin/kebo-twitter-feed). We want to hear about any bugs and/or problems ASAP so that we can fix them to improve the experience for all users.
+
+= There is something cool you could add... =
+
+Fantastic, make a post on the [Support Forum](http://wordpress.org/support/plugin/kebo-twitter-feed) and let us know. We are always looking for ways to improve our plugins.
+
+= Will this plugin leave clutter in my WordPress database? =
+
+We store data in an option and transient, both of which are removed when you uninstall the plugin. No trace will be left in your database.
 
 == Screenshots ==
 
-1. This screen shot description corresponds to screenshot-1.(png|jpg|jpeg|gif). Note that the screenshot is taken from
-the /assets directory or the directory that contains the stable readme.txt (tags or trunk). Screenshots in the /assets 
-directory take precedence. For example, `/assets/screenshot-1.png` would win over `/tags/4.3/screenshot-1.png` 
-(or jpg, jpeg, gif).
-2. This is the second screen shot
+1. This is the settings page for the plugin, you will need to connect your website to Twitter by clicking the 'Conntect to Twitter' button.
+2. Once you have setup a connection to Twitter, this is what the settings page should look like. You will now have access to our Widget.
+3. This is the Widget you can use to display your Twitter Feed.
 
 == Changelog ==
 
+= 0.20 =
+* Note: Improved compatibility, getting ready to make translation possible.
+* Note: Improved readme information.
+* Bug Fix: Fixed Twitter account link on plugin settings page.
+* Bug Fix: Added default settings to the Widget.
+
 = 0.15 =
-* A change since the previous version.
-* Another change.
+* Note: Initial version.
 
-== Upgrade Notice ==
+== Developers Notes ==
 
-= 0.15 =
-Upgrade notices describe the reason a user should upgrade.  No more than 300 characters.
+You can directly access the object containing all the Tweets like this:
 
-== Arbitrary section ==
+`<?php $tweets = kebo_twitter_get_tweets(); ?>`
 
-You may provide arbitrary sections, in the same format as the ones above.  This may be of use for extremely complicated
-plugins where more information needs to be conveyed that doesn't fit into the categories of "description" or
-"installation."  Arbitrary sections will be shown below the built-in sections outlined above.
+This function checks the cache and refreshes the data if needed. Then returns the object containing all the Tweets. Below is an example of how you might use the data:
 
-== A brief Markdown Example ==
+`
+<?php $i = 0; ?>
 
-Ordered list:
+<?php foreach ($tweets as $tweet) : ?>
 
-1. Some feature
-1. Another feature
-1. Something else about the plugin
+    <?php echo $tweet->text; ?>
 
-Unordered list:
+    <?php if ( ++$i == 10 ) break; ?>
 
-* something
-* something else
-* third thing
+<?php endforeach; ?>
+`
 
-Here's a link to [WordPress](http://wordpress.org/ "Your favorite software") and one to [Markdown's Syntax Documentation][markdown syntax].
-Titles are optional, naturally.
+== Styling the Widget ==
 
-[markdown syntax]: http://daringfireball.net/projects/markdown/syntax
-            "Markdown is what the parser uses to process much of the readme file"
+We use the the inbuilt methods to output the Widget and Title containers so that it should fit seamlessly into your website.
 
-Markdown uses email style notation for blockquotes and I've been told:
-> Asterisks for *emphasis*. Double it up  for **strong**.
+If you want to style the inside of the Widget below is the HTML structure:
 
-`<?php code(); // goes in backticks ?>`
+`
+<ul class="kebo-tweets vertical">
+
+    <li class="tweet">
+
+        <div class="meta">
+            <a class="account"></a>
+            <a class="date"></a>
+        </div>
+        
+        <p class="text"></p>
+
+        <div class="links">
+            <a class="reply"></a>
+            <a class="retweet"></a>
+            <a class="favourite"></a>
+        </div>
+
+    </li>
+
+</ul>
+`
+
+The slider has one significant change which is that the containing unordered list has an ID of 'kebo-tweet-slider'.
+
