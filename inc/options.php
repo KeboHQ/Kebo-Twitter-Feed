@@ -36,8 +36,8 @@ function kebo_twitter_options_init() {
 
         <?php else : ?>
 
-            <a class="social-link twitter" href="#"><i class="icon-twitter"></i><?php echo __('Connected to Twitter', 'kebo_twitter'); ?></a><br>
-            <p><?php _e('Connected as', 'kebo_twitter'); ?> <a class="account" href="<?php echo $twitter_data['account_link']; ?>" target="_blank">@<?php echo $twitter_data['account']; ?></a> <a class="disconnect" title="Disconnect Service" href="<?php echo admin_url('admin.php?page=kebo-twitter&reset=true') ?>">&#10006;</a></p>
+            <a class="social-link twitter" href="#"><?php _e('Connected to Twitter', 'kebo_twitter'); ?></a><br>
+            <p><?php _e('Connected as', 'kebo_twitter'); ?> <a class="account" href="<?php echo $twitter_data['account_link']; ?>" target="_blank">@<?php echo $twitter_data['account']; ?></a> <a class="disconnect" title="<?php _e('Disconnect Service', 'kebo_twitter'); ?>" href="<?php echo admin_url('admin.php?page=kebo-twitter&reset=true') ?>">&#10006;</a></p>
 
         <?php endif; ?>
 
