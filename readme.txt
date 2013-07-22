@@ -2,22 +2,22 @@
 Contributors: PeterBooker, lukeketley
 Tags: twitter, tweets, feeds, social, api, oauth, widget
 Requires at least: 3.0.1
-Tested up to: 3.4
+Tested up to: 3.5.2
 Stable tag: 0.21
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Connect your site to your Twitter account and display your Twitter Feed on your website effortlessly with a custom widget.
+The easiest way to add a great looking Twitter feed to your website.
 
 == Description ==
 
-Hassle-free and user-friendly way to add a Twitter Feed to your website. We provide a custom Widget to help you display the Twitter Feed on your website, as well as direct access to the data for developers.
+Hassle-free and user-friendly way to add a Twitter Feed to your website. We provide a custom Widget to help you display the Twitter Feed on your website, as well as direct access to the data for developers to use as they wish.
 
 = Why use Kebo Twitter Feed? =
 
 Other solutions usually require you to create a Twitter App and provide the plugin with OAuth credentials yourself. Our hassle-free solution takes care of all the complex OAuth requests for you. In a few clicks you can have your Twitter Feed displayed on your site.
 
-We make this so easy by managing all the complex OAuth requests on our own server using our own Twitter app. Our app only asks for read permission and we only ever request publically available information. Your data is never stored on our system and you can read more about how we treat your information in our [privacy policy](http://kebopowered.com/privacy-policy/#social-connections "Kebo Privacy Policy").
+We make this so easy by managing all the complex OAuth requests on our own server using our Twitter app. Our app only asks for read permission and we only ever request publically available information. Your data is never stored on our system and you can read more about how we treat your information in our [privacy policy](http://kebopowered.com/privacy-policy/#social-connections "Kebo Privacy Policy").
 
 = Features =
 
@@ -40,6 +40,12 @@ Please take the time to let us and others know about your experiences by leaving
 5. Place the 'Kebo Twitter Feed' Widget into a Widget area through the 'Appearance -> Widgets' menu in WordPress.
 
 == Frequently Asked Questions ==
+
+= Why should I use Kebo Twitter Feed? =
+
+It is significantly easier to use than other plugins. We no not require that you create your own developer application at Twitter and then copy your credentials across to the plugin options. We skip this step by providing access to our own Twitter App allowing you to get started in just a few clicks.
+
+We also make good use of inbuilt WordPress functions for caching and compatibility. Meaning that our plugin functions efficiently and has no hosting requirements above those which WordPress itself uses, making it safe to use on any site.
 
 = How do you get my Twitter Feed? =
 
@@ -70,8 +76,25 @@ We store data in an option and transient, both of which are removed when you uni
 1. This is the settings page for the plugin, you will need to connect your website to Twitter by clicking the 'Conntect to Twitter' button.
 2. Once you have setup a connection to Twitter, this is what the settings page should look like. You will now have access to our Widget.
 3. This is the Widget you can use to display your Twitter Feed.
+4. The Widget in action on the soon to be released theme 'Twenty Thirteen' coming in the next major WordPress update.
+5. An example of how the Widget fits into the design of a theme automatically.
 
 == Changelog ==
+
+= Coming Soon =
+* Note: Localisation is in testing. Working on a German release to begin with.
+* New Feature: Improved caching system, which will refresh the cache after page load, making no impact on page load speed even while refreshing the cache.
+* New Feature: Shortcode and Function to output the Twitter Feed directly without using the Widget.
+
+= 0.25 (current) =
+* New Feature: Added option to show profile image to the Widget.
+* New Feature: Added option to show time since the Tweet to the Widget (e.g. 2 hours ago).
+* New Feature: Made the local cache file tied to blog ID, making the plugin multisite compatible.
+* Bug Fix: Date format fix (03rd to 3rd).
+* Bug Fix: CSS fix - to ensure action links (reply, retweet, favorite) don't resize and break use of the sprite image.
+* Bug Fix: CSS fix - to ensure links inside the content text display as expected.
+* Bug Fix: Removed Widget code from the view files paving the way for directing outputting the Twitter Feed using a shortcode or the function directly - coming soon.
+* Note: Adjusted Theme option usage, Light now fits light background sites and Dark fits dark background sites. Current users will see no difference to the display.
 
 = 0.21 =
 * Bug Fix: Fixed incompatibility with older versions of PHP.
@@ -104,6 +127,27 @@ This function checks the cache and refreshes the data if needed. Then returns th
 
 <?php endforeach; ?>
 `
+
+== What data is available? ==
+
+The object we store contains everything that the Twitter API returns, leaving what you use in your control. Below are some of the most useful items:
+
+`
+$tweet->id_str // Tweet ID
+$tweet->created_at // Date/Time created
+$tweet->text // The content text (URLs already HTML links)
+$tweet->user->id_str // Author ID
+$tweet->user->name // Author display name
+$tweet->user->screen_name // Author screen name
+$tweet->user->location // Author location
+$tweet->user->description // Author description
+$tweet->user->followers_count // Author followers count
+$tweet->user->friends_count // Author friends count
+$tweet->user->profile_image_url // Authors profile image URL
+$tweet->user->profile_image_url_https // As above but with HTTPS
+`
+
+There are many ways you could use this information for more than just a Twitter Feed. For example you could also use this to track the follower count of your Twitter account for display on your website.
 
 == Styling the Widget ==
 

@@ -1,0 +1,166 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: kebo-twitter-feed\n"
+"POT-Creation-Date: 2013-07-18 17:49-0000\n"
+"PO-Revision-Date: 2013-07-18 17:52-0000\n"
+"Last-Translator: Kebo <contact@kebopowered.com>\n"
+"Language-Team: Kebo <contact@kebopowered.com>\n"
+"Language: English\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.7\n"
+"X-Poedit-KeywordsList: __;_e;_n\n"
+"X-Poedit-Basepath: D:/xampp/htdocs/wp/test/wp-content/\n"
+"X-Poedit-SearchPath-0: plugins/kebo-twitter-feed\n"
+
+#: plugins/kebo-twitter-feed/inc/menu.php:12
+#: plugins/kebo-twitter-feed/inc/menu.php:13
+msgid "Kebo Twitter"
+msgstr ""
+
+#: plugins/kebo-twitter-feed/inc/menu.php:30
+msgid "You do not have sufficient permissions to access this page."
+msgstr ""
+
+#: plugins/kebo-twitter-feed/inc/menu.php:57
+msgid "Connection established with Twitter."
+msgstr ""
+
+#: plugins/kebo-twitter-feed/inc/menu.php:73
+msgid "Connection reset to Twitter."
+msgstr ""
+
+#: plugins/kebo-twitter-feed/inc/menu.php:85
+msgid "Twitter Feed"
+msgstr ""
+
+#: plugins/kebo-twitter-feed/inc/options.php:20
+msgid "Service Connection"
+msgstr ""
+
+#: plugins/kebo-twitter-feed/inc/options.php:31
+msgid ""
+"To enable us to read your Twitter Feed you must connect your Twitter account "
+"to our Twitter Application by clicking on the large 'Connect to Twitter' "
+"button below."
+msgstr ""
+
+#: plugins/kebo-twitter-feed/inc/options.php:35
+msgid "Connect to Twitter"
+msgstr ""
+
+#: plugins/kebo-twitter-feed/inc/options.php:39
+msgid "Connected to Twitter"
+msgstr ""
+
+#: plugins/kebo-twitter-feed/inc/options.php:40
+msgid "Connected as"
+msgstr ""
+
+#: plugins/kebo-twitter-feed/inc/options.php:40
+msgid "Disconnect Service"
+msgstr ""
+
+#: plugins/kebo-twitter-feed/inc/options.php:51
+msgid "Feed Refresh Rate"
+msgstr ""
+
+#: plugins/kebo-twitter-feed/inc/options.php:96
+msgid "On"
+msgstr ""
+
+#: plugins/kebo-twitter-feed/inc/options.php:100
+msgid "Off"
+msgstr ""
+
+#: plugins/kebo-twitter-feed/inc/options.php:115
+msgid "Minutes. Should be between 5 and 60."
+msgstr ""
+
+#: plugins/kebo-twitter-feed/inc/options.php:116
+msgid ""
+"This controls how frequently we update the stored list of Tweets for display "
+"on your website."
+msgstr ""
+
+#: plugins/kebo-twitter-feed/inc/options.php:137
+msgid "Successfully updated."
+msgstr ""
+
+#: plugins/kebo-twitter-feed/inc/options.php:145
+msgid "Value supplied is outside of acceptable range 5-60."
+msgstr ""
+
+#: plugins/kebo-twitter-feed/inc/options.php:152
+msgid "Value supplied is not a valid number."
+msgstr ""
+
+#: plugins/kebo-twitter-feed/inc/widget.php:27
+msgid "Displays your Twitter Feed on your website."
+msgstr ""
+
+#: plugins/kebo-twitter-feed/inc/widget.php:30
+msgid "Kebo Twitter Feed"
+msgstr ""
+
+#: plugins/kebo-twitter-feed/inc/widget.php:77
+msgid "Title"
+msgstr ""
+
+#: plugins/kebo-twitter-feed/inc/widget.php:82
+msgid "Style"
+msgstr ""
+
+#: plugins/kebo-twitter-feed/inc/widget.php:84
+msgid "Vertical List"
+msgstr ""
+
+#: plugins/kebo-twitter-feed/inc/widget.php:85
+msgid "Slider"
+msgstr ""
+
+#: plugins/kebo-twitter-feed/inc/widget.php:92
+msgid "Theme"
+msgstr ""
+
+#: plugins/kebo-twitter-feed/inc/widget.php:94
+msgid "Dark"
+msgstr ""
+
+#: plugins/kebo-twitter-feed/inc/widget.php:95
+msgid "Light"
+msgstr ""
+
+#: plugins/kebo-twitter-feed/inc/widget.php:101
+msgid "Number Of Tweets"
+msgstr ""
+
+#: plugins/kebo-twitter-feed/inc/widget.php:101
+msgid "Range 1-50"
+msgstr ""
+
+#: plugins/kebo-twitter-feed/views/widget_horizontal.php:45
+#: plugins/kebo-twitter-feed/views/widget_vertical.php:41
+msgid "Time posted"
+msgstr ""
+
+#: plugins/kebo-twitter-feed/views/widget_horizontal.php:45
+#: plugins/kebo-twitter-feed/views/widget_vertical.php:41
+msgid "Posted on "
+msgstr ""
+
+#: plugins/kebo-twitter-feed/views/widget_horizontal.php:52
+#: plugins/kebo-twitter-feed/views/widget_vertical.php:48
+msgid "Reply"
+msgstr ""
+
+#: plugins/kebo-twitter-feed/views/widget_horizontal.php:53
+#: plugins/kebo-twitter-feed/views/widget_vertical.php:49
+msgid "Re-Tweet"
+msgstr ""
+
+#: plugins/kebo-twitter-feed/views/widget_horizontal.php:54
+#: plugins/kebo-twitter-feed/views/widget_vertical.php:50
+msgid "Favourite"
+msgstr ""

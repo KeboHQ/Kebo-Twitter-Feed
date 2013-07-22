@@ -52,7 +52,7 @@ function kebo_twitter_get_tweets() {
         /*
          * On error use data from cache file.
          */
-        $tweets = json_decode( file_get_contents( KEBO_TWITTER_PLUGIN_PATH . 'data/cache.json' ) );
+        $tweets = json_decode( file_get_contents( KEBO_TWITTER_PLUGIN_PATH . 'data/cache-blog-' . get_current_blog_id() . '.json' ) );
         
         // Set low refresh time on failed request
         set_transient( 'kebo_twitter_feed', $tweets, 60 );
@@ -75,7 +75,7 @@ function kebo_twitter_get_tweets() {
         /*
          * Then save to cache file in JSON format.
          */
-        $file = fopen( KEBO_TWITTER_PLUGIN_PATH . 'data/cache.json', 'w' );
+        $file = fopen( KEBO_TWITTER_PLUGIN_PATH . 'data/cache-blog-' . get_current_blog_id() . '.json', 'w' );
         fwrite( $file, json_encode( $tweets ) );
         fclose( $file );
         
