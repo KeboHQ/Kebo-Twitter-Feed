@@ -6,16 +6,6 @@
 
 $twitter: #0192c9;
 
-/* Admin Menu Icon */
-#adminmenu .toplevel_page_kebo-twitter div.wp-menu-image {
-        background: url("../imgs/twitter_feed_icons_sprite.png") -92px -34px no-repeat;
-}
-#adminmenu .toplevel_page_kebo-twitter:hover div.wp-menu-image,
-#adminmenu .toplevel_page_kebo-twitter.current div.wp-menu-image,
-#adminmenu .toplevel_page_kebo-twitter.current:hover div.wp-menu-image {
-        background-position: -92px -2px;
-}
-
 /* Admin Menu Page */
 
 .social-link {
@@ -67,8 +57,46 @@ a.account {
         color: #fff;
 }
 
+div.box {
+        margin-bottom: 30px;
+}
+.error-log {
+        border: 1px solid #ddd;
+        width: auto;
+        max-width: 600px;
+        padding: 0px 0px 5px 0px;
+}
+.error-log li {
+        padding: 4px 10px;
+        margin: 0;
+}
+.error-log li:nth-child(odd) {
+        background: #f9f9f9;
+}
+.error-log li.header {
+        padding: 6px 10px 4px 10px;
+        margin: 0 0 5px 0;
+        border-bottom: 1px solid #ddd;
+        background: #f7f7f7;
+}
+.error-log li.header span {
+        font-weight: bold;
+}
+.error-log span {
+        display: inline-block;
+}
+.error-log span.date {
+        min-width: 140px;
+}
+.error-log span.ref {
+        min-width: 60px;
+}
+.error-log span.message {
+        min-width: 200px;
+}
+
 /* Twitter Feed General */
-.kebo-tweets {
+html body .kebo-tweets {
         overflow: hidden;
         margin: 0;
         padding: 0;
@@ -85,12 +113,21 @@ a.account {
         outline: none;
         background-image: none;
 }
+.kebo-tweets li.tweet:before {
+        content: none !important;
+}
+.kebo-tweets .tweet .meta a {
+        display: inline-block;
+        padding: 0;
+        margin: 0;
+}
 .kebo-tweets .tweet .date {
         float: right;
 }
 .kebo-tweets .tweet .text {
         margin: 5px 0 2px 0;
         padding: 0;
+        min-height: 2em;
 }
 .kebo-tweets .tweet .text a {
         display: inline;
@@ -115,10 +152,16 @@ a.account {
         height: 14px;
         display: inline-block;
         padding: 0;
-        margin: 6px 0 0 0;
+        margin: 0;
+        border: none;
+        float: none;
 }
 .kebo-tweets .tweet .footer .timeago {
         float: left;
+        background: none;
+        border: none;
+        padding: 0;
+        margin: 0;
 }
 
 /* Light Theme */

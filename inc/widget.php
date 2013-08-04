@@ -6,7 +6,7 @@
 /*
  * Only register Widget if connection has been made to our Twitter App.
  */
-if ( false !== ( $twitter_data = get_transient( 'kebo_twitter_connection' ) ) ) {
+if ( false !== ( $twitter_data = get_transient( 'kebo_twitter_connection_' . get_current_blog_id() ) ) ) {
     
     add_action('widgets_init', 'kebo_twitter_register_widget');
     
@@ -36,33 +36,31 @@ class Kebo_Twitter_Feed_Widget extends WP_Widget {
      */
     function widget($args, $instance) {
         
-        // For performance testing
-        //timer_start();
-        
         extract($args, EXTR_SKIP);
+        
+        // Enqueue Style Sheet
+        wp_enqueue_style( 'kebo-twitter-plugin' );
         
         /*
          * Get tweets from transient and refresh if its expired.
          */
-        if ( false === ( $tweets = get_transient('kebo_twitter_feed') ) ) {
-            
-            $tweets = kebo_twitter_get_tweets();
-        
-        }
+        if ( false === ( $tweets = kebo_twitter_get_tweets() ) )
+            return;
         
         // Output opening Widget HTML
         echo $before_widget;
-
+        
         // If Title is set, output it with Widget title opening and closing HTML
         if (isset($instance['title']) && !empty($instance['title'])) {
 
             echo $before_title;
             echo $instance['title'];
             echo $after_title;
+            
         }
         
         /*
-         * Check which Style (Slider/List) has been chosen and use correct view file.
+         * Check which Style (Slider/List) has been chosen and use correct view file, default List.
          */
         if ( 2 == $instance['style'] ) {
             
@@ -77,9 +75,6 @@ class Kebo_Twitter_Feed_Widget extends WP_Widget {
         // Output closing Widget HTML
         echo $after_widget;
         
-        // Output process time
-        //timer_stop(1); echo ' seconds';
-        
     }
 
     /*
@@ -89,11 +84,18 @@ class Kebo_Twitter_Feed_Widget extends WP_Widget {
         ?>
 
         <?php
-        // Add default Tweet count of 5, to avoid none being set.
-        $count = ($instance['count']) ? $instance['count'] : 5;
-        
-        // Display timeago by default.
-        if ( !isset( $instance['timeago'] ) ? $instance['timeago'] = 'timeago' : '' )
+        // Add defaults.
+        if( !isset( $instance['count'] ) )
+            $instance['count'] = 5;
+        if( !isset( $instance['avatar'] ) )
+            $instance['avatar'] = '';
+        if( !isset( $instance['style'] ) )
+            $instance['style'] = 1;
+        if( !isset( $instance['theme'] ) )
+            $instance['theme'] = 'light';
+        if( !isset( $instance['title'] ) )
+            $instance['title'] = '';
+            
         ?>
         
         <label for="<?php echo $this->get_field_id('title'); ?>">
@@ -121,11 +123,7 @@ class Kebo_Twitter_Feed_Widget extends WP_Widget {
         </label>
 
         <label for="<?php echo $this->get_field_id('count'); ?>">
-            <p><?php _e('Number Of Tweets', 'kebo_twitter'); ?>: <input style="width: 28px;" type="text" value="<?php echo $count; ?>" name="<?php echo $this->get_field_name('count'); ?>" id="<?php echo $this->get_field_id('count'); ?>"><span> <?php _e('Range 1-50', 'kebo_twitter') ?></span></p>
-        </label>
-
-        <label for="<?php echo $this->get_field_id('timeago'); ?>">
-            <p><input style="width: 28px;" type="checkbox" value="timeago" name="<?php echo $this->get_field_name('timeago'); ?>" id="<?php echo $this->get_field_id('timeago'); ?>" <?php if ( 'timeago' == $instance['timeago'] ) { echo 'checked="checked"'; } ?>> <?php _e('Show time since Tweet?', 'kebo_twitter'); ?></p>
+            <p><?php _e('Number Of Tweets', 'kebo_twitter'); ?>: <input style="width: 28px;" type="text" value="<?php echo $instance['count']; ?>" name="<?php echo $this->get_field_name('count'); ?>" id="<?php echo $this->get_field_id('count'); ?>"><span> <?php _e('Range 1-50', 'kebo_twitter') ?></span></p>
         </label>
 
         <label for="<?php echo $this->get_field_id('avatar'); ?>">
@@ -149,7 +147,6 @@ class Kebo_Twitter_Feed_Widget extends WP_Widget {
         $instance['title'] = wp_filter_nohtml_kses( $new_instance['title'] );
         $instance['style'] = wp_filter_nohtml_kses( $new_instance['style'] );
         $instance['theme'] = wp_filter_nohtml_kses( $new_instance['theme'] );
-        $instance['timeago'] = wp_filter_nohtml_kses( $new_instance['timeago'] );
         $instance['avatar'] = wp_filter_nohtml_kses( $new_instance['avatar'] );
         
         // Check 'count' is numeric.
