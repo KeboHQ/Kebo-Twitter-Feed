@@ -205,14 +205,15 @@ html body .kebo-tweets {
 }
 
 /* Twitter Feed - Horizontal */
-.kebo-tweets.slider {
-        
+#kebo-tweet-slider {
+        position: relative;
 }
 #kebo-tweet-slider .tweet {
         display: none;
         height: auto;
         list-style: none;
         border-bottom: none;
+        position: absolute;
 }
 
 /* Twitter Feed - Vertical */

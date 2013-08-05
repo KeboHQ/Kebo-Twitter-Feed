@@ -158,7 +158,7 @@ function kebo_twitter_slider_script() {
             var tcount = 1;
             var limit = jQuery("#kebo-tweet-slider .tweet").size();
             var theight = jQuery('#kebo-tweet-slider .tweet').eq(0).outerHeight();
-            jQuery('#kebo-tweet-slider').css({minHeight: theight, })
+            jQuery('#kebo-tweet-slider').height(theight);
             var initTweets = setInterval(fadeTweets, 11500);
 
             function fadeTweets() {
@@ -166,8 +166,8 @@ function kebo_twitter_slider_script() {
                 if (tcount == limit) {
                     tcount = 0;
                 }
-                //theight = jQuery('#kebo-tweet-slider .tweet').eq(tcount).outerHeight();
-                //jQuery('#kebo-tweet-slider').height(theight);
+                theight = jQuery('#kebo-tweet-slider .tweet').eq(tcount).outerHeight();
+                jQuery('#kebo-tweet-slider').height(theight);
                 jQuery('#kebo-tweet-slider .tweet').eq(tcount).fadeToggle('1000').delay(10500).fadeToggle('1000');
 
                 ++tcount;

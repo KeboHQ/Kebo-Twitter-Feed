@@ -88,6 +88,10 @@ We store data in an option and transient, both of which are removed when you uni
 
 == Changelog ==
 
+= 0.4.2 =
+* Bug Fix: Fixed the code which checks if we have Tweets stored before rendering to the page.
+* Bug Fix: Improved the styling and function of the custom Slider. There will no longer occasionally be jerky re-sizing. Still working on a major re-work.
+
 = 0.4.0 =
 * New Feature: Now logs error messages from the Twitter API. You can view the log from the plugins options page and see what the errors mean.
 * Bug Fix: Fixed turning text URLs into links. It now turns text URLs, account names and hashtags into HTML links. This is done once at import, for performance.
@@ -150,15 +154,25 @@ You can directly access the object containing all the Tweets like this:
 This function checks the cache and refreshes the data if needed. Then returns the object containing all the Tweets. Below is an example of how you might use the data:
 
 `
+<?php $tweets = kebo_twitter_get_tweets(); ?>
+
 <?php $i = 0; ?>
 
-<?php foreach ($tweets as $tweet) : ?>
+<?php if (is_array($tweets)) : ?>
 
-    <?php echo $tweet->text; ?>
+    <?php foreach ($tweets as $tweet) : ?>
 
-    <?php if ( ++$i == 10 ) break; ?>
+        <?php echo $tweet->text; ?>
 
-<?php endforeach; ?>
+        <?php if (++$i == 10) break; ?>
+
+    <?php endforeach; ?>
+
+<?php else : ?>
+
+    <p>Sorry, no Tweets found.</p>
+
+<?php endif; ?>
 `
 
 == What data is available? ==
