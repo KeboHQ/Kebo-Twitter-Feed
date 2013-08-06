@@ -11,11 +11,11 @@ kebo_twitter_print_js();
 
 <?php $classes = 'kebo-tweets slider ' . $instance['theme']; ?>
 
-<ul class="<?php echo $classes; ?>" id="kebo-tweet-slider" data-timer="5000" data-transition="1000" data-animation="fade">
+<ul class="<?php echo $classes; ?>" id="kebo-tweet-slider" data-timer="10000" data-transition="1000" data-animation="fade">
 
     <?php $i = 0; ?>
         
-    <?php if (isset($tweets[0])) : ?>
+    <?php if ( isset($tweets[0]) ) : ?>
         
         <?php foreach ($tweets as $tweet) : ?>
 
