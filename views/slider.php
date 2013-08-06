@@ -9,17 +9,13 @@ wp_enqueue_script('jquery');
 kebo_twitter_print_js();
 ?>
 
-<?php if ( 'light' == $instance['theme'] ) { ?>
-    <ul class="kebo-tweets light slider" id="kebo-tweet-slider">
-<?php } elseif ( 'dark' == $instance['theme'] ) { ?>
-    <ul class="kebo-tweets dark slider" id="kebo-tweet-slider">
-<?php } else { ?>
-    <ul class="kebo-tweets light slider" id="kebo-tweet-slider">
-<?php } ?>
+<?php $classes = 'kebo-tweets slider ' . $instance['theme']; ?>
+
+<ul class="<?php echo $classes; ?>" id="kebo-tweet-slider" data-timer="5000" data-transition="1000" data-animation="fade">
 
     <?php $i = 0; ?>
         
-    <?php if (is_array($tweets)) : ?>
+    <?php if (isset($tweets[0])) : ?>
         
         <?php foreach ($tweets as $tweet) : ?>
 
@@ -33,7 +29,7 @@ kebo_twitter_print_js();
                 }
             ?>
 
-            <li class="tweet" id="kebo-tweet-slider">
+            <li class="tweet">
 
                 <div class="meta">
                     <a class="account" href="https://twitter.com/<?php echo $tweet->user->screen_name; ?>" target="_blank">@<?php echo $tweet->user->screen_name; ?></a>

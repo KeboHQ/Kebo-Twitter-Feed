@@ -4,17 +4,13 @@
  */
 ?>
 
-<?php if ( 'light' == $instance['theme'] ) { ?>
-    <ul class="kebo-tweets light list">
-<?php } elseif ( 'dark' == $instance['theme'] ) { ?>
-    <ul class="kebo-tweets dark list">
-<?php } else { ?>
-    <ul class="kebo-tweets light list">
-<?php } ?>
+<?php $classes = 'kebo-tweets list ' . $instance['theme']; ?>
+
+<ul class="<?php echo $classes; ?>">
         
     <?php $i = 0; ?>
     
-    <?php if (is_array($tweets)) : ?>
+    <?php if (isset($tweets[0])) : ?>
         
         <?php foreach ($tweets as $tweet) : ?>
 

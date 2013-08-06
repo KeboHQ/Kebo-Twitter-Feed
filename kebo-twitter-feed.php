@@ -153,13 +153,16 @@ function kebo_twitter_slider_script() {
     <script type="text/javascript">
         //<![CDATA[
         jQuery(document).ready(function() {
-
-            jQuery('#kebo-tweet-slider .tweet').eq(0).fadeToggle('1000').delay(10500).fadeToggle('1000');
+            
+            var timer = jQuery( "#kebo-tweet-slider" ).data( "timer" );
+            var transition = jQuery( "#kebo-tweet-slider" ).data( "transition" );
             var tcount = 1;
             var limit = jQuery("#kebo-tweet-slider .tweet").size();
             var theight = jQuery('#kebo-tweet-slider .tweet').eq(0).outerHeight();
+            var initTweets = setInterval( fadeTweets, timer );
+            
+            jQuery('#kebo-tweet-slider .tweet').eq(0).fadeToggle('1000').delay( timer - transition ).fadeToggle('1000');
             jQuery('#kebo-tweet-slider').height(theight);
-            var initTweets = setInterval(fadeTweets, 11500);
 
             function fadeTweets() {
 
@@ -168,7 +171,7 @@ function kebo_twitter_slider_script() {
                 }
                 theight = jQuery('#kebo-tweet-slider .tweet').eq(tcount).outerHeight();
                 jQuery('#kebo-tweet-slider').height(theight);
-                jQuery('#kebo-tweet-slider .tweet').eq(tcount).fadeToggle('1000').delay(10500).fadeToggle('1000');
+                jQuery('#kebo-tweet-slider .tweet').eq(tcount).fadeToggle('1000').delay( timer - transition ).fadeToggle('1000');
 
                 ++tcount;
 
@@ -192,7 +195,7 @@ function kebo_twitter_touch_script() {
         jQuery(document).ready(function() {
             
             var is_touch_device = 'ontouchstart' in document.documentElement;
-
+            
             if (is_touch_device) {
                 jQuery(".kebo-tweets").each(function(index, element) {
                     jQuery(this).addClass( "touch" );

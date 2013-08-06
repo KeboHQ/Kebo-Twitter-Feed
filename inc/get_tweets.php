@@ -1,11 +1,6 @@
 <?php
-
 /*
  * Requests Twitter Feed and Updates Transient
- */
-
-/*
- * Requests the Twitter Feed via Kebo Server using OAuth data stored.
  */
 
 function kebo_twitter_get_tweets() {
@@ -25,18 +20,24 @@ function kebo_twitter_get_tweets() {
         // Make POST request to Kebo OAuth App.
         $request = kebo_twitter_external_request();
 
-        // Response is in JSON format, so decode it.
-        $response = json_decode($request['body']);
-
-        $tweets = $response;
-
+        // If not WP Error response is in body
+        if (!is_wp_error($response)) {
+            
+            // Response is in JSON format, so decode it.
+            $response = json_decode($request['body']);
+            
+        }
+        
         // Check for Error or Success Response.
-        if (isset($response->errors)) {
-
+        if (isset($response->errors) ) {
+            
             // If error, add to error log.
             kebo_twitter_add_error( $response );
             
         } else {
+            
+            // We have Tweets, linkify the text
+            $tweets = kebo_twitter_linkify( $response );
 
             // Add custom expiry time
             $tweets['expiry'] = time() + ( $options['kebo_twitter_cache_timer'] * MINUTE_IN_SECONDS );
@@ -147,9 +148,12 @@ function kebo_twitter_refresh_cache() {
 
         // Make POST request to Kebo OAuth App.
         $request = kebo_twitter_external_request();
-
-        // Response is in JSON format, so decode it.
-        $response = json_decode($request['body']);
+        
+        // If not WP Error response is in body
+        if (!is_wp_error($response)) {
+            // Response is in JSON format, so decode it.
+            $response = json_decode($request['body']);
+        }
         
         // Grab the Plugin Options.
         $options = kebo_get_twitter_options();
@@ -162,10 +166,8 @@ function kebo_twitter_refresh_cache() {
             
         } else {
 
-            // We have an object full of Tweets.
-            $tweets = $response;
-
-            $tweets = kebo_twitter_linkify( $tweets );
+            // We have Tweets, linkify the text
+            $tweets = kebo_twitter_linkify( $response );
 
             // Add custom expiry time
             $tweets['expiry'] = time() + ( $options['kebo_twitter_cache_timer'] * MINUTE_IN_SECONDS );
@@ -205,12 +207,25 @@ function kebo_twitter_linkify($tweets) {
  */
 function kebo_twitter_add_error( $response ) {
     
-    // Add details of current error
-    $error[] = array(
-        'date' => time(),
-        'code' => $response->errors[0]->code,
-        'message' => $response->errors[0]->message,
-    );
+    if (is_wp_error($response)) {
+        
+        // Add details of current WP error
+        $error[] = array(
+            'date' => time(),
+            'code' => 1,
+            'message' => $response->errors['http_request_failed'][0],
+        );
+        
+    } else {
+        
+        // Add details of current error
+        $error[] = array(
+            'date' => time(),
+            'code' => $response->errors[0]->code,
+            'message' => $response->errors[0]->message,
+        );
+        
+    }
     
     // Get currently stored errors
     $log = get_option( 'kebo_twitter_errors' );
