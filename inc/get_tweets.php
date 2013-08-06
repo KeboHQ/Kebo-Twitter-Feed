@@ -18,13 +18,13 @@ function kebo_twitter_get_tweets() {
     if ( false === ( $tweets = get_transient( 'kebo_twitter_feed_' . get_current_blog_id() ) ) ) {
 
         // Make POST request to Kebo OAuth App.
-        $request = kebo_twitter_external_request();
-
+        $response = kebo_twitter_external_request();
+        
         // If not WP Error response is in body
-        if (!is_wp_error($response)) {
+        if ( !is_wp_error($response) ) {
             
             // Response is in JSON format, so decode it.
-            $response = json_decode($request['body']);
+            $response = json_decode($response['body']);
             
         }
         
@@ -147,12 +147,14 @@ function kebo_twitter_refresh_cache() {
     if (false !== ( $tweets = get_transient('kebo_twitter_feed_' . get_current_blog_id()) )) {
 
         // Make POST request to Kebo OAuth App.
-        $request = kebo_twitter_external_request();
+        $response = kebo_twitter_external_request();
         
         // If not WP Error response is in body
-        if (!is_wp_error($response)) {
+        if ( !is_wp_error($response) ) {
+            
             // Response is in JSON format, so decode it.
-            $response = json_decode($request['body']);
+            $response = json_decode($response['body']);
+            
         }
         
         // Grab the Plugin Options.
@@ -207,7 +209,7 @@ function kebo_twitter_linkify($tweets) {
  */
 function kebo_twitter_add_error( $response ) {
     
-    if (is_wp_error($response)) {
+    if ( is_wp_error($response) ) {
         
         // Add details of current WP error
         $error[] = array(
