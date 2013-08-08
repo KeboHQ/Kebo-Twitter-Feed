@@ -15,7 +15,7 @@ kebo_twitter_print_js();
 
     <?php $i = 0; ?>
         
-    <?php if ( isset($tweets[0]) ) : ?>
+    <?php if ( isset($tweets[0]->created_at ) ) : ?>
         
         <?php foreach ($tweets as $tweet) : ?>
 
@@ -40,7 +40,9 @@ kebo_twitter_print_js();
 
                 <p class="text">
                     <?php if ( 'avatar' == $instance['avatar'] ) : ?>
-                        <img class="avatar" src="<?php echo $tweet->user->profile_image_url; ?>" />
+                        <a href="https://twitter.com/<?php echo $tweet->user->screen_name; ?>" target="_blank">
+                            <img class="avatar" src="<?php echo $tweet->user->profile_image_url; ?>" />
+                        </a>
                     <?php endif; ?>
                     <?php echo $tweet->text; ?>
                 </p>

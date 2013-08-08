@@ -10,17 +10,17 @@
         
     <?php $i = 0; ?>
     
-    <?php if (isset($tweets[0])) : ?>
+    <?php if ( isset($tweets[0]->created_at ) ) : ?>
         
         <?php foreach ($tweets as $tweet) : ?>
 
             <?php
-            if ( date( 'Ymd' ) == date( 'Ymd', strtotime($tweet->created_at) ) ) {
+            if ( date( 'Ymd' ) == date( 'Ymd', strtotime( $tweet->created_at ) ) ) {
                 // Covert created at date into timeago format
-                $created = human_time_diff( date('U', strtotime($tweet->created_at)), current_time('timestamp') );
+                $created = human_time_diff( date( 'U', strtotime( $tweet->created_at )), current_time( 'timestamp' ) );
             } else {
                 // Convert created at date into easily readable format.
-                $created = date('jS M', strtotime($tweet->created_at));
+                $created = date( 'jS M', strtotime( $tweet->created_at ) );
             }
             ?>
 
@@ -35,7 +35,9 @@
 
                 <p class="text">
                     <?php if ( 'avatar' == $instance['avatar'] ) : ?>
-                        <img class="avatar" src="<?php echo $tweet->user->profile_image_url; ?>" />
+                        <a href="https://twitter.com/<?php echo $tweet->user->screen_name; ?>" target="_blank">
+                            <img class="avatar" src="<?php echo $tweet->user->profile_image_url; ?>" />
+                        </a>
                     <?php endif; ?>
                     <?php echo $tweet->text; ?>
                 </p>
