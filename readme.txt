@@ -88,6 +88,11 @@ We store data in an option and transient, both of which are removed when you uni
 
 == Changelog ==
 
+= 0.4.3 =
+* Warning: The next major version (0.5.0) will be coming in the next couple of days and will re-name most of the classes used, to avoid any styles being picked up from commonly names classes (like .reply). So if you have written custom CSS to change the style of the plugin, please be aware that your styling might stop working when we change the class names.
+* Bug Fix: Reverted code used to check for Tweets before rendering, which was incorrectly causing "Sorry, no Tweets were found." to be displayed.
+* Bug Fix: Profile images now correctly link to the users profle (Thanks Joshua Michaels).
+
 = 0.4.2 =
 * Bug Fix: Fixed error logging to include internal WP_Errors when making HTTP requests, not just Twitter API errors.
 * Note: Improved the Slider HTML to pass animation details using data attributes. Paving the way to make it easy to customise using the Widget.
