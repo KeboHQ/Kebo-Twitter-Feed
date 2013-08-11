@@ -64,11 +64,11 @@ class Kebo_Twitter_Feed_Widget extends WP_Widget {
          */
         if ( 2 == $instance['style'] ) {
             
-            require_once( KEBO_TWITTER_PLUGIN_PATH . 'views/slider.php' );
+            require( KEBO_TWITTER_PLUGIN_PATH . 'views/slider.php' );
             
         } else {
             
-            require_once( KEBO_TWITTER_PLUGIN_PATH . 'views/list.php' );
+            require( KEBO_TWITTER_PLUGIN_PATH . 'views/list.php' );
             
         }
         

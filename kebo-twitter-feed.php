@@ -40,6 +40,11 @@ function kebo_twitter_plugin_setup() {
      * Include Request for the Twitter Feed.
      */
     require_once( KEBO_TWITTER_PLUGIN_PATH . 'inc/get_tweets.php' );
+    
+    /**
+     * Include Shortcode.
+     */
+    require_once( KEBO_TWITTER_PLUGIN_PATH . 'inc/shortcode.php' );
 
     /**
      * Load Text Domain for Translations.

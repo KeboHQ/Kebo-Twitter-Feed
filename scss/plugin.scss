@@ -96,7 +96,10 @@ div.box {
 }
 
 /* Twitter Feed General */
-html body .kebo-tweets {
+.kcontainer {
+        margin-bottom: 1.6em;
+}
+html body ul.kebo-tweets {
         overflow: hidden;
         margin: 0;
         padding: 0;
@@ -105,7 +108,7 @@ html body .kebo-tweets {
         outline: none;
         background-image: none;
 }
-.kebo-tweets .tweet {
+html body ul.kebo-tweets li.ktweet {
         margin: 0;
         padding: 0;
         list-style: none;
@@ -113,27 +116,27 @@ html body .kebo-tweets {
         outline: none;
         background-image: none;
 }
-.kebo-tweets li.tweet:before {
+.kebo-tweets li.ktweet:before {
         content: none !important;
 }
-.kebo-tweets .tweet .meta a {
+.kebo-tweets .ktweet .kmeta a {
         display: inline-block;
         padding: 0;
         margin: 0;
 }
-.kebo-tweets .tweet .date {
+.kebo-tweets .ktweet .kdate {
         float: right;
 }
-.kebo-tweets .tweet .text {
+.kebo-tweets .ktweet .ktext {
         margin: 5px 0 2px 0;
         padding: 0;
         min-height: 2em;
 }
-.kebo-tweets .tweet .text a {
+.kebo-tweets .ktweet .ktext a {
         display: inline;
         padding: 0;
 }
-.kebo-tweets .tweet .avatar {
+.kebo-tweets .ktweet .kavatar {
         float: left;
         margin: 7px 7px 0 0;
         border-radius: 0px;
@@ -142,11 +145,11 @@ html body .kebo-tweets {
         padding: 0;
         border: none;
 }
-.kebo-tweets .tweet .footer {
+.kebo-tweets .ktweet .kfooter {
         text-align: right;
         padding: 0;
 }
-.kebo-tweets .tweet .footer a {
+.kebo-tweets .ktweet .kfooter a {
         background: url('../imgs/twitter_feed_icons_sprite.png') top left no-repeat;
         width: 20px;
         height: 14px;
@@ -156,51 +159,44 @@ html body .kebo-tweets {
         border: none;
         float: none;
 }
-.kebo-tweets .tweet .footer .timeago {
-        float: left;
-        background: none;
-        border: none;
-        padding: 0;
-        margin: 0;
-}
 
 /* Light Theme */
-.kebo-tweets.light .tweet .footer a {
+.kebo-tweets.light .ktweet .kfooter a {
         opacity: 0.5;
 }
-.kebo-tweets.light .tweet .footer a:hover {
+.kebo-tweets.light .ktweet .kfooter a:hover {
         opacity: 0.7;
 }
-.kebo-tweets.light .tweet .footer .reply {
+.kebo-tweets.light .ktweet .kfooter .kreply {
         background-position: 0px 0px;
 }
-.kebo-tweets.light .tweet .footer .retweet {
+.kebo-tweets.light .ktweet .kfooter .kretweet {
         background-position: -27px 0px;
 }
-.kebo-tweets.light .tweet .footer .favourite {
+.kebo-tweets.light .ktweet .kfooter .kfavourite {
         background-position: -54px 0px;
 }
-.kebo-tweets.light .tweet .footer .timeago {
+.kebo-tweets.light .ktweet .kfooter .ktimeago {
         color: rgba(0, 0, 0, 0.5);
 }
 
 /* Dark Theme */
-.kebo-tweets.dark .tweet .footer a {
+.kebo-tweets.dark .ktweet .kfooter a {
         opacity: 1;
 }
-.kebo-tweets.dark .tweet .footer a:hover {
+.kebo-tweets.dark .ktweet .kfooter a:hover {
         opacity: 0.6;
 }
-.kebo-tweets.dark .tweet .footer .reply {
+.kebo-tweets.dark .ktweet .kfooter .kreply {
         background-position: 0px -32px;
 }
-.kebo-tweets.dark .tweet .footer .retweet {
+.kebo-tweets.dark .ktweet .kfooter .kretweet {
         background-position: -27px -32px;
 }
-.kebo-tweets.dark .tweet .footer .favourite {
+.kebo-tweets.dark .ktweet .kfooter .kfavourite {
         background-position: -54px -32px;
 }
-.kebo-tweets.dark .tweet .footer .timeago {
+.kebo-tweets.dark .ktweet .kfooter .ktimeago {
         color: rgba(255, 255, 255, 0.5);
 }
 

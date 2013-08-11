@@ -64,7 +64,9 @@ function kebo_twitter_get_tweets() {
         add_action( 'shutdown', 'kebo_twitter_refresh_cache' );
         
     }
-
+    
+    unset( $tweets['expiry'] );
+    
     return $tweets;
     
 }
@@ -76,7 +78,9 @@ if (!function_exists('get_tweets')) :
 
     function get_tweets() {
 
-        kebo_twitter_get_tweets();
+        $tweets = kebo_twitter_get_tweets();
+        
+        return $tweets;
         
     }
 
