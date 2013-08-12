@@ -33,7 +33,7 @@
                     </a>
                 </div>
 
-                <p class="text">
+                <p class="ktext">
                     <?php if ( 'avatar' == $instance['avatar'] ) : ?>
                         <a href="https://twitter.com/<?php echo $tweet->user->screen_name; ?>" target="_blank">
                             <img class="kavatar" src="<?php echo $tweet->user->profile_image_url; ?>" />
