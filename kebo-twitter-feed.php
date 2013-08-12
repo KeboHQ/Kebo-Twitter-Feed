@@ -3,7 +3,7 @@
  * Plugin Name: Kebo Twitter Feed
  * Plugin URI: http://wordpress.org/plugins/kebo-twitter-feed/
  * Description: Connect your site to your Twitter account and display your Twitter Feed on your website effortlessly with a custom widget. 
- * Version: 0.4.3
+ * Version: 0.5.4
  * Author: Kebo
  * Author URI: http://kebopowered.com
  */
@@ -13,7 +13,7 @@ if (!defined('ABSPATH'))
     exit;
 
 if (!defined('KEBO_TWITTER_PLUGIN_VERSION'))
-    define('KEBO_TWITTER_PLUGIN_VERSION', '0.4.3');
+    define('KEBO_TWITTER_PLUGIN_VERSION', '0.5.4');
 if (!defined('KEBO_TWITTER_PLUGIN_URL'))
     define('KEBO_TWITTER_PLUGIN_URL', plugin_dir_url(__FILE__));
 if (!defined('KEBO_TWITTER_PLUGIN_PATH'))
@@ -162,11 +162,11 @@ function kebo_twitter_slider_script() {
             var timer = jQuery( "#kebo-tweet-slider" ).data( "timer" );
             var transition = jQuery( "#kebo-tweet-slider" ).data( "transition" );
             var tcount = 1;
-            var limit = jQuery("#kebo-tweet-slider .tweet").size();
-            var theight = jQuery('#kebo-tweet-slider .tweet').eq(0).outerHeight();
+            var limit = jQuery("#kebo-tweet-slider .ktweet").size();
+            var theight = jQuery('#kebo-tweet-slider .ktweet').eq(0).outerHeight();
             var initTweets = setInterval( fadeTweets, timer );
             
-            jQuery('#kebo-tweet-slider .tweet').eq(0).fadeToggle('1000').delay( timer - transition ).fadeToggle('1000');
+            jQuery('#kebo-tweet-slider .ktweet').eq(0).fadeToggle('1000').delay( timer - transition ).fadeToggle('1000');
             jQuery('#kebo-tweet-slider').height(theight);
 
             function fadeTweets() {
@@ -174,9 +174,9 @@ function kebo_twitter_slider_script() {
                 if (tcount == limit) {
                     tcount = 0;
                 }
-                theight = jQuery('#kebo-tweet-slider .tweet').eq(tcount).outerHeight();
+                theight = jQuery('#kebo-tweet-slider .ktweet').eq(tcount).outerHeight();
                 jQuery('#kebo-tweet-slider').height(theight);
-                jQuery('#kebo-tweet-slider .tweet').eq(tcount).fadeToggle('1000').delay( timer - transition ).fadeToggle('1000');
+                jQuery('#kebo-tweet-slider .ktweet').eq(tcount).fadeToggle('1000').delay( timer - transition ).fadeToggle('1000');
 
                 ++tcount;
 
