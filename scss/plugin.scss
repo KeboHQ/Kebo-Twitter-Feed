@@ -204,7 +204,7 @@ html body ul.kebo-tweets li.ktweet {
 #kebo-tweet-slider {
         position: relative;
 }
-#kebo-tweet-slider .tweet {
+#kebo-tweet-slider .ktweet {
         display: none;
         height: auto;
         list-style: none;
@@ -214,11 +214,11 @@ html body ul.kebo-tweets li.ktweet {
 }
 
 /* Twitter Feed - Vertical */
-.kebo-tweets.list .tweet {
+.kebo-tweets.list .ktweet {
         margin: 0;
         padding: 10px 0;
         border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 }
-.kebo-tweets.list .tweet:first-of-type {
+.kebo-tweets.list .ktweet:first-of-type {
         padding-top: 0;
 }
