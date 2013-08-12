@@ -16,7 +16,7 @@ class Kebo_Twitter_Shortcode {
         // Sort Options
         extract(shortcode_atts(array(
             'title' => null,
-            'style' => 1,
+            'style' => 'list',
             'theme' => 'light',
             'count' => 5,
             'avatar' => 'off',
@@ -27,7 +27,6 @@ class Kebo_Twitter_Shortcode {
         
         // Add defaults.
         $instance['count'] = $count;
-        $instance['style'] = $style;
         $instance['theme'] = $theme;
         
         if ( 'on' == $avatar ) {
