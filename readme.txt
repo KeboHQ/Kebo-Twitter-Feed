@@ -88,6 +88,12 @@ We store data in an option and transient, both of which are removed when you uni
 
 == Changelog ==
 
+= 0.5.5 =
+* New Feature: Added 'Offset' attribute to the Shortcode, allowing you to skip a certain number of the Tweets from the beginning of the feed.
+* Note: Added Shortcode information and attributes to the 'Other Notes' section.
+* Bug Fix: Twitter API responses only come GZIP'd if the relevant Accept-Encoding headers are present, the default is now without inflation. This should resolve the rare cases where badly formated data was fetched, as the website could not deflate the response and so no Tweets could be displayed.
+* Note: Added details of WordPress's inbuilt functionality for embedding Tweets into posts/pages to the 'Other Notes' section.
+
 = 0.5.4 =
 * Bug Fix: Fixed Slider javascript output to use new class names.
 
@@ -222,6 +228,37 @@ $tweet->user->profile_image_url_https // As above but with HTTPS
 
 There are many ways you could use this information for more than just a Twitter Feed. For example you could also use this to track the follower count of your Twitter account for display on your website.
 
+== Shortcodes ==
+
+Currently there is one Shortcode which can be used to replicate the behavior of the Widget. You can call this shortcode in the content of a post and/or page using:
+
+`[kebo_tweets]`
+
+Or by using PHP directly:
+
+`<?php do_shortcode('[kebo_tweets]'); ?>`
+
+Here is the shortcode with all the available attributes and their default values:
+
+`[kebo_tweets title="" count="5" style="list" theme="light" offset="false" avatar="off"]`
+
+The available options are:
+
+`
+Title - Text
+Count - 1-50
+Style - list/slider
+Theme - light/dark
+Avatar - on/off
+Offset - 1-50
+`
+
+== Embedded Tweets ==
+
+WordPress has inbuilt functionality for embedding Tweets directly into posts/pages. You can do this by simply pasting the full URL of the Tweet into the content, the URL will look similar to this:
+
+`https://twitter.com/BarackObama/statuses/266031293945503744`
+
 == Styling the Widget ==
 
 We use the the inbuilt methods to output the Widget and Title containers so that it should fit seamlessly into your website.
@@ -229,21 +266,23 @@ We use the the inbuilt methods to output the Widget and Title containers so that
 If you want to style the inside of the Widget below is the HTML structure:
 
 `
-<ul class="kebo-tweets vertical">
+<ul class="kebo-tweets">
 
-    <li class="tweet">
+    <li class="ktweet">
 
-        <div class="meta">
-            <a class="account"></a>
-            <a class="date"></a>
+        <div class="kmeta">
+            <a class="kaccount"></a>
+            <a class="kdate"></a>
         </div>
         
-        <p class="text"></p>
+        <p class="ktext">
+            <a><img class="kavatar" /></a>
+        </p>
 
-        <div class="links">
-            <a class="reply"></a>
-            <a class="retweet"></a>
-            <a class="favourite"></a>
+        <div class="kfooter">
+            <a class="kreply"></a>
+            <a class="kretweet"></a>
+            <a class="kfavourite"></a>
         </div>
 
     </li>
