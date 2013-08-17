@@ -1,5 +1,4 @@
 <?php
-
 /*
  * Shortcode to display Twitter Feed
  */
@@ -20,6 +19,7 @@ class Kebo_Twitter_Shortcode {
             'theme' => 'light',
             'count' => 5,
             'avatar' => 'off',
+            'offset' => false
         ), $atts));
         
         // Enqueue Style Sheet
@@ -64,6 +64,13 @@ class Kebo_Twitter_Shortcode {
         if ( false === ( $tweets = kebo_twitter_get_tweets() ) )
             return;
 
+        // If an offset is set, slice early items off the array
+        if ( ! false == $offset && is_numeric( $offset ) ) {
+            
+            $tweets = array_slice($tweets, $offset);
+            
+        }
+        
         // Output Twitter Feed
         if ( 2 == $instance['style'] ) {
 
