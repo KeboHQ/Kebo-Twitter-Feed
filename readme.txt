@@ -3,7 +3,7 @@ Contributors: PeterBooker, lukeketley
 Tags: twitter, tweets, feeds, social, api, oauth, widget
 Requires at least: 3.2
 Tested up to: 3.6
-Stable tag: 0.5.5
+Stable tag: 0.5.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -87,6 +87,9 @@ We store data in an option and transient, both of which are removed when you uni
 5. An example of how the Widget fits into the design of a theme automatically.
 
 == Changelog ==
+
+= 0.5.6 =
+* Bug Fix: Avoids Fatal PHP Error when the format of fetched data is not as expected.
 
 = 0.5.5 =
 * New Feature: Added 'Offset' attribute to the Shortcode, allowing you to skip a certain number of the Tweets from the beginning of the feed.
