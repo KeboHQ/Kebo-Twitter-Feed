@@ -66,9 +66,13 @@ function kebo_twitter_get_tweets() {
     }
     
     // Avoid Potential Fatal Error
-    if (isset($tweets['expiry'])) {
+    /*
+     * Removed to fix fatal error: TODO- Find better way to avoid blank tweet.
+    if ( isset( $tweets['expiry'] ) ) {
         unset( $tweets['expiry'] );
     }
+     * 
+     */
     
     return $tweets;
     
