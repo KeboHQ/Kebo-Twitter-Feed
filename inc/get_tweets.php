@@ -65,7 +65,10 @@ function kebo_twitter_get_tweets() {
         
     }
     
-    unset( $tweets['expiry'] );
+    // Avoid Potential Fatal Error
+    if (isset($tweets['expiry'])) {
+        unset( $tweets['expiry'] );
+    }
     
     return $tweets;
     
