@@ -1,6 +1,6 @@
 === Kebo Twitter Feed ===
 Contributors: PeterBooker, lukeketley
-Tags: twitter, tweets, feeds, social, api, oauth, widget
+Tags: twitter, twitter feed, twitter api, twitter shortcode, twitter 1.1, tweets, feeds, social, api, oauth, widget
 Requires at least: 3.2
 Tested up to: 3.6
 Stable tag: 0.5.7
