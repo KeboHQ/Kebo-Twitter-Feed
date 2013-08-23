@@ -56,7 +56,7 @@ function kebo_twitter_menu_render() {
                 'updated'
             );
 
-        endif;
+    endif;
 
         // Check for reset request, if set delete transient which will break the connection to Twitter, so the credentials will be lost.
         if ( isset( $_GET['reset'] ) && 'true' == $_GET['reset'] ) :
