@@ -10,7 +10,7 @@
         
     <?php $i = 0; ?>
     
-    <?php if ( isset($tweets[0]->created_at ) ) : ?>
+    <?php if ( isset( $tweets[0]->created_at ) ) : ?>
         
         <?php foreach ($tweets as $tweet) : ?>
 
