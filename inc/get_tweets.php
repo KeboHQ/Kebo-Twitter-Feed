@@ -200,7 +200,9 @@ function kebo_twitter_refresh_cache() {
 function kebo_twitter_linkify($tweets) {
 
     foreach ($tweets as $tweet) {
-
+        
+        // Encode Special Chars
+        $tweet->text = htmlentities($tweet->text);
         // Text URLs into HTML links
         $tweet->text = make_clickable($tweet->text);
         // Usernames into HTML links
