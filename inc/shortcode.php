@@ -49,6 +49,9 @@ class Kebo_Twitter_Shortcode {
             
         }
 
+        // Begin Output Buffering
+        ob_start();
+        
         // Shortcode Container
         echo '<div class="kcontainer">';
         
@@ -84,6 +87,12 @@ class Kebo_Twitter_Shortcode {
         
         // End of Shortcode Container
         echo '</div><!-- .kcontainer -->';
+        
+        // End Output Buffering and Clear Buffer
+        $output = ob_get_contents();
+        ob_end_clean();
+        
+        return $output;
         
     }
 
