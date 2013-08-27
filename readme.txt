@@ -3,7 +3,7 @@ Contributors: PeterBooker, lukeketley
 Tags: twitter, twitter feed, latest tweets, twitter api, twitter shortcode, twitter 1.1, twitter widget, tweets, twitter tweets
 Requires at least: 3.2
 Tested up to: 3.6
-Stable tag: 0.5.9
+Stable tag: 0.5.10
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -87,6 +87,10 @@ We store data in an option and transient, both of which are removed when you uni
 5. An example of how the Widget fits into the design of a theme automatically.
 
 == Changelog ==
+
+= 0.5.10 =
+* Bug Fix: Properly encode/decode Tweet text using UTF-8, so that characters display as intended when output.
+* Note: I am still investigating how to display characters as symbols as seen on the Twitter website.
 
 = 0.5.9 =
 * Bug Fix: Added output buffering to the Shortcode, fixes Tweets appearing at the top of the page regardless of Shortcode position. (Thanks dstZloi)
