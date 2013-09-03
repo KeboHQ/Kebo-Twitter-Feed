@@ -29,7 +29,7 @@
                 <div class="kmeta">
                     <a class="kaccount" href="https://twitter.com/<?php echo $tweet->user->screen_name; ?>" target="_blank">@<?php echo $tweet->user->screen_name; ?></a>
                     <a class="kdate" href="https://twitter.com/<?php echo $tweet->user->screen_name; ?>/statuses/<?php echo $tweet->id_str; ?>" target="_blank">
-                        <time title="<?php _e('Time posted'); ?>: <?php echo date('dS M Y H:i:s e', strtotime($tweet->created_at)); ?>" datetime="<?php echo date('c', strtotime($tweet->created_at)); ?>" aria-label="<?php _e('Posted on '); ?><?php echo date('jS M', strtotime($tweet->created_at)); ?>"><?php echo $created; ?></time>
+                        <time title="<?php _e('Time posted'); ?>: <?php echo date_i18n( 'dS M Y H:i:s', strtotime( $tweet->created_at ) + $tweet->user->utc_offset ); ?>" datetime="<?php echo date_i18n( 'c', strtotime( $tweet->created_at ) + $tweet->user->utc_offset ); ?>" aria-label="<?php _e('Posted on '); ?><?php echo date_i18n( 'dS M Y H:i:s', strtotime( $tweet->created_at ) + $tweet->user->utc_offset ); ?>"><?php echo $created; ?></time>
                     </a>
                 </div>
 
