@@ -48,7 +48,7 @@ $classes[] = $instance['theme'];
                             <img class="kavatar" src="<?php echo $tweet->user->profile_image_url; ?>" />
                         </a>
                     <?php endif; ?>
-                    <?php echo utf8_decode( $tweet->text ); ?>
+                    <?php echo $tweet->text; ?>
                 </p>
 
                 <div class="kfooter">
