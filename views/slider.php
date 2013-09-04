@@ -18,19 +18,28 @@ $classes[] = $instance['theme'];
 <ul class="<?php echo implode(' ', $classes); ?>" id="kebo-tweet-slider" data-timer="10000" data-transition="1000" data-animation="fade">
 
     <?php $i = 0; ?>
+    
+    <?php
+    $options = kebo_get_twitter_options();
+    $format = $options['kebo_twitter_date_format'];
+    ?>
         
     <?php if ( isset( $tweets[0]->created_at ) ) : ?>
         
         <?php foreach ($tweets as $tweet) : ?>
 
             <?php
-                if ( date( 'Ymd' ) == date( 'Ymd', strtotime($tweet->created_at) ) ) {
-                    // Covert created at date into timeago format
-                    $created = human_time_diff( date('U', strtotime($tweet->created_at)), current_time('timestamp') );
-                } else {
-                    // Convert created at date into easily readable format.
-                    $created = date('jS M', strtotime($tweet->created_at));
-                }
+            if ( date( 'Ymd' ) == date( 'Ymd', strtotime($tweet->created_at) ) ) {
+                    
+                // Covert created at date into timeago format
+                $created = human_time_diff( date( 'U', strtotime($tweet->created_at ) ), current_time( 'timestamp' ) );
+                    
+            } else {
+                    
+                // Convert created at date into easily readable format.
+                $created = date( $format, strtotime( $tweet->created_at ) );
+                    
+            }
             ?>
 
             <li class="ktweet">
