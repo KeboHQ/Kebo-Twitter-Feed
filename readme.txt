@@ -3,7 +3,7 @@ Contributors: PeterBooker, lukeketley
 Tags: twitter, twitter feed, latest tweets, twitter api, twitter shortcode, twitter 1.1, twitter widget, tweets, twitter tweets
 Requires at least: 3.2
 Tested up to: 3.6
-Stable tag: 0.5.10
+Stable tag: 0.5.11
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -87,6 +87,11 @@ We store data in an option and transient, both of which are removed when you uni
 5. An example of how the Widget fits into the design of a theme automatically.
 
 == Changelog ==
+
+= 0.5.11 =
+* Bug Fix: Encoding of International Characters.
+* New Feature: Added option for date format to plugin options page.
+* Bug Fix: Display times using users time zone.
 
 = 0.5.10 =
 * Bug Fix: Properly encode/decode Tweet text using UTF-8, so that characters display as intended when output.
@@ -193,6 +198,39 @@ We store data in an option and transient, both of which are removed when you uni
 = 0.15 =
 * Note: Initial version.
 
+== Styling the Widget ==
+
+We use the the inbuilt methods to output the Widget and Title containers so that it should fit seamlessly into your website.
+
+If you want to style the inside of the Widget below is the HTML structure:
+
+`
+<ul class="kebo-tweets">
+
+    <li class="ktweet">
+
+        <div class="kmeta">
+            <a class="kaccount"></a>
+            <a class="kdate"></a>
+        </div>
+        
+        <p class="ktext">
+            <a><img class="kavatar" /></a>
+        </p>
+
+        <div class="kfooter">
+            <a class="kreply"></a>
+            <a class="kretweet"></a>
+            <a class="kfavourite"></a>
+        </div>
+
+    </li>
+
+</ul>
+`
+
+The slider has one significant change which is that the containing unordered list has an ID of 'kebo-tweet-slider'.
+
 == Developers Notes ==
 
 You can directly access the object containing all the Tweets like this:
@@ -206,7 +244,7 @@ This function checks the cache and refreshes the data if needed. Then returns th
 
 <?php $i = 0; ?>
 
-<?php if (is_array($tweets)) : ?>
+<?php if ( isset( $tweets[0]->created_at ) ) : ?>
 
     <?php foreach ($tweets as $tweet) : ?>
 
@@ -274,37 +312,3 @@ Offset - 1-50
 WordPress has inbuilt functionality for embedding Tweets directly into posts/pages. You can do this by simply pasting the full URL of the Tweet into the content, the URL will look similar to this:
 
 `https://twitter.com/BarackObama/statuses/266031293945503744`
-
-== Styling the Widget ==
-
-We use the the inbuilt methods to output the Widget and Title containers so that it should fit seamlessly into your website.
-
-If you want to style the inside of the Widget below is the HTML structure:
-
-`
-<ul class="kebo-tweets">
-
-    <li class="ktweet">
-
-        <div class="kmeta">
-            <a class="kaccount"></a>
-            <a class="kdate"></a>
-        </div>
-        
-        <p class="ktext">
-            <a><img class="kavatar" /></a>
-        </p>
-
-        <div class="kfooter">
-            <a class="kreply"></a>
-            <a class="kretweet"></a>
-            <a class="kfavourite"></a>
-        </div>
-
-    </li>
-
-</ul>
-`
-
-The slider has one significant change which is that the containing unordered list has an ID of 'kebo-tweet-slider'.
-
