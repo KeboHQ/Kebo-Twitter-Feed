@@ -3,7 +3,7 @@ Contributors: PeterBooker, lukeketley
 Tags: twitter, twitter feed, latest tweets, twitter api, twitter shortcode, twitter 1.1, twitter widget, tweets, twitter tweets
 Requires at least: 3.2
 Tested up to: 3.6
-Stable tag: 0.5.11
+Stable tag: 0.5.12
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -87,6 +87,11 @@ We store data in an option and transient, both of which are removed when you uni
 5. An example of how the Widget fits into the design of a theme automatically.
 
 == Changelog ==
+
+= 0.5.12 =
+* Bug Fix: Correctly decode HTML chars like &amp; to &.
+* Bug Fix: Improved error log styling for improved readability.
+* Note: Extended the date format options to include full year displays.
 
 = 0.5.11 =
 * Bug Fix: Encoding of International Characters.
