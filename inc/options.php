@@ -121,8 +121,16 @@ function kebo_twitter_date_format_select_options() {
 			'label' => date('d/m/y')
 		),
                 '3' => array(
+			'value' => 'd/m/Y',
+			'label' => date('d/m/Y')
+		),
+                '4' => array(
 			'value' => 'm/d/y',
 			'label' => date('m/d/y')
+		),
+                '5' => array(
+			'value' => 'm/d/Y',
+			'label' => date('m/d/Y')
 		),
 	);
 
