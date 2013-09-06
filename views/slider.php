@@ -32,7 +32,7 @@ $classes[] = $instance['theme'];
             if ( date( 'Ymd' ) == date( 'Ymd', strtotime($tweet->created_at) ) ) {
                     
                 // Covert created at date into timeago format
-                $created = human_time_diff( date( 'U', strtotime($tweet->created_at ) ), current_time( 'timestamp' ) );
+                $created = human_time_diff( date( 'U', strtotime($tweet->created_at ) ), current_time( 'timestamp', $gmt = 1 ) );
                     
             } else {
                     
