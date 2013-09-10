@@ -1,9 +1,9 @@
 === Kebo Twitter Feed ===
 Contributors: PeterBooker, lukeketley
-Tags: twitter, twitter feed, latest tweets, twitter api, twitter shortcode, twitter 1.1, twitter widget, tweets, twitter tweets
+Tags: twitter, feed, twitter feed, latest tweets, twitter api, twitter shortcode, twitter 1.1, twitter widget, tweets, twitter tweets
 Requires at least: 3.2
 Tested up to: 3.6
-Stable tag: 0.5.13
+Stable tag: 0.5.11
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -298,7 +298,7 @@ Currently there is one Shortcode which can be used to replicate the behavior of 
 
 Or by using PHP directly:
 
-`<?php do_shortcode('[kebo_tweets]'); ?>`
+`<?php echo do_shortcode('[kebo_tweets]'); ?>`
 
 Here is the shortcode with all the available attributes and their default values:
 
