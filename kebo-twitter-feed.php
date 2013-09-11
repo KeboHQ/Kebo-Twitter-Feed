@@ -222,11 +222,58 @@ function kebo_twitter_touch_script() {
  * Runs On Plugin Activation
  */
 function kebo_twitter_activation() {
+    
+    if ( is_multisite() ) {
 
-    if ( false !== ( $twitter_data = get_transient( 'kebo_twitter_connection_' . get_current_blog_id() ) ) ) {
-        
-        update_option( 'kebo_twitter_connection_' . get_current_blog_id(), $twitter_data );
-        
+        global $wpdb;
+
+        // Store Network Site ID so we can get back later.
+        $current_blog = get_current_blog_id();
+
+        // Get a list of all Blog IDs, ignore network admin with ID of 1.
+        $blogs = $wpdb->get_results("
+                SELECT blog_id
+                FROM {$wpdb->blogs}
+                WHERE site_id = '{$wpdb->siteid}'
+                AND spam = '0'
+                AND deleted = '0'
+                AND archived = '0'
+                AND blog_id != '{$current_blog}'
+            ");
+
+        foreach ( $blogs as $blog ) {
+
+            switch_to_blog( $blog->blog_id );
+
+            // Check if old format is used for storing connection info
+            if ( false !== ( $twitter_data = get_transient( 'kebo_twitter_connection_' . $blog->blog_id ) ) ) {
+
+                // Add connection data to new Option
+                update_option( 'kebo_twitter_connection', $twitter_data );
+
+                // Delete the now un-used Transient
+                delete_transient( 'kebo_twitter_connection_' . $blog->blog_id );
+
+            }
+
+        }
+
+        // Go back to Network Site
+        switch_to_blog($current_blog);
+    
+    } else {
+
+         // Check if old format is used for storing connection info
+        if ( false !== ( $twitter_data = get_transient( 'kebo_twitter_connection_1' ) ) ) {
+
+            // Add connection data to new Option
+            update_option( 'kebo_twitter_connection', $twitter_data );
+
+            // Delete the now un-used Transient
+            delete_transient( 'kebo_twitter_connection_1' );
+
+        }
+
     }
     
 }
