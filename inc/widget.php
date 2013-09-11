@@ -6,7 +6,7 @@
 /*
  * Only register Widget if connection has been made to our Twitter App.
  */
-if ( false !== ( $twitter_data = get_transient( 'kebo_twitter_connection_' . get_current_blog_id() ) ) ) {
+if ( false !== ( $twitter_data = get_option( 'kebo_twitter_connection_' . get_current_blog_id() ) ) ) {
     
     add_action('widgets_init', 'kebo_twitter_register_widget');
     

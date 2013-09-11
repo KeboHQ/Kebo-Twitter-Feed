@@ -6,7 +6,7 @@
 function kebo_twitter_get_tweets() {
 
     // If there is no social connection, we cannot get tweets, so return false
-    if (false === ( $twitter_data = get_transient( 'kebo_twitter_connection_' . get_current_blog_id() ) ) )
+    if (false === ( $twitter_data = get_option( 'kebo_twitter_connection_' . get_current_blog_id() ) ) )
         return false;
 
     // Grab the Plugin Options.
@@ -109,7 +109,7 @@ function kebo_twitter_print_js() {
 
 function kebo_twitter_external_request() {
 
-    if (false !== ( $twitter_data = get_transient('kebo_twitter_connection_' . get_current_blog_id()) )) {
+    if ( false !== ( $twitter_data = get_option('kebo_twitter_connection_' . get_current_blog_id() ) ) ) {
 
         // URL to Kebo OAuth Request App
         $request_url = 'http://auth.kebopowered.com/request/index.php';
@@ -155,7 +155,7 @@ function kebo_twitter_refresh_cache() {
     /*
      * If cache has already been updated, no need to refresh
      */
-    if (false !== ( $tweets = get_transient('kebo_twitter_feed_' . get_current_blog_id()) )) {
+    if ( false !== ( $tweets = get_transient( 'kebo_twitter_feed_' . get_current_blog_id() ) ) ) {
 
         // Make POST request to Kebo OAuth App.
         $response = kebo_twitter_external_request();
@@ -186,7 +186,7 @@ function kebo_twitter_refresh_cache() {
             $tweets['expiry'] = time() + ( $options['kebo_twitter_cache_timer'] * MINUTE_IN_SECONDS );
 
             // No error, set transient with latest Tweets
-            set_transient('kebo_twitter_feed_' . get_current_blog_id(), $tweets, 24 * HOUR_IN_SECONDS);
+            set_transient( 'kebo_twitter_feed_' . get_current_blog_id(), $tweets, 24 * HOUR_IN_SECONDS );
             
         }
         

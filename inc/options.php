@@ -64,9 +64,17 @@ function kebo_twitter_options_init() {
             'kebo_twitter_options_general' // Settings section.
     );
     
-    // Option to store the error log
+    // Stores Error Log
     add_option(
             'kebo_twitter_errors', // name
+            array(), // value
+            null, // depreciated
+            'no' // autoload
+    );
+    
+    // Stores Connection Info
+    add_option(
+            'kebo_twitter_connection_' . get_current_blog_id(), // name
             array(), // value
             null, // depreciated
             'no' // autoload
