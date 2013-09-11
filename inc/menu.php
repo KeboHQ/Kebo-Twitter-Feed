@@ -63,7 +63,7 @@ function kebo_twitter_menu_render() {
 
             if ( 'true' == $_GET['reset'] ) :
 
-                update_option( 'kebo_twitter_connection_' . get_current_blog_id(), false );
+                update_option( 'kebo_twitter_connection', false );
             
                 add_settings_error(
                     'kebo_twitter_connection_reset',
