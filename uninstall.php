@@ -35,7 +35,6 @@ if ( is_multisite() ) {
         delete_option('kebo_twitter_connection');
 
         // Delete the Transients we registered.
-        delete_transient('kebo_twitter_connection_' . $blog->blog_id); // Removed in 0.6.0 - phase out at some point.
         delete_transient('kebo_twitter_feed_' . $blog->blog_id);
         
     }
@@ -51,7 +50,6 @@ if ( is_multisite() ) {
     delete_option('kebo_twitter_connection');
 
     // Delete the Transients we registered.
-    delete_transient('kebo_twitter_connection_1'); // Removed in 0.6.0 - phase out at some point.
     delete_transient('kebo_twitter_feed_1');
     
 }
