@@ -6,7 +6,7 @@
 function kebo_twitter_get_tweets() {
 
     // If there is no social connection, we cannot get tweets, so return false
-    if (false === ( $twitter_data = get_option( 'kebo_twitter_connection_' . get_current_blog_id() ) ) )
+    if ( false === ( $twitter_data = get_option( 'kebo_twitter_connection' ) ) )
         return false;
 
     // Grab the Plugin Options.
@@ -109,7 +109,7 @@ function kebo_twitter_print_js() {
 
 function kebo_twitter_external_request() {
 
-    if ( false !== ( $twitter_data = get_option('kebo_twitter_connection_' . get_current_blog_id() ) ) ) {
+    if ( false !== ( $twitter_data = get_option('kebo_twitter_connection' ) ) ) {
 
         // URL to Kebo OAuth Request App
         $request_url = 'http://auth.kebopowered.com/request/index.php';

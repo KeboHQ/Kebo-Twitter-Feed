@@ -74,11 +74,11 @@ function kebo_twitter_options_init() {
     
     // Stores Connection Info
     add_option(
-            'kebo_twitter_connection_' . get_current_blog_id(), // name
+            'kebo_twitter_connection', // name
             array(), // value
             null, // depreciated
             'no' // autoload
-    ); 
+    );
     
 }
 add_action('admin_init', 'kebo_twitter_options_init');
