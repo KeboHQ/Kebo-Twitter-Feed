@@ -6,7 +6,7 @@
 function kebo_twitter_get_tweets() {
 
     // If there is no social connection, we cannot get tweets, so return false
-    if ( false === ( $twitter_data = get_option( 'kebo_twitter_connection' ) ) )
+    if ( false == ( $twitter_data = get_option( 'kebo_twitter_connection' ) ) )
         return false;
 
     // Grab the Plugin Options.
