@@ -42,8 +42,6 @@ function kebo_twitter_options_init() {
             </p>
 
         <?php endif; ?>
-
-            <?php print_r($twitter_data); ?>
             
         <h3>General Options</h3>
 
