@@ -7,7 +7,7 @@
 if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) )
     exit();
 
-if (is_multisite()) {
+if ( is_multisite() ) {
 
     global $wpdb;
 
@@ -32,10 +32,12 @@ if (is_multisite()) {
         // Delete the Options we registered.
         delete_option('kebo_twitter_options');
         delete_option('kebo_twitter_errors');
+        delete_option('kebo_twitter_connection');
 
         // Delete the Transients we registered.
-        delete_transient('kebo_twitter_connection_' . $blog->blog_id);
+        delete_transient('kebo_twitter_connection_' . $blog->blog_id); // Removed in 0.6.0 - phase out at some point.
         delete_transient('kebo_twitter_feed_' . $blog->blog_id);
+        
     }
 
     // Go back to Network Site
@@ -45,8 +47,11 @@ if (is_multisite()) {
 
     // Delete the Option we registered.
     delete_option('kebo_twitter_options');
+    delete_option('kebo_twitter_errors');
+    delete_option('kebo_twitter_connection');
 
     // Delete the Transients we registered.
-    delete_transient('kebo_twitter_connection_1');
+    delete_transient('kebo_twitter_connection_1'); // Removed in 0.6.0 - phase out at some point.
     delete_transient('kebo_twitter_feed_1');
+    
 }
