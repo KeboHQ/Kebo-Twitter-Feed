@@ -3,7 +3,7 @@ Contributors: PeterBooker, lukeketley
 Tags: twitter, feed, twitter feed, latest tweets, twitter api, twitter shortcode, twitter 1.1, twitter widget, tweets, twitter tweets
 Requires at least: 3.2
 Tested up to: 3.6
-Stable tag: 0.6.0
+Stable tag: 0.6.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -87,6 +87,9 @@ We store data in an option and transient, both of which are removed when you uni
 5. An example of how the Widget fits into the design of a theme automatically.
 
 == Changelog ==
+
+= 0.6.1 =
+* Bug Fix: Fixed Plugin settings page not correctly identifying if a social connection has been made or not.
 
 = 0.6.0 =
 * Bug Fix: Store Twitter Connection data in reliable format, so it cannot be lost.
