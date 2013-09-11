@@ -49,7 +49,7 @@ function kebo_twitter_plugin_setup() {
     /**
      * Load Text Domain for Translations.
      */
-    load_plugin_textdomain('kebo_twitter', false, KEBO_TWITTER_PLUGIN_PATH . 'languages/');
+    load_plugin_textdomain( 'kebo_twitter', false, KEBO_TWITTER_PLUGIN_PATH . 'languages/' );
     
 }
 add_action('plugins_loaded', 'kebo_twitter_plugin_setup', 15);
@@ -76,25 +76,18 @@ endif;
 /**
  * Add a link to the plugin screen, to allow users to jump straight to the settings page.
  */
-function kebo_twitter_plugin_meta($links, $file) {
-
-    $plugin = plugin_basename(__FILE__);
-
-    // Add our custom link to the defaults.
-    if ($file == $plugin) {
-        return array_merge(
-                $links, array('<a href="' . admin_url('options-general.php?page=kebo-twitter') . '">' . __('Settings') . '</a>')
-        );
-    }
-
+function kebo_twitter_plugin_meta( $links ) {
+    
+    $links[] = '<a href="' . admin_url( 'options-general.php?page=kebo-twitter' ) . '">' . __( 'Settings', 'kebo_twitter' ) . '</a>';
     return $links;
+    
 }
-add_filter('plugin_row_meta', 'kebo_twitter_plugin_meta', 10, 2);
+add_filter( 'plugin_action_links_kebo-twitter-feed/kebo-twitter-feed.php', 'kebo_twitter_plugin_meta' );
 
 /**
  * Adds a WordPress pointer to Kebo Twitter settings page.
  */
-function kebo_twitter_pointer_script_style($hook_suffix) {
+function kebo_twitter_pointer_script_style( $hook_suffix ) {
 
     // Assume pointer shouldn't be shown
     $enqueue_pointer_script_style = false;
@@ -115,6 +108,7 @@ function kebo_twitter_pointer_script_style($hook_suffix) {
         wp_enqueue_style('wp-pointer');
         wp_enqueue_script('wp-pointer');
     }
+    
 }
 add_action('admin_enqueue_scripts', 'kebo_twitter_pointer_script_style');
 
