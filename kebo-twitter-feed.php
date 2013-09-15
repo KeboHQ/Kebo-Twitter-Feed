@@ -223,8 +223,8 @@ if ( false == $plugin_version || empty( $plugin_version ) || ( ! empty( $plugin_
     
     //add_action( 'admin_notices', 'kebo_twitter_upgrade_notice' );
     
-    // If the 
-    add_action( 'wp', 'kebo_twitter_activation_script' );
+    // 
+    add_action( 'after_setup_theme', 'kebo_twitter_activation_script' );
     
     // Update Plugin Version Option
     update_option( 'kebo_se_version', KEBO_TWITTER_PLUGIN_VERSION );
