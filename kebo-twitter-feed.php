@@ -219,7 +219,7 @@ function kebo_twitter_touch_script() {
 
 $plugin_version = get_option( 'kebo_se_version' );
 
-if ( false === $plugin_version || ( ! empty( $plugin_version ) && '0.6.3' > $plugin_version ) ) {
+if ( false == $plugin_version || empty( $plugin_version ) || ( ! empty( $plugin_version ) && '0.6.3' > $plugin_version ) ) {
     
     //add_action( 'admin_notices', 'kebo_twitter_upgrade_notice' );
     
