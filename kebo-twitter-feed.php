@@ -301,6 +301,30 @@ function kebo_twitter_upgrade_notice() {
     <?php
 }
 
+/*
+ * Display an Admin Notice if plugin is active but no connection to Twitter is active.
+ */
+
+$twitter_data = get_option( 'kebo_twitter_connection' );
+
+// Check if Connection data is being stored.
+if ( empty ( $twitter_data ) ) {
+    
+    add_action( 'admin_notices', 'kebo_twitter_no_connection_notice' );
+    
+}
+
+// Display Notice
+function kebo_twitter_no_connection_notice() {
+    ?>
+    
+    <div class="updated">
+        <p><?php _e( '<strong>Kebo Twitter Feed: No connection to Twitter found, to get started connect to your Twitter account from <a href="' . admin_url( 'options-general.php?page=kebo-twitter' ) . '">this page</a>.</strong>', 'kebo_twitter' ); ?></p>
+    </div>
+    
+    <?php
+}
+
 /**
  * ToDo List
  * 
