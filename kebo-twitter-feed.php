@@ -3,7 +3,7 @@
  * Plugin Name: Kebo - Twitter Feed
  * Plugin URI: http://wordpress.org/plugins/kebo-twitter-feed/
  * Description: Connect your site to your Twitter account and display your Twitter Feed on your website effortlessly with a custom widget. 
- * Version: 0.6.1
+ * Version: 0.6.3
  * Author: Kebo
  * Author URI: http://kebopowered.com
  */
@@ -13,7 +13,7 @@ if (!defined('ABSPATH'))
     exit;
 
 if (!defined('KEBO_TWITTER_PLUGIN_VERSION'))
-    define('KEBO_TWITTER_PLUGIN_VERSION', '0.6.1');
+    define('KEBO_TWITTER_PLUGIN_VERSION', '0.6.3');
 if (!defined('KEBO_TWITTER_PLUGIN_URL'))
     define('KEBO_TWITTER_PLUGIN_URL', plugin_dir_url(__FILE__));
 if (!defined('KEBO_TWITTER_PLUGIN_PATH'))
@@ -54,7 +54,7 @@ function kebo_twitter_plugin_setup() {
 }
 add_action('plugins_loaded', 'kebo_twitter_plugin_setup', 15);
 
-if (!function_exists('kebo_twitter_plugin_scripts')):
+if ( ! function_exists('kebo_twitter_plugin_scripts') ):
 
     /**
      * Enqueue plugin scripts and styles.
@@ -62,11 +62,12 @@ if (!function_exists('kebo_twitter_plugin_scripts')):
     function kebo_twitter_scripts() {
 
         // Queues the main CSS file.
-        wp_register_style('kebo-twitter-plugin', KEBO_TWITTER_PLUGIN_URL . 'css/plugin.css', array(), KEBO_TWITTER_PLUGIN_VERSION, 'all');
+        wp_register_style( 'kebo-twitter-plugin', KEBO_TWITTER_PLUGIN_URL . 'css/plugin.css', array(), KEBO_TWITTER_PLUGIN_VERSION, 'all' );
 
         // Enqueue Stylesheet for Admin Pages
         if (is_admin())
             wp_enqueue_style('kebo-twitter-plugin');
+        
     }
     add_action('wp_enqueue_scripts', 'kebo_twitter_scripts');
     add_action('admin_enqueue_scripts', 'kebo_twitter_scripts');
@@ -213,9 +214,24 @@ function kebo_twitter_touch_script() {
 }
 
 /*
- * Runs On Plugin Activation
+ * Runs if version check matches
  */
-function kebo_twitter_activation() {
+
+$plugin_version = get_option( 'kebo_se_version' );
+
+if ( false === $plugin_version || ( ! empty( $plugin_version ) && '0.6.3' > $plugin_version ) ) {
+    
+    //add_action( 'admin_notices', 'kebo_twitter_upgrade_notice' );
+    
+    // If the 
+    add_action( 'wp', 'kebo_twitter_activation_script' );
+    
+    // Update Plugin Version Option
+    update_option( 'kebo_se_version', KEBO_TWITTER_PLUGIN_VERSION );
+    
+}
+
+function kebo_twitter_activation_script() {
     
     if ( is_multisite() ) {
 
@@ -226,14 +242,14 @@ function kebo_twitter_activation() {
 
         // Get a list of all Blog IDs, ignore network admin with ID of 1.
         $blogs = $wpdb->get_results("
-                SELECT blog_id
-                FROM {$wpdb->blogs}
-                WHERE site_id = '{$wpdb->siteid}'
-                AND spam = '0'
-                AND deleted = '0'
-                AND archived = '0'
-                AND blog_id != '{$current_blog}'
-            ");
+            SELECT blog_id
+            FROM {$wpdb->blogs}
+            WHERE site_id = '{$wpdb->siteid}'
+            AND spam = '0'
+            AND deleted = '0'
+            AND archived = '0'
+            AND blog_id != '{$current_blog}'
+        ");
 
         foreach ( $blogs as $blog ) {
 
@@ -253,11 +269,11 @@ function kebo_twitter_activation() {
         }
 
         // Go back to Network Site
-        switch_to_blog($current_blog);
+        switch_to_blog( $current_blog );
     
     } else {
 
-         // Check if old format is used for storing connection info
+        // Check if old format is used for storing connection info
         if ( false !== ( $twitter_data = get_transient( 'kebo_twitter_connection_1' ) ) ) {
 
             // Add connection data to new Option
@@ -271,7 +287,19 @@ function kebo_twitter_activation() {
     }
     
 }
-register_activation_hook( __FILE__, 'kebo_twitter_activation' );
+
+/*
+ * Use if needed
+ */
+function kebo_twitter_upgrade_notice() {
+    ?>
+    
+    <div class="updated">
+        <p><?php _e( 'This update changed the way your connection to Twitter was stored by WordPress, please check the plugin is still connected to your Twitter account, <a href="' . admin_url( 'options-general.php?page=kebo-twitter' ) . '">here</a>.', 'kebo_twitter' ); ?></p>
+    </div>
+    
+    <?php
+}
 
 /**
  * ToDo List

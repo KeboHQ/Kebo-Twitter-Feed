@@ -22,6 +22,11 @@ class Kebo_Twitter_Shortcode {
             'offset' => false
         ), $atts));
         
+        // Check if a connection to Twitter exists.
+        $twitter_data = get_option( 'kebo_twitter_connection' );
+        if ( empty ( $twitter_data ) )
+            return false;
+        
         // Enqueue Style Sheet
         wp_enqueue_style( 'kebo-twitter-plugin' );
         
@@ -65,7 +70,7 @@ class Kebo_Twitter_Shortcode {
          * Get tweets from transient and refresh if its expired.
          */
         if ( false === ( $tweets = kebo_twitter_get_tweets() ) )
-            return;
+            return false;
 
         // If an offset is set, slice early items off the array
         if ( ! false == $offset && is_numeric( $offset ) ) {

@@ -26,7 +26,12 @@ function kebo_twitter_options_init() {
 
         <p><?php _e("To enable us to display your Tweets you must connect your Twitter account to our Twitter Application by clicking on the large 'Connect to Twitter' button below.", 'kebo_twitter'); ?></p>
 
-        <?php if ( false == ( $twitter_data = get_option( 'kebo_twitter_connection' ) ) ) : ?>
+        <?php
+        $twitter_data = get_option( 'kebo_twitter_connection' );
+        
+        // Check if Connection exists
+        if ( empty ( $twitter_data ) ) :
+        ?>
 
             <a class="social-link twitter disabled" href="http://auth.kebopowered.com/twitterread/?origin=<?php echo admin_url('options-general.php?page=kebo-twitter') ?>"><?php _e('Connect to Twitter', 'kebo_twitter'); ?></a>
 

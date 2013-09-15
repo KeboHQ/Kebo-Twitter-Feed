@@ -6,7 +6,8 @@
 function kebo_twitter_get_tweets() {
 
     // If there is no social connection, we cannot get tweets, so return false
-    if ( false == ( $twitter_data = get_option( 'kebo_twitter_connection' ) ) )
+    $twitter_data = get_option( 'kebo_twitter_connection' );
+    if ( empty ( $twitter_data ) )
         return false;
 
     // Grab the Plugin Options.
@@ -81,7 +82,7 @@ function kebo_twitter_get_tweets() {
 /*
  * Alias function for 'kebo_twitter_get_tweets'.
  */
-if (!function_exists('get_tweets')) :
+if ( ! function_exists( 'get_tweets' ) ) {
 
     function get_tweets() {
 
@@ -91,7 +92,7 @@ if (!function_exists('get_tweets')) :
         
     }
 
-endif;
+}
 
 /*
  * Hooks Output Function to 'wp_footer'.
@@ -100,7 +101,8 @@ endif;
 function kebo_twitter_print_js() {
 
     // Add javascript output script to 'wp_footer' hook with low priority so that jQuery loads before.
-    add_action('wp_footer', 'kebo_twitter_slider_script', 99);
+    add_action( 'wp_footer', 'kebo_twitter_slider_script', 99 );
+    
 }
 
 /*
