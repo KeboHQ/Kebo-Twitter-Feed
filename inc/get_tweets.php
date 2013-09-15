@@ -202,9 +202,9 @@ function kebo_twitter_linkify($tweets) {
     foreach ($tweets as $tweet) {
         
         // Encode Special Chars
-        $tweet->text = htmlentities($tweet->text, ENT_NOQUOTES, 'UTF-8');
+        $tweet->text = htmlentities($tweet->text, ENT_QUOTES, 'UTF-8');
         // Decode HTML Chars like &amp; to &
-        $tweet->text = htmlspecialchars_decode($tweet->text);
+        $tweet->text = htmlspecialchars_decode($tweet->text, ENT_QUOTES);
         // Text URLs into HTML links
         $tweet->text = make_clickable($tweet->text);
         // Usernames into HTML links
