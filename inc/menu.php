@@ -50,9 +50,9 @@ function kebo_twitter_menu_render() {
             // Let user know we successfully received and stored their credentials.
             // TODO: Add error checking.
             add_settings_error(
-                'kebo_twitter_connection',
+                'kebo-twitter',
                 esc_attr('settings_updated'),
-                __('Connection established with Twitter.', 'kebo_twitter'),
+                __('Connection established with Twitter. You can now display your Twitter Feed on your website using a <a href="' . admin_url('widgets.php') . '">Widget</a>.', 'kebo_twitter'),
                 'updated'
             );
 
@@ -66,7 +66,7 @@ function kebo_twitter_menu_render() {
                 update_option( 'kebo_twitter_connection', false );
             
                 add_settings_error(
-                    'kebo_twitter_connection_reset',
+                    'kebo-twitter',
                     esc_attr('settings_updated'),
                     __( 'Connection reset to Twitter.', 'kebo_twitter' ),
                     'updated'
@@ -81,7 +81,7 @@ function kebo_twitter_menu_render() {
         
         <?php screen_icon('options-general'); ?>
         <h2><?php _e('Twitter Feed', 'kebo_twitter'); ?></h2>
-            <?php //settings_errors(); ?>
+            <?php settings_errors(); ?>
 
         <form method="post" action="options.php">
             <?php
