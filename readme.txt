@@ -36,7 +36,7 @@ We make this so easy by managing all the complex OAuth requests on our own serve
 
 = Rate Us / Feedback =
 
-Please take the time to let us and others know about your experiences by leaving a review. If your use of our plugin has not been a five star experience please let us know at: feedback@kebopowered.com.
+Please take the time to let us and others know about your experiences by leaving a review. If your use of our plugin has not been a five star experience please let us know on the support forum.
 
 == Installation ==
 
