@@ -13,7 +13,6 @@
     <?php
     $options = kebo_get_twitter_options();
     $format = $options['kebo_twitter_date_format'];
-    print_r($tweets[0]);
     ?>
     
     <?php if ( isset( $tweets[0]->created_at ) ) : ?>
