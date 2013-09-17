@@ -49,6 +49,12 @@ class Kebo_Twitter_Feed_Widget extends WP_Widget {
         if ( false === ( $tweets = kebo_twitter_get_tweets() ) )
             return;
         
+        /*
+         * Remove Expiry to leave clean Tweets array
+         */
+        if ( isset( $tweets['expiry'] ) )
+            unset($tweets['expiry']);
+        
         // Output opening Widget HTML
         echo $before_widget;
         
