@@ -49,6 +49,10 @@ class Kebo_Twitter_Feed_Widget extends WP_Widget {
         if ( false === ( $tweets = kebo_twitter_get_tweets() ) )
             return;
         
+        // Ensure not undefined for updates
+        if ( ! isset( $instance['conversations'] ) )
+            $instance['conversations'] = false;
+        
         /*
          * Remove Expiry to leave clean Tweets array
          */
