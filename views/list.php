@@ -13,6 +13,7 @@
     <?php
     $options = kebo_get_twitter_options();
     $format = $options['kebo_twitter_date_format'];
+    print_r($tweets[0]);
     ?>
     
     <?php if ( isset( $tweets[0]->created_at ) ) : ?>
@@ -34,8 +35,8 @@
             }
             
             // Check if we should display replies and hide if so and this is a reply.
-            if ( ! true == $instance['replies'] && ! empty( $tweet->in_reply_to_screen_name ) && ! empty( $tweet->in_reply_to_user_id_str ) )
-                continue;
+            if ( ! true == $instance['conversations'] && ( ! empty( $tweet->in_reply_to_screen_name ) || ! empty( $tweet->in_reply_to_user_id_str ) || ! empty( $tweet->in_reply_to_status_id_str ) ) )
+                continue; // skip this loop without changing the counter
             
             ?>
 

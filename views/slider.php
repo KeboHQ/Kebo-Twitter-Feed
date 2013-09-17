@@ -43,8 +43,8 @@ $classes[] = $instance['theme'];
             }
             
             // Check if we should display replies and hide if so and this is a reply.
-            if ( ! true == $instance['replies'] && ! empty( $tweet->in_reply_to_screen_name ) && ! empty( $tweet->in_reply_to_user_id_str ) )
-                continue;
+            if ( ! true == $instance['conversations'] && ( ! empty( $tweet->in_reply_to_screen_name ) || ! empty( $tweet->in_reply_to_user_id_str ) || ! empty( $tweet->in_reply_to_status_id_str ) ) )
+                continue; // skip this loop without changing the counter
             
             ?>
 
