@@ -3,7 +3,7 @@ Contributors: PeterBooker, lukeketley
 Tags: twitter, feed, twitter feed, latest tweets, twitter api, twitter shortcode, twitter 1.1, twitter widget, tweets, twitter tweets
 Requires at least: 3.2
 Tested up to: 3.6.1
-Stable tag: 0.6.7
+Stable tag: 0.7.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -87,6 +87,12 @@ We store data in an option and transient, both of which are removed when you uni
 5. An example of how the Widget fits into the design of a theme automatically.
 
 == Changelog ==
+
+= 0.7.2 =
+* Bug Fix: Handles character encoding differently, should work on all sites/themes using UTF8 charsets.
+* Bug Fix: Improved handling of linkifying hashtags and mentions in tweet text. No longer uses regex.
+* Note: Changed the "Sorry, no Tweets were found." error message to "The Tweet data is not in the expected format.", which better reflects the situation.
+* Note: There have been a lot of character encoding issues reported recently and I am determined to fix these. If you notice any problems please let me know.
 
 = 0.6.7 =
 * Bug Fix: Correctly decode codes for single quotes.
