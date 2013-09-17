@@ -199,26 +199,74 @@ function kebo_twitter_refresh_cache() {
 /*
  * Converts Tweet text urls, account names and hashtags into HTML links.
  */
-function kebo_twitter_linkify($tweets) {
+function kebo_twitter_linkify( $tweets ) {
+    
+    foreach ( $tweets as $tweet ) {
 
-    foreach ($tweets as $tweet) {
+        $hash_length = 45; // Length of HTML added to hashtags
+        $mention_length = 33; // Length of HTML added to mentions
+        $markers = array();
         
-        // Decode HTML Chars like &amp; to &
-        $tweet->text = htmlspecialchars_decode($tweet->text, ENT_QUOTES);
-        // Encode Special Chars
-        $tweet->text = htmlentities($tweet->text, ENT_QUOTES, 'UTF-8');
-        // Decode HTML Chars like &amp; to &
-        $tweet->text = htmlspecialchars_decode($tweet->text, ENT_QUOTES);
+        if ( ! empty( $tweet->entities->hashtags ) ) {
+            
+            foreach ( $tweet->entities->hashtags as $hastag ) {
+                
+                $offset = 0;
+                $length = $hastag->indices[1] - $hastag->indices[0];
+                
+                if ( ! empty($markers) ) {
+                    foreach ( $markers as $mark ) {
+                        if ( $hastag->indices[0] > $mark['point'] ) {
+                            $offset = ( $offset + ( $mark['length'] ) );
+                        }
+                    }
+                }
+                
+                $tweet->text = substr_replace( $tweet->text, '<a href="http://twitter.com/search?q=%23' . $hastag->text . '">#' . $hastag->text . '</a>', $hastag->indices[0] + $offset, $length );
+
+                $markers[] = array(
+                    'point' => $hastag->indices[0],
+                    'length' => $hash_length + $length,
+                );
+                
+                
+            }
+            
+        }
+        
+        if ( ! empty( $tweet->entities->user_mentions ) ) {
+            
+            foreach ( $tweet->entities->user_mentions as $mention ) {
+                
+                $offset = 0;
+                $length = $mention->indices[1] - $mention->indices[0];
+                
+                if ( ! empty($markers) ) {
+                    foreach ( $markers as $mark ) {
+                        if ( $mention->indices[0] > $mark['point'] ) {
+                            $offset = ( $offset + ( $mark['length'] ) );
+                        }
+                    }
+                }
+                
+                $tweet->text = substr_replace( $tweet->text, '<a href="http://twitter.com/' . $mention->screen_name . '">@' . $mention->screen_name . '</a>', $mention->indices[0] + $offset, $length );
+
+                $markers[] = array(
+                    'point' => $mention->indices[0],
+                    'length' => $mention_length + $length,
+                );
+                
+                
+            }
+            
+        }
+        
         // Text URLs into HTML links
-        $tweet->text = make_clickable($tweet->text);
-        // Decode HTML Chars like &amp; to &
-        $tweet->text = htmlspecialchars_decode($tweet->text, ENT_QUOTES);
-        // Usernames into HTML links
-        $tweet->text = preg_replace('#@([\\d\\w]+)#', '<a href="http://twitter.com/$1">$0</a>', $tweet->text);
-        // Hashtags to HTML links
-        $tweet->text = preg_replace('/#([\\d\\w]+)/', '<a href="http://twitter.com/#search?q=%23$1">$0</a>', $tweet->text);
+        $tweet->text = make_clickable( $tweet->text );
         // Add target="_blank" to all links
-        $tweet->text = links_add_target($tweet->text, '_blank', array('a'));
+        $tweet->text = links_add_target( $tweet->text, '_blank', array( 'a' ) );
+        // Decode HTML Chars like &amp; to &
+        $tweet->text = htmlspecialchars_decode( $tweet->text, ENT_QUOTES );
         
     }
     
