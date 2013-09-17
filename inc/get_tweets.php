@@ -207,23 +207,42 @@ function kebo_twitter_linkify( $tweets ) {
         $mention_length = 33; // Length of HTML added to mentions
         $markers = array();
         
+        /*
+         * Linkify Hashtags
+         */
         if ( ! empty( $tweet->entities->hashtags ) ) {
             
+            // One Hashtag at a time
             foreach ( $tweet->entities->hashtags as $hastag ) {
                 
+                // Start offset from 0
                 $offset = 0;
+                // Calculate length of hastag - end minus start
                 $length = $hastag->indices[1] - $hastag->indices[0];
                 
-                if ( ! empty($markers) ) {
+                // If no markers, no need to offset
+                if ( ! empty( $markers ) ) {
+                    
                     foreach ( $markers as $mark ) {
+                        
+                        // If the start point is past a previous marker, we need to adjust for the characters added.
                         if ( $hastag->indices[0] > $mark['point'] ) {
+                            
+                            // Include previous offsets.
                             $offset = ( $offset + ( $mark['length'] ) );
+                            
                         }
+                        
                     }
+                    
                 }
                 
+                /*
+                 * Replace hashtag text with an HTML link
+                 */
                 $tweet->text = substr_replace( $tweet->text, '<a href="http://twitter.com/search?q=%23' . $hastag->text . '">#' . $hastag->text . '</a>', $hastag->indices[0] + $offset, $length );
 
+                // Set marker so we can take into account the characters we just added.
                 $markers[] = array(
                     'point' => $hastag->indices[0],
                     'length' => $hash_length + $length,
@@ -234,8 +253,12 @@ function kebo_twitter_linkify( $tweets ) {
             
         }
         
+        /*
+         * Linkify Mentions
+         */
         if ( ! empty( $tweet->entities->user_mentions ) ) {
             
+            // One Mention at a time
             foreach ( $tweet->entities->user_mentions as $mention ) {
                 
                 $offset = 0;
@@ -249,8 +272,12 @@ function kebo_twitter_linkify( $tweets ) {
                     }
                 }
                 
+                /*
+                 * Replace mention text with an HTML link
+                 */
                 $tweet->text = substr_replace( $tweet->text, '<a href="http://twitter.com/' . $mention->screen_name . '">@' . $mention->screen_name . '</a>', $mention->indices[0] + $offset, $length );
 
+                // Set marker so we can take into account the characters we just added.
                 $markers[] = array(
                     'point' => $mention->indices[0],
                     'length' => $mention_length + $length,
@@ -261,11 +288,19 @@ function kebo_twitter_linkify( $tweets ) {
             
         }
         
-        // Text URLs into HTML links
+        /*
+         * Linkify text URLs
+         */
         $tweet->text = make_clickable( $tweet->text );
-        // Add target="_blank" to all links
+        
+        /*
+         * Add target="_blank" to all links
+         */
         $tweet->text = links_add_target( $tweet->text, '_blank', array( 'a' ) );
-        // Decode HTML Chars like &amp; to &
+        
+        /*
+         * Decode HTML Chars like &#039; to '
+         */
         $tweet->text = htmlspecialchars_decode( $tweet->text, ENT_QUOTES );
         
     }
