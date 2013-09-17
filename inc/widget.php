@@ -97,6 +97,8 @@ class Kebo_Twitter_Feed_Widget extends WP_Widget {
             $instance['theme'] = 'light';
         if( !isset( $instance['title'] ) )
             $instance['title'] = '';
+        if( !isset( $instance['replies'] ) )
+            $instance['replies'] = false;
             
         ?>
         
@@ -132,6 +134,10 @@ class Kebo_Twitter_Feed_Widget extends WP_Widget {
             <p><input style="width: 28px;" type="checkbox" value="avatar" name="<?php echo $this->get_field_name('avatar'); ?>" id="<?php echo $this->get_field_id('avatar'); ?>" <?php if ( 'avatar' == $instance['avatar'] ) { echo 'checked="checked"'; } ?>> <?php _e('Show profile image?', 'kebo_twitter'); ?> </p>
         </label>
 
+        <label for="<?php echo $this->get_field_id('replies'); ?>">
+            <p><input style="width: 28px;" type="checkbox" value="true" name="<?php echo $this->get_field_name('replies'); ?>" id="<?php echo $this->get_field_id('replies'); ?>" <?php if ( 'true' == $instance['replies'] ) { echo 'checked="checked"'; } ?>> <?php _e('Show replies?', 'kebo_twitter'); ?> </p>
+        </label>
+
         <?php
     }
 
@@ -150,6 +156,7 @@ class Kebo_Twitter_Feed_Widget extends WP_Widget {
         $instance['style'] = wp_filter_nohtml_kses( $new_instance['style'] );
         $instance['theme'] = wp_filter_nohtml_kses( $new_instance['theme'] );
         $instance['avatar'] = wp_filter_nohtml_kses( $new_instance['avatar'] );
+        $instance['replies'] = wp_filter_nohtml_kses( $new_instance['replies'] );
         
         // Check 'count' is numeric.
         if ( is_numeric( $new_instance['count'] ) ) {
