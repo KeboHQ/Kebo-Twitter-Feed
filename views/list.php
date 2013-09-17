@@ -13,6 +13,7 @@
     <?php
     $options = kebo_get_twitter_options();
     $format = $options['kebo_twitter_date_format'];
+    print_r($tweets[0]);
     ?>
     
     <?php if ( isset( $tweets[0]->created_at ) ) : ?>
@@ -20,10 +21,11 @@
         <?php foreach ($tweets as $tweet) : ?>
 
             <?php
-            if ( date( 'Ymd' ) == date( 'Ymd', strtotime($tweet->created_at) ) ) {
+            // Prepare Date Formats
+            if ( date( 'Ymd' ) == date( 'Ymd', strtotime( $tweet->created_at ) ) ) {
                     
                 // Covert created at date into timeago format
-                $created = human_time_diff( date( 'U', strtotime($tweet->created_at ) ), current_time( 'timestamp', $gmt = 1 ) );
+                $created = human_time_diff( date( 'U', strtotime( $tweet->created_at ) ), current_time( 'timestamp', $gmt = 1 ) );
                     
             } else {
                     
@@ -31,6 +33,11 @@
                 $created = date( $format, strtotime( $tweet->created_at ) );
                     
             }
+            
+            // Check if we should display replies and hide if so and this is a reply.
+            if ( ! true == $instance['replies'] && ! empty( $tweet->in_reply_to_screen_name ) && ! empty( $tweet->in_reply_to_user_id_str ) )
+                continue;
+            
             ?>
 
             <li class="ktweet">
