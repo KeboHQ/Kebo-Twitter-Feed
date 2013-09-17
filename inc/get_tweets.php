@@ -66,15 +66,6 @@ function kebo_twitter_get_tweets() {
         
     }
     
-    // Avoid Potential Fatal Error
-    /*
-     * Removed to fix fatal error: TODO- Find better way to avoid blank tweet.
-    if ( isset( $tweets['expiry'] ) ) {
-        unset( $tweets['expiry'] );
-    }
-     * 
-     */
-    
     return $tweets;
     
 }
@@ -213,12 +204,12 @@ function kebo_twitter_linkify( $tweets ) {
         if ( ! empty( $tweet->entities->hashtags ) ) {
             
             // One Hashtag at a time
-            foreach ( $tweet->entities->hashtags as $hastag ) {
+            foreach ( $tweet->entities->hashtags as $hashtag ) {
                 
                 // Start offset from 0
                 $offset = 0;
                 // Calculate length of hastag - end minus start
-                $length = $hastag->indices[1] - $hastag->indices[0];
+                $length = $hashtag->indices[1] - $hashtag->indices[0];
                 
                 // If no markers, no need to offset
                 if ( ! empty( $markers ) ) {
@@ -226,7 +217,7 @@ function kebo_twitter_linkify( $tweets ) {
                     foreach ( $markers as $mark ) {
                         
                         // If the start point is past a previous marker, we need to adjust for the characters added.
-                        if ( $hastag->indices[0] > $mark['point'] ) {
+                        if ( $hashtag->indices[0] > $mark['point'] ) {
                             
                             // Include previous offsets.
                             $offset = ( $offset + ( $mark['length'] ) );
@@ -240,11 +231,11 @@ function kebo_twitter_linkify( $tweets ) {
                 /*
                  * Replace hashtag text with an HTML link
                  */
-                $tweet->text = substr_replace( $tweet->text, '<a href="http://twitter.com/search?q=%23' . $hastag->text . '">#' . $hastag->text . '</a>', $hastag->indices[0] + $offset, $length );
+                $tweet->text = substr_replace( $tweet->text, '<a href="http://twitter.com/search?q=%23' . $hashtag->text . '">#' . $hashtag->text . '</a>', $hashtag->indices[0] + $offset, $length );
 
                 // Set marker so we can take into account the characters we just added.
                 $markers[] = array(
-                    'point' => $hastag->indices[0],
+                    'point' => $hashtag->indices[0],
                     'length' => $hash_length + $length,
                 );
                 
