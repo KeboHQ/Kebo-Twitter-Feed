@@ -73,12 +73,6 @@ class Kebo_Twitter_Shortcode {
          */
         if ( false === ( $tweets = kebo_twitter_get_tweets() ) )
             return false;
-
-        /*
-         * Remove Expiry to leave clean Tweets array
-         */
-        if ( isset( $tweets['expiry'] ) )
-            unset($tweets['expiry']);
         
         // If an offset is set, slice early items off the array
         if ( ! false == $offset && is_numeric( $offset ) ) {

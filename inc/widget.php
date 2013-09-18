@@ -53,15 +53,6 @@ class Kebo_Twitter_Feed_Widget extends WP_Widget {
         if ( ! isset( $instance['conversations'] ) )
             $instance['conversations'] = false;
         
-        /*
-         * Remove Expiry to leave clean Tweets array
-         */
-        if ( isset( $tweets['expiry'] ) ) {
-            
-            unset( $tweets['expiry'] );
-            
-        }
-        
         // Output opening Widget HTML
         echo $before_widget;
         
