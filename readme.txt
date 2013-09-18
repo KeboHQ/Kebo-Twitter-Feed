@@ -3,7 +3,7 @@ Contributors: PeterBooker, lukeketley
 Tags: twitter, feed, twitter feed, latest tweets, twitter api, twitter shortcode, twitter 1.1, twitter widget, tweets, twitter tweets
 Requires at least: 3.2
 Tested up to: 3.6.1
-Stable tag: 0.7.5
+Stable tag: 0.7.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -87,6 +87,9 @@ We store data in an option and transient, both of which are removed when you uni
 5. An example of how the Widget fits into the design of a theme automatically.
 
 == Changelog ==
+
+= 0.7.6 =
+* Note: Skipped a version to fix a bad 0.7.5 release (not all files updated).
 
 = 0.7.5 =
 * Bug Fix: Prevent 'Cannot unset string offsets' error from occuring by changing how we deal with the expiry time at the end of the $tweets array.
