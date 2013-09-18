@@ -3,7 +3,7 @@ Contributors: PeterBooker, lukeketley
 Tags: twitter, feed, twitter feed, latest tweets, twitter api, twitter shortcode, twitter 1.1, twitter widget, tweets, twitter tweets
 Requires at least: 3.2
 Tested up to: 3.6.1
-Stable tag: 0.7.3
+Stable tag: 0.7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -88,7 +88,11 @@ We store data in an option and transient, both of which are removed when you uni
 
 == Changelog ==
 
+= 0.7.4 =
+* Bug Fix: Prevent an 'Illegal string offset' warning from occurring by checking for an array keys existence first.
+
 = 0.7.3 =
+* New Feature: You can now choose whether or not to show conversations in your feed using the Widget and Shortcode.
 * Bug Fix: Prevent undefined index on updated plugins.
 
 = 0.7.2 =
