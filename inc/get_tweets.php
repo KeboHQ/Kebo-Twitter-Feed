@@ -22,15 +22,15 @@ function kebo_twitter_get_tweets() {
         $response = kebo_twitter_external_request();
         
         // If not WP Error response is in body
-        if ( !is_wp_error($response) ) {
+        if ( ! is_wp_error( $response ) ) {
             
             // Response is in JSON format, so decode it.
-            $response = json_decode($response['body']);
+            $response = json_decode( $response['body'] );
             
         }
         
         // Check for Error or Success Response.
-        if (isset($response->errors) ) {
+        if ( isset( $response->errors ) ) {
             
             // If error, add to error log.
             kebo_twitter_add_error( $response );
@@ -53,7 +53,7 @@ function kebo_twitter_get_tweets() {
     /*
      * Check if Twwets have soft expired (user setting), if so run refresh after page load.
      */
-    elseif ( $tweets['expiry'] < time() ) {
+    elseif ( isset( $tweets['expiry'] ) && $tweets['expiry'] < time() ) {
 
         // Add 10 seconds to soft expire, to stop other threads trying to update it at the same time.
         $tweets['expiry'] = ( time() + 60 );
@@ -102,7 +102,7 @@ function kebo_twitter_print_js() {
 
 function kebo_twitter_external_request() {
 
-    if ( false !== ( $twitter_data = get_option('kebo_twitter_connection' ) ) ) {
+    if ( false !== ( $twitter_data = get_option( 'kebo_twitter_connection' ) ) ) {
 
         // URL to Kebo OAuth Request App
         $request_url = 'http://auth.kebopowered.com/request/index.php';
@@ -133,10 +133,12 @@ function kebo_twitter_external_request() {
         );
 
         // Make POST request to Kebo OAuth App.
-        $request = wp_remote_post($request_url, $args);
+        $request = wp_remote_post( $request_url, $args );
 
         return $request;
+        
     }
+    
 }
 
 /*
@@ -154,10 +156,10 @@ function kebo_twitter_refresh_cache() {
         $response = kebo_twitter_external_request();
         
         // If not WP Error response is in body
-        if ( !is_wp_error($response) ) {
+        if ( ! is_wp_error( $response ) ) {
             
             // Response is in JSON format, so decode it.
-            $response = json_decode($response['body']);
+            $response = json_decode( $response['body'] );
             
         }
         
@@ -165,7 +167,7 @@ function kebo_twitter_refresh_cache() {
         $options = kebo_get_twitter_options();
 
         // Check for Error or Success Response.
-        if (isset($response->errors)) {
+        if ( isset( $response->errors ) ) {
             
             // If error, add to error log.
             kebo_twitter_add_error( $response );
@@ -256,11 +258,17 @@ function kebo_twitter_linkify( $tweets ) {
                 $length = $mention->indices[1] - $mention->indices[0];
                 
                 if ( ! empty($markers) ) {
+                    
                     foreach ( $markers as $mark ) {
+                        
                         if ( $mention->indices[0] > $mark['point'] ) {
+                            
                             $offset = ( $offset + ( $mark['length'] ) );
+                            
                         }
+                        
                     }
+                    
                 }
                 
                 /*
