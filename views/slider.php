@@ -25,16 +25,16 @@ $classes[] = $instance['theme'];
     ?>
         
     <?php if ( isset( $tweets[0]->created_at ) ) : ?>
-        
-        <?php
-        // Skip if no Tweet Data
-        if ( ! isset( $tweet->created_at ) ) {
-            continue;
-        }
-        ?>
     
         <?php foreach ($tweets as $tweet) : ?>
 
+            <?php
+            // Skip if no Tweet Data
+            if ( ! isset( $tweet->created_at ) ) {
+                continue;
+            }
+            ?>
+    
             <?php
             // Prepare Date Formats
             if ( date( 'Ymd' ) == date( 'Ymd', strtotime( $tweet->created_at ) ) ) {
