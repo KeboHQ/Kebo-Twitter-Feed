@@ -56,14 +56,17 @@ class Kebo_Twitter_Feed_Widget extends WP_Widget {
         /*
          * Remove Expiry to leave clean Tweets array
          */
-        if ( isset( $tweets['expiry'] ) )
-            unset($tweets['expiry']);
+        if ( isset( $tweets['expiry'] ) ) {
+            
+            unset( $tweets['expiry'] );
+            
+        }
         
         // Output opening Widget HTML
         echo $before_widget;
         
         // If Title is set, output it with Widget title opening and closing HTML
-        if (isset($instance['title']) && !empty($instance['title'])) {
+        if ( isset($instance['title'] ) && ! empty( $instance['title'] ) ) {
 
             echo $before_title;
             echo $instance['title'];
@@ -92,7 +95,7 @@ class Kebo_Twitter_Feed_Widget extends WP_Widget {
     /*
      * Outputs Options Form
      */
-    function form($instance) {
+    function form( $instance ) {
         ?>
 
         <?php
