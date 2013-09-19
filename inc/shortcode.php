@@ -32,6 +32,7 @@ class Kebo_Twitter_Shortcode {
         wp_enqueue_style( 'kebo-twitter-plugin' );
         
         // Add defaults.
+        $instance['title'] = $title;
         $instance['count'] = $count;
         $instance['theme'] = $theme;
         $instance['conversations'] = $conversations;
@@ -62,9 +63,9 @@ class Kebo_Twitter_Shortcode {
         // Shortcode Container
         echo '<div class="kcontainer">';
         
-        if ( isset( $title ) ) {
+        if ( isset( $instance['title'] ) ) {
             
-            echo '<h2 class="ktweets-title">' . $title . '</h2>';
+            echo '<h2 class="ktweets-title">' . $instance['title'] . '</h2>';
             
         }
         
