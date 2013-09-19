@@ -16,10 +16,8 @@
     ?>
     
     <?php if ( isset( $tweets[0]->created_at ) ) : ?>
-        
-        
     
-        <?php foreach ($tweets as $tweet) : ?>
+        <?php foreach ( $tweets as $tweet ) : ?>
 
             <?php
             // Skip if no Tweet Data
