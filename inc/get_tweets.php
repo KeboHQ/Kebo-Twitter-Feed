@@ -16,7 +16,7 @@ function kebo_twitter_get_tweets() {
     /*
      * Get transient and check if it has expired.
      */
-    if ( false === ( $tweets = get_transient( 'kebo_twitter_feed_' . get_current_blog_id() ) ) ) {
+    if ( false === ( $tweets = get_transient( 'kebo_twitter_feed_' . get_current_blog_id() ) ) || empty( $tweets['expiry'] ) ) {
 
         // Make POST request to Kebo OAuth App.
         $response = kebo_twitter_external_request();
@@ -55,8 +55,8 @@ function kebo_twitter_get_tweets() {
      */
     elseif ( isset( $tweets['expiry'] ) && $tweets['expiry'] < time() ) {
 
-        // Add 10 seconds to soft expire, to stop other threads trying to update it at the same time.
-        $tweets['expiry'] = ( time() + 60 );
+        // Add 30 seconds to soft expire, to stop other threads trying to update it at the same time.
+        $tweets['expiry'] = ( time() + 30 );
 
         // Update soft expire time.
         set_transient( 'kebo_twitter_feed_' . get_current_blog_id(), $tweets, 24 * HOUR_IN_SECONDS );
@@ -196,13 +196,19 @@ function kebo_twitter_linkify( $tweets ) {
     
     foreach ( $tweets as $tweet ) {
 
+        // TEMPORARILY COMMENTED OUT AND REPLACED WITH REGEX
+        
+        /*
         $hash_length = 45; // Length of HTML added to hashtags
         $mention_length = 33; // Length of HTML added to mentions
         $markers = array();
+         * 
+         */
         
         /*
          * Linkify Hashtags
          */
+        /*
         if ( ! empty( $tweet->entities->hashtags ) ) {
             
             // One Hashtag at a time
@@ -229,10 +235,13 @@ function kebo_twitter_linkify( $tweets ) {
                     }
                     
                 }
+         * 
+         */
                 
                 /*
                  * Replace hashtag text with an HTML link
                  */
+        /*
                 $tweet->text = substr_replace( $tweet->text, '<a href="http://twitter.com/search?q=%23' . $hashtag->text . '">#' . $hashtag->text . '</a>', $hashtag->indices[0] + $offset, $length );
 
                 // Set marker so we can take into account the characters we just added.
@@ -245,10 +254,13 @@ function kebo_twitter_linkify( $tweets ) {
             }
             
         }
+         * 
+         */
         
         /*
          * Linkify Mentions
          */
+        /*
         if ( ! empty( $tweet->entities->user_mentions ) ) {
             
             // One Mention at a time
@@ -270,10 +282,13 @@ function kebo_twitter_linkify( $tweets ) {
                     }
                     
                 }
+         * 
+         */
                 
                 /*
                  * Replace mention text with an HTML link
                  */
+        /*
                 $tweet->text = substr_replace( $tweet->text, '<a href="http://twitter.com/' . $mention->screen_name . '">@' . $mention->screen_name . '</a>', $mention->indices[0] + $offset, $length );
 
                 // Set marker so we can take into account the characters we just added.
@@ -286,6 +301,23 @@ function kebo_twitter_linkify( $tweets ) {
             }
             
         }
+         * 
+         */
+        
+        /*
+         * Decode HTML Chars like &#039; to '
+         */
+        $tweet->text = htmlspecialchars_decode( $tweet->text, ENT_QUOTES );
+        
+        /*
+         * Turn Hasntags into HTML Links
+         */
+        $tweet->text = preg_replace( '/#([A-Za-z0-9\/\.]*)/', '<a href="http://twitter.com/search?q=$1">#$1</a>', $tweet->text );
+        
+        /*
+         * Turn Mentions into HTML Links
+         */
+        $tweet->text = preg_replace( '/@([A-Za-z0-9_\/\.]*)/', '<a href="http://www.twitter.com/$1">@$1</a>', $tweet->text );
         
         /*
          * Linkify text URLs
@@ -297,11 +329,6 @@ function kebo_twitter_linkify( $tweets ) {
          */
         $tweet->text = links_add_target( $tweet->text, '_blank', array( 'a' ) );
         
-        /*
-         * Decode HTML Chars like &#039; to '
-         */
-        $tweet->text = htmlspecialchars_decode( $tweet->text, ENT_QUOTES );
-        
     }
     
     return $tweets;
@@ -312,7 +339,7 @@ function kebo_twitter_linkify( $tweets ) {
  */
 function kebo_twitter_add_error( $response ) {
     
-    if ( is_wp_error($response) ) {
+    if ( is_wp_error( $response ) ) {
         
         // Add details of current WP error
         $error[] = array(
@@ -335,11 +362,15 @@ function kebo_twitter_add_error( $response ) {
     // Get currently stored errors
     $log = get_option( 'kebo_twitter_errors' );
     
-    if ($log[0]) {
+    if ( $log[0] ) {
+        
         // Add new error to start of array
         $errors = array_merge( $error, $log );
+        
     } else {
+        
         $errors = $error;
+        
     }
     
     // Limit array to the latest 10 errors
