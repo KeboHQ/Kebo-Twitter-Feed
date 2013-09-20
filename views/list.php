@@ -65,7 +65,7 @@
                 </p>
 
                 <div class="kfooter">
-                    <?php if ( ! empty( $tweet->entities->media ) ) : ?>
+                    <?php if ( ! empty( $tweet->entities->media ) && true == $instance['media'] ) : ?>
                         <a class="ktogglemedia kclosed" href="#" data-id="<?php echo $tweet->id_str; ?>"><span class="kshow" title="<?php _e('View photo'); ?>"><?php _e('View photo'); ?></span><span class="khide" title="<?php _e('Hide photo'); ?>"><?php _e('Hide photo'); ?></span></a>
                     <?php endif; ?>
                     <a class="kreply" title="<?php _e('Reply'); ?>" href="javascript:void(window.open('https://twitter.com/intent/tweet?in_reply_to=<?php echo $tweet->id_str; ?>', 'twitter', 'width=600, height=400'));"></a>
@@ -73,11 +73,13 @@
                     <a class="kfavourite" title="<?php _e('Favourite'); ?>" href="javascript:void(window.open('https://twitter.com/intent/favorite?tweet_id=<?php echo $tweet->id_str; ?>', 'twitter', 'width=600, height=400'));"></a>
                 </div>
                 
-                <?php if ( ! empty( $tweet->entities->media ) ) : ?>
+                <?php if ( ! empty( $tweet->entities->media ) && true == $instance['media'] ) : ?>
                 
                 <div id="<?php echo $tweet->id_str; ?>" class="kmedia kclosed">
                     <?php foreach ( $tweet->entities->media as $media ) : ?>
-                        <img src="<?php if ( is_ssl() ) { echo $media->media_url_https; } else { echo $media->media_url; } ?>" />
+                        <a href="<?php echo $media->expanded_url; ?>" target="_blank">
+                            <img alt="<?php _e( 'Tweet Image', 'kebo_twitter' ); ?>" src="<?php if ( is_ssl() ) { echo $media->media_url_https; } else { echo $media->media_url; } ?>" />
+                        </a>
                     <?php endforeach; ?>
                 </div>
                 
