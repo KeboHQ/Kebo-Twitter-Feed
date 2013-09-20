@@ -159,6 +159,45 @@ html body ul.kebo-tweets li.ktweet {
         border: none;
         float: none;
 }
+.kebo-tweets.dark .ktweet .kfooter a.ktogglemedia,
+.kebo-tweets.light .ktweet .kfooter a.ktogglemedia {
+        float: left;
+        width: auto;
+        background: none;
+        font-size: 12px;
+        padding: 4px 0;
+        opacity: 1;
+}
+.kebo-tweets .ktweet .kfooter a.ktogglemedia:hover {
+        text-decoration: underline;
+}
+.kebo-tweets .ktweet .kfooter a.ktogglemedia .kshow {
+        display: none;
+}
+.kebo-tweets .ktweet .kfooter a.ktogglemedia .khide {
+        display: block;
+}
+.kebo-tweets .ktweet .kfooter a.ktogglemedia.kclosed .kshow {
+        display: block;
+}
+.kebo-tweets .ktweet .kfooter a.ktogglemedia.kclosed .khide {
+        display: none;
+}
+.kebo-tweets .ktweet .kmedia {
+        height: auto;
+        overflow: hidden;
+        margin-top: 5px;
+}
+.kebo-tweets .ktweet .kmedia.kclosed {
+        height: 0px;
+}
+.kebo-tweets .ktweet .kmedia img {
+        display: inline-block;
+        vertical-align: middle;
+        width: 100%;
+        height: auto;
+        margin-bottom: 5px;
+}
 
 /* Light Theme */
 .kebo-tweets.light .ktweet .kfooter a {
