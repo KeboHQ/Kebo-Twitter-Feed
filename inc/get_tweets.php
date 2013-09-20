@@ -53,7 +53,7 @@ function kebo_twitter_get_tweets() {
     /*
      * Check if Twwets have soft expired (user setting), if so run refresh after page load.
      */
-    elseif ( isset( $tweets['expiry'] ) && $tweets['expiry'] < time() ) {
+    elseif ( $tweets['expiry'] < time() ) {
 
         // Add 30 seconds to soft expire, to stop other threads trying to update it at the same time.
         $tweets['expiry'] = ( time() + 30 );
