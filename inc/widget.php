@@ -53,6 +53,10 @@ class Kebo_Twitter_Feed_Widget extends WP_Widget {
         if ( ! isset( $instance['conversations'] ) )
             $instance['conversations'] = false;
         
+        // Ensure not undefined for updates
+        if ( ! isset( $instance['media'] ) )
+            $instance['media'] = false;
+        
         // Output opening Widget HTML
         echo $before_widget;
         
@@ -103,6 +107,8 @@ class Kebo_Twitter_Feed_Widget extends WP_Widget {
             $instance['title'] = '';
         if( !isset( $instance['conversations'] ) )
             $instance['conversations'] = false;
+        if( !isset( $instance['media'] ) )
+            $instance['media'] = false;
             
         ?>
         
@@ -142,6 +148,10 @@ class Kebo_Twitter_Feed_Widget extends WP_Widget {
             <p><input style="width: 28px;" type="checkbox" value="true" name="<?php echo $this->get_field_name('conversations'); ?>" id="<?php echo $this->get_field_id('conversations'); ?>" <?php if ( 'true' == $instance['conversations'] ) { echo 'checked="checked"'; } ?>> <?php _e('Show conversations?', 'kebo_twitter'); ?> </p>
         </label>
 
+        <label for="<?php echo $this->get_field_id('media'); ?>">
+            <p><input style="width: 28px;" type="checkbox" value="true" name="<?php echo $this->get_field_name('media'); ?>" id="<?php echo $this->get_field_id('media'); ?>" <?php if ( 'true' == $instance['media'] ) { echo 'checked="checked"'; } ?>> <?php _e('Show media?', 'kebo_twitter'); ?> </p>
+        </label>
+
         <?php
     }
 
@@ -161,6 +171,7 @@ class Kebo_Twitter_Feed_Widget extends WP_Widget {
         $instance['theme'] = wp_filter_nohtml_kses( $new_instance['theme'] );
         $instance['avatar'] = wp_filter_nohtml_kses( $new_instance['avatar'] );
         $instance['conversations'] = wp_filter_nohtml_kses( $new_instance['conversations'] );
+        $instance['media'] = wp_filter_nohtml_kses( $new_instance['media'] );
         
         // Check 'count' is numeric.
         if ( is_numeric( $new_instance['count'] ) ) {

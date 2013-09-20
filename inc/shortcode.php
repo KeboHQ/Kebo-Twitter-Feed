@@ -21,6 +21,7 @@ class Kebo_Twitter_Shortcode {
             'avatar' => 'off',
             'offset' => false,
             'conversations' => false,
+            'media' => false,
         ), $atts));
         
         // Check if a connection to Twitter exists.
@@ -36,6 +37,7 @@ class Kebo_Twitter_Shortcode {
         $instance['count'] = $count;
         $instance['theme'] = $theme;
         $instance['conversations'] = $conversations;
+        $instance['media'] = $media;
         
         if ( 'on' == $avatar ) {
             
