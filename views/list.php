@@ -65,10 +65,21 @@
                 </p>
 
                 <div class="kfooter">
+                    <?php if ( ! empty( $tweet->entities->media ) ) : ?>
+                        <a class="ktogglemedia kclosed" href="#" data-id="<?php echo $tweet->id_str; ?>"><span class="kshow" title="<?php _e('View photo'); ?>"><?php _e('View photo'); ?></span><span class="khide" title="<?php _e('Hide photo'); ?>"><?php _e('Hide photo'); ?></span></a>
+                    <?php endif; ?>
                     <a class="kreply" title="<?php _e('Reply'); ?>" href="javascript:void(window.open('https://twitter.com/intent/tweet?in_reply_to=<?php echo $tweet->id_str; ?>', 'twitter', 'width=600, height=400'));"></a>
                     <a class="kretweet" title="<?php _e('Re-Tweet'); ?>" href="javascript:void(window.open('https://twitter.com/intent/retweet?tweet_id=<?php echo $tweet->id_str; ?>', 'twitter', 'width=600, height=400'));"></a>
                     <a class="kfavourite" title="<?php _e('Favourite'); ?>" href="javascript:void(window.open('https://twitter.com/intent/favorite?tweet_id=<?php echo $tweet->id_str; ?>', 'twitter', 'width=600, height=400'));"></a>
                 </div>
+                
+                <?php if ( ! empty( $tweet->entities->media ) ) : ?>
+                <div id="<?php echo $tweet->id_str; ?>" class="kmedia kclosed">
+                    <?php foreach ( $tweet->entities->media as $media ) : ?>
+                        <img src="<?php if ( is_ssl() ) { echo $media->media_url_https; } else { echo $media->media_url; } ?>" />
+                    <?php endforeach; ?>
+                </div>
+                <?php endif; ?>
 
             </li>
 
@@ -85,3 +96,33 @@
     <?php unset( $tweets ); ?>
 
 </ul>
+
+<script type="text/javascript">
+    
+    /*
+     * Capture Show/Hide photo link clicks, then show/hide the photo.
+     */
+    jQuery( '.ktweet .ktogglemedia' ).click(function(e) {
+    
+        // Prevent Click from Reloading page
+        e.preventDefault();
+
+        var klink = jQuery(this);
+        var kid = klink.data( 'id' );
+        var kcontainer = jQuery( '#' + kid );
+        
+        if ( klink.hasClass('kclosed') && kcontainer.hasClass('kclosed') ) {
+
+            klink.removeClass('kclosed');
+            kcontainer.removeClass('kclosed');
+
+        } else {
+            
+            klink.addClass('kclosed');
+            kcontainer.addClass('kclosed');
+
+        };
+
+    });
+
+</script>
