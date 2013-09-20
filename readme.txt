@@ -88,11 +88,20 @@ We store data in an option and transient, both of which are removed when you uni
 
 == Changelog ==
 
+= 0.7.8 =
+* Note: Now refreshes Tweets when the plugin updates.
+* Note: Removed debug code from previous testing version to make it public safe.
+
+= 0.7.7 =
+* Bug Fix: Temporary fix for an error caused by miscalculating where Hashtags and Mentions are inside the Tweet text which resulted in corrupting the data.
+* Bug Fix: The plugin now refreshes Tweets even if the Tweet data is corrupted.
+* Note: Not a public release, only going out to certain people.
+
 = 0.7.6 =
 * Note: Skipped a version to fix a bad 0.7.5 release (not all files updated).
 
 = 0.7.5 =
-* Bug Fix: Prevent 'Cannot unset string offsets' error from occuring by changing how we deal with the expiry time at the end of the $tweets array.
+* Bug Fix: Prevent 'Cannot unset string offsets' error from occurring by changing how we deal with the expiry time at the end of the $tweets array.
 
 = 0.7.4 =
 * Bug Fix: Prevent an 'Illegal string offset' warning from occurring by checking for an array keys existence first.
