@@ -74,11 +74,13 @@
                 </div>
                 
                 <?php if ( ! empty( $tweet->entities->media ) ) : ?>
+                
                 <div id="<?php echo $tweet->id_str; ?>" class="kmedia kclosed">
                     <?php foreach ( $tweet->entities->media as $media ) : ?>
                         <img src="<?php if ( is_ssl() ) { echo $media->media_url_https; } else { echo $media->media_url; } ?>" />
                     <?php endforeach; ?>
                 </div>
+                
                 <?php endif; ?>
 
             </li>
