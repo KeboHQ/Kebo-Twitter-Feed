@@ -173,7 +173,7 @@ function kebo_twitter_refresh_cache() {
             kebo_twitter_add_error( $response );
             
         } else {
-
+            
             // We have Tweets, linkify the text
             $tweets = kebo_twitter_linkify( $response );
 
@@ -332,6 +332,7 @@ function kebo_twitter_linkify( $tweets ) {
     }
     
     return $tweets;
+    
 }
 
 /*
