@@ -87,7 +87,7 @@ $classes[] = $instance['theme'];
     
     <?php else : ?>
             
-            <p><?php _e( 'The Tweet data is not in the expected format.', 'kebo_twitter' ); ?></p>
+            <p><?php _e( 'Sorry, the Tweet data is not in the expected format.', 'kebo_twitter' ); ?></p>
             
     <?php endif; ?>
         

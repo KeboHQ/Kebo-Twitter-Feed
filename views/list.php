@@ -75,6 +75,7 @@
                 
                 <?php if ( ! empty( $tweet->entities->media ) && true == $instance['media'] ) : ?>
                 
+                <?php $is_media = true; ?>
                 <div id="<?php echo $tweet->id_str; ?>" class="kmedia kclosed">
                     <?php foreach ( $tweet->entities->media as $media ) : ?>
                         <a href="<?php echo $media->expanded_url; ?>" target="_blank">
@@ -93,13 +94,15 @@
             
     <?php else : ?>
             
-            <p><?php _e( 'The Tweet data is not in the expected format.', 'kebo_twitter' ); ?></p>
+            <p><?php _e( 'Sorry, the Tweet data is not in the expected format.', 'kebo_twitter' ); ?></p>
             
     <?php endif; ?>
-        
+            
     <?php unset( $tweets ); ?>
 
 </ul>
+
+<?php if ( ! empty( $is_media ) && true == $is_media ) : ?>
 
 <script type="text/javascript">
     
@@ -130,3 +133,5 @@
     });
 
 </script>
+
+<?php endif; ?>
