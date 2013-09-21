@@ -22,15 +22,17 @@ $classes[] = $instance['theme'];
     <?php
     $options = kebo_get_twitter_options();
     $format = $options['kebo_twitter_date_format'];
+    $corruption = 0;
     ?>
         
-    <?php if ( isset( $tweets[0]->created_at ) ) : ?>
+    <?php if ( ! empty( $tweets ) ) : ?>
     
         <?php foreach ( $tweets as $tweet ) : ?>
 
             <?php
-            // Skip if no Tweet Data
-            if ( ! isset( $tweet->created_at ) ) {
+            // Skip if corrupted data or Expiry time.
+            if ( empty( $tweet->created_at ) ) {
+                $corruption++;
                 continue;
             }
             ?>
@@ -74,9 +76,9 @@ $classes[] = $instance['theme'];
                 </p>
 
                 <div class="kfooter">
-                    <a class="kreply" title="<?php _e('Reply'); ?>" href="javascript:void(window.open('https://twitter.com/intent/tweet?in_reply_to=<?php echo $tweet->id_str; ?>', 'twitter', 'width=600, height=400'));"></a>
-                    <a class="kretweet" title="<?php _e('Re-Tweet'); ?>" href="javascript:void(window.open('https://twitter.com/intent/retweet?tweet_id=<?php echo $tweet->id_str; ?>', 'twitter', 'width=600, height=400'));"></a>
-                    <a class="kfavourite" title="<?php _e('Favourite'); ?>" href="javascript:void(window.open('https://twitter.com/intent/favorite?tweet_id=<?php echo $tweet->id_str; ?>', 'twitter', 'width=600, height=400'));"></a>
+                    <a class="kreply" title="<?php _e('Reply'); ?>" href="https://twitter.com/intent/tweet?in_reply_to=<?php echo $tweet->id_str; ?>"></a>
+                    <a class="kretweet" title="<?php _e('Re-Tweet'); ?>" href="https://twitter.com/intent/retweet?tweet_id=<?php echo $tweet->id_str; ?>"></a>
+                    <a class="kfavourite" title="<?php _e('Favourite'); ?>" href="https://twitter.com/intent/favorite?tweet_id=<?php echo $tweet->id_str; ?>"></a>
                 </div>
 
             </li>
@@ -87,10 +89,33 @@ $classes[] = $instance['theme'];
     
     <?php else : ?>
             
+            <p><?php _e( 'Sorry, no Tweets were found.', 'kebo_twitter' ); ?></p>
+            
+    <?php endif; ?>
+            
+    <?php if ( 1 < $corruption ) : ?>
+            
             <p><?php _e( 'Sorry, the Tweet data is not in the expected format.', 'kebo_twitter' ); ?></p>
             
     <?php endif; ?>
-        
+            
     <?php unset( $tweets ); ?>
 
 </ul>
+
+<script type="text/javascript">
+    
+    /*
+     * Capture Show/Hide photo link clicks, then show/hide the photo.
+     */
+    jQuery( '.ktweet .kfooter a:not(.ktogglemedia)' ).click(function(e) {
+    
+        // Prevent Click from Reloading page
+        e.preventDefault();
+        
+        var href = jQuery(this).attr('href');
+        window.open( href, 'twitter', 'width=600, height=400, top=0, left=0');
+
+    });
+
+</script>
