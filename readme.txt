@@ -3,7 +3,7 @@ Contributors: PeterBooker, lukeketley
 Tags: twitter, feed, twitter feed, latest tweets, twitter api, twitter shortcode, twitter 1.1, twitter widget, tweets, twitter tweets
 Requires at least: 3.2
 Tested up to: 3.6.1
-Stable tag: 0.7.8
+Stable tag: 0.9.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -87,6 +87,14 @@ We store data in an option and transient, both of which are removed when you uni
 5. An example of how the Widget fits into the design of a theme automatically.
 
 == Changelog ==
+
+= 0.9.0 =
+* Bug Fix: Fixed WordPress failing to serialize the Tweet data (due to Unicode Characters), by using 'json_encode' myself before saving the data (which correctly handles Unicode characters).
+* Note: The above problem was hidden by most sites simply refreshing Tweets every pageload before rendering the page, so another advantage is that those sites will go back to using the background caching which does not impact page load speed.
+
+= 0.8.0 =
+* New Feature: You can now choose to show media (photos) attached to Tweets using the Shortcode and Widget, by selecting the option 'Show Media?'. It currently only works for the 'List' display, but working it into the 'Slider' display is being planned.
+* Note: If you notice any display issues with the photos displayed under Tweets please let me know, and ideally give me a live site URL, so that I can fix the plugins CSS where possible.
 
 = 0.7.8 =
 * Note: Now refreshes Tweets when the plugin updates.
@@ -279,9 +287,14 @@ If you want to style the inside of the Widget below is the HTML structure:
         </p>
 
         <div class="kfooter">
+            <a class="ktogglemedia"></a>
             <a class="kreply"></a>
             <a class="kretweet"></a>
             <a class="kfavourite"></a>
+        </div>
+
+        <div class="kmedia">
+            <a><img /></a>
         </div>
 
     </li>
@@ -316,7 +329,7 @@ This function checks the cache and refreshes the data if needed. Then returns th
 
 <?php else : ?>
 
-    <p>Sorry, no Tweets found.</p>
+    <p>Sorry, the Tweet data is not in the expected format.</p>
 
 <?php endif; ?>
 `
@@ -354,7 +367,7 @@ Or by using PHP directly:
 
 Here is the shortcode with all the available attributes and their default values:
 
-`[kebo_tweets title="" count="5" style="list" theme="light" offset="false" avatar="off"]`
+`[kebo_tweets title="" count="5" style="list" theme="light" offset="false" avatar="off" conversations="false" media="false"]`
 
 The available options are:
 
@@ -365,6 +378,8 @@ Style - list/slider
 Theme - light/dark
 Avatar - on/off
 Offset - 1-50
+Conversations - true/false
+Media - true/false
 `
 
 == Embedded Tweets ==

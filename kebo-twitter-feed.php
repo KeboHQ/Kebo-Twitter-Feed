@@ -3,7 +3,7 @@
  * Plugin Name: Kebo - Twitter Feed
  * Plugin URI: http://wordpress.org/plugins/kebo-twitter-feed/
  * Description: Connect your site to your Twitter account and display your Twitter Feed on your website effortlessly with a custom widget. 
- * Version: 0.7.8
+ * Version: 0.9.0
  * Author: Kebo
  * Author URI: http://kebopowered.com
  */
@@ -13,7 +13,7 @@ if (!defined('ABSPATH'))
     exit;
 
 if (!defined('KEBO_TWITTER_PLUGIN_VERSION'))
-    define('KEBO_TWITTER_PLUGIN_VERSION', '0.7.8');
+    define('KEBO_TWITTER_PLUGIN_VERSION', '0.9.0');
 if (!defined('KEBO_TWITTER_PLUGIN_URL'))
     define('KEBO_TWITTER_PLUGIN_URL', plugin_dir_url(__FILE__));
 if (!defined('KEBO_TWITTER_PLUGIN_PATH'))
@@ -94,10 +94,10 @@ function kebo_twitter_pointer_script_style( $hook_suffix ) {
     $enqueue_pointer_script_style = false;
 
     // Get array list of dismissed pointers for current user and convert it to array
-    $dismissed_pointers = explode(',', get_user_meta(get_current_user_id(), 'dismissed_wp_pointers', true));
+    $dismissed_pointers = explode( ',', get_user_meta( get_current_user_id(), 'dismissed_wp_pointers', true ) );
 
     // Check if our pointer is not among dismissed ones
-    if ( !in_array('kebo_twitter_settings_pointer', $dismissed_pointers) ) {
+    if ( ! in_array( 'kebo_twitter_settings_pointer', $dismissed_pointers ) ) {
         $enqueue_pointer_script_style = true;
 
         // Add footer scripts using callback function
@@ -105,13 +105,13 @@ function kebo_twitter_pointer_script_style( $hook_suffix ) {
     }
 
     // Enqueue pointer CSS and JS files, if needed
-    if ($enqueue_pointer_script_style) {
-        wp_enqueue_style('wp-pointer');
-        wp_enqueue_script('wp-pointer');
+    if ( $enqueue_pointer_script_style ) {
+        wp_enqueue_style( 'wp-pointer' );
+        wp_enqueue_script( 'wp-pointer' );
     }
     
 }
-add_action('admin_enqueue_scripts', 'kebo_twitter_pointer_script_style');
+add_action( 'admin_enqueue_scripts', 'kebo_twitter_pointer_script_style' );
 
 function kebo_twitter_pointer_print_scripts() {
 
@@ -216,12 +216,14 @@ function kebo_twitter_touch_script() {
 /*
  * Runs if version check matches
  */
-
 $plugin_version = get_option( 'kebo_se_version' );
 
 if ( false == $plugin_version || empty( $plugin_version ) || ( ! empty( $plugin_version ) && KEBO_TWITTER_PLUGIN_VERSION > $plugin_version ) ) {
     
     //add_action( 'admin_notices', 'kebo_twitter_upgrade_notice' );
+    
+    // Delete currently cached data as format is changing in 0.9.0
+    delete_transient( 'kebo_twitter_connection_' . get_current_blog_id() );
     
     // Set silent cache to refresh after page load.
     add_action( 'shutdown', 'kebo_twitter_refresh_cache' );
