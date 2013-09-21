@@ -88,6 +88,9 @@ We store data in an option and transient, both of which are removed when you uni
 
 == Changelog ==
 
+= 0.9.1 =
+* Bug Fix: Now correctly deletes the old Tweet data on update, allowing the plugin start using the fixed format of Tweet data.
+
 = 0.9.0 =
 * Bug Fix: Fixed WordPress failing to serialize the Tweet data (due to Unicode Characters), by using 'json_encode' myself before saving the data (which correctly handles Unicode characters).
 * Note: The above problem was hidden by most sites simply refreshing Tweets every pageload before rendering the page, so another advantage is that those sites will go back to using the background caching which does not impact page load speed.
