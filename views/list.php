@@ -78,7 +78,7 @@ wp_enqueue_script('jquery');
                     <?php endif; ?>
                     <a class="kreply" title="<?php _e('Reply'); ?>" href="https://twitter.com/intent/tweet?in_reply_to=<?php echo $tweet->id_str; ?>"></a>
                     <a class="kretweet" title="<?php _e('Re-Tweet'); ?>" href="https://twitter.com/intent/retweet?tweet_id=<?php echo $tweet->id_str; ?>"></a>
-                    <a class="kfavourite" title="<?php _e('Favourite'); ?>" href="https://twitter.com/intent/favorite?tweet_id=<?php echo $tweet->id_str; ?>"></a>
+                    <a class="kfavorite" title="<?php _e('Favorite'); ?>" href="https://twitter.com/intent/favorite?tweet_id=<?php echo $tweet->id_str; ?>"></a>
                 </div>
                 
                 <?php if ( ! empty( $tweet->entities->media ) && true == $instance['media'] ) : ?>
