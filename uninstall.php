@@ -33,6 +33,7 @@ if ( is_multisite() ) {
         delete_option('kebo_twitter_options');
         delete_option('kebo_twitter_errors');
         delete_option('kebo_twitter_connection');
+        delete_option('kebo_se_version');
 
         // Delete the Transients we registered.
         delete_transient('kebo_twitter_feed_' . $blog->blog_id);
@@ -48,6 +49,7 @@ if ( is_multisite() ) {
     delete_option('kebo_twitter_options');
     delete_option('kebo_twitter_errors');
     delete_option('kebo_twitter_connection');
+    delete_option('kebo_se_version');
 
     // Delete the Transients we registered.
     delete_transient('kebo_twitter_feed_1');
