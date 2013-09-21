@@ -16,7 +16,7 @@ function kebo_twitter_get_tweets() {
     /*
      * Get transient and check if it has expired.
      */
-    if ( false === ( $tweets = get_transient( 'kebo_twitter_feed_' . get_current_blog_id() ) ) || empty( $tweets['expiry'] ) ) {
+    if ( false === ( $tweets = get_transient( 'kebo_twitter_feed_' . get_current_blog_id() ) ) ) {
 
         // Make POST request to Kebo OAuth App.
         $response = kebo_twitter_external_request();
@@ -43,6 +43,9 @@ function kebo_twitter_get_tweets() {
             // Add custom expiry time
             $tweets['expiry'] = time() + ( $options['kebo_twitter_cache_timer'] * MINUTE_IN_SECONDS );
 
+            // JSON encode Tweet data
+            $tweets = json_encode( $tweets );
+            
             // No error, set transient with latest Tweets
             set_transient( 'kebo_twitter_feed_' . get_current_blog_id(), $tweets, 24 * HOUR_IN_SECONDS );
             
@@ -51,19 +54,31 @@ function kebo_twitter_get_tweets() {
     }
 
     /*
-     * Check if Twwets have soft expired (user setting), if so run refresh after page load.
+     * Check if Tweets have soft expired (user setting), if so run refresh after page load.
      */
-    elseif ( $tweets['expiry'] < time() ) {
+    elseif ( ! empty( $tweets->expiry ) && $tweets->expiry < time() ) {
 
         // Add 30 seconds to soft expire, to stop other threads trying to update it at the same time.
-        $tweets['expiry'] = ( time() + 30 );
+        $tweets->expiry = ( time() + 30 );
 
+        // JSON encode Tweet data
+        $tweets = json_encode( $tweets );
+        
         // Update soft expire time.
         set_transient( 'kebo_twitter_feed_' . get_current_blog_id(), $tweets, 24 * HOUR_IN_SECONDS );
 
         // Set silent cache to refresh after page load.
         add_action( 'shutdown', 'kebo_twitter_refresh_cache' );
         
+    }
+    
+    /*
+     * If we have serialized data from the Transient we must decode it.
+     */
+    if ( null != json_decode( $tweets )  ) {
+		
+        $tweets = json_decode( $tweets );
+		
     }
     
     return $tweets;
@@ -144,7 +159,6 @@ function kebo_twitter_external_request() {
 /*
  * Silently refreshes the cache (transient) after page has rendered.
  */
-
 function kebo_twitter_refresh_cache() {
 
     /*
@@ -179,6 +193,9 @@ function kebo_twitter_refresh_cache() {
 
             // Add custom expiry time
             $tweets['expiry'] = time() + ( $options['kebo_twitter_cache_timer'] * MINUTE_IN_SECONDS );
+            
+            // JSON encode Tweet data
+            $tweets = json_encode( $tweets );
 
             // No error, set transient with latest Tweets
             set_transient( 'kebo_twitter_feed_' . get_current_blog_id(), $tweets, 24 * HOUR_IN_SECONDS );
