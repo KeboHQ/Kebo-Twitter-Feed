@@ -90,6 +90,7 @@ We store data in an option and transient, both of which are removed when you uni
 
 = 0.9.1 =
 * Bug Fix: Now correctly deletes the old Tweet data on update, allowing the plugin start using the fixed format of Tweet data.
+* Note: If 0.9.0 caused an error when outputting Tweets this fixes it.
 
 = 0.9.0 =
 * Bug Fix: Fixed WordPress failing to serialize the Tweet data (due to Unicode Characters), by using 'json_encode' myself before saving the data (which correctly handles Unicode characters).
