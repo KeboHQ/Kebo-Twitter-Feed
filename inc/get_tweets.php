@@ -49,14 +49,26 @@ function kebo_twitter_get_tweets() {
             // No error, set transient with latest Tweets
             set_transient( 'kebo_twitter_feed_' . get_current_blog_id(), $tweets, 24 * HOUR_IN_SECONDS );
             
+            // Decode for use
+            $tweets = json_decode( $tweets );
+            
         }
         
+    }
+    
+    /*
+     * If we have serialized data from the Transient we must decode it.
+     */
+    if ( is_string( $tweets ) && ( null != json_decode( $tweets ) ) ) {
+		
+        $tweets = json_decode( $tweets );
+		
     }
 
     /*
      * Check if Tweets have soft expired (user setting), if so run refresh after page load.
      */
-    elseif ( ! empty( $tweets->expiry ) && $tweets->expiry < time() ) {
+    if ( ! empty( $tweets->expiry ) && $tweets->expiry < time() ) {
 
         // Add 30 seconds to soft expire, to stop other threads trying to update it at the same time.
         $tweets->expiry = ( time() + 30 );
@@ -66,19 +78,13 @@ function kebo_twitter_get_tweets() {
         
         // Update soft expire time.
         set_transient( 'kebo_twitter_feed_' . get_current_blog_id(), $tweets, 24 * HOUR_IN_SECONDS );
+        
+        // Decode for use
+        $tweets = json_decode( $tweets );
 
         // Set silent cache to refresh after page load.
         add_action( 'shutdown', 'kebo_twitter_refresh_cache' );
         
-    }
-    
-    /*
-     * If we have serialized data from the Transient we must decode it.
-     */
-    if ( null != json_decode( $tweets )  ) {
-		
-        $tweets = json_decode( $tweets );
-		
     }
     
     return $tweets;
