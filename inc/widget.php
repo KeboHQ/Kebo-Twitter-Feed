@@ -149,7 +149,7 @@ class Kebo_Twitter_Feed_Widget extends WP_Widget {
         </label>
 
         <label for="<?php echo $this->get_field_id('media'); ?>">
-            <p><input style="width: 28px;" type="checkbox" value="true" name="<?php echo $this->get_field_name('media'); ?>" id="<?php echo $this->get_field_id('media'); ?>" <?php if ( 'true' == $instance['media'] ) { echo 'checked="checked"'; } ?>> <?php _e('Show media?', 'kebo_twitter'); ?> </p>
+            <p><input style="width: 28px;" type="checkbox" value="true" name="<?php echo $this->get_field_name('media'); ?>" id="<?php echo $this->get_field_id('media'); ?>" <?php if ( 'true' == $instance['media'] ) { echo 'checked="checked"'; } ?>> <?php _e('Show media? (only Lists)', 'kebo_twitter'); ?> </p>
         </label>
 
         <?php
