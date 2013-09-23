@@ -50,7 +50,7 @@ function kebo_twitter_get_tweets() {
             set_transient( 'kebo_twitter_feed_' . get_current_blog_id(), $tweets, 24 * HOUR_IN_SECONDS );
             
             // Decode for use
-            $tweets = json_decode( $tweets );
+            $tweets = json_decode( $tweets, false );
             
         }
         
@@ -61,7 +61,7 @@ function kebo_twitter_get_tweets() {
      */
     if ( is_string( $tweets ) && ( null != json_decode( $tweets ) ) ) {
 		
-        $tweets = json_decode( $tweets );
+        $tweets = json_decode( $tweets, false );
 		
     }
 
@@ -80,7 +80,7 @@ function kebo_twitter_get_tweets() {
         set_transient( 'kebo_twitter_feed_' . get_current_blog_id(), $tweets, 24 * HOUR_IN_SECONDS );
         
         // Decode for use
-        $tweets = json_decode( $tweets );
+        $tweets = json_decode( $tweets, false );
 
         // Set silent cache to refresh after page load.
         add_action( 'shutdown', 'kebo_twitter_refresh_cache' );
