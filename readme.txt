@@ -1,9 +1,9 @@
 === Kebo Twitter Feed ===
 Contributors: PeterBooker, lukeketley
-Tags: twitter, feed, twitter feed, latest tweets, twitter api, twitter shortcode, twitter 1.1, twitter widget, tweets, twitter tweets
+Tags: twitter, feed, twitter feed, latest tweets, twitter api, shortcode, widget, tweets, twitter tweets
 Requires at least: 3.2
 Tested up to: 3.6.1
-Stable tag: 0.9.2
+Stable tag: 0.9.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -87,6 +87,10 @@ We store data in an option and transient, both of which are removed when you uni
 5. An example of how the Widget fits into the design of a theme automatically.
 
 == Changelog ==
+
+= 0.9.3 =
+* Bug Fix: Corrected spelling from British English to US English, 'Favourite' to 'Favorite'.
+* Note: The above change also means that one of the CSS classes changed name. One of the 'Twitter Intent' links changed from '.kfavourite' to '.kfavorite', now all the CSS classes are in US English there should be no further changes.
 
 = 0.9.2 =
 * Bug Fix: Correctly schedules Tweets to be refreshed according to plugin option. Change in Tweet data format caused this to break in 0.9.x!
