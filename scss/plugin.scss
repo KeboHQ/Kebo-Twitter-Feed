@@ -101,6 +101,7 @@ div.box {
 }
 html body ul.kebo-tweets {
         overflow: hidden;
+        width: 100%;
         margin: 0;
         padding: 0;
         list-style: none;
@@ -232,7 +233,7 @@ html body ul.kebo-tweets li.ktweet {
 .kebo-tweets.dark .ktweet .kfooter .kretweet {
         background-position: -27px -32px;
 }
-.kebo-tweets.dark .ktweet .kfooter .kfavourite {
+.kebo-tweets.dark .ktweet .kfooter .kfavorite {
         background-position: -54px -32px;
 }
 .kebo-tweets.dark .ktweet .kfooter .ktimeago {
