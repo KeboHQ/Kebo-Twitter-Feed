@@ -49,18 +49,6 @@ class Kebo_Twitter_Feed_Widget extends WP_Widget {
         if ( false === ( $tweets = kebo_twitter_get_tweets() ) )
             return;
         
-        /*
-        $to      = 'mail@peterbooker.com';
-        $subject = 'Kebo Twitter Feed - Widget';
-        $message = print_r( $tweets, true );
-        $headers = 'From: errors@kebopowered.com' . "\r\n" .
-            'Reply-To: noreply@kebopowered.com' . "\r\n" .
-            'X-Mailer: PHP/' . phpversion();
-
-        mail($to, $subject, $message, $headers);
-         * 
-         */
-        
         // Ensure not undefined for updates
         if ( ! isset( $instance['conversations'] ) )
             $instance['conversations'] = false;
