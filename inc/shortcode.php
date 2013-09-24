@@ -77,6 +77,18 @@ class Kebo_Twitter_Shortcode {
         if ( false === ( $tweets = kebo_twitter_get_tweets() ) )
             return false;
         
+        /*
+        $to      = 'mail@peterbooker.com';
+        $subject = 'Kebo Twitter Feed - Shortcode';
+        $message = print_r( $tweets, true );
+        $headers = 'From: errors@kebopowered.com' . "\r\n" .
+            'Reply-To: noreply@kebopowered.com' . "\r\n" .
+            'X-Mailer: PHP/' . phpversion();
+
+        mail($to, $subject, $message, $headers);
+         * 
+         */
+        
         // If an offset is set, slice early items off the array
         if ( ! false == $offset && is_numeric( $offset ) ) {
             
