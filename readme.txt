@@ -3,7 +3,7 @@ Contributors: PeterBooker, lukeketley
 Tags: twitter, feed, twitter feed, latest tweets, twitter api, shortcode, widget, tweets, twitter tweets
 Requires at least: 3.2
 Tested up to: 3.6.1
-Stable tag: 0.9.3
+Stable tag: 0.9.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -87,6 +87,10 @@ We store data in an option and transient, both of which are removed when you uni
 5. An example of how the Widget fits into the design of a theme automatically.
 
 == Changelog ==
+
+= 0.9.4 =
+* Bug Fix: Missed changing a class name in the plugins CSS from the previous change to US English which meant one 'Intent' icon could be the wrong color.
+* Bug Fix: Slightly adjusted the Tweet container CSS to improve compatibility with the sites Theme CSS.
 
 = 0.9.3 =
 * Bug Fix: Corrected spelling from British English to US English, 'Favourite' to 'Favorite'.
