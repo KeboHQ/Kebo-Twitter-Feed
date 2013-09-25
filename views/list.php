@@ -22,7 +22,7 @@ wp_enqueue_script('jquery');
     $corruption = 0;
     ?>
     
-    <?php if ( ! empty( $tweets ) ) : ?>
+    <?php if ( ! empty( $tweets ) && is_array( $tweets ) ) : ?>
     
         <?php foreach ( $tweets as $tweet ) : ?>
 
