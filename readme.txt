@@ -6,6 +6,7 @@ Tested up to: 3.6.1
 Stable tag: 0.9.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: kebo_twitter
 
 The easiest way to add a great looking Twitter feed to your website.
 
