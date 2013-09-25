@@ -116,7 +116,7 @@ add_action( 'admin_enqueue_scripts', 'kebo_twitter_pointer_script_style' );
 function kebo_twitter_pointer_print_scripts() {
 
     $pointer_content = '<h3>' . __('Connect to your Twitter Account', 'kebo_twitter') . '</h3>';
-    $pointer_content .= '<p>' . __('In just a few clicks we can connect your website to your Twitter account and display your Latest Tweets.', 'kebo_twitter') . ' <a href="' . admin_url('options-general.php?page=kebo-twitter') . '">' . __('Get Started Now', 'kebo_twitter') . '</a></p>';
+    $pointer_content .= '<p>' . __('In just a few clicks we can connect your website to your Twitter account and display your latest Tweets.', 'kebo_twitter') . ' <a href="' . admin_url('options-general.php?page=kebo-twitter') . '">' . __('Get Started Now', 'kebo_twitter') . '</a></p>';
     ?>
 
     <script type="text/javascript">
@@ -300,7 +300,7 @@ function kebo_twitter_upgrade_notice() {
     ?>
     
     <div class="updated">
-        <p><?php _e( 'This update changed the way your connection to Twitter was stored by WordPress, please check the plugin is still connected to your Twitter account, <a href="' . admin_url( 'options-general.php?page=kebo-twitter' ) . '">here</a>.', 'kebo_twitter' ); ?></p>
+        <p><?php echo sprintf( __( 'This update changed the way your connection to Twitter was stored by WordPress, please check the plugin is still connected to your Twitter account, <a href="%s">here</a>.', 'kebo_twitter' ), admin_url( 'options-general.php?page=kebo-twitter' ) ); ?></p>
     </div>
     
     <?php
@@ -329,7 +329,7 @@ function kebo_twitter_no_connection_notice() {
     ?>
     
     <div class="updated">
-        <p><?php _e( '<strong>Kebo Twitter Feed: No connection to Twitter found, to get started connect to your Twitter account from <a href="' . admin_url( 'options-general.php?page=kebo-twitter' ) . '">this page</a>.</strong>', 'kebo_twitter' ); ?></p>
+        <p><?php echo sprintf( __( '<strong>Kebo Twitter Feed:</strong> No connection to Twitter found, to get started connect to your Twitter account from <a href="%s">this page</a>.', 'kebo_twitter' ), admin_url( 'options-general.php?page=kebo-twitter' ) ); ?></p>
     </div>
     
     <?php
@@ -341,6 +341,7 @@ function kebo_twitter_no_connection_notice() {
 /**
  * ToDo List
  * 
- * 1. Re-write custom Slider/Fader javascript. Extending features e.g. pause on hover, speed, etc.
+ * 1. Include Re-Tweets in request to Twitter API and give users the option.
+ * 2. 
  * 
  */
