@@ -18,11 +18,12 @@ wp_enqueue_script('jquery');
     
     <?php
     $options = kebo_get_twitter_options();
-    $format = $options['kebo_twitter_date_format'];
+    $format = get_option( 'date_format' );
     $corruption = 0;
+    $count = 0;
     ?>
     
-    <?php if ( ! empty( $tweets ) && is_array( $tweets ) ) : ?>
+    <?php if ( ! empty( $tweets ) ) : ?>
     
         <?php foreach ( $tweets as $tweet ) : ?>
 
@@ -32,6 +33,8 @@ wp_enqueue_script('jquery');
                 $corruption++;
                 continue;
             }
+            // Count Tweets
+            $count++;
             ?>
     
             <?php
@@ -42,9 +45,9 @@ wp_enqueue_script('jquery');
                 $created = human_time_diff( date( 'U', strtotime( $tweet->created_at ) ), current_time( 'timestamp', $gmt = 1 ) );
                     
             } else {
-                    
+                
                 // Convert created at date into easily readable format.
-                $created = date( $format, strtotime( $tweet->created_at ) );
+                $created = date_i18n( $format, strtotime( $tweet->created_at ) );
                     
             }
             
@@ -59,7 +62,7 @@ wp_enqueue_script('jquery');
                 <div class="kmeta">
                     <a class="kaccount" href="https://twitter.com/<?php echo $tweet->user->screen_name; ?>" target="_blank">@<?php echo $tweet->user->screen_name; ?></a>
                     <a class="kdate" href="https://twitter.com/<?php echo $tweet->user->screen_name; ?>/statuses/<?php echo $tweet->id_str; ?>" target="_blank">
-                        <time title="<?php _e('Time posted'); ?>: <?php echo date_i18n( 'dS M Y H:i:s', strtotime( $tweet->created_at ) + $tweet->user->utc_offset ); ?>" datetime="<?php echo date_i18n( 'c', strtotime( $tweet->created_at ) + $tweet->user->utc_offset ); ?>" aria-label="<?php _e('Posted on '); ?><?php echo date_i18n( 'dS M Y H:i:s', strtotime( $tweet->created_at ) + $tweet->user->utc_offset ); ?>"><?php echo $created; ?></time>
+                        <time title="<?php _e( 'Time posted', 'kebo_twitter' ); ?>: <?php echo date_i18n( 'dS M Y H:i:s', strtotime( $tweet->created_at ) + $tweet->user->utc_offset ); ?>" datetime="<?php echo date_i18n( 'c', strtotime( $tweet->created_at ) + $tweet->user->utc_offset ); ?>" aria-label="<?php _e('Posted on ', 'kebo_twitter'); ?><?php echo date_i18n( 'dS M Y H:i:s', strtotime( $tweet->created_at ) + $tweet->user->utc_offset ); ?>"><?php echo $created; ?></time>
                     </a>
                 </div>
 
@@ -74,11 +77,11 @@ wp_enqueue_script('jquery');
 
                 <div class="kfooter">
                     <?php if ( ! empty( $tweet->entities->media ) && true == $instance['media'] ) : ?>
-                        <a class="ktogglemedia kclosed" href="#" data-id="<?php echo $tweet->id_str; ?>"><span class="kshow" title="<?php _e('View photo'); ?>"><?php _e('View photo'); ?></span><span class="khide" title="<?php _e('Hide photo'); ?>"><?php _e('Hide photo'); ?></span></a>
+                        <a class="ktogglemedia kclosed" href="#" data-id="<?php echo $tweet->id_str; ?>"><span class="kshow" title="<?php _e('View photo', 'kebo_twitter'); ?>"><?php _e('View photo', 'kebo_twitter'); ?></span><span class="khide" title="<?php _e('Hide photo', 'kebo_twitter'); ?>"><?php _e('Hide photo', 'kebo_twitter'); ?></span></a>
                     <?php endif; ?>
-                    <a class="kreply" title="<?php _e('Reply'); ?>" href="https://twitter.com/intent/tweet?in_reply_to=<?php echo $tweet->id_str; ?>"></a>
-                    <a class="kretweet" title="<?php _e('Re-Tweet'); ?>" href="https://twitter.com/intent/retweet?tweet_id=<?php echo $tweet->id_str; ?>"></a>
-                    <a class="kfavorite" title="<?php _e('Favorite'); ?>" href="https://twitter.com/intent/favorite?tweet_id=<?php echo $tweet->id_str; ?>"></a>
+                    <a class="kreply" title="<?php _e('Reply', 'kebo_twitter'); ?>" href="https://twitter.com/intent/tweet?in_reply_to=<?php echo $tweet->id_str; ?>"></a>
+                    <a class="kretweet" title="<?php _e('Re-Tweet', 'kebo_twitter'); ?>" href="https://twitter.com/intent/retweet?tweet_id=<?php echo $tweet->id_str; ?>"></a>
+                    <a class="kfavorite" title="<?php _e('Favorite', 'kebo_twitter'); ?>" href="https://twitter.com/intent/favorite?tweet_id=<?php echo $tweet->id_str; ?>"></a>
                 </div>
                 
                 <?php if ( ! empty( $tweet->entities->media ) && true == $instance['media'] ) : ?>
@@ -109,6 +112,12 @@ wp_enqueue_script('jquery');
     <?php if ( 1 < $corruption ) : ?>
             
             <p><?php _e( 'Sorry, the Tweet data is not in the expected format.', 'kebo_twitter' ); ?></p>
+            
+    <?php endif; ?>
+            
+    <?php if ( 2 > $count ) : ?>
+            
+            <p><?php _e( 'Sorry, no Tweets were found.', 'kebo_twitter' ); ?></p>
             
     <?php endif; ?>
             
