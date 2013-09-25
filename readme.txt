@@ -3,10 +3,9 @@ Contributors: PeterBooker, lukeketley
 Tags: twitter, feed, twitter feed, latest tweets, twitter api, shortcode, widget, tweets, twitter tweets
 Requires at least: 3.2
 Tested up to: 3.6.1
-Stable tag: 0.9.4
+Stable tag: 0.9.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Text Domain: kebo_twitter
 
 The easiest way to add a great looking Twitter feed to your website.
 
@@ -88,6 +87,9 @@ We store data in an option and transient, both of which are removed when you uni
 5. An example of how the Widget fits into the design of a theme automatically.
 
 == Changelog ==
+
+= 0.9.6 =
+* New Feature: Included a 'kebo_twitter.pot' file, so that users can translate the plugin into their own language. If you do translate it, I would be grateful if you could send the files to me and we will include them in the plugin.
 
 = 0.9.5 =
 * Note: Removed the date format option. The plugin now uses the date format selected under 'Settings -> General'. This allows it to be automatically be translated for those using WordPress in other languages.
