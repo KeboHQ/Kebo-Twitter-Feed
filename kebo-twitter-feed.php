@@ -51,7 +51,7 @@ function kebo_twitter_plugin_setup() {
     /**
      * Load Text Domain for Translations.
      */
-    load_plugin_textdomain( 'kebo_twitter', false, KEBO_TWITTER_PLUGIN_PATH . 'languages/' );
+    load_plugin_textdomain( 'kebo_twitter', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
     
 }
 add_action('plugins_loaded', 'kebo_twitter_plugin_setup', 15);
