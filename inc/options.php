@@ -13,7 +13,7 @@ function kebo_twitter_options_init() {
 
     add_settings_section(
             'kebo_twitter_options_general', // Unique identifier for the settings section
-            __('Twitter Connection', 'kebo'), // Section title
+            __('Twitter Connection', 'kebo_twitter'), // Section title
             'kebo_twitter_connection_render', // Section callback
             'kebo-twitter' // Menu slug
     );
