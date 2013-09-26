@@ -102,10 +102,10 @@ function kebo_twitter_menu_render() {
 
             <ul class="error-log">
 
-                <li class="header"><span class="date">Date</span> <span class="ref">Code</span> <span class="message">Message</span></li>
+                <li class="header"><span class="date"><?php _e( 'Date', 'kebo_twitter' ); ?></span> <span class="ref"><?php _e( 'Code', 'kebo_twitter' ); ?></span> <span class="message"><?php _e( 'Message', 'kebo_twitter' ); ?></span></li>
 
                 <?php foreach ( $errors as $error ) : ?>
-                    <li><span class="date"><?php echo date_i18n( get_option( 'date_format' ), $error['date'] ); ?></span> <span class="ref"><?php echo $error['code']; ?></span> <span class="message"><?php echo $error['message']; ?></span></li>
+                    <li><span class="date"><?php echo date( 'H:i:s', $error['date'] ); ?> - <?php echo date_i18n( get_option( 'date_format' ), $error['date'] ); ?></span> <span class="ref"><?php echo $error['code']; ?></span> <span class="message"><?php echo $error['message']; ?></span></li>
                 <?php endforeach; ?>
 
             </ul>
