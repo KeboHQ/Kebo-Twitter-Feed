@@ -80,7 +80,7 @@ function kebo_twitter_menu_render() {
     <div class="wrap">
         
         <?php screen_icon('options-general'); ?>
-        <h2><?php _e('Twitter Feed', 'kebo_twitter'); ?></h2>
+        <h2><?php _e('Kebo Twitter Feed', 'kebo_twitter'); ?></h2>
             <?php settings_errors( 'kebo-twitter' ); ?>
 
         <form method="post" action="options.php">
