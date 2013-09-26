@@ -3,7 +3,7 @@ Contributors: PeterBooker, lukeketley
 Tags: twitter, feed, twitter feed, latest tweets, twitter api, shortcode, widget, tweets, twitter tweets
 Requires at least: 3.2
 Tested up to: 3.6.1
-Stable tag: 0.9.6
+Stable tag: 0.9.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -11,32 +11,35 @@ The easiest way to add a great looking Twitter feed to your website.
 
 == Description ==
 
-Hassle-free and user-friendly way to add a Twitter Feed to your website. We provide a custom Widget to help you display the Twitter Feed on your website, as well as direct access to the data for developers to use as they wish.
+Hassle-free and user-friendly way to add a Twitter Feed to your website. Get started in just a few clicks without the need to setup your own Twitter App. Use the provided Widget or Shortcode to easily display your Tweets on your website.
 
 = Why use Kebo Twitter Feed? =
 
-* Get started in just a few clicks. No setting up your own Twitter App (API v1.1 made easy).
+`
+* Get started in just a few clicks. No setting up your own Twitter App.
+* Fits seamlessly with your current site design.
+* Friendly and active support.
 * Compatible with any WordPress hosting.
-* Advanced caching, discreetly caches in the background after page load.
-* WordPress 3.6 compatible.
-* Completely Multisite compatible.
+* WordPress Multisite compatible.
+* Refreshes Tweets in the background, never impacts pageload.
+* Translation ready - German included (thanks pixolin).
+`
 
-Other solutions usually require you to create a Twitter App and provide the plugin with OAuth credentials yourself. Our hassle-free solution takes care of all the complex OAuth requests for you. In a few clicks you can have your Twitter Feed displayed on your site.
+Other solutions usually require you to create a Twitter App and provide the plugin with oAuth credentials yourself. We don't believe it should be that hard, and with our plugin you can get the Tweets displayed on your website with just a few clicks.
 
-We make this so easy by managing all the complex OAuth requests on our own server using our Twitter app. Our app only asks for read permission and we only ever request publically available information. Your data is never stored on our system and you can read more about how we treat your information in our [privacy policy](http://kebopowered.com/privacy-policy/#social-connections "Kebo Privacy Policy").
+We make this so easy by managing all the complex oAuth requests on our own server using our Twitter app. Our app only asks for read permission and we only ever request publically available information. Your data is never stored on our system and you can read more about how we treat your information in our [privacy policy](http://kebopowered.com/privacy-policy/#social-connections "Kebo Privacy Policy").
 
-= Features =
+= Main Features =
 
-* Hassle-free Twitter API handling. We take care of the OAuth requests for you.
-* Connect your website to Twitter in seconds with no technical knowledge required.
-* Handy Widget to display your feed in seconds.
-* Can display profile image with Tweets.
-* Caching is used to avoid needless requests every page refresh.
+* Hassle-free setup (no creating a Twitter App).
+* Easily display Tweets with a Widget or Shortcode.
+* Choose to show a profile image, attached media and much more with your Tweets.
+* Advanced Caching, so that we never impact pageload speed.
 * Local cache backup, in case the connection to Twitter has problems.
 
 = Rate Us / Feedback =
 
-Please take the time to let us and others know about your experiences by leaving a review. If your use of our plugin has not been a five star experience please let us know on the support forum.
+Please take the time to let us and others know about your experiences by leaving a review. If your use of our plugin has not been a five star experience we would like to understand why, so that we can improve the plugin for you and other users.
 
 == Installation ==
 
@@ -87,6 +90,10 @@ We store data in an option and transient, both of which are removed when you uni
 5. An example of how the Widget fits into the design of a theme automatically.
 
 == Changelog ==
+
+= 0.9.7 =
+* New Feature: German translation file included by default.
+* Bug Fix: Fixed language .mo files from not being included correctly. Now including your own translation .mo file should work.
 
 = 0.9.6 =
 * New Feature: Included a 'kebo_twitter.pot' file, so that users can translate the plugin into their own language. If you do translate it, I would be grateful if you could send the files to me and we will include them in the plugin.
