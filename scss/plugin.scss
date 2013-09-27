@@ -131,7 +131,8 @@ html body ul.kebo-tweets li.ktweet {
 .kebo-tweets .ktweet .ktext {
         margin: 5px 0 2px 0;
         padding: 0;
-        min-height: 2em;
+        min-height: 4em;
+        clear: both;
 }
 .kebo-tweets .ktweet .ktext a {
         display: inline;
@@ -149,6 +150,7 @@ html body ul.kebo-tweets li.ktweet {
 .kebo-tweets .ktweet .kfooter {
         text-align: right;
         padding: 0;
+        overflow: hidden;
 }
 .kebo-tweets .ktweet .kfooter a {
         background: url('../imgs/twitter_feed_icons_sprite.png') top left no-repeat;
@@ -164,10 +166,14 @@ html body ul.kebo-tweets li.ktweet {
 .kebo-tweets.light .ktweet .kfooter a.ktogglemedia {
         float: left;
         width: auto;
+        height: auto;
         background: none;
         font-size: 12px;
-        padding: 4px 0;
+        padding: 0;
         opacity: 1;
+        overflow: hidden;
+        line-height: 1em;
+        margin-top: 8px;
 }
 .kebo-tweets .ktweet .kfooter a.ktogglemedia:hover {
         text-decoration: underline;
@@ -176,10 +182,12 @@ html body ul.kebo-tweets li.ktweet {
         display: none;
 }
 .kebo-tweets .ktweet .kfooter a.ktogglemedia .khide {
-        display: block;
+        display: inline-block;
+        float: left;
 }
 .kebo-tweets .ktweet .kfooter a.ktogglemedia.kclosed .kshow {
-        display: block;
+        display: inline-block;
+        float: left;
 }
 .kebo-tweets .ktweet .kfooter a.ktogglemedia.kclosed .khide {
         display: none;
@@ -197,7 +205,47 @@ html body ul.kebo-tweets li.ktweet {
         vertical-align: middle;
         width: 100%;
         height: auto;
-        margin-bottom: 5px;
+        margin: 0 0 5px 0;
+        padding: 0;
+}
+.kebo-tweets .kfollow {
+        margin: 10px 0 0 0;
+        padding: 0;
+}
+
+/* RTL Styles */
+.kebo-tweets.rtl .kmeta a {
+        direction: rtl;
+        unicode-bidi: bidi-override;
+}
+.kebo-tweets.rtl .kmeta .kaccount {
+        float: right;
+}
+.kebo-tweets.rtl .kmeta .kdate {
+        float: left;
+}
+.kebo-tweets.rtl .ktext {
+        direction: rtl;
+        unicode-bidi: bidi-override;
+}
+.kebo-tweets .ktweet .kavatar {
+        float: right;
+        margin: 7px 0 0 7px;
+}
+.kebo-tweets.rtl .kfooter a {
+        float: left;
+        direction: rtl;
+        unicode-bidi: bidi-override;
+}
+.kebo-tweets.light.rtl .ktweet .kfooter a.ktogglemedia,
+.kebo-tweets.dark.rtl .ktweet .kfooter a.ktogglemedia {
+        float: right;
+        margin-top: 2px;
+}
+.kebo-tweets.light.rtl .ktweet .kfooter a.ktogglemedia span,
+.kebo-tweets.dark.rtl .ktweet .kfooter a.ktogglemedia span {
+        direction: rtl;
+        unicode-bidi: bidi-override;
 }
 
 /* Light Theme */
