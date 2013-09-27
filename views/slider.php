@@ -10,9 +10,13 @@ kebo_twitter_print_js();
 ?>
 
 <?php
+// Prepare Classes
 $classes[] = 'kebo-tweets';
 $classes[] = 'slider';
 $classes[] = $instance['theme'];
+if ( is_rtl() ) {
+    $classes[] = 'rtl';
+}
 ?>
 
 <ul class="<?php echo implode(' ', $classes); ?>" id="kebo-tweet-slider" data-timer="10000" data-transition="1000" data-animation="fade">
@@ -23,10 +27,9 @@ $classes[] = $instance['theme'];
     $options = kebo_get_twitter_options();
     $format = get_option( 'date_format' );
     $corruption = 0;
-    $count = 0;
     ?>
         
-    <?php if ( ! empty( $tweets ) ) : ?>
+    <?php if ( ! empty( $tweets->{0}->created_at ) ) : ?>
     
         <?php foreach ( $tweets as $tweet ) : ?>
 
@@ -36,8 +39,6 @@ $classes[] = $instance['theme'];
                 $corruption++;
                 continue;
             }
-            // Count Tweets
-            $count++;
             ?>
     
             <?php
@@ -100,13 +101,7 @@ $classes[] = $instance['theme'];
             
             <p><?php _e( 'Sorry, the Tweet data is not in the expected format.', 'kebo_twitter' ); ?></p>
             
-    <?php endif; ?>
-    
-    <?php if ( 2 > $count ) : ?>
-            
-            <p><?php _e( 'Sorry, no Tweets were found.', 'kebo_twitter' ); ?></p>
-            
-    <?php endif; ?>        
+    <?php endif; ?>  
             
     <?php unset( $tweets ); ?>
 
