@@ -109,21 +109,6 @@ if ( is_rtl() ) {
 
         <?php endforeach; ?>
             
-        <?php //if ( true == $instance['follow'] ) : ?>
-            
-            <?php $twitter_data = get_option( 'kebo_twitter_connection' ); ?>
-            <?php if ( strpos( $twitter_data['account_link'], 'http' ) === false ) { $account_link = 'http://' . $twitter_data['account_link']; } ?>
-            
-            <div class="kfollow">
-                    
-                <a href="<?php echo  $account_link; ?>" class="twitter-follow-button" data-lang="<?php echo ( ! empty( $lang ) ) ? $lang : 'en'; ?>" data-size="medium" data-dnt="true">Follow @<?php echo $twitter_data['account']; ?></a>
-
-                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="http://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-                
-            </div>
-            
-        <?php //endif; ?>
-            
     <?php else : ?>
             
             <p><?php _e( 'Sorry, no Tweets were found.', 'kebo_twitter' ); ?></p>
