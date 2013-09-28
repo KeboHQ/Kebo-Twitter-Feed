@@ -3,7 +3,7 @@ Contributors: PeterBooker, lukeketley
 Tags: twitter, feed, twitter feed, latest tweets, twitter api, shortcode, widget, tweets, twitter tweets
 Requires at least: 3.2
 Tested up to: 3.6.1
-Stable tag: 1.0.1
+Stable tag: 1.0.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -88,6 +88,9 @@ We store data in an option and transient, both of which are removed when you uni
 5. An example of how the Widget fits into the design of a theme automatically.
 
 == Changelog ==
+
+= 1.0.2 =
+* Note: New version to fix a bad released on wordpress.org, some files got muddled up in version 1.0.1.
 
 = 1.0.1 =
 * Note: We finally reached our goals for compatibility, reliability and feature set and have moved past the version 1.0.0 release point. This means we are confident that users of the plugin will have an excellent experience. However it does not mean we are going to stop working on the plugin, as there are more features and a lot of polish we would like to add, to make this the greatest Twitter Feed plugin of all. Thanks to all our users and everyone who has made the time to give feedback, your input and support is invaluable.
