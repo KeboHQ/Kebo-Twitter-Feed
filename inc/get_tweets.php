@@ -130,7 +130,7 @@ function kebo_twitter_external_request() {
 
         // Setup arguments for OAuth request.
         $data = array(
-            'service' => 'twitter',
+            'service' => 'twitterfull',
             'account' => $twitter_data['account'], // Screen Name
             'token' => $twitter_data['token'], // OAuth Token
             'secret' => $twitter_data['secret'], // OAuth Secret
