@@ -28,8 +28,7 @@ if ( is_rtl() ) {
     $options = kebo_get_twitter_options();
     $format = get_option( 'date_format' );
     $corruption = 0;
-    $lang = mb_substr( get_bloginfo('language'), 0, 2 );
-    print_r( $tweets->{5}->retweeted_status );
+    //$lang = mb_substr( get_bloginfo('language'), 0, 2 );// Needed for follow button
     ?>
     
     <?php if ( ! empty( $tweets->{0}->created_at ) ) : ?>
