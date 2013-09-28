@@ -36,10 +36,21 @@ if ( is_rtl() ) {
         <?php foreach ( $tweets as $tweet ) : ?>
 
             <?php
-            // Skip if corrupted data or Expiry time.
+            // Skip if no Tweet data.
             if ( empty( $tweet->created_at ) ) {
                 $corruption++;
                 continue;
+            }
+            if ( 'tweets' == $instance['display'] ) {
+                // Skip Re-Tweets
+                if ( ! empty( $tweet->retweeted_status ) ) {
+                    continue;
+                }
+            } elseif ( 'retweets' == $instance['display'] ) {
+                // Skip Normal Tweets
+                if ( empty( $tweet->retweeted_status ) ) {
+                    continue;
+                }
             }
             ?>
     
