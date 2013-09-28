@@ -3,7 +3,7 @@ Contributors: PeterBooker, lukeketley
 Tags: twitter, feed, twitter feed, latest tweets, twitter api, shortcode, widget, tweets, twitter tweets
 Requires at least: 3.2
 Tested up to: 3.6.1
-Stable tag: 0.9.8
+Stable tag: 1.0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -89,12 +89,19 @@ We store data in an option and transient, both of which are removed when you uni
 
 == Changelog ==
 
+= 1.0.1 =
+* Note: We finally reached our goals for compatibility, reliability and feature set and have moved past the version 1.0.0 release point. This means we are confident that users of the plugin will have an excellent experience. However it does not mean we are going to stop working on the plugin, as there are more features and a lot of polish we would like to add, to make this the greatest Twitter Feed plugin of all. Thanks to all our users and everyone who has made the time to give feedback, your input and support is invaluable.
+* New Feature: We now import your Re-Tweets too, you can now choose between displaying your personal Tweets, your Re-Tweets, or all your Tweets.
+* New Feature: Russian translation files are now included. Our thanks to Stas Newdel (stasn) for providing the translation.
+* Bug Fix: Fixed the alignment of profile images inside Tweets. The recent RTL changes did not have the required .rtl class, so were effecting the default view by mistake.
+* Note: The Widget and Shortcode have been updated to handle us now importing Re-Tweets. The Widget has a dropdown called 'Display', with the options 'Tweets' (Your personal Tweets), 'Re-Tweets' (Your Re-Tweets) and 'All Tweets' (Your Tweets and Re-Tweets). By Re-Tweets we mean other user's Tweets which you Re-Tweeted. The Shortcode has the 'display' parameter, which has the same three options 'tweets', 'retweets' and 'all'. The default for both is just showing your personal Tweets (no Re-Tweets).
+
 = 0.9.8 =
 * New Feature: Right-to-Left (RTL) language support.
 * Bug Fix: Resolved bad check for no Tweets. Only displays "Sorry, no Tweets were found." if there really are no Tweets.
 
 = 0.9.7 =
-* New Feature: German translation file included by default.
+* New Feature: German translation file included by default. Our thanks to Bego Mario Garde (pixolin) for providing the translation.
 * Bug Fix: Fixed language .mo files from not being included correctly. Now including your own translation .mo file should work.
 
 = 0.9.6 =
