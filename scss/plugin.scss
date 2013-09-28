@@ -228,7 +228,7 @@ html body ul.kebo-tweets li.ktweet {
         direction: rtl;
         unicode-bidi: bidi-override;
 }
-.kebo-tweets .ktweet .kavatar {
+.kebo-tweets.rtl .ktweet .kavatar {
         float: right;
         margin: 7px 0 0 7px;
 }
