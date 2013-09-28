@@ -29,6 +29,7 @@ if ( is_rtl() ) {
     $format = get_option( 'date_format' );
     $corruption = 0;
     $lang = mb_substr( get_bloginfo('language'), 0, 2 );
+    print_r( $tweets->{5}->retweeted_status );
     ?>
     
     <?php if ( ! empty( $tweets->{0}->created_at ) ) : ?>
@@ -74,8 +75,8 @@ if ( is_rtl() ) {
 
                 <p class="ktext">
                     <?php if ( 'avatar' == $instance['avatar'] ) : ?>
-                        <a href="https://twitter.com/<?php echo $tweet->user->screen_name; ?>" target="_blank">
-                            <img class="kavatar" src="<?php echo $tweet->user->profile_image_url; ?>" />
+                        <a href="https://twitter.com/<?php echo ( isset( $tweet->retweeted_status ) ) ? $tweet->retweeted_status->user->screen_name : $tweet->user->screen_name ; ?>" target="_blank">
+                            <img class="kavatar" src="<?php echo ( isset( $tweet->retweeted_status ) ) ? $tweet->retweeted_status->user->profile_image_url : $tweet->user->profile_image_url ; ?>" />
                         </a>
                     <?php endif; ?>
                     <?php echo $tweet->text; ?>
@@ -86,7 +87,7 @@ if ( is_rtl() ) {
                         <a class="ktogglemedia kclosed" href="#" data-id="<?php echo $tweet->id_str; ?>"><span class="kshow" title="<?php _e('View photo', 'kebo_twitter'); ?>"><?php _e('View photo', 'kebo_twitter'); ?></span><span class="khide" title="<?php _e('Hide photo', 'kebo_twitter'); ?>"><?php _e('Hide photo', 'kebo_twitter'); ?></span></a>
                     <?php endif; ?>
                     <a class="kreply" title="<?php _e('Reply', 'kebo_twitter'); ?>" href="https://twitter.com/intent/tweet?in_reply_to=<?php echo $tweet->id_str; ?>"></a>
-                    <a class="kretweet" title="<?php _e('Re-Tweet', 'kebo_twitter'); ?>" href="https://twitter.com/intent/retweet?tweet_id=<?php echo $tweet->id_str; ?>"></a>
+                    <a class="kretweet" title="<?php _e('Re-Tweet', 'kebo_twitter'); ?>" href="https://twitter.com/intent/retweet?tweet_id=<?php echo ( isset( $tweet->retweeted_status ) ) ? $tweet->retweeted_status->id_str : $tweet->id_str ; ?>"></a>
                     <a class="kfavorite" title="<?php _e('Favorite', 'kebo_twitter'); ?>" href="https://twitter.com/intent/favorite?tweet_id=<?php echo $tweet->id_str; ?>"></a>
                 </div>
                 

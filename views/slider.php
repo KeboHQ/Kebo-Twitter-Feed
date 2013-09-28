@@ -66,14 +66,14 @@ if ( is_rtl() ) {
                 <div class="kmeta">
                     <a class="kaccount" href="https://twitter.com/<?php echo $tweet->user->screen_name; ?>" target="_blank">@<?php echo $tweet->user->screen_name; ?></a>
                     <a class="kdate" href="https://twitter.com/<?php echo $tweet->user->screen_name; ?>/statuses/<?php echo $tweet->id_str; ?>" target="_blank">
-                        <time title="<?php _e('Time posted', 'kebo_twitter'); ?>: <?php echo date_i18n( 'dS M Y H:i:s', strtotime( $tweet->created_at ) + $tweet->user->utc_offset ); ?>" datetime="<?php echo date_i18n( 'c', strtotime( $tweet->created_at ) + $tweet->user->utc_offset ); ?>" aria-label="<?php _e('Posted on ', 'kebo_twitter'); ?><?php echo date_i18n( 'dS M Y H:i:s', strtotime( $tweet->created_at ) + $tweet->user->utc_offset ); ?>"><?php echo $created; ?></time>
+                        <time title="<?php _e( 'Time posted', 'kebo_twitter' ); ?>: <?php echo date_i18n( 'dS M Y H:i:s', strtotime( $tweet->created_at ) + $tweet->user->utc_offset ); ?>" datetime="<?php echo date_i18n( 'c', strtotime( $tweet->created_at ) + $tweet->user->utc_offset ); ?>" aria-label="<?php _e('Posted on ', 'kebo_twitter'); ?><?php echo date_i18n( 'dS M Y H:i:s', strtotime( $tweet->created_at ) + $tweet->user->utc_offset ); ?>"><?php echo $created; ?></time>
                     </a>
                 </div>
 
                 <p class="ktext">
                     <?php if ( 'avatar' == $instance['avatar'] ) : ?>
-                        <a href="https://twitter.com/<?php echo $tweet->user->screen_name; ?>" target="_blank">
-                            <img class="kavatar" src="<?php echo $tweet->user->profile_image_url; ?>" />
+                        <a href="https://twitter.com/<?php echo ( isset( $tweet->retweeted_status ) ) ? $tweet->retweeted_status->user->screen_name : $tweet->user->screen_name ; ?>" target="_blank">
+                            <img class="kavatar" src="<?php echo ( isset( $tweet->retweeted_status ) ) ? $tweet->retweeted_status->user->profile_image_url : $tweet->user->profile_image_url ; ?>" />
                         </a>
                     <?php endif; ?>
                     <?php echo $tweet->text; ?>
@@ -81,7 +81,7 @@ if ( is_rtl() ) {
 
                 <div class="kfooter">
                     <a class="kreply" title="<?php _e('Reply', 'kebo_twitter'); ?>" href="https://twitter.com/intent/tweet?in_reply_to=<?php echo $tweet->id_str; ?>"></a>
-                    <a class="kretweet" title="<?php _e('Re-Tweet', 'kebo_twitter'); ?>" href="https://twitter.com/intent/retweet?tweet_id=<?php echo $tweet->id_str; ?>"></a>
+                    <a class="kretweet" title="<?php _e('Re-Tweet', 'kebo_twitter'); ?>" href="https://twitter.com/intent/retweet?tweet_id=<?php echo ( isset( $tweet->retweeted_status ) ) ? $tweet->retweeted_status->id_str : $tweet->id_str ; ?>"></a>
                     <a class="kfavorite" title="<?php _e('Favorite', 'kebo_twitter'); ?>" href="https://twitter.com/intent/favorite?tweet_id=<?php echo $tweet->id_str; ?>"></a>
                 </div>
 
