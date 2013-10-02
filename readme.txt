@@ -3,7 +3,7 @@ Contributors: PeterBooker, lukeketley
 Tags: twitter, feed, twitter feed, latest tweets, twitter api, shortcode, widget, tweets, twitter tweets
 Requires at least: 3.2
 Tested up to: 3.6.1
-Stable tag: 1.0.2
+Stable tag: 1.0.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -21,7 +21,7 @@ Hassle-free and user-friendly way to add a Twitter Feed to your website. Get sta
 * Compatible with any WordPress hosting.
 * WordPress Multisite compatible.
 * Refreshes Tweets in the background, never impacts pageload.
-* Translation ready - German included (thanks pixolin).
+* Translation ready (see below for included languages).
 
 Other solutions usually require you to create a Twitter App and provide the plugin with oAuth credentials yourself. We don't believe it should be that hard, and with our plugin you can get the Tweets displayed on your website with just a few clicks.
 
@@ -34,6 +34,12 @@ We make this so easy by managing all the complex oAuth requests on our own serve
 * Choose to show a profile image, attached media and much more with your Tweets.
 * Advanced Caching, so that we never impact pageload speed.
 * Local cache backup, in case the connection to Twitter has problems.
+
+= Included Translations =
+
+* German by [Bego Mario Garde](https://twitter.com/pixolin).
+* Russian by [Stas Newdel](http://newdel.net).
+* Italian by [Alberto Ramacciotti](http://ramacciotti.altervista.org).
 
 = Rate Us / Feedback =
 
@@ -88,6 +94,9 @@ We store data in an option and transient, both of which are removed when you uni
 5. An example of how the Widget fits into the design of a theme automatically.
 
 == Changelog ==
+
+= 1.0.3 =
+* New Feature: Included the Italian language translation files. Our thanks to Alberto Ramacciotti (sobert) for providing the translation.
 
 = 1.0.2 =
 * Note: New version to fix a bad released on wordpress.org, some files got muddled up in version 1.0.1.
