@@ -1,0 +1,330 @@
+# Copyright (C) 2013 Kebo - Twitter Feed
+# This file is distributed under the same license as the Kebo - Twitter Feed package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Kebo - Twitter Feed v1.0.3\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/kebo-twitter-feed\n"
+"POT-Creation-Date: 2013-09-29 14:53:55+00:00\n"
+"PO-Revision-Date: 2013-10-08 10:19+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.7\n"
+"X-Poedit-Basepath: C:\\xampp\\htdocs\\wordpress\\wp-content\\plugins\\kebo-"
+"twitter-feed\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"Language: Dutch\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: C:\\xampp\\htdocs\\wordpress\\wp-content\\plugins"
+"\\kebo-twitter-feed\n"
+
+#: inc/menu.php:13 inc/menu.php:14 inc/menu.php:83 inc/widget.php:32
+msgid "Kebo Twitter Feed"
+msgstr "Kebo Twitter Feed"
+
+#: inc/menu.php:29
+msgid "You do not have sufficient permissions to access this page."
+msgstr "U heeft niet voldoende rechten om deze pagina te openen."
+
+#: inc/menu.php:55
+msgid ""
+"Connection established with Twitter. You can now display your Twitter Feed "
+"on your website using a <a href=\"%s\">Widget</a>."
+msgstr ""
+"Verbinding tot stand gebracht met Twitter. U kunt uw Twitter feed op uw "
+"website weergeven met behulp van een <a href=\"%s\">Widget</a>."
+
+#: inc/menu.php:71
+msgid "Connection reset to Twitter."
+msgstr "Verbinding met Twitter gereset."
+
+#: inc/menu.php:99
+msgid "Twitter API - Error Log"
+msgstr "Twitter API - Foutenlogbestand"
+
+#: inc/menu.php:101
+msgid ""
+"Any errors received while connecting to Twitter will be displayed below."
+msgstr ""
+"Eventuele fouten welke ontvangen zijn tijdens het verbinden met Twitter "
+"zullen hieronder worden getoond."
+
+#: inc/menu.php:105
+msgid "Date"
+msgstr "Datum"
+
+#: inc/menu.php:105
+msgid "Code"
+msgstr "Code"
+
+#: inc/menu.php:105
+msgid "Message"
+msgstr "Bericht"
+
+#: inc/menu.php:117
+msgid "Twitter API - Error Key"
+msgstr "Twitter API - Fout Sleutel"
+
+#: inc/menu.php:119
+msgid ""
+"Below is a key of the most common types of error returned by Twitter and a "
+"short description."
+msgstr ""
+"Hieronder is een sleutel van de meest voorkomende soorten fouten "
+"teruggegeven door Twitter met een korte omschrijving."
+
+#: inc/menu.php:124 inc/menu.php:127
+msgid ""
+"There is a problem with your connection to Twitter, please disconnect and re-"
+"connect to the service."
+msgstr ""
+"Er is een probleem met uw Twitter connectie, verbreek de verbinding en "
+"probeer opnieuw te verbinden."
+
+#: inc/menu.php:125
+msgid "Twitter has blocked our access to your account."
+msgstr "Twitter heeft onze toegang tot uw account geblokkeerd."
+
+#: inc/menu.php:126
+msgid ""
+"Your account has hit Twitter's limit of 180 requests per hour, we are making "
+"%d of those requests. You can edit the 'Feed Refresh Rate' in the options "
+"above to change this."
+msgstr ""
+"Uw Twitter account heeft de grens van 180 aanvragen per uur bereikt, we "
+"maken %d van deze aanvragen. U kunt de 'Feed Verversingssnelheid' in de "
+"bovenstaande opties aanpassen."
+
+#: inc/menu.php:128
+msgid "Twitter is currently too busy to reply."
+msgstr "Twitter is momenteel te druk bezet om te antwoorden."
+
+#: inc/options.php:16
+msgid "Twitter Connection"
+msgstr "Twitter Connectie"
+
+#: inc/options.php:27
+msgid ""
+"To enable us to display your Tweets you must connect your Twitter account to "
+"our Twitter Application by clicking on the large 'Connect to Twitter' button "
+"below."
+msgstr ""
+"Om ons in staat stellen om uw Tweets weer te geven moet u uw Twitter account "
+"aansluiten op onze Twitter toepassing door te klikken op de onderstaande "
+"'Maak verbinding met Twitter' knop."
+
+#: inc/options.php:36
+msgid "Connect to Twitter"
+msgstr "Maak verbinding met Twitter"
+
+#: inc/options.php:42
+msgid "Connected to Twitter"
+msgstr "Verbinding gemaakt met Twitter"
+
+#: inc/options.php:44
+msgid "Connected as"
+msgstr "Verbinding gemaakt als"
+
+#: inc/options.php:46
+msgid "Disconnect Service"
+msgstr "Verbreken verbinding"
+
+#: inc/options.php:51
+msgid "General Options"
+msgstr "Algemene Opties"
+
+#: inc/options.php:58
+msgid "Feed Refresh Rate"
+msgstr "Feed Verversingssnelheid"
+
+#: inc/options.php:114
+msgid "Minutes. Should be between 1 and 30."
+msgstr "Minuten. Moet tussen 1 en 30 zijn."
+
+#: inc/options.php:115
+msgid ""
+"This controls how frequently we update the stored list of Tweets for display "
+"on your website."
+msgstr ""
+"Dit bepaalt hoe vaak we de opgeslagen lijst van Tweets bijwerken voor "
+"weergave op uw website."
+
+#: inc/options.php:144
+msgid "Value supplied is outside of acceptable range 1-30."
+msgstr "Verschafte waarde ligt buiten het aanvaardbare bereik van 1-30."
+
+#: inc/options.php:155
+msgid "Value supplied is not a valid number."
+msgstr "Verschafte waarde is geen geldig getal."
+
+#: inc/widget.php:29
+msgid "Displays your Twitter Feed on your website."
+msgstr "Toont uw Twitter feed op uw website."
+
+#: inc/widget.php:122
+msgid "Title"
+msgstr "Titel"
+
+#: inc/widget.php:127
+msgid "Display"
+msgstr "Weergave"
+
+#: inc/widget.php:129
+msgid "Tweets"
+msgstr "Tweets"
+
+#: inc/widget.php:130
+msgid "Re-Tweets"
+msgstr "ReTweets"
+
+#: inc/widget.php:131
+msgid "All Tweets"
+msgstr "Alle Tweets"
+
+#: inc/widget.php:138
+msgid "Style"
+msgstr "Stijl"
+
+#: inc/widget.php:140
+msgid "List"
+msgstr "Lijst"
+
+#: inc/widget.php:141
+msgid "Slider"
+msgstr "Slider"
+
+#: inc/widget.php:148
+msgid "Theme"
+msgstr "Thema"
+
+#: inc/widget.php:150
+msgid "Light"
+msgstr "Licht"
+
+#: inc/widget.php:151
+msgid "Dark"
+msgstr "Donker"
+
+#: inc/widget.php:157
+msgid "Number Of Tweets"
+msgstr "Aantal Tweets"
+
+#: inc/widget.php:157
+msgid "Range 1-50"
+msgstr "Reeks 1-50"
+
+#: inc/widget.php:161
+msgid "Show profile image?"
+msgstr "Toon profielafbeelding?"
+
+#: inc/widget.php:165
+msgid "Show conversations?"
+msgstr "Toon conversaties?"
+
+#: inc/widget.php:169
+msgid "Show media? (only Lists)"
+msgstr "Toon media? (alleen lijsten)"
+
+#: kebo-twitter-feed.php:84
+msgid "Settings"
+msgstr "Instellingen"
+
+#: kebo-twitter-feed.php:120
+msgid "Connect to your Twitter Account"
+msgstr "Maak verbinding met uw Twitter account"
+
+#: kebo-twitter-feed.php:121
+msgid ""
+"In just a few clicks we can connect your website to your Twitter account and "
+"display your latest Tweets."
+msgstr ""
+"In slechts een paar klikken kunnen wij uw website verbinden met uw Twitter "
+"account en uw laatste Tweets tonen."
+
+#: kebo-twitter-feed.php:121
+msgid "Get Started Now"
+msgstr "Start Nu"
+
+#: kebo-twitter-feed.php:305
+msgid ""
+"This update changed the way your connection to Twitter was stored by "
+"WordPress, please check the plugin is still connected to your Twitter "
+"account, <a href=\"%s\">here</a>."
+msgstr ""
+"Deze update verandert de manier waarop uw verbinding met Twitter werd "
+"opgeslagen door WordPress, controleer of de plugin nog steeds verbonden is "
+"met uw Twitter-account, <a href=\"%s\">here</a>."
+
+#: kebo-twitter-feed.php:334
+msgid ""
+"<strong>Kebo Twitter Feed:</strong> No connection to Twitter found, to get "
+"started connect to your Twitter account from <a href=\"%s\">this page</a>."
+msgstr ""
+"<strong>Kebo Twitter Feed:</strong> Geen verbinding met Twitter gevonden, om "
+"te starten verbind uw Twitter account op <a href=\"%s\">deze pagina</a>."
+
+#: views/list.php:82 views/slider.php:81
+msgid "Time posted"
+msgstr "Tijd plaatsing"
+
+#: views/list.php:82 views/slider.php:81
+msgid "Posted on "
+msgstr "Geplaatst op"
+
+#: views/list.php:97
+msgid "View photo"
+msgstr "Bekijk afbeelding"
+
+#: views/list.php:97
+msgid "Hide photo"
+msgstr "Verberg afbeelding"
+
+#: views/list.php:99 views/slider.php:95
+msgid "Reply"
+msgstr "Antwoord"
+
+#: views/list.php:100 views/slider.php:96
+msgid "Re-Tweet"
+msgstr "ReTweet"
+
+#: views/list.php:101 views/slider.php:97
+msgid "Favorite"
+msgstr "Favoriet"
+
+#: views/list.php:110
+msgid "Tweet Image"
+msgstr "Tweet Afbeelding"
+
+#: views/list.php:125 views/slider.php:108
+msgid "Sorry, no Tweets were found."
+msgstr "Sorry, geen Tweets zijn gevonden."
+
+#: views/list.php:131 views/slider.php:114
+msgid "Sorry, the Tweet data is not in the expected format."
+msgstr "Sorry, Tweet data is niet in de verwachte opmaak."
+
+#. Plugin Name of the plugin/theme
+msgid "Kebo - Twitter Feed"
+msgstr "Kebo - Twitter Feed"
+
+#. Plugin URI of the plugin/theme
+msgid "http://wordpress.org/plugins/kebo-twitter-feed/"
+msgstr "http://wordpress.org/plugins/kebo-twitter-feed/"
+
+#. Description of the plugin/theme
+msgid ""
+"Connect your site to your Twitter account and display your Twitter Feed on "
+"your website effortlessly with a custom widget."
+msgstr ""
+"Verbind uw site met uw Twitter account en toon uw Twitter feed moeiteloos op "
+"uw website met een aangepast widget."
+
+#. Author of the plugin/theme
+msgid "Kebo"
+msgstr "Kebo"
+
+#. Author URI of the plugin/theme
+msgid "http://kebopowered.com"
+msgstr "http://kebopowered.com"
