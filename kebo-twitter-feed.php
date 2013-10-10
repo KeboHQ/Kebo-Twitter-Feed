@@ -156,26 +156,26 @@ function kebo_twitter_slider_script() {
         //<![CDATA[
         jQuery(document).ready(function() {
             
-            var timer = jQuery( "#kebo-tweet-slider" ).data( "timer" );
-            var transition = jQuery( "#kebo-tweet-slider" ).data( "transition" );
-            var tcount = 1;
-            var limit = jQuery("#kebo-tweet-slider .ktweet").size();
-            var theight = jQuery('#kebo-tweet-slider .ktweet').eq(0).outerHeight();
-            var initTweets = setInterval( fadeTweets, timer );
+            var ktimer = jQuery( "#kebo-tweet-slider" ).data( "timer" );
+            var ktransition = jQuery( "#kebo-tweet-slider" ).data( "transition" );
+            var kcount = 1;
+            var klimit = jQuery("#kebo-tweet-slider .ktweet").size();
+            var kheight = jQuery('#kebo-tweet-slider .ktweet').eq(0).outerHeight();
+            var initTweets = setInterval( fadeTweets, ktimer );
             
-            jQuery('#kebo-tweet-slider .ktweet').eq(0).fadeToggle('1000').delay( timer - transition ).fadeToggle('1000');
-            jQuery('#kebo-tweet-slider').height(theight);
+            jQuery('#kebo-tweet-slider .ktweet').eq(0).fadeToggle('1000').delay( ktimer - ktransition ).fadeToggle('1000');
+            jQuery('#kebo-tweet-slider').height( kheight );
 
             function fadeTweets() {
 
-                if (tcount == limit) {
-                    tcount = 0;
+                if ( kcount == klimit ) {
+                    kcount = 0;
                 }
-                theight = jQuery('#kebo-tweet-slider .ktweet').eq(tcount).outerHeight();
-                jQuery('#kebo-tweet-slider').height(theight);
-                jQuery('#kebo-tweet-slider .ktweet').eq(tcount).fadeToggle('1000').delay( timer - transition ).fadeToggle('1000');
+                kheight = jQuery('#kebo-tweet-slider .ktweet').eq( kcount ).outerHeight();
+                jQuery('#kebo-tweet-slider').height( kheight );
+                jQuery('#kebo-tweet-slider .ktweet').eq( kcount ).fadeToggle('1000').delay( ktimer - ktransition ).fadeToggle('1000');
 
-                ++tcount;
+                ++kcount;
 
             }
 
