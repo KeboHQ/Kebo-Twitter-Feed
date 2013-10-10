@@ -147,7 +147,7 @@ function kebo_twitter_external_request() {
             'headers' => array(),
             'body' => array(
                 'feed' => 'true',
-                'data' => json_encode($data),
+                'data' => json_encode( $data ),
             ),
             'cookies' => array(),
             'sslverify' => false,
@@ -172,6 +172,35 @@ function kebo_twitter_refresh_cache() {
      */
     if ( false !== ( $tweets = get_transient( 'kebo_twitter_feed_' . get_current_blog_id() ) ) ) {
 
+        /*
+         * Check if we are already updating.
+         */
+        if ( get_transient( 'kebo_cron_is_running' ) ) {
+            die();
+        }
+
+        /*
+         * Create hash of the current time (nothing else should occupy the same microtime).
+         */
+        $hash = hash( 'sha1', microtime() );
+
+        /*
+         * Set transient to show we are updating and set the hash for this specific thread.
+         */
+        set_transient( 'kebo_cron_is_running', $hash, 5 );
+        
+        /*
+         * Sleep so that other threads at the same point can set the hash
+         */
+        usleep( 250000 ); // Sleep for 1/4th of a second
+        
+        /*
+         * Only one thread will have the same hash as is stored in the transient now, all others can die.
+         */
+        if ( get_transient( 'kebo_cron_is_running' ) && ( get_transient( 'kebo_cron_is_running' ) != $hash ) ) {
+            die();
+        }
+        
         // Make POST request to Kebo OAuth App.
         $response = kebo_twitter_external_request();
         
@@ -207,6 +236,11 @@ function kebo_twitter_refresh_cache() {
             set_transient( 'kebo_twitter_feed_' . get_current_blog_id(), $tweets, 24 * HOUR_IN_SECONDS );
             
         }
+        
+        /*
+         * Remove transient once updating is done.
+         */
+        delete_transient( 'kebo_cron_is_running' );
         
     }
     
