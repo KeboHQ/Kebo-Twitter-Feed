@@ -37,6 +37,7 @@ if ( is_multisite() ) {
 
         // Delete the Transients we registered.
         delete_transient('kebo_twitter_feed_' . $blog->blog_id);
+        delete_transient('kebo_cron_is_running');
         
     }
 
@@ -53,5 +54,6 @@ if ( is_multisite() ) {
 
     // Delete the Transients we registered.
     delete_transient('kebo_twitter_feed_1');
+    delete_transient('kebo_cron_is_running');
     
 }
