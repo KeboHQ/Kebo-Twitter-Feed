@@ -3,7 +3,7 @@ Contributors: PeterBooker, lukeketley
 Tags: twitter, feed, twitter feed, latest tweets, twitter api, shortcode, widget, tweets, twitter tweets
 Requires at least: 3.2
 Tested up to: 3.6.1
-Stable tag: 1.0.4
+Stable tag: 1.0.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -95,6 +95,10 @@ We store data in an option and transient, both of which are removed when you uni
 5. An example of how the Widget fits into the design of a theme automatically.
 
 == Changelog ==
+
+= 1.0.5 =
+* Bug Fix: Prevent simultaneous Twitter API updates in certain situations. This did not effect users in any way and neither will the change.
+* Bug Fix: Correctly prefix all Javascript variables with 'k', so they do not clash with others. Only effects those displaying Tweets using the 'Slider' method.
 
 = 1.0.4 =
 * New Feature: Included the Dutch language translation files. Our thanks to Renee Klein from themes101 for providing the translation.
