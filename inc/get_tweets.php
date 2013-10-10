@@ -362,29 +362,63 @@ function kebo_twitter_linkify( $tweets ) {
          */
         
         /*
-         * Decode HTML Chars like &#039; to '
+         * Check if it is the Tweet text or Re-Tweet text which we need to pre-process.
          */
-        $tweet->text = htmlspecialchars_decode( $tweet->text, ENT_QUOTES );
-        
-        /*
-         * Turn Hasntags into HTML Links
-         */
-        $tweet->text = preg_replace( '/#([A-Za-z0-9\/\.]*)/', '<a href="http://twitter.com/search?q=$1">#$1</a>', $tweet->text );
-        
-        /*
-         * Turn Mentions into HTML Links
-         */
-        $tweet->text = preg_replace( '/@([A-Za-z0-9_\/\.]*)/', '<a href="http://www.twitter.com/$1">@$1</a>', $tweet->text );
-        
-        /*
-         * Linkify text URLs
-         */
-        $tweet->text = make_clickable( $tweet->text );
-        
-        /*
-         * Add target="_blank" to all links
-         */
-        $tweet->text = links_add_target( $tweet->text, '_blank', array( 'a' ) );
+        if ( ! empty( $tweet->retweeted_status ) ) {
+            
+           /*
+            * Decode HTML Chars like &#039; to '
+            */
+           $tweet->retweeted_status->text = htmlspecialchars_decode( $tweet->retweeted_status->text, ENT_QUOTES );
+
+           /*
+            * Turn Hasntags into HTML Links
+            */
+           $tweet->retweeted_status->text = preg_replace( '/#([A-Za-z0-9\/\.]*)/', '<a href="http://twitter.com/search?q=$1">#$1</a>', $tweet->retweeted_status->text );
+
+           /*
+            * Turn Mentions into HTML Links
+            */
+           $tweet->retweeted_status->text = preg_replace( '/@([A-Za-z0-9_\/\.]*)/', '<a href="http://www.twitter.com/$1">@$1</a>', $tweet->retweeted_status->text );
+
+           /*
+            * Linkify text URLs
+            */
+           $tweet->retweeted_status->text = make_clickable( $tweet->retweeted_status->text );
+
+           /*
+            * Add target="_blank" to all links
+            */
+           $tweet->retweeted_status->text = links_add_target( $tweet->retweeted_status->text, '_blank', array( 'a' ) );
+            
+        } else {
+            
+           /*
+            * Decode HTML Chars like &#039; to '
+            */
+           $tweet->text = htmlspecialchars_decode( $tweet->text, ENT_QUOTES );
+
+           /*
+            * Turn Hasntags into HTML Links
+            */
+           $tweet->text = preg_replace( '/#([A-Za-z0-9\/\.]*)/', '<a href="http://twitter.com/search?q=$1">#$1</a>', $tweet->text );
+
+           /*
+            * Turn Mentions into HTML Links
+            */
+           $tweet->text = preg_replace( '/@([A-Za-z0-9_\/\.]*)/', '<a href="http://www.twitter.com/$1">@$1</a>', $tweet->text );
+
+           /*
+            * Linkify text URLs
+            */
+           $tweet->text = make_clickable( $tweet->text );
+
+           /*
+            * Add target="_blank" to all links
+            */
+           $tweet->text = links_add_target( $tweet->text, '_blank', array( 'a' ) );
+            
+        }
         
     }
     
