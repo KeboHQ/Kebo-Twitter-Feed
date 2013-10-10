@@ -77,8 +77,8 @@ if ( is_rtl() ) {
             <li class="ktweet">
 
                 <div class="kmeta">
-                    <a class="kaccount" href="https://twitter.com/<?php echo $tweet->user->screen_name; ?>" target="_blank">@<?php echo $tweet->user->screen_name; ?></a>
-                    <a class="kdate" href="https://twitter.com/<?php echo $tweet->user->screen_name; ?>/statuses/<?php echo $tweet->id_str; ?>" target="_blank">
+                    <a class="kaccount" href="https://twitter.com/<?php echo ( ! empty( $tweet->retweeted_status ) ) ? $tweet->retweeted_status->user->screen_name : $tweet->user->screen_name ; ?>" target="_blank">@<?php echo ( ! empty( $tweet->retweeted_status ) ) ? $tweet->retweeted_status->user->screen_name : $tweet->user->screen_name ; ?></a>
+                    <a class="kdate" href="https://twitter.com/<?php echo ( ! empty( $tweet->retweeted_status ) ) ? $tweet->retweeted_status->user->screen_name : $tweet->user->screen_name ; ?>/statuses/<?php echo ( ! empty( $tweet->retweeted_status ) ) ? $tweet->retweeted_status->id_str : $tweet->id_str ; ?>" target="_blank">
                         <time title="<?php _e( 'Time posted', 'kebo_twitter' ); ?>: <?php echo date_i18n( 'dS M Y H:i:s', strtotime( $tweet->created_at ) + $tweet->user->utc_offset ); ?>" datetime="<?php echo date_i18n( 'c', strtotime( $tweet->created_at ) + $tweet->user->utc_offset ); ?>" aria-label="<?php _e('Posted on ', 'kebo_twitter'); ?><?php echo date_i18n( 'dS M Y H:i:s', strtotime( $tweet->created_at ) + $tweet->user->utc_offset ); ?>"><?php echo $created; ?></time>
                     </a>
                 </div>
@@ -89,7 +89,7 @@ if ( is_rtl() ) {
                             <img class="kavatar" src="<?php echo ( isset( $tweet->retweeted_status ) ) ? $tweet->retweeted_status->user->profile_image_url : $tweet->user->profile_image_url ; ?>" />
                         </a>
                     <?php endif; ?>
-                    <?php echo $tweet->text; ?>
+                    <?php echo ( ! empty( $tweet->retweeted_status ) ) ? $tweet->retweeted_status->text : $tweet->text ; ?>
                 </p>
 
                 <div class="kfooter">
