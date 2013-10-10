@@ -1,0 +1,324 @@
+# Copyright (C) 2013 Kebo - Twitter Feed
+# This file is distributed under the same license as the Kebo - Twitter Feed package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Kebo - Twitter Feed 1.0.2\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/kebo-twitter-feed\n"
+"POT-Creation-Date: 2013-09-29 14:53:55+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2013-10-10 17:03-0000\n"
+"Last-Translator: Peter Booker <mail@peterbooker.com>\n"
+"Language-Team: Peter Booker <mail@peterbooker.com>\n"
+"X-Generator: Poedit 1.5.7\n"
+"Language: en_GB\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+
+#: inc/menu.php:13 inc/menu.php:14 inc/menu.php:83 inc/widget.php:32
+msgid "Kebo Twitter Feed"
+msgstr "Kebo Twitter Feed"
+
+#: inc/menu.php:29
+msgid "You do not have sufficient permissions to access this page."
+msgstr "You do not have sufficient permissions to access this page."
+
+#: inc/menu.php:55
+msgid ""
+"Connection established with Twitter. You can now display your Twitter Feed "
+"on your website using a <a href=\"%s\">Widget</a>."
+msgstr ""
+"Connection established with Twitter. You can now display your Twitter Feed "
+"on your website using a <a href=\"%s\">Widget</a>."
+
+#: inc/menu.php:71
+msgid "Connection reset to Twitter."
+msgstr "Connection reset to Twitter."
+
+#: inc/menu.php:99
+msgid "Twitter API - Error Log"
+msgstr "Twitter API - Error Log"
+
+#: inc/menu.php:101
+msgid ""
+"Any errors received while connecting to Twitter will be displayed below."
+msgstr ""
+"Any errors received while connecting to Twitter will be displayed below."
+
+#: inc/menu.php:105
+msgid "Date"
+msgstr "Date"
+
+#: inc/menu.php:105
+msgid "Code"
+msgstr "Code"
+
+#: inc/menu.php:105
+msgid "Message"
+msgstr "Message"
+
+#: inc/menu.php:117
+msgid "Twitter API - Error Key"
+msgstr "Twitter API - Error Key"
+
+#: inc/menu.php:119
+msgid ""
+"Below is a key of the most common types of error returned by Twitter and a "
+"short description."
+msgstr ""
+"Below is a key of the most common types of error returned by Twitter and a "
+"short description."
+
+#: inc/menu.php:124 inc/menu.php:127
+msgid ""
+"There is a problem with your connection to Twitter, please disconnect and re-"
+"connect to the service."
+msgstr ""
+"There is a problem with your connection to Twitter, please disconnect and re-"
+"connect to the service."
+
+#: inc/menu.php:125
+msgid "Twitter has blocked our access to your account."
+msgstr "Twitter has blocked our access to your account."
+
+#: inc/menu.php:126
+msgid ""
+"Your account has hit Twitter's limit of 180 requests per hour, we are making "
+"%d of those requests. You can edit the 'Feed Refresh Rate' in the options "
+"above to change this."
+msgstr ""
+"Your account has hit Twitter's limit of 180 requests per hour, we are making "
+"%d of those requests. You can edit the 'Feed Refresh Rate' in the options "
+"above to change this."
+
+#: inc/menu.php:128
+msgid "Twitter is currently too busy to reply."
+msgstr "Twitter is currently too busy to reply."
+
+#: inc/options.php:16
+msgid "Twitter Connection"
+msgstr "Twitter Connection"
+
+#: inc/options.php:27
+msgid ""
+"To enable us to display your Tweets you must connect your Twitter account to "
+"our Twitter Application by clicking on the large 'Connect to Twitter' button "
+"below."
+msgstr ""
+"To enable us to display your Tweets you must connect your Twitter account to "
+"our Twitter Application by clicking on the large 'Connect to Twitter' button "
+"below."
+
+#: inc/options.php:36
+msgid "Connect to Twitter"
+msgstr "Connect to Twitter"
+
+#: inc/options.php:42
+msgid "Connected to Twitter"
+msgstr "Connected to Twitter"
+
+#: inc/options.php:44
+msgid "Connected as"
+msgstr "Connected as"
+
+#: inc/options.php:46
+msgid "Disconnect Service"
+msgstr "Disconnect Service"
+
+#: inc/options.php:51
+msgid "General Options"
+msgstr "General Options"
+
+#: inc/options.php:58
+msgid "Feed Refresh Rate"
+msgstr "Feed Refresh Rate"
+
+#: inc/options.php:114
+msgid "Minutes. Should be between 1 and 30."
+msgstr "Minutes. Should be between 1 and 30."
+
+#: inc/options.php:115
+msgid ""
+"This controls how frequently we update the stored list of Tweets for display "
+"on your website."
+msgstr ""
+"This controls how frequently we update the stored list of Tweets for display "
+"on your website."
+
+#: inc/options.php:144
+msgid "Value supplied is outside of acceptable range 1-30."
+msgstr "Value supplied is outside of acceptable range 1-30."
+
+#: inc/options.php:155
+msgid "Value supplied is not a valid number."
+msgstr "Value supplied is not a valid number."
+
+#: inc/widget.php:29
+msgid "Displays your Twitter Feed on your website."
+msgstr "Displays your Twitter Feed on your website."
+
+#: inc/widget.php:122
+msgid "Title"
+msgstr "Title"
+
+#: inc/widget.php:127
+msgid "Display"
+msgstr "Display"
+
+#: inc/widget.php:129
+msgid "Tweets"
+msgstr "Tweets"
+
+#: inc/widget.php:130
+msgid "Re-Tweets"
+msgstr "Re-Tweets"
+
+#: inc/widget.php:131
+msgid "All Tweets"
+msgstr "All Tweets"
+
+#: inc/widget.php:138
+msgid "Style"
+msgstr "Style"
+
+#: inc/widget.php:140
+msgid "List"
+msgstr "List"
+
+#: inc/widget.php:141
+msgid "Slider"
+msgstr "Slider"
+
+#: inc/widget.php:148
+msgid "Theme"
+msgstr "Theme"
+
+#: inc/widget.php:150
+msgid "Light"
+msgstr "Light"
+
+#: inc/widget.php:151
+msgid "Dark"
+msgstr "Dark"
+
+#: inc/widget.php:157
+msgid "Number Of Tweets"
+msgstr "Number Of Tweets"
+
+#: inc/widget.php:157
+msgid "Range 1-50"
+msgstr "Range 1-50"
+
+#: inc/widget.php:161
+msgid "Show profile image?"
+msgstr "Show profile image?"
+
+#: inc/widget.php:165
+msgid "Show conversations?"
+msgstr "Show conversations?"
+
+#: inc/widget.php:169
+msgid "Show media? (only Lists)"
+msgstr "Show media? (only Lists)"
+
+#: kebo-twitter-feed.php:84
+msgid "Settings"
+msgstr "Settings"
+
+#: kebo-twitter-feed.php:120
+msgid "Connect to your Twitter Account"
+msgstr "Connect to your Twitter Account"
+
+#: kebo-twitter-feed.php:121
+msgid ""
+"In just a few clicks we can connect your website to your Twitter account and "
+"display your latest Tweets."
+msgstr ""
+"In just a few clicks we can connect your website to your Twitter account and "
+"display your latest Tweets."
+
+#: kebo-twitter-feed.php:121
+msgid "Get Started Now"
+msgstr "Get Started Now"
+
+#: kebo-twitter-feed.php:305
+msgid ""
+"This update changed the way your connection to Twitter was stored by "
+"WordPress, please check the plugin is still connected to your Twitter "
+"account, <a href=\"%s\">here</a>."
+msgstr ""
+"This update changed the way your connection to Twitter was stored by "
+"WordPress, please check the plugin is still connected to your Twitter "
+"account, <a href=\"%s\">here</a>."
+
+#: kebo-twitter-feed.php:334
+msgid ""
+"<strong>Kebo Twitter Feed:</strong> No connection to Twitter found, to get "
+"started connect to your Twitter account from <a href=\"%s\">this page</a>."
+msgstr ""
+"<strong>Kebo Twitter Feed:</strong> No connection to Twitter found, to get "
+"started connect to your Twitter account from <a href=\"%s\">this page</a>."
+
+#: views/list.php:82 views/slider.php:81
+msgid "Time posted"
+msgstr "Time posted"
+
+#: views/list.php:82 views/slider.php:81
+msgid "Posted on "
+msgstr "Posted on "
+
+#: views/list.php:97
+msgid "View photo"
+msgstr "View photo"
+
+#: views/list.php:97
+msgid "Hide photo"
+msgstr "Hide photo"
+
+#: views/list.php:99 views/slider.php:95
+msgid "Reply"
+msgstr "Reply"
+
+#: views/list.php:100 views/slider.php:96
+msgid "Re-Tweet"
+msgstr "Re-Tweet"
+
+#: views/list.php:101 views/slider.php:97
+msgid "Favorite"
+msgstr "Favourite"
+
+#: views/list.php:110
+msgid "Tweet Image"
+msgstr "Tweet Image"
+
+#: views/list.php:125 views/slider.php:108
+msgid "Sorry, no Tweets were found."
+msgstr "Sorry, no Tweets were found."
+
+#: views/list.php:131 views/slider.php:114
+msgid "Sorry, the Tweet data is not in the expected format."
+msgstr "Sorry, the Tweet data is not in the expected format."
+
+#. Plugin Name of the plugin/theme
+msgid "Kebo - Twitter Feed"
+msgstr "Kebo - Twitter Feed"
+
+#. Plugin URI of the plugin/theme
+msgid "http://wordpress.org/plugins/kebo-twitter-feed/"
+msgstr "http://wordpress.org/plugins/kebo-twitter-feed/"
+
+#. Description of the plugin/theme
+msgid ""
+"Connect your site to your Twitter account and display your Twitter Feed on "
+"your website effortlessly with a custom widget."
+msgstr ""
+"Connect your site to your Twitter account and display your Twitter Feed on "
+"your website effortlessly with a custom widget."
+
+#. Author of the plugin/theme
+msgid "Kebo"
+msgstr "Kebo"
+
+#. Author URI of the plugin/theme
+msgid "http://kebopowered.com"
+msgstr "http://kebopowered.com"
