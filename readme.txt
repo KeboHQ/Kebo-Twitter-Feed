@@ -3,7 +3,7 @@ Contributors: PeterBooker, lukeketley
 Tags: twitter, feed, twitter feed, latest tweets, twitter api, shortcode, widget, tweets, twitter tweets
 Requires at least: 3.2
 Tested up to: 3.6.1
-Stable tag: 1.0.5
+Stable tag: 1.0.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -41,6 +41,7 @@ We make this so easy by managing all the complex oAuth requests on our own serve
 * Russian by [Stas Newdel](http://newdel.net).
 * Italian by [Alberto Ramacciotti](http://ramacciotti.altervista.org).
 * Dutch by [Renee Klein](http://restaurantthemes101.com).
+* English (British).
 
 = Rate Us / Feedback =
 
@@ -95,6 +96,10 @@ We store data in an option and transient, both of which are removed when you uni
 5. An example of how the Widget fits into the design of a theme automatically.
 
 == Changelog ==
+
+= 1.0.7 =
+* New Feature: Included the English (British) language translation files.
+* Bug Fix: Now correctly displays Re-Tweets, with the exact original text.
 
 = 1.0.5 =
 * Bug Fix: Prevent simultaneous Twitter API updates in certain situations. This did not effect users in any way and neither will the change.
