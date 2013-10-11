@@ -98,7 +98,7 @@ We store data in an option and transient, both of which are removed when you uni
 == Changelog ==
 
 = 1.0.7 =
-* New Feature: Included the English (British) language translation files.
+* New Feature: Included the British English (en_GB) language translation files.
 * Bug Fix: Now correctly displays Re-Tweets, with the exact original text.
 
 = 1.0.5 =
