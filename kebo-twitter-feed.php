@@ -216,27 +216,36 @@ function kebo_twitter_touch_script() {
 }
 
 /*
- * Runs if version check matches
+ * Check if the plugin has updated.
+ * If so process any changes and update current version.
  */
-$plugin_version = get_option( 'kebo_se_version' );
+function kebo_twitter_update_check() {
+    
+    /*
+     * Runs if version check matches
+     */
+    $plugin_version = get_option( 'kebo_se_version' );
 
-if ( false == $plugin_version || empty( $plugin_version ) || ( ! empty( $plugin_version ) && KEBO_TWITTER_PLUGIN_VERSION > $plugin_version ) ) {
-    
-    //add_action( 'admin_notices', 'kebo_twitter_upgrade_notice' );
-    
-    // Delete currently cached data as format is changing in 0.9.0
-    delete_transient( 'kebo_twitter_feed_' . get_current_blog_id() );
-    
-    // Set silent cache to refresh after page load.
-    add_action( 'shutdown', 'kebo_twitter_refresh_cache' );
-    
-    // Connection Migration Script
-    add_action( 'after_setup_theme', 'kebo_twitter_activation_script' );
-    
-    // Update Plugin Version Option
-    update_option( 'kebo_se_version', KEBO_TWITTER_PLUGIN_VERSION );
-    
+    if ( false == $plugin_version || empty( $plugin_version ) || ( ! empty( $plugin_version ) && KEBO_TWITTER_PLUGIN_VERSION > $plugin_version ) ) {
+
+        //add_action( 'admin_notices', 'kebo_twitter_upgrade_notice' );
+
+        // Delete currently cached data as format is changing in 0.9.0
+        delete_transient( 'kebo_twitter_feed_' . get_current_blog_id() );
+
+        // Set silent cache to refresh after page load.
+        add_action( 'shutdown', 'kebo_twitter_refresh_cache' );
+
+        // Connection Migration Script
+        add_action( 'after_setup_theme', 'kebo_twitter_activation_script' );
+
+        // Update Plugin Version Option
+        update_option( 'kebo_se_version', KEBO_TWITTER_PLUGIN_VERSION );
+
+    }
+
 }
+add_action( 'admin_init', 'kebo_twitter_update_check' );
 
 function kebo_twitter_activation_script() {
     
