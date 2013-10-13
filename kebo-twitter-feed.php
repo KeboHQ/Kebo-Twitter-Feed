@@ -221,11 +221,11 @@ function kebo_twitter_touch_script() {
  */
 function kebo_twitter_update_check() {
     
+    $plugin_version = get_option( 'kebo_se_version' );
+    
     /*
      * Runs if version check matches
      */
-    $plugin_version = get_option( 'kebo_se_version' );
-
     if ( false == $plugin_version || empty( $plugin_version ) || ( ! empty( $plugin_version ) && KEBO_TWITTER_PLUGIN_VERSION > $plugin_version ) ) {
 
         //add_action( 'admin_notices', 'kebo_twitter_upgrade_notice' );
