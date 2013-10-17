@@ -3,7 +3,7 @@ Contributors: PeterBooker, lukeketley
 Tags: twitter, feed, twitter feed, latest tweets, twitter api, shortcode, widget, tweets, twitter tweets
 Requires at least: 3.2
 Tested up to: 3.6.1
-Stable tag: 1.0.7
+Stable tag: 1.0.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -42,6 +42,7 @@ We make this so easy by managing all the complex oAuth requests on our own serve
 * Italian by [Alberto Ramacciotti](http://ramacciotti.altervista.org).
 * Dutch by [Renee Klein](http://restaurantthemes101.com).
 * English (British).
+* Swedish by [Johanna Kitzman](https://www.facebook.com/johannakitzmanphotography).
 
 = Rate Us / Feedback =
 
@@ -96,6 +97,9 @@ We store data in an option and transient, both of which are removed when you uni
 5. An example of how the Widget fits into the design of a theme automatically.
 
 == Changelog ==
+
+= 1.0.8 =
+* New Feature: Included the Swedish language translation files. Our thanks to Johanna Kitzman for providing the translation.
 
 = 1.0.7 =
 * New Feature: Included the British English (en_GB) language translation files.
