@@ -3,7 +3,7 @@ Contributors: PeterBooker, lukeketley
 Tags: twitter, feed, twitter feed, latest tweets, twitter api, shortcode, widget, tweets, twitter tweets
 Requires at least: 3.2
 Tested up to: 3.6.1
-Stable tag: 1.0.8
+Stable tag: 1.0.9
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -97,6 +97,10 @@ We store data in an option and transient, both of which are removed when you uni
 5. An example of how the Widget fits into the design of a theme automatically.
 
 == Changelog ==
+
+= 1.0.9 =
+* Bug Fix: Correctly supply https avatar images when the site is using SSL.
+* Bug Fix: Added default style to Tweet text as 'text-align: left' to ensure other theme Widget styling does not overwrite it.
 
 = 1.0.8 =
 * New Feature: Included the Swedish language translation files. Our thanks to Johanna Kitzman for providing the translation.
