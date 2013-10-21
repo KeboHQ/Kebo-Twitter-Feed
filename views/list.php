@@ -150,17 +150,23 @@ if ( is_rtl() ) {
 <script type="text/javascript">
     
     /*
-     * Capture Show/Hide photo link clicks, then show/hide the photo.
+     * Open Twitter Intent buttons in small popup windows.
      */
-    jQuery( '.ktweet .kfooter a:not(.ktogglemedia)' ).click(function(e) {
-    
-        // Prevent Click from Reloading page
-        e.preventDefault();
+    //<![CDATA[
+    jQuery(document).ready(function() {
         
-        var href = jQuery(this).attr('href');
-        window.open( href, 'twitter', 'width=600, height=400, top=0, left=0');
+        jQuery( '.ktweet .kfooter a:not(.ktogglemedia)' ).click(function(e) {
 
+            // Prevent Click from Reloading page
+            e.preventDefault();
+
+            var href = jQuery(this).attr('href');
+            window.open( href, 'twitter', 'width=600, height=400, top=0, left=0');
+
+        });
+        
     });
+    //]]>
 
 </script>
 
@@ -171,28 +177,34 @@ if ( is_rtl() ) {
     /*
      * Capture Show/Hide photo link clicks, then show/hide the photo.
      */
-    jQuery( '.ktweet .ktogglemedia' ).click(function(e) {
-    
-        // Prevent Click from Reloading page
-        e.preventDefault();
-
-        var klink = jQuery(this);
-        var kid = klink.data( 'id' );
-        var kcontainer = jQuery( '#' + kid );
+    //<![CDATA[
+    jQuery(document).ready(function() {
         
-        if ( klink.hasClass('kclosed') && kcontainer.hasClass('kclosed') ) {
+        jQuery( '.ktweet .ktogglemedia' ).click(function(e) {
 
-            klink.removeClass('kclosed');
-            kcontainer.removeClass('kclosed');
+            // Prevent Click from Reloading page
+            e.preventDefault();
 
-        } else {
-            
-            klink.addClass('kclosed');
-            kcontainer.addClass('kclosed');
+            var klink = jQuery(this);
+            var kid = klink.data( 'id' );
+            var kcontainer = jQuery( '#' + kid );
 
-        };
+            if ( klink.hasClass('kclosed') && kcontainer.hasClass('kclosed') ) {
 
+                klink.removeClass('kclosed');
+                kcontainer.removeClass('kclosed');
+
+            } else {
+
+                klink.addClass('kclosed');
+                kcontainer.addClass('kclosed');
+
+            };
+
+        });
+    
     });
+    //]]>
 
 </script>
 

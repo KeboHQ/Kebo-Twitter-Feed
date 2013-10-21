@@ -132,16 +132,22 @@ if ( is_rtl() ) {
 <script type="text/javascript">
     
     /*
-     * Capture Show/Hide photo link clicks, then show/hide the photo.
+     * Open Twitter Intent buttons in small popup windows.
      */
-    jQuery( '.ktweet .kfooter a:not(.ktogglemedia)' ).click(function(e) {
-    
-        // Prevent Click from Reloading page
-        e.preventDefault();
+    //<![CDATA[
+    jQuery(document).ready(function() {
         
-        var href = jQuery(this).attr('href');
-        window.open( href, 'twitter', 'width=600, height=400, top=0, left=0');
+        jQuery( '.ktweet .kfooter a:not(.ktogglemedia)' ).click(function(e) {
 
+            // Prevent Click from Reloading page
+            e.preventDefault();
+
+            var href = jQuery(this).attr('href');
+            window.open( href, 'twitter', 'width=600, height=400, top=0, left=0');
+
+        });
+        
     });
+    //]]>
 
 </script>
