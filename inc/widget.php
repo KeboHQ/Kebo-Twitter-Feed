@@ -214,7 +214,7 @@ class Kebo_Twitter_Feed_Widget extends WP_Widget {
         
         // Update text inputs and remove HTML.
         $instance['title'] = wp_filter_nohtml_kses( $new_instance['title'] );
-        $instance['style'] = wp_filter_nohtml_kses( $new_instance['style'] );
+        $instance['style'] = intval( $new_instance['style'] );
         $instance['theme'] = wp_filter_nohtml_kses( $new_instance['theme'] );
         $instance['avatar'] = wp_filter_nohtml_kses( $new_instance['avatar'] );
         $instance['conversations'] = wp_filter_nohtml_kses( $new_instance['conversations'] );
