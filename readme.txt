@@ -3,7 +3,7 @@ Contributors: PeterBooker, lukeketley
 Tags: twitter, feed, twitter feed, latest tweets, twitter api, shortcode, widget, tweets, twitter tweets
 Requires at least: 3.2
 Tested up to: 3.6.1
-Stable tag: 1.1.0
+Stable tag: 1.1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -97,6 +97,9 @@ We store data in an option and transient, both of which are removed when you uni
 5. An example of how the Widget fits into the design of a theme automatically.
 
 == Changelog ==
+
+= 1.1.1 =
+* Bug Fix: Changed how we sanitize/validate the 'Style' option in the Widget. We now test it against being a numerical value, instead of filtering it for HTML.
 
 = 1.1.0 =
 * Note: Removed inline javascript from view files into functions. If you are using custom View files, you can safely remove the inline javascript after updating. There is a small edit to the end of the lists view file to ensure the media javascript is output.
