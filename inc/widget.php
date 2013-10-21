@@ -22,6 +22,21 @@ if ( ! empty ( $twitter_data ) ) {
 
 class Kebo_Twitter_Feed_Widget extends WP_Widget {
 
+    /**
+     * Has the Tweet Intent javascript been printed?
+     */
+    static $printed_intent_js;
+    
+    /**
+     * Has the Tweet Slider javascript been printed?
+     */
+    static $printed_slider_js;
+    
+    /**
+     * Has the Tweet Media javascript been printed?
+     */
+    static $printed_media_js;
+    
     function Kebo_Twitter_Feed_Widget() {
 
         $widget_ops = array(
@@ -43,6 +58,20 @@ class Kebo_Twitter_Feed_Widget extends WP_Widget {
         // Enqueue Style Sheet
         wp_enqueue_style( 'kebo-twitter-plugin' );
         wp_enqueue_script( 'jquery' );
+        
+        if ( ! true == self::$printed_intent_js ) {
+            
+            self::$printed_intent_js = true;
+            add_action( 'wp_footer', 'kebo_twitter_intent_script', 90 );
+            
+        }
+        
+        if ( 2 == $instance['style'] && ! true == self::$printed_slider_js ) {
+            
+            self::$printed_slider_js = true;
+            add_action( 'wp_footer', 'kebo_twitter_slider_script', 90 );
+
+        }
         
         /*
          * Get tweets from transient and refresh if its expired.

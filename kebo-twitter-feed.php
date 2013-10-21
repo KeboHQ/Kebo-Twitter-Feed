@@ -67,7 +67,7 @@ if ( ! function_exists('kebo_twitter_plugin_scripts') ):
         wp_register_style( 'kebo-twitter-plugin', KEBO_TWITTER_PLUGIN_URL . 'css/plugin.css', array(), KEBO_TWITTER_PLUGIN_VERSION, 'all' );
 
         // Enqueue Stylesheet for Admin Pages
-        if (is_admin())
+        if ( is_admin() )
             wp_enqueue_style('kebo-twitter-plugin');
         
     }
@@ -153,6 +153,7 @@ function kebo_twitter_slider_script() {
     
     ?>
     <script type="text/javascript">
+        
         //<![CDATA[
         jQuery(document).ready(function() {
             
@@ -181,6 +182,78 @@ function kebo_twitter_slider_script() {
 
         });
         //]]>
+        
+    </script>
+    <?php
+
+}
+
+/*
+ * Print the Tweet Intent js
+ */
+function kebo_twitter_intent_script() {
+    
+    ?>
+    <script type="text/javascript">
+        
+        //<![CDATA[
+        jQuery(document).ready(function() {
+            
+            jQuery( '.ktweet .kfooter a:not(.ktogglemedia)' ).click(function(e) {
+
+                // Prevent Click from Reloading page
+                e.preventDefault();
+
+                var khref = jQuery(this).attr('href');
+                window.open( khref, 'twitter', 'width=600, height=400, top=0, left=0');
+
+            });
+            
+        });
+        //]]>
+        
+    </script>
+    <?php
+
+}
+
+/*
+ * Print the Tweet Media js
+ */
+function kebo_twitter_media_script() {
+    
+    ?>
+    <script type="text/javascript">
+        
+        //<![CDATA[
+        jQuery(document).ready(function() {
+            
+            jQuery( '.ktweet .ktogglemedia' ).click(function(e) {
+
+                // Prevent Click from Reloading page
+                e.preventDefault();
+
+                var klink = jQuery(this);
+                var kid = klink.data( 'id' );
+                var kcontainer = jQuery( '#' + kid );
+
+                if ( klink.hasClass('kclosed') && kcontainer.hasClass('kclosed') ) {
+
+                    klink.removeClass('kclosed');
+                    kcontainer.removeClass('kclosed');
+
+                } else {
+
+                    klink.addClass('kclosed');
+                    kcontainer.addClass('kclosed');
+
+                };
+
+            });
+            
+        });
+        //]]>
+        
     </script>
     <?php
 
@@ -221,7 +294,7 @@ function kebo_twitter_touch_script() {
  */
 function kebo_twitter_update_check() {
     
-    $plugin_version = get_option( 'kebo_se_version' );
+    $plugin_version = get_option( 'kebo_twitter_version' );
     
     /*
      * Runs if version check matches
@@ -231,7 +304,7 @@ function kebo_twitter_update_check() {
         //add_action( 'admin_notices', 'kebo_twitter_upgrade_notice' );
 
         // Delete currently cached data as format is changing in 0.9.0
-        delete_transient( 'kebo_twitter_feed_' . get_current_blog_id() );
+        //delete_transient( 'kebo_twitter_feed_' . get_current_blog_id() );
 
         // Set silent cache to refresh after page load.
         add_action( 'shutdown', 'kebo_twitter_refresh_cache' );
@@ -240,7 +313,7 @@ function kebo_twitter_update_check() {
         add_action( 'after_setup_theme', 'kebo_twitter_activation_script' );
 
         // Update Plugin Version Option
-        update_option( 'kebo_se_version', KEBO_TWITTER_PLUGIN_VERSION );
+        update_option( 'kebo_twitter_version', KEBO_TWITTER_PLUGIN_VERSION );
 
     }
 

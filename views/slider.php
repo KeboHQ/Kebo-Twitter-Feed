@@ -2,11 +2,6 @@
 /*
  * HTML output for the Horizontal Slider style of widget.
  */
-
-// Requires jQuery
-wp_enqueue_script('jquery');
-// Prints Slider Javascript using 'wp_footer' hook.
-kebo_twitter_print_js();
 ?>
 
 <?php
@@ -128,26 +123,3 @@ if ( is_rtl() ) {
     <?php unset( $tweets ); ?>
 
 </ul>
-
-<script type="text/javascript">
-    
-    /*
-     * Open Twitter Intent buttons in small popup windows.
-     */
-    //<![CDATA[
-    jQuery(document).ready(function() {
-        
-        jQuery( '.ktweet .kfooter a:not(.ktogglemedia)' ).click(function(e) {
-
-            // Prevent Click from Reloading page
-            e.preventDefault();
-
-            var href = jQuery(this).attr('href');
-            window.open( href, 'twitter', 'width=600, height=400, top=0, left=0');
-
-        });
-        
-    });
-    //]]>
-
-</script>

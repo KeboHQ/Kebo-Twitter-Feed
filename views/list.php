@@ -7,7 +7,6 @@
  * Requires jQuery for Link Popups.
  * Works without JS by traditional links.
  */
-wp_enqueue_script('jquery');
 ?>
 
 <?php
@@ -147,65 +146,9 @@ if ( is_rtl() ) {
 
 </ul>
 
-<script type="text/javascript">
-    
-    /*
-     * Open Twitter Intent buttons in small popup windows.
-     */
-    //<![CDATA[
-    jQuery(document).ready(function() {
-        
-        jQuery( '.ktweet .kfooter a:not(.ktogglemedia)' ).click(function(e) {
+<?php if ( ! empty( $is_media ) && true == $is_media && ! true == self::$printed_media_js ) {
 
-            // Prevent Click from Reloading page
-            e.preventDefault();
+    self::$printed_media_js = true;
+    add_action( 'wp_footer', 'kebo_twitter_media_script', 90 );
 
-            var href = jQuery(this).attr('href');
-            window.open( href, 'twitter', 'width=600, height=400, top=0, left=0');
-
-        });
-        
-    });
-    //]]>
-
-</script>
-
-<?php if ( ! empty( $is_media ) && true == $is_media ) : ?>
-
-<script type="text/javascript">
-    
-    /*
-     * Capture Show/Hide photo link clicks, then show/hide the photo.
-     */
-    //<![CDATA[
-    jQuery(document).ready(function() {
-        
-        jQuery( '.ktweet .ktogglemedia' ).click(function(e) {
-
-            // Prevent Click from Reloading page
-            e.preventDefault();
-
-            var klink = jQuery(this);
-            var kid = klink.data( 'id' );
-            var kcontainer = jQuery( '#' + kid );
-
-            if ( klink.hasClass('kclosed') && kcontainer.hasClass('kclosed') ) {
-
-                klink.removeClass('kclosed');
-                kcontainer.removeClass('kclosed');
-
-            } else {
-
-                klink.addClass('kclosed');
-                kcontainer.addClass('kclosed');
-
-            };
-
-        });
-    
-    });
-    //]]>
-
-</script>
-
-<?php endif; ?>
+} ?>

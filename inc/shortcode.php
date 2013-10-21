@@ -4,7 +4,7 @@
  */
 
 class Kebo_Twitter_Shortcode {
-
+    
     static function init() {
 
         add_shortcode('kebo_tweets', array(__CLASS__, 'handle_shortcode'));
@@ -34,6 +34,12 @@ class Kebo_Twitter_Shortcode {
         // Enqueue Style Sheet
         wp_enqueue_style( 'kebo-twitter-plugin' );
         wp_enqueue_script( 'jquery' );
+        
+        add_action( 'wp_footer', 'kebo_twitter_intent_script', 90 );
+        
+        if ( 2 == $instance['style'] ) {
+            add_action( 'wp_footer', 'kebo_twitter_slider_script', 90 );
+        }
         
         // Add defaults.
         $instance['title'] = $title;
