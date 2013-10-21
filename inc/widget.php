@@ -42,6 +42,7 @@ class Kebo_Twitter_Feed_Widget extends WP_Widget {
         
         // Enqueue Style Sheet
         wp_enqueue_style( 'kebo-twitter-plugin' );
+        wp_enqueue_script( 'jquery' );
         
         /*
          * Get tweets from transient and refresh if its expired.
