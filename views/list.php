@@ -67,10 +67,21 @@ if ( is_rtl() ) {
                 $created = date_i18n( $format, strtotime( $tweet->created_at ) );
                     
             }
+            // Prepare Avatar URL
+            if ( is_ssl() ) {
+                
+                $profile_image = ( isset( $tweet->retweeted_status ) ) ? $tweet->retweeted_status->user->profile_image_url_https : $tweet->user->profile_image_url_https ;
+            
+            } else {
+                
+                $profile_image = ( isset( $tweet->retweeted_status ) ) ? $tweet->retweeted_status->user->profile_image_url : $tweet->user->profile_image_url ;
+                
+            }
             
             // Check if we should display replies and hide if so and this is a reply.
-            if ( ! true == $instance['conversations'] && ( ! empty( $tweet->in_reply_to_screen_name ) || ! empty( $tweet->in_reply_to_user_id_str ) || ! empty( $tweet->in_reply_to_status_id_str ) ) )
+            if ( ! true == $instance['conversations'] && ( ! empty( $tweet->in_reply_to_screen_name ) || ! empty( $tweet->in_reply_to_user_id_str ) || ! empty( $tweet->in_reply_to_status_id_str ) ) ) {
                 continue; // skip this loop without changing the counter
+            }
             
             ?>
 
@@ -85,8 +96,8 @@ if ( is_rtl() ) {
 
                 <p class="ktext">
                     <?php if ( 'avatar' == $instance['avatar'] ) : ?>
-                        <a href="https://twitter.com/<?php echo ( isset( $tweet->retweeted_status ) ) ? $tweet->retweeted_status->user->screen_name : $tweet->user->screen_name ; ?>" target="_blank">
-                            <img class="kavatar" src="<?php echo ( isset( $tweet->retweeted_status ) ) ? $tweet->retweeted_status->user->profile_image_url : $tweet->user->profile_image_url ; ?>" />
+                        <a href="https://twitter.com/<?php echo ( isset( $tweet->retweeted_status ) ) ? $tweet->retweeted_status->user->screen_name : $tweet->user->screen_name ; ?>" title="<?php echo ( ! empty( $tweet->retweeted_status ) ) ? $tweet->retweeted_status->user->name : $tweet->user->name ; ?> @<?php echo ( ! empty( $tweet->retweeted_status ) ) ? $tweet->retweeted_status->user->screen_name : $tweet->user->screen_name ; ?>" target="_blank">
+                            <img class="kavatar" src="<?php echo $profile_image; ?>" alt="<?php echo ( ! empty( $tweet->retweeted_status ) ) ? $tweet->retweeted_status->user->name : $tweet->user->name ; ?>" />
                         </a>
                     <?php endif; ?>
                     <?php echo ( ! empty( $tweet->retweeted_status ) ) ? $tweet->retweeted_status->text : $tweet->text ; ?>
