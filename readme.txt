@@ -99,6 +99,7 @@ We store data in an option and transient, both of which are removed when you uni
 == Changelog ==
 
 = 1.1.4 =
+* Bug Fix: Fixed an error where the slider would get to the last slide and then continue showing this slide permanently.
 * Note: Improved jQuery Masonry detection and recalculation.
 
 = 1.1.3 =
