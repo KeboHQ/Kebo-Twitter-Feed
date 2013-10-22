@@ -3,7 +3,7 @@
  * Plugin Name: Kebo - Twitter Feed
  * Plugin URI: http://wordpress.org/plugins/kebo-twitter-feed/
  * Description: Connect your site to your Twitter account and display your Twitter Feed on your website effortlessly with a custom widget. 
- * Version: 1.1.1
+ * Version: 1.1.2
  * Author: Kebo
  * Author URI: http://kebopowered.com
  * Text Domain: kebo_twitter
@@ -15,7 +15,7 @@ if (!defined('ABSPATH'))
     exit;
 
 if (!defined('KEBO_TWITTER_PLUGIN_VERSION'))
-    define('KEBO_TWITTER_PLUGIN_VERSION', '1.1.1');
+    define('KEBO_TWITTER_PLUGIN_VERSION', '1.1.2');
 if (!defined('KEBO_TWITTER_PLUGIN_URL'))
     define('KEBO_TWITTER_PLUGIN_URL', plugin_dir_url(__FILE__));
 if (!defined('KEBO_TWITTER_PLUGIN_PATH'))
@@ -172,10 +172,11 @@ function kebo_twitter_slider_script() {
                 if ( kcount == klimit ) {
                     kcount = 0;
                 }
+                
                 kheight = jQuery('#kebo-tweet-slider .ktweet').eq( kcount ).outerHeight();
                 jQuery('#kebo-tweet-slider').height( kheight );
                 jQuery('#kebo-tweet-slider .ktweet').eq( kcount ).fadeToggle('1000').delay( ktimer - ktransition ).fadeToggle('1000');
-                //jQuery(body).masonry('reload');
+                <?php if ( kebo_twitter_masonry_check() ) { ?>jQuery(body).masonry('reload');<?php } ?>
 
                 ++kcount;
 
@@ -187,6 +188,26 @@ function kebo_twitter_slider_script() {
     </script>
     <?php
 
+}
+
+function kebo_twitter_masonry_check() {
+    
+    global $wp_scripts;
+    
+    $found = false;
+    
+    foreach ( $wp_scripts -> registered as $registered ) {
+        
+        if ( ( 'jquery-masonry' == $registered->handle ) || ( false !== strpos( $registered->handle, 'masonry') ) ) {
+            
+            $found = true;
+            
+        }
+    
+    }
+    
+    return $found;
+    
 }
 
 /*

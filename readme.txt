@@ -3,7 +3,7 @@ Contributors: PeterBooker, lukeketley
 Tags: twitter, feed, twitter feed, latest tweets, twitter api, shortcode, widget, tweets, twitter tweets
 Requires at least: 3.2
 Tested up to: 3.6.1
-Stable tag: 1.1.1
+Stable tag: 1.1.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -97,6 +97,10 @@ We store data in an option and transient, both of which are removed when you uni
 5. An example of how the Widget fits into the design of a theme automatically.
 
 == Changelog ==
+
+= 1.1.2 =
+* Bug Fix: Added inline CSS to list items in the Slider. This prevents themes from overwriting the 'display: none' property which breaks the slider, causing two slides to be visible at a time.
+* Bug Fix: Added a check for jQuery Masonry being active when using the Slider, if so each slide forces Masonry to recalculate positions, so the resizing of the Tweets does not break the widget positioning.
 
 = 1.1.1 =
 * Bug Fix: Changed how we sanitize/validate the 'Style' option in the Widget. We now test it against being a numerical value, instead of filtering it for HTML.
