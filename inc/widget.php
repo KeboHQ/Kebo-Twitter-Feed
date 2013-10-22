@@ -76,8 +76,9 @@ class Kebo_Twitter_Feed_Widget extends WP_Widget {
         /*
          * Get tweets from transient and refresh if its expired.
          */
-        if ( false === ( $tweets = kebo_twitter_get_tweets() ) )
+        if ( false === ( $tweets = kebo_twitter_get_tweets() ) ) {
             return;
+        }
         
         // Ensure not undefined for updates
         if ( ! isset( $instance['conversations'] ) )
