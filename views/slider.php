@@ -73,12 +73,13 @@ if ( is_rtl() ) {
             }
             
             // Check if we should display replies and hide if so and this is a reply.
-            if ( ! true == $instance['conversations'] && ( ! empty( $tweet->in_reply_to_screen_name ) || ! empty( $tweet->in_reply_to_user_id_str ) || ! empty( $tweet->in_reply_to_status_id_str ) ) )
+            if ( ! true == $instance['conversations'] && ( ! empty( $tweet->in_reply_to_screen_name ) || ! empty( $tweet->in_reply_to_user_id_str ) || ! empty( $tweet->in_reply_to_status_id_str ) ) ) {
                 continue; // skip this loop without changing the counter
+            }
             
             ?>
 
-            <li class="ktweet">
+            <li class="ktweet" style="display: none;">
 
                 <div class="kmeta">
                     <a class="kaccount" href="https://twitter.com/<?php echo ( ! empty( $tweet->retweeted_status ) ) ? $tweet->retweeted_status->user->screen_name : $tweet->user->screen_name ; ?>" target="_blank">@<?php echo ( ! empty( $tweet->retweeted_status ) ) ? $tweet->retweeted_status->user->screen_name : $tweet->user->screen_name ; ?></a>
