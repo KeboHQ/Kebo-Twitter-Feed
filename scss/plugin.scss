@@ -120,6 +120,9 @@ html body ul.kebo-tweets li.ktweet {
 .kebo-tweets li.ktweet:before {
         content: none !important;
 }
+.kebo-tweets .ktweet .kmeta {
+        text-align: left;
+}
 .kebo-tweets .ktweet .kmeta a {
         display: inline-block;
         padding: 0;
@@ -215,6 +218,9 @@ html body ul.kebo-tweets li.ktweet {
 }
 
 /* RTL Styles */
+.kebo-tweets.rtl .ktweet .kmeta {
+        text-align: right;
+}
 .kebo-tweets.rtl .kmeta a {
         direction: rtl;
         unicode-bidi: bidi-override;
