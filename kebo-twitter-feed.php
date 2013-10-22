@@ -198,7 +198,7 @@ function kebo_twitter_masonry_check() {
     
     foreach ( $wp_scripts -> registered as $registered ) {
         
-        if ( ( 'jquery-masonry' == $registered->handle ) || ( false !== strpos( $registered->handle, 'masonry') ) ) {
+        if ( ( 'jquery-masonry' == $registered->handle ) || ( false !== strpos( $registered->handle, 'masonry' ) ) || ( false !== strpos( $registered->src, 'masonry' ) ) ) {
             
             $found = true;
             
