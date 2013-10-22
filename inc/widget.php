@@ -95,7 +95,7 @@ class Kebo_Twitter_Feed_Widget extends WP_Widget {
         echo $before_widget;
         
         // If Title is set, output it with Widget title opening and closing HTML
-        if ( isset($instance['title'] ) && ! empty( $instance['title'] ) ) {
+        if ( isset( $instance['title'] ) && ! empty( $instance['title'] ) ) {
 
             echo $before_title;
             echo $instance['title'];
