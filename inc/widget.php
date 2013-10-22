@@ -51,9 +51,9 @@ class Kebo_Twitter_Feed_Widget extends WP_Widget {
     /*
      * Outputs Content
      */
-    function widget($args, $instance) {
+    function widget( $args, $instance ) {
         
-        extract($args, EXTR_SKIP);
+        extract( $args, EXTR_SKIP );
         
         // Enqueue Style Sheet
         wp_enqueue_style( 'kebo-twitter-plugin' );
@@ -205,7 +205,7 @@ class Kebo_Twitter_Feed_Widget extends WP_Widget {
     /*
      * Validates and Updates Options
      */
-    function update($new_instance, $old_instance) {
+    function update( $new_instance, $old_instance ) {
         
         $instance = array();
         
