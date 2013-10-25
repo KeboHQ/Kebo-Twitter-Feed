@@ -3,7 +3,7 @@
  * Plugin Name: Kebo - Twitter Feed
  * Plugin URI: http://wordpress.org/plugins/kebo-twitter-feed/
  * Description: Connect your site to your Twitter account and display your Twitter Feed on your website effortlessly with a custom widget. 
- * Version: 1.1.5
+ * Version: 1.1.6
  * Author: Kebo
  * Author URI: http://kebopowered.com
  * Text Domain: kebo_twitter
@@ -15,7 +15,7 @@ if (!defined('ABSPATH'))
     exit;
 
 if (!defined('KEBO_TWITTER_PLUGIN_VERSION'))
-    define('KEBO_TWITTER_PLUGIN_VERSION', '1.1.5');
+    define('KEBO_TWITTER_PLUGIN_VERSION', '1.1.6');
 if (!defined('KEBO_TWITTER_PLUGIN_URL'))
     define('KEBO_TWITTER_PLUGIN_URL', plugin_dir_url(__FILE__));
 if (!defined('KEBO_TWITTER_PLUGIN_PATH'))
@@ -153,14 +153,13 @@ function kebo_twitter_slider_script() {
     
     ?>
     <script type="text/javascript">
-        
         //<![CDATA[
         jQuery(document).ready(function() {
             
-            var ktimer = jQuery( '#kebo-tweet-slider' ).data( 'timer' );
-            var ktransition = jQuery( '#kebo-tweet-slider' ).data( 'transition' );
+            var ktimer = jQuery( "#kebo-tweet-slider" ).data( "timer" );
+            var ktransition = jQuery( "#kebo-tweet-slider" ).data( "transition" );
             var kcount = 1;
-            var klimit = jQuery('#kebo-tweet-slider .ktweet').size();
+            var klimit = jQuery("#kebo-tweet-slider").children().length;
             var kheight = jQuery('#kebo-tweet-slider .ktweet').eq(0).outerHeight();
             var initTweets = setInterval( fadeTweets, ktimer );
             
@@ -172,18 +171,16 @@ function kebo_twitter_slider_script() {
                 if ( kcount == klimit ) {
                     kcount = 0;
                 }
-                
                 kheight = jQuery('#kebo-tweet-slider .ktweet').eq( kcount ).outerHeight();
                 jQuery('#kebo-tweet-slider').height( kheight );
                 jQuery('#kebo-tweet-slider .ktweet').eq( kcount ).fadeToggle('1000').delay( ktimer - ktransition ).fadeToggle('1000');
-                
+
                 ++kcount;
 
             }
 
         });
         //]]>
-        
     </script>
     <?php
 
