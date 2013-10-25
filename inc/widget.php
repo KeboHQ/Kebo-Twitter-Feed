@@ -37,14 +37,17 @@ class Kebo_Twitter_Feed_Widget extends WP_Widget {
      */
     static $printed_media_js;
     
+    /**
+     * Register Widget Details 
+     */
     function Kebo_Twitter_Feed_Widget() {
 
         $widget_ops = array(
             'classname' => 'kebo_twitter_feed_widget',
-            'description' => __('Displays your Twitter Feed on your website.', 'kebo_twitter')
+            'description' => __('Displays your Twitter Feed on your website.', 'kbso')
         );
 
-        $this->WP_Widget( false, __('Kebo Twitter Feed', 'kebo_twitter'), $widget_ops );
+        $this->WP_Widget( false, __('Kebo Twitter Feed', 'kbso'), $widget_ops );
         
     }
 

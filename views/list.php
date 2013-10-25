@@ -146,9 +146,9 @@ if ( is_rtl() ) {
 
 </ul>
 
-<?php if ( ! empty( $is_media ) && true == $is_media && ! true == self::$printed_media_js ) {
+<?php if ( ! empty( $is_media ) && true == $is_media && ! true == Kebo_Twitter_Feed_Widget::$printed_media_js ) {
 
-    self::$printed_media_js = true;
+    Kebo_Twitter_Feed_Widget::$printed_media_js = true;
     add_action( 'wp_footer', 'kebo_twitter_media_script', 90 );
 
 } ?>

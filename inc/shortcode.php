@@ -35,10 +35,18 @@ class Kebo_Twitter_Shortcode {
         wp_enqueue_style( 'kebo-twitter-plugin' );
         wp_enqueue_script( 'jquery' );
         
-        add_action( 'wp_footer', 'kebo_twitter_intent_script', 90 );
+        if ( ! true == Kebo_Twitter_Feed_Widget::$printed_intent_js ) {
+            
+            Kebo_Twitter_Feed_Widget::$printed_intent_js = true;
+            add_action( 'wp_footer', 'kebo_twitter_intent_script', 90 );
+            
+        }
         
-        if ( 2 == $instance['style'] ) {
+        if ( 'slider' == $style && ! true == Kebo_Twitter_Feed_Widget::$printed_slider_js ) {
+            
+            Kebo_Twitter_Feed_Widget::$printed_slider_js = true;
             add_action( 'wp_footer', 'kebo_twitter_slider_script', 90 );
+
         }
         
         // Add defaults.
