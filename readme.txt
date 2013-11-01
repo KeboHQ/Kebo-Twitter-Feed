@@ -3,7 +3,7 @@ Contributors: PeterBooker, lukeketley
 Tags: twitter, feed, twitter feed, latest tweets, twitter api, shortcode, widget, tweets, twitter tweets
 Requires at least: 3.2
 Tested up to: 3.7
-Stable tag: 1.1.8
+Stable tag: 1.2.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -97,6 +97,10 @@ We store data in an option and transient, both of which are removed when you uni
 5. An example of how the Widget fits into the design of a theme automatically.
 
 == Changelog ==
+
+= 1.2.0 =
+* Note: First pass at properly using sanization on all outputs for improved security.
+* Bug Fix: Added WordPress 3.2 compatibility for enqueueing the stylesheet, as it does not support adding files after the header. Now gets enqueued on all pages automatically.
 
 = 1.1.8 =
 * Bug Fix: Prevented calling the WP Pointer unless on version 3.3 or up, to maintain compatibility with version 3.2.
