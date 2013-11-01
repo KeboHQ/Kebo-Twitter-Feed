@@ -92,7 +92,7 @@ function kebo_get_twitter_options() {
     $saved = (array) get_option('kebo_twitter_options');
 
     $defaults = array(
-        'kebo_twitter_cache_timer' => 5,
+        'kebo_twitter_cache_timer' => 15,
     );
 
     $defaults = apply_filters('kebo_get_twitter_options', $defaults);
