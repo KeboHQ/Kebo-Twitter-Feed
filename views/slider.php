@@ -71,6 +71,12 @@ if ( is_rtl() ) {
                 $profile_image = ( isset( $tweet->retweeted_status ) ) ? $tweet->retweeted_status->user->profile_image_url : $tweet->user->profile_image_url ;
                 
             }
+            // Tweet ID
+            $tweet_id = absint( ! empty( $tweet->retweeted_status ) ) ? $tweet->retweeted_status->id_str : $tweet->id_str ;
+            // Screen Name
+            $screen_name = ( ! empty( $tweet->retweeted_status ) ) ? $tweet->retweeted_status->user->screen_name : $tweet->user->screen_name ;
+            // Name
+            $name = ( ! empty( $tweet->retweeted_status ) ) ? $tweet->retweeted_status->user->name : $tweet->user->name ;
             
             // Check if we should display replies and hide if so and this is a reply.
             if ( ! true == $instance['conversations'] && ( ! empty( $tweet->in_reply_to_screen_name ) || ! empty( $tweet->in_reply_to_user_id_str ) || ! empty( $tweet->in_reply_to_status_id_str ) ) ) {
@@ -82,25 +88,25 @@ if ( is_rtl() ) {
             <li class="ktweet" style="display: none;">
 
                 <div class="kmeta">
-                    <a class="kaccount" href="https://twitter.com/<?php echo ( ! empty( $tweet->retweeted_status ) ) ? $tweet->retweeted_status->user->screen_name : $tweet->user->screen_name ; ?>" target="_blank">@<?php echo ( ! empty( $tweet->retweeted_status ) ) ? $tweet->retweeted_status->user->screen_name : $tweet->user->screen_name ; ?></a>
-                    <a class="kdate" href="https://twitter.com/<?php echo ( ! empty( $tweet->retweeted_status ) ) ? $tweet->retweeted_status->user->screen_name : $tweet->user->screen_name ; ?>/statuses/<?php echo ( ! empty( $tweet->retweeted_status ) ) ? $tweet->retweeted_status->id_str : $tweet->id_str ; ?>" target="_blank">
-                        <time title="<?php _e( 'Time posted', 'kebo_twitter' ); ?>: <?php echo date_i18n( 'dS M Y H:i:s', strtotime( $tweet->created_at ) + $tweet->user->utc_offset ); ?>" datetime="<?php echo date_i18n( 'c', strtotime( $tweet->created_at ) + $tweet->user->utc_offset ); ?>" aria-label="<?php _e('Posted on ', 'kebo_twitter'); ?><?php echo date_i18n( 'dS M Y H:i:s', strtotime( $tweet->created_at ) + $tweet->user->utc_offset ); ?>"><?php echo $created; ?></time>
+                    <a class="kaccount" href="<?php echo esc_url( 'https://twitter.com/' . $screen_name ); ?>" target="_blank">@<?php echo esc_html( $screen_name ); ?></a>
+                    <a class="kdate" href="<?php echo esc_url( 'https://twitter.com/' . $screen_name . '/statuses/' . $tweet_id ); ?>" target="_blank">
+                        <time title="<?php esc_attr_e( 'Time posted', 'kebo_twitter' ); ?>: <?php echo date_i18n( 'dS M Y H:i:s', strtotime( $tweet->created_at ) + $tweet->user->utc_offset ); ?>" datetime="<?php echo date_i18n( 'c', strtotime( $tweet->created_at ) + $tweet->user->utc_offset ); ?>" aria-label="<?php esc_attr_e('Posted on ', 'kebo_twitter'); ?><?php echo date_i18n( 'dS M Y H:i:s', strtotime( $tweet->created_at ) + $tweet->user->utc_offset ); ?>"><?php echo esc_html ( $created ); ?></time>
                     </a>
                 </div>
 
                 <p class="ktext">
                     <?php if ( 'avatar' == $instance['avatar'] ) : ?>
-                        <a href="https://twitter.com/<?php echo ( isset( $tweet->retweeted_status ) ) ? $tweet->retweeted_status->user->screen_name : $tweet->user->screen_name ; ?>" title="<?php echo ( ! empty( $tweet->retweeted_status ) ) ? $tweet->retweeted_status->user->name : $tweet->user->name ; ?> @<?php echo ( ! empty( $tweet->retweeted_status ) ) ? $tweet->retweeted_status->user->screen_name : $tweet->user->screen_name ; ?>" target="_blank">
-                            <img class="kavatar" src="<?php echo $profile_image; ?>" alt="<?php echo ( ! empty( $tweet->retweeted_status ) ) ? $tweet->retweeted_status->user->name : $tweet->user->name ; ?>" />
+                        <a href="<?php echo esc_url( 'https://twitter.com/' . $screen_name ); ?>" title="<?php echo esc_attr( $name . ' @' . $screen_name ); ?>" target="_blank">
+                            <img class="kavatar" src="<?php echo esc_url( $profile_image ); ?>" alt="<?php echo esc_attr( $name ); ?>" />
                         </a>
                     <?php endif; ?>
-                    <?php echo ( ! empty( $tweet->retweeted_status ) ) ? $tweet->retweeted_status->text : $tweet->text ; ?>
+                    <?php echo wp_kses_post( ( ! empty( $tweet->retweeted_status ) ) ? $tweet->retweeted_status->text : $tweet->text ); ?>
                 </p>
 
                 <div class="kfooter">
-                    <a class="kreply" title="<?php _e('Reply', 'kebo_twitter'); ?>" href="https://twitter.com/intent/tweet?in_reply_to=<?php echo $tweet->id_str; ?>"></a>
-                    <a class="kretweet" title="<?php _e('Re-Tweet', 'kebo_twitter'); ?>" href="https://twitter.com/intent/retweet?tweet_id=<?php echo ( isset( $tweet->retweeted_status ) ) ? $tweet->retweeted_status->id_str : $tweet->id_str ; ?>"></a>
-                    <a class="kfavorite" title="<?php _e('Favorite', 'kebo_twitter'); ?>" href="https://twitter.com/intent/favorite?tweet_id=<?php echo $tweet->id_str; ?>"></a>
+                    <a class="kreply" title="<?php esc_attr_e('Reply', 'kebo_twitter'); ?>" href="<?php echo esc_url( 'https://twitter.com/intent/tweet?in_reply_to=' . $tweet_id ); ?>"></a>
+                    <a class="kretweet" title="<?php esc_attr_e('Re-Tweet', 'kebo_twitter'); ?>" href="<?php echo esc_url( 'https://twitter.com/intent/retweet?tweet_id=' . $tweet_id ); ?>"></a>
+                    <a class="kfavorite" title="<?php esc_attr_e('Favorite', 'kebo_twitter'); ?>" href="<?php echo esc_url( 'https://twitter.com/intent/favorite?tweet_id=' . $tweet_id ); ?>"></a>
                 </div>
 
             </li>

@@ -102,7 +102,7 @@ class Kebo_Twitter_Feed_Widget extends WP_Widget {
         if ( isset( $instance['title'] ) && ! empty( $instance['title'] ) ) {
 
             echo $before_title;
-            echo $instance['title'];
+            echo esc_html( $instance['title'] );
             echo $after_title;
             
         }

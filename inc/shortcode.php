@@ -85,7 +85,7 @@ class Kebo_Twitter_Shortcode {
         
         if ( isset( $instance['title'] ) ) {
             
-            echo '<h2 class="ktweets-title">' . $instance['title'] . '</h2>';
+            echo '<h2 class="ktweets-title">' . esc_html( $instance['title'] ) . '</h2>';
             
         }
         
