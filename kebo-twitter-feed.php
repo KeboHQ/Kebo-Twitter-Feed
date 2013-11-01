@@ -84,7 +84,24 @@ function kebo_twitter_plugin_meta( $links ) {
 }
 add_filter( 'plugin_action_links_kebo-twitter-feed/kebo-twitter-feed.php', 'kebo_twitter_plugin_meta' );
 
-/*
+/**
+ * If WordPress version is under 3.3, always enqueue stylesheet,
+ * as it does not work if you call it after the header.
+ */
+global $wp_version;
+
+if ( version_compare( $wp_version, '3.3', '<' ) ) {
+    
+    function kebo_twitter_enqueue_style_compat() {
+        
+        wp_enqueue_style('kebo-twitter-plugin');
+        
+    }
+    add_action('wp_enqueue_scripts', 'kebo_twitter_enqueue_style_compat');
+    
+}
+
+/**
  * Check we are on WordPress version 3.3 at least,
  * before trying to use the WP Pointer.
  */
