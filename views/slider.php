@@ -12,6 +12,14 @@ $classes[] = $instance['theme'];
 if ( is_rtl() ) {
     $classes[] = 'rtl';
 }
+
+$allowed_html = array(
+    'a' => array(
+        'href' => array(),
+        'title' => array(),
+        'target' => array()
+    )
+);
 ?>
 
 <ul class="<?php echo implode(' ', $classes); ?>" id="kebo-tweet-slider" data-timer="10000" data-transition="1000" data-animation="fade">
@@ -100,7 +108,7 @@ if ( is_rtl() ) {
                             <img class="kavatar" src="<?php echo esc_url( $profile_image ); ?>" alt="<?php echo esc_attr( $name ); ?>" />
                         </a>
                     <?php endif; ?>
-                    <?php echo wp_kses_post( ( ! empty( $tweet->retweeted_status ) ) ? $tweet->retweeted_status->text : $tweet->text ); ?>
+                    <?php echo wp_kses( ( ! empty( $tweet->retweeted_status ) ) ? $tweet->retweeted_status->text : $tweet->text, $allowed_html ); ?>
                 </p>
 
                 <div class="kfooter">
