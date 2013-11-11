@@ -112,11 +112,29 @@ class Kebo_Twitter_Feed_Widget extends WP_Widget {
          */
         if ( 2 == $instance['style'] ) {
             
-            require( KEBO_TWITTER_PLUGIN_PATH . 'views/slider.php' );
+            if ( '' != locate_template( 'views/kebo-twitter-slider.php' ) ) {
+                
+                // yep, load the page template
+                get_template_part( 'views/kebo-twitter-slider' );
+                    
+            } else {
+                
+                require( KEBO_TWITTER_PLUGIN_PATH . 'views/slider.php' );
+                
+            }
             
         } else {
             
-            require( KEBO_TWITTER_PLUGIN_PATH . 'views/list.php' );
+            if ( '' != locate_template( 'views/kebo-twitter-list.php' ) ) {
+                
+                // yep, load the page template
+                get_template_part( 'views/kebo-twitter-list' );
+                    
+            } else {
+                
+                require( KEBO_TWITTER_PLUGIN_PATH . 'views/list.php' );
+                
+            }
             
         }
         

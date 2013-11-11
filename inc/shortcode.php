@@ -103,15 +103,35 @@ class Kebo_Twitter_Shortcode {
             
         }
         
-        // Output Twitter Feed
+        /*
+         * Check which Style (Slider/List) has been chosen and use correct view file, default List.
+         */
         if ( 2 == $instance['style'] ) {
-
-            require( KEBO_TWITTER_PLUGIN_PATH . 'views/slider.php' );
+            
+            if ( '' != locate_template( 'views/kebo-twitter-slider.php' ) ) {
                 
+                // yep, load the page template
+                get_template_part( 'views/kebo-twitter-slider' );
+                    
+            } else {
+                
+                require( KEBO_TWITTER_PLUGIN_PATH . 'views/slider.php' );
+                
+            }
+            
         } else {
-
-            require( KEBO_TWITTER_PLUGIN_PATH . 'views/list.php' );
+            
+            if ( '' != locate_template( 'views/kebo-twitter-list.php' ) ) {
                 
+                // yep, load the page template
+                get_template_part( 'views/kebo-twitter-list' );
+                    
+            } else {
+                
+                require( KEBO_TWITTER_PLUGIN_PATH . 'views/list.php' );
+                
+            }
+            
         }
         
         // End of Shortcode Container
