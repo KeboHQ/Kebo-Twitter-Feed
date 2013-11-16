@@ -3,7 +3,7 @@ Contributors: PeterBooker, lukeketley
 Tags: twitter, feed, twitter feed, latest tweets, twitter api, shortcode, widget, tweets, twitter tweets
 Requires at least: 3.2
 Tested up to: 3.7
-Stable tag: 1.3.0
+Stable tag: 1.4.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -97,6 +97,10 @@ We store data in an option and transient, both of which are removed when you uni
 5. An example of how the Widget fits into the design of a theme automatically.
 
 == Changelog ==
+
+= 1.4.0 =
+* New Feature: Changed the system behind the Slider, this should resolve bugs breaking the display when using the Slider. It now uses http://responsiveslides.com/ by Viljami Salminen (thanks to pixolin for the suggestion).
+* Important: Due to the above change there have been small changes to the HTML output (IDs and Classes) of the Slider view file.
 
 = 1.3.0 =
 * New Feature: Now searches for custom template files in the theme ( 'views/kebo-twitter-list.php' and 'views/kebo-twitter-slider.php' ), allowing users to more easily customise the plugin output.
