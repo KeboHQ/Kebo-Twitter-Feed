@@ -177,8 +177,8 @@ function kebo_twitter_slider_script() {
         //<![CDATA[
         jQuery(document).ready(function() {
             
-            ktimeout = jQuery.data( "#<?php echo $widget_id; ?> ul", "timeout" );
-            kspeed = jQuery.data( "#<?php echo $widget_id; ?> ul", "speed" );
+            ktimeout = jQuery( "#<?php echo $widget_id; ?> ul" ).data( "timeout" );
+            kspeed = jQuery( "#<?php echo $widget_id; ?> ul" ).data( "speed" );
             
             jQuery( function() {
                 jQuery("#<?php echo $widget_id; ?> ul").responsiveSlides({
