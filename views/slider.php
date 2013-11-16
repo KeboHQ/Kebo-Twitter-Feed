@@ -22,7 +22,7 @@ $allowed_html = array(
 );
 ?>
 
-<ul class="<?php echo implode(' ', $classes); ?>" id="kebo-tweet-slider" data-timer="10000" data-transition="1000" data-animation="fade">
+<ul class="<?php echo implode(' ', $classes); ?>" data-timeout="10000" data-speed="1000" data-animation="fade">
 
     <?php $i = 0; ?>
     
@@ -30,6 +30,7 @@ $allowed_html = array(
     $options = kebo_get_twitter_options();
     $format = get_option( 'date_format' );
     $corruption = 0;
+    $count = 0;
     //$lang = mb_substr( get_bloginfo('language'), 0, 2 );// Needed for follow button
     ?>
         
@@ -91,9 +92,10 @@ $allowed_html = array(
                 continue; // skip this loop without changing the counter
             }
             
+            $count++;
             ?>
 
-            <li class="ktweet" style="display: none;">
+            <li class="ktweet" <?php echo ( 1 != $count ) ? 'style="display: none;"' : ''; ?>>
 
                 <div class="kmeta">
                     <a class="kaccount" href="<?php echo esc_url( 'https://twitter.com/' . $screen_name ); ?>" target="_blank">@<?php echo esc_html( $screen_name ); ?></a>

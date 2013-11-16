@@ -62,7 +62,9 @@ if ( ! function_exists('kebo_twitter_plugin_scripts') ):
 
         // Queues the main CSS file.
         wp_register_style( 'kebo-twitter-plugin', KEBO_TWITTER_PLUGIN_URL . 'css/plugin.css', array(), KEBO_TWITTER_PLUGIN_VERSION, 'all' );
-
+        
+        wp_register_script( 'responsive-slides', KEBO_TWITTER_PLUGIN_URL . 'js/responsiveslides.min.js', array( 'jquery' ), KEBO_TWITTER_PLUGIN_VERSION, false );
+        
         // Enqueue Stylesheet for Admin Pages
         if ( is_admin() ) {
             wp_enqueue_style('kebo-twitter-plugin');
@@ -165,38 +167,37 @@ if ( version_compare( $wp_version, '3.3', '>=' ) ) {
  */
 function kebo_twitter_slider_script() {
     
+    // Collect the IDs of all Widgets using the Slider display.
+    $widget_ids = Kebo_Twitter_Feed_Widget::$slider_ids;
+    
+    foreach ( $widget_ids as $widget_id ) {
+        
     ?>
     <script type="text/javascript">
         //<![CDATA[
         jQuery(document).ready(function() {
             
-            var ktimer = jQuery( "#kebo-tweet-slider" ).data( "timer" );
-            var ktransition = jQuery( "#kebo-tweet-slider" ).data( "transition" );
-            var kcount = 1;
-            var klimit = jQuery("#kebo-tweet-slider").children().length;
-            var kheight = jQuery('#kebo-tweet-slider .ktweet').eq(0).outerHeight();
-            var initTweets = setInterval( fadeTweets, ktimer );
+            ktimeout = jQuery.data( "#<?php echo $widget_id; ?> ul", "timeout" );
+            kspeed = jQuery.data( "#<?php echo $widget_id; ?> ul", "speed" );
             
-            jQuery('#kebo-tweet-slider .ktweet').eq(0).fadeToggle('1000').delay( ktimer - ktransition ).fadeToggle('1000');
-            jQuery('#kebo-tweet-slider').height( kheight );
-
-            function fadeTweets() {
-
-                if ( kcount == klimit ) {
-                    kcount = 0;
-                }
-                kheight = jQuery('#kebo-tweet-slider .ktweet').eq( kcount ).outerHeight();
-                jQuery('#kebo-tweet-slider').height( kheight );
-                jQuery('#kebo-tweet-slider .ktweet').eq( kcount ).fadeToggle('1000').delay( ktimer - ktransition ).fadeToggle('1000');
-
-                ++kcount;
-
-            }
+            jQuery( function() {
+                jQuery("#<?php echo $widget_id; ?> ul").responsiveSlides({
+                    auto: true,           // Boolean: Animate automatically, true or false
+                    speed: kspeed,           // Integer: Speed of the transition, in milliseconds
+                    timeout: ktimeout,        // Integer: Time between slide transitions, in milliseconds
+                    pager: false,         // Boolean: Show pager, true or false
+                    nav: false,           // Boolean: Show navigation, true or false
+                    random: false,        // Boolean: Randomize the order of the slides, true or false
+                    pause: true           // Boolean: Pause on hover, true or false
+                });
+            });
 
         });
         //]]>
     </script>
     <?php
+    
+    }
 
 }
 

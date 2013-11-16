@@ -296,9 +296,45 @@ html body ul.kebo-tweets li.ktweet {
         color: rgba(255, 255, 255, 0.5);
 }
 
-/* Twitter Feed - Horizontal */
+/* Twitter Feed - Slider */
+html body ul.kebo-tweets.slider {
+        overflow: hidden;
+        width: 100%;
+        margin: 0 !important; // only way to override themes which use #IDs for widget areas
+        padding: 0;
+        list-style: none;
+        border: none;
+        outline: none;
+        background-image: none;
+        position: relative;
+        overflow: hidden;
+}
+html body ul.kebo-tweets.slider li.ktweet {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        border: none;
+        outline: none;
+        background-image: none;
+        -webkit-backface-visibility: hidden;
+        position: absolute;
+        display: none;
+        width: 100%;
+        left: 0;
+        top: 0;
+}
+html body ul.kebo-tweets.slider li.ktweet:first-child {
+        position: relative;
+        display: block;
+        float: left;
+}
 #kebo-tweet-slider {
         position: relative;
+        list-style: none;
+        overflow: hidden;
+        width: 100%;
+        padding: 0;
+        margin: 0;
 }
 #kebo-tweet-slider .ktweet {
         display: none;

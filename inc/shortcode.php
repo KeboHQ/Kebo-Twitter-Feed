@@ -5,16 +5,18 @@
 
 class Kebo_Twitter_Shortcode {
     
+    static $shortcode_id = 1;
+    
     static function init() {
 
         add_shortcode('kebo_tweets', array(__CLASS__, 'handle_shortcode'));
         
     }
 
-    static function handle_shortcode($atts) {
+    static function handle_shortcode( $atts ) {
 
         // Sort Options
-        extract(shortcode_atts(array(
+        extract( shortcode_atts( array(
             'title' => null,
             'display' => 'tweets',
             'style' => 'list',
@@ -24,7 +26,7 @@ class Kebo_Twitter_Shortcode {
             'offset' => false,
             'conversations' => false,
             'media' => false,
-        ), $atts));
+        ), $atts ) );
         
         // Check if a connection to Twitter exists.
         $twitter_data = get_option( 'kebo_twitter_connection' );
@@ -35,6 +37,10 @@ class Kebo_Twitter_Shortcode {
         wp_enqueue_style( 'kebo-twitter-plugin' );
         wp_enqueue_script( 'jquery' );
         
+        $widget_id = 'kebo_twitter_feed_shortcode-' . self::$shortcode_id;
+        
+        self::$shortcode_id++;
+        
         if ( ! true == Kebo_Twitter_Feed_Widget::$printed_intent_js ) {
             
             Kebo_Twitter_Feed_Widget::$printed_intent_js = true;
@@ -42,9 +48,10 @@ class Kebo_Twitter_Shortcode {
             
         }
         
-        if ( 'slider' == $style && ! true == Kebo_Twitter_Feed_Widget::$printed_slider_js ) {
+        if ( 'slider' == $style ) {
             
-            Kebo_Twitter_Feed_Widget::$printed_slider_js = true;
+            Kebo_Twitter_Feed_Widget::$slider_ids[] = $widget_id;
+            wp_enqueue_script( 'responsive-slides' );
             add_action( 'wp_footer', 'kebo_twitter_slider_script', 90 );
 
         }
@@ -81,7 +88,7 @@ class Kebo_Twitter_Shortcode {
         ob_start();
         
         // Shortcode Container
-        echo '<div class="kcontainer">';
+        echo '<div id="' . $widget_id . '" class="kcontainer">';
         
         if ( isset( $instance['title'] ) ) {
             

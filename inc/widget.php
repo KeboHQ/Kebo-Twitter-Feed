@@ -28,14 +28,14 @@ class Kebo_Twitter_Feed_Widget extends WP_Widget {
     static $printed_intent_js;
     
     /**
-     * Has the Tweet Slider javascript been printed?
-     */
-    static $printed_slider_js;
-    
-    /**
      * Has the Tweet Media javascript been printed?
      */
     static $printed_media_js;
+    
+    /**
+     * Widget IDs using Slider display
+     */
+    static $slider_ids = array();
     
     /**
      * Register Widget Details 
@@ -69,9 +69,10 @@ class Kebo_Twitter_Feed_Widget extends WP_Widget {
             
         }
         
-        if ( 2 == $instance['style'] && ! true == self::$printed_slider_js ) {
+        if ( 2 == $instance['style'] ) {
             
-            self::$printed_slider_js = true;
+            self::$slider_ids[] = $widget_id;
+            wp_enqueue_script( 'responsive-slides' );
             add_action( 'wp_footer', 'kebo_twitter_slider_script', 90 );
 
         }
