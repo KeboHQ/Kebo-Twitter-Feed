@@ -8,6 +8,7 @@
 // Prepare Classes
 $classes[] = 'kebo-tweets';
 $classes[] = 'slider';
+$classes[] = $widget_id;
 $classes[] = $instance['theme'];
 if ( is_rtl() ) {
     $classes[] = 'rtl';
