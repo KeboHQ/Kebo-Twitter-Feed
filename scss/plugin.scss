@@ -354,3 +354,6 @@ html body ul.kebo-tweets.slider li.ktweet:first-child {
 .kebo-tweets.list .ktweet:first-of-type {
         padding-top: 0;
 }
+.kebo-tweets.list .ktweet:last-of-type {
+        border-bottom: none;
+}
