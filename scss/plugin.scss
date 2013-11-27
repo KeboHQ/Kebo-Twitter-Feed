@@ -357,3 +357,13 @@ html body ul.kebo-tweets.slider li.ktweet:first-child {
 .kebo-tweets.list .ktweet:last-of-type {
         border-bottom: none;
 }
+
+
+/*
+ * Misc Fixes
+ */
+
+// Fixes Themes adding <br> tags to post content (effecting shortcode html output).
+.kcontainer br {
+        display: none;
+}
