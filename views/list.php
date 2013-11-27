@@ -71,7 +71,7 @@ $allowed_html = array(
             } else {
                 
                 // Convert created at date into easily readable format.
-                $created = date_i18n( $format, strtotime( $tweet->created_at ) );
+                $created = date_i18n( $format, strtotime( $tweet->created_at ) + $tweet->user->utc_offset );
                     
             }
             // Prepare Avatar URL
