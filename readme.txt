@@ -1,9 +1,9 @@
 === Kebo Twitter Feed ===
 Contributors: PeterBooker
-Tags: twitter, feed, twitter feed, latest tweets, twitter api, shortcode, widget, tweets, twitter tweets
+Tags: twitter, feed, twitter feed, latest tweets, twitter api, shortcode, widget, tweets
 Requires at least: 3.2
 Tested up to: 3.7
-Stable tag: 1.4.2
+Stable tag: 1.4.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -97,6 +97,10 @@ We store data in an option and transient, both of which are removed when you uni
 5. An example of how the Widget fits into the design of a theme automatically.
 
 == Changelog ==
+
+= 1.4.3 =
+* Bug Fix: Hovering over the Tweet date now correctly shows the time adjusted for timezone. (thanks dr4g0nus)
+* Bug Fix: Fixed br tags damaging the Shortcode output and breaking the layout/styling. Used a CSS trick to disable any br tags inside the plugin Shortcode.
 
 = 1.4.2 =
 * Bug Fix: Improved Slider theme compatibility by identifying it using the widget ID as a class. Involved a change to the slider view file.
