@@ -3,7 +3,7 @@ Contributors: PeterBooker
 Tags: twitter, feed, twitter feed, latest tweets, twitter api, shortcode, widget, tweets
 Requires at least: 3.2
 Tested up to: 3.7
-Stable tag: 1.4.3
+Stable tag: 1.4.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -97,6 +97,9 @@ We store data in an option and transient, both of which are removed when you uni
 5. An example of how the Widget fits into the design of a theme automatically.
 
 == Changelog ==
+
+= 1.4.4 =
+* Bug Fix: Styled the Tweet list item to height: auto, so that general theme styling does not alter the height of the Tweets.
 
 = 1.4.3 =
 * Bug Fix: Hovering over the Tweet date now correctly shows the time adjusted for timezone. (thanks dr4g0nus)
