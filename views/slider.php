@@ -33,6 +33,8 @@ $allowed_html = array(
     $corruption = 0;
     $count = 0;
     //$lang = mb_substr( get_bloginfo('language'), 0, 2 );// Needed for follow button
+
+    date_default_timezone_set(get_option('timezone_string'));
     ?>
         
     <?php if ( ! empty( $tweets->{0}->created_at ) ) : ?>
@@ -66,6 +68,9 @@ $allowed_html = array(
                 $created = human_time_diff( date( 'U', strtotime( $tweet->created_at ) ), current_time( 'timestamp', $gmt = 1 ) );
                     
             } else {
+                if ($options['kebo_twitter_today_only'] == 1) {
+                    continue;
+                }
                     
                 // Convert created at date into easily readable format.
                 $created = date_i18n( $format, strtotime( $tweet->created_at ) );
