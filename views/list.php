@@ -36,10 +36,12 @@ $allowed_html = array(
     $format = get_option( 'date_format' );
     $corruption = 0;
     //$lang = mb_substr( get_bloginfo('language'), 0, 2 );// Needed for follow button
+
+    date_default_timezone_set(get_option('timezone_string'));
     ?>
     
     <?php if ( ! empty( $tweets->{0}->created_at ) ) : ?>
-    
+
         <?php foreach ( $tweets as $tweet ) : ?>
 
             <?php
@@ -69,10 +71,11 @@ $allowed_html = array(
                 $created = human_time_diff( date( 'U', strtotime( $tweet->created_at ) ), current_time( 'timestamp', $gmt = 1 ) );
                     
             } else {
-                
+                if ( $options['kebo_twitter_today_only'] == 1 ) {
+                    continue;
+                }
                 // Convert created at date into easily readable format.
                 $created = date_i18n( $format, strtotime( $tweet->created_at ) + $tweet->user->utc_offset );
-                    
             }
             // Prepare Avatar URL
             if ( is_ssl() ) {
