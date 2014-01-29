@@ -68,6 +68,14 @@ function kebo_twitter_options_init() {
             'kebo-twitter', // Menu slug
             'kebo_twitter_options_general' // Settings section.
     );
+
+    add_settings_field(
+            'kebo_twitter_absolute_timestamp', // Unique identifier for the field for this section
+            __('Use absolute timestamps', 'kebo_twitter'), // Setting field label
+            'kebo_twitter_absolute_timestamp_render', // Function that renders the settings field
+            'kebo-twitter', // Menu slug
+            'kebo_twitter_options_general' // Settings section.
+    );
     
     // Stores Error Log
     add_option(
@@ -102,6 +110,7 @@ function kebo_get_twitter_options() {
     $defaults = array(
         'kebo_twitter_cache_timer' => 15,
         'kebo_twitter_today_only' => 0,
+        'kebo_twitter_absolute_timestamp' => 0,
     );
 
     $defaults = apply_filters('kebo_get_twitter_options', $defaults);
@@ -126,7 +135,7 @@ function kebo_twitter_cache_timer_render() {
 }
 
 /**
- * Renders the Cache Timer input.
+ * Renders the Time Only input.
  */
 function kebo_twitter_today_only_render() {
 
@@ -134,6 +143,18 @@ function kebo_twitter_today_only_render() {
     ?>
     <input type="checkbox" name="kebo_twitter_options[kebo_twitter_today_only]" id="kebo_twitter_today_only" <?php if ( $options['kebo_twitter_today_only'] == 1 ) { echo 'checked="checked"'; } ?>" />
     <p><?php _e('This controls whether we only display tweets for today.', 'kebo_twitter'); ?></p>
+    <?php
+}
+
+/**
+ * Renders the "Absolute Timestamp" input.
+ */
+function kebo_twitter_absolute_timestamp_render() {
+
+    $options = kebo_get_twitter_options();
+    ?>
+    <input type="checkbox" name="kebo_twitter_options[kebo_twitter_absolute_timestamp]" id="kebo_twitter_absolute_timestamp" <?php if ( $options['kebo_twitter_absolute_timestamp'] == 1 ) { echo 'checked="checked"'; } ?>" />
+    <p><?php _e('This controls whether today\'s tweets get the actual date/time instead of a relative time diff.', 'kebo_twitter'); ?></p>
     <?php
 }
 
@@ -181,6 +202,7 @@ function kebo_twitter_options_validate($input) {
         
     }
     $output['kebo_twitter_today_only'] = (isset($input['kebo_twitter_today_only'])) ? 1 : 0;
+    $output['kebo_twitter_absolute_timestamp'] = (isset($input['kebo_twitter_absolute_timestamp'])) ? 1 : 0;
 
     return apply_filters('kebo_twitter_options_validate', $output, $options);
 }
