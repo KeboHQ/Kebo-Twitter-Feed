@@ -141,7 +141,7 @@ function kebo_twitter_today_only_render() {
 
     $options = kebo_get_twitter_options();
     ?>
-    <input type="checkbox" name="kebo_twitter_options[kebo_twitter_today_only]" id="kebo_twitter_today_only" <?php if ( $options['kebo_twitter_today_only'] == 1 ) { echo 'checked="checked"'; } ?>" />
+    <input type="checkbox" name="kebo_twitter_options[kebo_twitter_today_only]" id="kebo_twitter_today_only" <?php if ( $options['kebo_twitter_today_only'] == 1 ) { echo 'checked="checked"'; } ?> />
     <p><?php _e('This controls whether we only display tweets for today.', 'kebo_twitter'); ?></p>
     <?php
 }
@@ -153,7 +153,7 @@ function kebo_twitter_absolute_timestamp_render() {
 
     $options = kebo_get_twitter_options();
     ?>
-    <input type="checkbox" name="kebo_twitter_options[kebo_twitter_absolute_timestamp]" id="kebo_twitter_absolute_timestamp" <?php if ( $options['kebo_twitter_absolute_timestamp'] == 1 ) { echo 'checked="checked"'; } ?>" />
+    <input type="checkbox" name="kebo_twitter_options[kebo_twitter_absolute_timestamp]" id="kebo_twitter_absolute_timestamp" <?php if ( $options['kebo_twitter_absolute_timestamp'] == 1 ) { echo 'checked="checked"'; } ?> />
     <p><?php _e('This controls whether today\'s tweets get the actual date/time instead of a relative time diff.', 'kebo_twitter'); ?></p>
     <?php
 }
