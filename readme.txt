@@ -2,8 +2,8 @@
 Contributors: PeterBooker
 Tags: twitter, feed, twitter feed, latest tweets, twitter api, shortcode, widget, tweets
 Requires at least: 3.2
-Tested up to: 3.7
-Stable tag: 1.4.4
+Tested up to: 3.8.1
+Stable tag: 1.4.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -97,6 +97,11 @@ We store data in an option and transient, both of which are removed when you uni
 5. An example of how the Widget fits into the design of a theme automatically.
 
 == Changelog ==
+
+= 1.4.6 =
+* Important: The Kebo API server changes recently, which means it now runs from a different IP address. The new IP is 23.239.13.127 and this will not be changing for a few months. I realise that such a fast and unannounced change is very inconvenient and I will ensure that next time I give a few weeks notice and announce the coming change in these change logs and in the plugin.
+* New Feature: Added an API Status box to the top right of the plugin's settings page. This checks whether or not your site can connect to the API Server successfully or not. It will turn green for success or red for failure shortly after the page loads.
+* New Feature: There is now a 'Debug Tweet Data' link at the far bottom of the plugin's settings page. This will load the cached Tweet data into a text box which will assist in debugging problems with the plugin.
 
 = 1.4.4 =
 * Bug Fix: Styled the Tweet list item to height: auto, so that general theme styling does not alter the height of the Tweets.
