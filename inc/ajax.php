@@ -135,7 +135,7 @@ function kebo_twitter_fetch_tweet_data() {
         $response = array(
             'action' => 'fetch_tweet_data',
             'success' => true,
-            'data' => print_r( json_decode( $tweets, true ), true ),
+            'data' => print_r( $tweets, true ),
         );
         
     }
