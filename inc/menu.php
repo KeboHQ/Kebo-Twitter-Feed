@@ -58,23 +58,26 @@ function kebo_twitter_menu_render() {
 
     endif;
 
-        // Check for reset request, if set delete transient which will break the connection to Twitter, so the credentials will be lost.
-        if ( isset( $_GET['reset'] ) && 'true' == $_GET['reset'] ) :
+    // Check for reset request, if set delete transient which will break the connection to Twitter, so the credentials will be lost.
+    if ( isset( $_GET['reset'] ) && 'true' == $_GET['reset'] ) :
 
-            if ( 'true' == $_GET['reset'] ) :
+        if ( 'true' == $_GET['reset'] ) :
 
-                update_option( 'kebo_twitter_connection', false );
+            update_option( 'kebo_twitter_connection', false );
             
-                add_settings_error(
-                    'kebo-twitter',
-                    esc_attr('settings_updated'),
-                    __( 'Connection reset to Twitter.', 'kebo_twitter' ),
-                    'updated'
-                );
+            add_settings_error(
+                'kebo-twitter',
+                esc_attr('settings_updated'),
+                __( 'Connection reset to Twitter.', 'kebo_twitter' ),
+                'updated'
+            );
                 
-            endif;
-
         endif;
+
+    endif;
+    
+    // Enqueue Thickbox
+    add_thickbox();
         
     ?>
     <div class="wrap">
@@ -131,7 +134,114 @@ function kebo_twitter_menu_render() {
         
         <?php endif; ?>
         
-    </div>
+        <a href="#TB_inline?width=600&height=550&inlineId=kebo-debug-modal" class="thickbox kdebug-button"><?php _e( 'Debug Tweet Data', 'kebo_twitter' ); ?></a>
+
+        <div id="kebo-debug-modal" style="display:none;">
+            
+            <h2><?php _e( 'Debug - Cached Tweet Data', 'kebo_twitter' ); ?> <a class="kselect" href="#"><?php _e( 'Select All', 'kebo_twitter' ); ?></a> </h2>
+            
+            <img class="kloading" src="<?php echo admin_url( 'images/wpspin_light.gif' ); ?>">
+            
+            <textarea class="kdebug-content" readonly="readonly">
+                
+            </textarea>
+            
+        </div>
+        
+        <script type="text/javascript">
+            
+            jQuery( document ).ready( function() {
+                
+                jQuery( '.kdebug-button' ).one( 'click', function() {
+                    
+                    var data = {
+                        action: 'kebo_twitter_fetch_tweet_data',
+                        nonce: '<?php echo wp_create_nonce( 'kebo_twitter_fetch_tweet_data' ); ?>'
+                    };
+
+                    // do AJAX request
+                    jQuery.post( ajaxurl, data, function( response ) {
+
+                        response = jQuery.parseJSON( response );
+
+                        if ( true === response.success ) {
+
+                            jQuery('#TB_ajaxContent .kloading').hide();
+                            jQuery('.kdebug-content').text( response.data );
+
+                        } else {
+
+                            jQuery('#TB_ajaxContent .kloading').hide();
+                            jQuery('.kdebug-content').text( 'Sorry, no Tweet data was found.' );
+
+                        }
+
+                    });
+                    
+                });
+                
+                jQuery( '.kselect' ).on( 'click', function(e) {
+                    e.preventDefault();
+                    jQuery('.kdebug-content').select();
+                });
+                
+            });
+        
+        </script>
+        
+        <div class="kapi-status">
+            
+            <h4><?php _e( 'API Status', 'kebo_twitter' ); ?></h4>
+            
+            <div>
+                <span title="auth.kebopowered.com">23.239.13.127</span>
+                <img class="kloading" src="<?php echo admin_url( 'images/wpspin_light.gif' ); ?>" title="Testing API Connection">
+                <span class="ksuccess" title="<?php _e( 'Your site can successfully connect to the Kebo API.', 'kebo_twitter' ); ?>"><?php _e( 'Success', 'kebo_twitter' ); ?></span>
+                <span class="kerror" title="<?php _e( 'Your site failed to connect to the Kebo API.', 'kebo_twitter' ); ?>"><?php _e( 'Error', 'kebo_twitter' ); ?></span>
+                <?php $url = 'http://wordpress.org/support/plugin/kebo-twitter-feed'; ?>
+                <p class="kmessage"><?php printf( __( 'Your site cannot connect to the Kebo API, this will prevent the plugin from functioning as expected. You are welcome to ask for help on the <a href="%s" target="_blank">support forum</a>.', 'kebo_twitter' ), esc_url( $url ) ); ?></p>
+            </div>
+            
+        </div>
+        
+        <script type="text/javascript">
+            
+            jQuery( document ).ready(function() {
+                
+                var data = {
+                    action: 'kebo_twitter_api_status',
+                    nonce: '<?php echo wp_create_nonce('kebo_twitter_api_status'); ?>'
+                };
+
+                // do AJAX request
+                jQuery.post( ajaxurl, data, function( response ) {
+
+                    response = jQuery.parseJSON( response );
+
+                    if ( true === response.success ) {
+                        
+                        jQuery('.kapi-status').addClass( 'ksuccess' );
+                        jQuery('.kapi-status .kloading').hide();
+                        jQuery('.kapi-status .ksuccess').show();
+                        jQuery('.kapi-status .kerror').hide();
+                        
+                    } else {
+                        
+                        jQuery('.kapi-status').addClass( 'kerror' );
+                        jQuery('.kapi-status .kloading').hide();
+                        jQuery('.kapi-status .kerror').show();
+                        jQuery('.kapi-status .ksuccess').hide();
+                        jQuery('.kapi-status .kmessage').show();
+                        
+                    }
+
+                });
+                
+            });
+            
+        </script>
+        
+    </div><!-- .wrap -->
 
     <?php
     
