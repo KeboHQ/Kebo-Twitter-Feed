@@ -46,7 +46,7 @@ a.account {
 .disconnect {
         text-decoration: none;
         color: #fff;
-        padding: 1px 3px 2px 3px;
+        padding: 0px 3px 1px 3px;
         background: #dd4b39;
         border-radius: 9999px;
         font-size: 9px;
@@ -93,6 +93,49 @@ div.box {
 }
 .error-log span.message {
         min-width: 200px;
+}
+
+.kapi-status {
+        border: 1px solid #ddd;
+        background: #fff;
+        padding: 10px;
+        position: absolute;
+        top: 20px;
+        right: 20px;
+}
+.kapi-status.ksuccess {
+        border-color: #009900;
+        background: #ccffcc;
+}
+.kapi-status.kerror {
+        border-color: #c23321;
+        background: #ffcccc;
+}
+.kapi-status h4 {
+        margin: 0 0 5px 0;
+        min-width: 160px;
+}
+.kapi-status .kloading {
+        margin-bottom: -2px;
+        margin-left: 20px;
+}
+.kapi-status .ksuccess,
+.kapi-status .kerror {
+        display: none;
+        margin-left: 10px;
+}
+.kmessage {
+        display: none;
+        max-width: 160px;
+        margin-bottom: 0;
+}
+.kdebug-content {
+        width: 100%;
+        min-height: 440px;
+}
+.kselect {
+        font-size: 14px;
+        float: right;
 }
 
 /* Twitter Feed General */
