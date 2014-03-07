@@ -25,8 +25,8 @@ add_action('admin_menu', 'kebo_twitter_menu');
  */
 function kebo_twitter_menu_render() {
     
-    if (!current_user_can('manage_options')) {
-            wp_die(__('You do not have sufficient permissions to access this page.'));
+    if ( ! current_user_can( 'manage_options' ) ) {
+            wp_die( __( 'You do not have sufficient permissions to access this page.' ) );
         }
     
     // Collect returned OAuth2 credentials on callback and save in a transient.
