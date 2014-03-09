@@ -392,7 +392,7 @@ function kebo_twitter_linkify( $tweets ) {
             */
            $tweet->retweeted_status->text = links_add_target( $tweet->retweeted_status->text, '_blank', array( 'a' ) );
             
-        } else {
+        } elseif ( ! empty( $tweet->text ) ) {
             
            /*
             * Decode HTML Chars like &#039; to '
