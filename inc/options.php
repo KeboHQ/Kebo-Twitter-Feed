@@ -125,6 +125,10 @@ function kebo_twitter_options_validate($input) {
 
     $output = array();
     
+    // Purge currently cached data
+    // A tool to allow users to forcefully reset the cache.
+    delete_transient( 'kebo_twitter_feed_' . get_current_blog_id() );
+    
     // Refresh Tweets when saving settings
     kebo_twitter_get_tweets();
     

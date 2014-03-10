@@ -321,8 +321,8 @@ function kebo_twitter_update_check() {
 
         //add_action( 'admin_notices', 'kebo_twitter_upgrade_notice' );
 
-        // Delete currently cached data as format is changing in 0.9.0
-        //delete_transient( 'kebo_twitter_feed_' . get_current_blog_id() );
+        // Delete currently cached data in an attempt to properly purge corrupt data.
+        delete_transient( 'kebo_twitter_feed_' . get_current_blog_id() );
 
         // Set silent cache to refresh after page load.
         add_action( 'shutdown', 'kebo_twitter_refresh_cache' );
