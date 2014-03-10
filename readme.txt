@@ -3,7 +3,7 @@ Contributors: PeterBooker
 Tags: twitter, feed, twitter feed, latest tweets, twitter api, shortcode, widget, tweets
 Requires at least: 3.2
 Tested up to: 3.8.1
-Stable tag: 1.4.6
+Stable tag: 1.4.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -97,6 +97,12 @@ We store data in an option and transient, both of which are removed when you uni
 5. An example of how the Widget fits into the design of a theme automatically.
 
 == Changelog ==
+
+= 1.4.7 =
+* Bug Fix: Now properly removes the plugins Widget configuration and version number from the database when the plugin is uninstalled.
+* Bug Fix: Improved various areas of code to better avoid the possibility of PHP errors when dealing with unexpected data/values.
+* Bug Fix: Updates will now completely clear the cached data. This should resolve a bug where an API problem resulted in cached data only holding an expiry time as an array, as the cached data was expected to be an object, this caused many problems.
+* Note: Saving on the plugins options page will now delete the transient holding the Cached Tweet Data, this allows users to forcefully clear the cache which may solve certain problems.
 
 = 1.4.6 =
 * Important: The Kebo API server changes recently, which means it now runs from a different IP address. The new IP is 23.239.13.127 and this will not be changing for a few months. I realise that such a fast and unannounced change is very inconvenient and I will ensure that next time I give a few weeks notice and announce the coming change in these change logs and in the plugin.
