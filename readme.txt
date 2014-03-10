@@ -99,6 +99,7 @@ We store data in an option and transient, both of which are removed when you uni
 == Changelog ==
 
 = 1.4.7 =
+* Important: If you have been suffering the "Sorry, no Tweets found." problem since the API problems last week this update might resolve that problem for you.
 * Bug Fix: Now properly removes the plugins Widget configuration and version number from the database when the plugin is uninstalled.
 * Bug Fix: Improved various areas of code to better avoid the possibility of PHP errors when dealing with unexpected data/values.
 * Bug Fix: Updates will now completely clear the cached data. This should resolve a bug where an API problem resulted in cached data only holding an expiry time as an array, as the cached data was expected to be an object, this caused many problems.
