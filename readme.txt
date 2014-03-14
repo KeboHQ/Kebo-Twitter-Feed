@@ -1,13 +1,13 @@
 === Kebo Twitter Feed ===
 Contributors: PeterBooker
-Tags: twitter, feed, twitter feed, latest tweets, twitter api, shortcode, widget, tweets
+Tags: twitter, feed, twitter feed, latest tweets, twitter api, social, widget, tweets
 Requires at least: 3.2
 Tested up to: 3.8.1
 Stable tag: 1.4.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-The easiest way to add a great looking Twitter feed to your website.
+Kebo Twitter Feed is the easiest way to add a great looking Twitter feed to your website.
 
 == Description ==
 
