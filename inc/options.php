@@ -63,7 +63,7 @@ function kebo_twitter_options_init() {
     
     add_settings_field(
         'kebo_twitter_nofollow_links', // Unique identifier for the field for this section
-        __('Add nofollow to links?', 'kebo_twitter'), // Setting field label
+        __('NoFollow Links', 'kebo_twitter'), // Setting field label
         'kebo_twitter_nofollow_links_render', // Function that renders the settings field
         'kebo-twitter', // Menu slug
         'kebo_twitter_options_general' // Settings section.
