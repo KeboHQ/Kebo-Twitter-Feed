@@ -20,9 +20,10 @@ if ( is_rtl() ) {
 
 $allowed_html = array(
     'a' => array(
-        'href' => array(),
-        'title' => array(),
-        'target' => array()
+        'href' => true,
+        'title' => true,
+        'target' => true,
+        'rel' => true,
     )
 );
 ?>
