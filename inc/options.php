@@ -134,7 +134,7 @@ function kebo_twitter_nofollow_links_render() {
     ?>
     <input type="checkbox" name="kebo_twitter_options[kebo_twitter_nofollow_links]" id="kebo_twitter_nofollow_links" value="nofollow" <?php checked( 'nofollow', $options['kebo_twitter_nofollow_links'] ); ?> data-test="<?php echo $options['kebo_twitter_nofollow_links']; ?>" />
     <label class="description" for="kebo_twitter_nofollow_links"><?php _e('Toggle feature on/off.', 'kebo_twitter'); ?></label>
-    <p><?php _e('Adds rel="nofollow" to all links inside Tweets.', 'kebo_twitter'); ?></p>
+    <p><?php _e('Adds rel="nofollow" to all links inside Tweets. This is used to indicate links which might not be trustworthy/endorsed by you.', 'kebo_twitter'); ?></p>
     <?php
 }
 
