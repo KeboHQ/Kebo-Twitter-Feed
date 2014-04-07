@@ -3,7 +3,7 @@ Contributors: PeterBooker
 Tags: twitter, feed, twitter feed, latest tweets, twitter api, social, widget, tweets
 Requires at least: 3.2
 Tested up to: 3.8.1
-Stable tag: 1.4.7
+Stable tag: 1.4.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -97,6 +97,9 @@ We store data in an option and transient, both of which are removed when you uni
 5. An example of how the Widget fits into the design of a theme automatically.
 
 == Changelog ==
+
+= 1.4.8 =
+* New Feature: The plugins options page now allows you to choose whether or not the links created by the plugin use the rel="nofollow" attribute.
 
 = 1.4.7 =
 * Important: If you have been suffering the "Sorry, no Tweets found." problem since the API problems last week this update might resolve that problem for you.
