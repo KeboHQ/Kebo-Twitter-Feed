@@ -102,15 +102,15 @@ $allowed_html = array(
             <li class="ktweet">
 
                 <div class="kmeta">
-                    <a class="kaccount" href="<?php echo esc_url( 'https://twitter.com/' . $screen_name ); ?>" target="_blank">@<?php echo esc_html( $screen_name ); ?></a>
-                    <a class="kdate" href="<?php echo esc_url( 'https://twitter.com/' . $screen_name . '/statuses/' . $tweet_id ); ?>" target="_blank">
+                    <a class="kaccount" href="<?php echo esc_url( 'https://twitter.com/' . $screen_name ); ?>" target="_blank"<?php kebo_twitter_maybe_nofollow(); ?>>@<?php echo esc_html( $screen_name ); ?></a>
+                    <a class="kdate" href="<?php echo esc_url( 'https://twitter.com/' . $screen_name . '/statuses/' . $tweet_id ); ?>" target="_blank"<?php kebo_twitter_maybe_nofollow(); ?>>
                         <time title="<?php esc_attr_e( 'Time posted', 'kebo_twitter' ); ?>: <?php echo date_i18n( 'dS M Y H:i:s', strtotime( $tweet->created_at ) + $tweet->user->utc_offset ); ?>" datetime="<?php echo date_i18n( 'c', strtotime( $tweet->created_at ) + $tweet->user->utc_offset ); ?>" aria-label="<?php esc_attr_e('Posted on ', 'kebo_twitter'); ?><?php echo date_i18n( 'dS M Y H:i:s', strtotime( $tweet->created_at ) + $tweet->user->utc_offset ); ?>"><?php echo esc_html ( $created ); ?></time>
                     </a>
                 </div>
 
                 <p class="ktext">
                     <?php if ( 'avatar' == $instance['avatar'] ) : ?>
-                        <a href="<?php echo esc_url( 'https://twitter.com/' . $screen_name ); ?>" title="<?php echo esc_attr( $name . ' @' . $screen_name ); ?>" target="_blank">
+                        <a href="<?php echo esc_url( 'https://twitter.com/' . $screen_name ); ?>" title="<?php echo esc_attr( $name . ' @' . $screen_name ); ?>" target="_blank"<?php kebo_twitter_maybe_nofollow(); ?>>
                             <img class="kavatar" src="<?php echo esc_url( $profile_image ); ?>" alt="<?php echo esc_attr( $name ); ?>" />
                         </a>
                     <?php endif; ?>
