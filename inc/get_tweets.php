@@ -494,3 +494,14 @@ function kebo_twitter_add_error( $response ) {
     update_option( 'kebo_twitter_errors', $errors );
         
 }
+
+/*
+ * Add rel="nofollow" to links if set.
+ */
+function kebo_twitter_maybe_nofollow() {
+    
+    $options = kebo_get_twitter_options();
+    
+    echo ( 'nofollow' == $options['kebo_twitter_nofollow_links'] ) ? ' rel="nofollow"' : '' ;
+    
+}
