@@ -252,6 +252,8 @@ function kebo_twitter_refresh_cache() {
  */
 function kebo_twitter_linkify( $tweets ) {
     
+    $options = kebo_get_twitter_options();
+    
     foreach ( $tweets as $tweet ) {
 
         // TEMPORARILY COMMENTED OUT AND REPLACED WITH REGEX
@@ -386,7 +388,17 @@ function kebo_twitter_linkify( $tweets ) {
             * Linkify text URLs
             */
            $tweet->retweeted_status->text = make_clickable( $tweet->retweeted_status->text );
-
+           
+           /*
+            * Add rel="nofollow" to all links
+            * if nofollow option is set
+            */
+           if ( 'nofollow' == $options['kebo_twitter_nofollow_links'] ) {
+               
+               $tweet->retweeted_status->text = wp_rel_nofollow( $tweet->retweeted_status->text );
+               
+           }
+           
            /*
             * Add target="_blank" to all links
             */
@@ -408,11 +420,21 @@ function kebo_twitter_linkify( $tweets ) {
             * Turn Mentions into HTML Links
             */
            $tweet->text = preg_replace( '/@([A-Za-z0-9_\/\.]*)/', '<a href="http://www.twitter.com/$1">@$1</a>', $tweet->text );
-
+           
            /*
             * Linkify text URLs
             */
            $tweet->text = make_clickable( $tweet->text );
+           
+           /*
+            * Add rel="nofollow" to all links
+            * if nofollow option is set
+            */
+           if ( 'nofollow' == $options['kebo_twitter_nofollow_links'] ) {
+               
+               $tweet->text = wp_rel_nofollow( $tweet->retweeted_status->text );
+               
+           }
 
            /*
             * Add target="_blank" to all links
