@@ -390,16 +390,6 @@ function kebo_twitter_linkify( $tweets ) {
            $tweet->retweeted_status->text = make_clickable( $tweet->retweeted_status->text );
            
            /*
-            * Add rel="nofollow" to all links
-            * if nofollow option is set
-            */
-           if ( 'nofollow' == $options['kebo_twitter_nofollow_links'] ) {
-               
-               $tweet->retweeted_status->text = wp_rel_nofollow( $tweet->retweeted_status->text );
-               
-           }
-           
-           /*
             * Add target="_blank" to all links
             */
            $tweet->retweeted_status->text = links_add_target( $tweet->retweeted_status->text, '_blank', array( 'a' ) );
@@ -425,16 +415,6 @@ function kebo_twitter_linkify( $tweets ) {
             * Linkify text URLs
             */
            $tweet->text = make_clickable( $tweet->text );
-           
-           /*
-            * Add rel="nofollow" to all links
-            * if nofollow option is set
-            */
-           if ( 'nofollow' == $options['kebo_twitter_nofollow_links'] ) {
-               
-               $tweet->text = wp_rel_nofollow( $tweet->retweeted_status->text );
-               
-           }
 
            /*
             * Add target="_blank" to all links
