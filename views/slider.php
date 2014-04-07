@@ -14,12 +14,14 @@ if ( is_rtl() ) {
     $classes[] = 'rtl';
 }
 
+$options = kebo_get_twitter_options();
+
 $allowed_html = array(
     'a' => array(
         'href' => true,
         'title' => true,
         'target' => true,
-        'rel' => true,
+        'rel' => ( 'nofollow' == $options['kebo_twitter_nofollow_links'] ) ? true : false,
     )
 );
 ?>
@@ -29,7 +31,6 @@ $allowed_html = array(
     <?php $i = 0; ?>
     
     <?php
-    $options = kebo_get_twitter_options();
     $format = get_option( 'date_format' );
     $corruption = 0;
     $count = 0;
