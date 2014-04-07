@@ -54,25 +54,33 @@ function kebo_twitter_options_init() {
     }
 
     add_settings_field(
-            'kebo_twitter_cache_timer', // Unique identifier for the field for this section
-            __('Feed Refresh Rate', 'kebo_twitter'), // Setting field label
-            'kebo_twitter_cache_timer_render', // Function that renders the settings field
-            'kebo-twitter', // Menu slug
-            'kebo_twitter_options_general' // Settings section.
+        'kebo_twitter_cache_timer', // Unique identifier for the field for this section
+        __('Feed Refresh Rate', 'kebo_twitter'), // Setting field label
+        'kebo_twitter_cache_timer_render', // Function that renders the settings field
+        'kebo-twitter', // Menu slug
+        'kebo_twitter_options_general' // Settings section.
+    );
+    
+    add_settings_field(
+        'kebo_twitter_nofollow_links', // Unique identifier for the field for this section
+        __('Add nofollow to links?', 'kebo_twitter'), // Setting field label
+        'kebo_twitter_nofollow_links_render', // Function that renders the settings field
+        'kebo-twitter', // Menu slug
+        'kebo_twitter_options_general' // Settings section.
     );
     
     // Stores Error Log
     add_option(
-            'kebo_twitter_errors', // name
-            array(), // value
-            null, // depreciated
-            'no' // autoload
+        'kebo_twitter_errors', // name
+        array(), // value
+        null, // depreciated
+        'no' // autoload
     );
     
     
     
 }
-add_action('admin_init', 'kebo_twitter_options_init');
+add_action( 'admin_init', 'kebo_twitter_options_init' );
 
 /**
  * Change the capability required to save the 'kebo_twitter_options' options group.
@@ -93,6 +101,7 @@ function kebo_get_twitter_options() {
 
     $defaults = array(
         'kebo_twitter_cache_timer' => 15,
+        'kebo_twitter_nofollow_links' => 'nofollow',
     );
 
     $defaults = apply_filters('kebo_get_twitter_options', $defaults);
@@ -117,9 +126,22 @@ function kebo_twitter_cache_timer_render() {
 }
 
 /**
+ * Renders the Cache Timer input.
+ */
+function kebo_twitter_nofollow_links_render() {
+
+    $options = kebo_get_twitter_options();
+    ?>
+    <input type="checkbox" name="kebo_twitter_options[kebo_twitter_nofollow_links]" id="kebo_twitter_nofollow_links" value="nofollow" <?php checked( 'nofollow', $options['kebo_twitter_nofollow_links'] ); ?> data-test="<?php echo $options['kebo_twitter_nofollow_links']; ?>" />
+    <label class="description" for="kebo_twitter_nofollow_links"><?php _e('Toggle feature on/off.', 'kebo_twitter'); ?></label>
+    <p><?php _e('Adds rel="nofollow" to all links inside Tweets.', 'kebo_twitter'); ?></p>
+    <?php
+}
+
+/**
  * Sanitize and validate form input. Accepts an array, return a sanitized array.
  */
-function kebo_twitter_options_validate($input) {
+function kebo_twitter_options_validate( $input ) {
 
     $options = kebo_get_twitter_options();
 
@@ -138,7 +160,7 @@ function kebo_twitter_options_validate($input) {
             
             if ( 1 <= $input['kebo_twitter_cache_timer'] && 30 >= $input['kebo_twitter_cache_timer'] ) {
                 
-                $output['kebo_twitter_cache_timer'] = intval($input['kebo_twitter_cache_timer']);
+                $output['kebo_twitter_cache_timer'] = intval( $input['kebo_twitter_cache_timer'] );
                 
             } else {
                 
@@ -161,6 +183,16 @@ function kebo_twitter_options_validate($input) {
             );
             
         }
+        
+    }
+    
+    if ( isset( $input['kebo_twitter_nofollow_links'] ) && 'nofollow' == $input['kebo_twitter_nofollow_links'] ) {
+        
+        $output['kebo_twitter_nofollow_links'] = $input['kebo_twitter_nofollow_links'];
+        
+    } else {
+        
+        $output['kebo_twitter_nofollow_links'] = false;
         
     }
 
