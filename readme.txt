@@ -2,7 +2,7 @@
 Contributors: PeterBooker
 Tags: twitter, feed, twitter feed, latest tweets, twitter api, social, widget, tweets
 Requires at least: 3.2
-Tested up to: 3.8.1
+Tested up to: 3.9
 Stable tag: 1.4.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -97,6 +97,10 @@ We store data in an option and transient, both of which are removed when you uni
 5. An example of how the Widget fits into the design of a theme automatically.
 
 == Changelog ==
+
+= 1.4.9 =
+* Important: Tested and updated for WordPress 3.9 compatibility, with focus on the new Widget Customizer feature.
+* Bug Fix: Potential fix to images not being output with Tweets leaving empty HTML.
 
 = 1.4.8 =
 * New Feature: The plugins options page now allows you to choose whether or not the links created by the plugin use the rel="nofollow" attribute.
