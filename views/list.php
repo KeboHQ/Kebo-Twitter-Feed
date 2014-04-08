@@ -119,7 +119,7 @@ $allowed_html = array(
                 </p>
 
                 <div class="kfooter">
-                    <?php if ( ! empty( $tweet->entities->media ) && true == $instance['media'] ) : ?>
+                    <?php if ( isset( $tweet->entities->media ) && is_array( $tweet->entities->media ) && true == $instance['media'] ) : ?>
                         <a class="ktogglemedia kclosed" href="#" data-id="<?php echo esc_attr( $tweet->id_str ); ?>"><span class="kshow" title="<?php esc_attr_e('View photo', 'kebo_twitter'); ?>"><?php esc_html_e('View photo', 'kebo_twitter'); ?></span><span class="khide" title="<?php esc_attr_e('Hide photo', 'kebo_twitter'); ?>"><?php esc_html_e('Hide photo', 'kebo_twitter'); ?></span></a>
                     <?php endif; ?>
                     <a class="kreply" title="<?php esc_attr_e('Reply', 'kebo_twitter'); ?>" href="<?php echo esc_url( 'https://twitter.com/intent/tweet?in_reply_to=' . $tweet_id ); ?>"></a>
@@ -127,7 +127,7 @@ $allowed_html = array(
                     <a class="kfavorite" title="<?php esc_attr_e('Favorite', 'kebo_twitter'); ?>" href="<?php echo esc_url( 'https://twitter.com/intent/favorite?tweet_id=' . $tweet_id ); ?>"></a>
                 </div>
                 
-                <?php if ( ! empty( $tweet->entities->media ) && true == $instance['media'] ) : ?>
+                <?php if ( isset( $tweet->entities->media ) && is_array( $tweet->entities->media ) && true == $instance['media'] ) : ?>
                 
                 <?php $is_media = true; ?>
                 <div id="<?php echo $tweet->id_str; ?>" class="kmedia kclosed">
