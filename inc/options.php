@@ -84,6 +84,22 @@ function kebo_twitter_options_init() {
             'kebo-twitter', // Menu slug
             'kebo_twitter_options_general' // Settings section.
     );
+
+    add_settings_field(
+            'kebo_twitter_today_only', // Unique identifier for the field for this section
+            __('Todays tweets only', 'kebo_twitter'), // Setting field label
+            'kebo_twitter_today_only_render', // Function that renders the settings field
+            'kebo-twitter', // Menu slug
+            'kebo_twitter_options_general' // Settings section.
+    );
+
+    add_settings_field(
+            'kebo_twitter_absolute_timestamp', // Unique identifier for the field for this section
+            __('Use absolute timestamps', 'kebo_twitter'), // Setting field label
+            'kebo_twitter_absolute_timestamp_render', // Function that renders the settings field
+            'kebo-twitter', // Menu slug
+            'kebo_twitter_options_general' // Settings section.
+    );
     
     // Stores Error Log
     add_option(
