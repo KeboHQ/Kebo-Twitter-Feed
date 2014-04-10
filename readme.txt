@@ -8,6 +8,7 @@ License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 Kebo Twitter Feed is the easiest way to add a great looking Twitter feed to your website.
+Display your Twitter Feed beautifully in 60 seconds.
 
 == Description ==
 
@@ -41,8 +42,9 @@ We make this so easy by managing all the complex oAuth requests on our own serve
 * Russian by [Stas Newdel](http://newdel.net).
 * Italian by [Alberto Ramacciotti](http://ramacciotti.altervista.org).
 * Dutch by [Renee Klein](http://restaurantthemes101.com).
-* English (British).
+* English (British) by [Peter Booker](https://kebopowered.com).
 * Swedish by [Johanna Kitzman](https://www.facebook.com/johannakitzmanphotography).
+* Serbian by [Borisa Djuraskovic](http://www.webhostinghub.com/).
 
 = Rate Us / Feedback =
 
@@ -97,6 +99,9 @@ We store data in an option and transient, both of which are removed when you uni
 5. An example of how the Widget fits into the design of a theme automatically.
 
 == Changelog ==
+
+= 1.4.10 =
+* New Feature: Added the Serbian (sr_RS) language files, thanks to Borisa Djuraskovic for providing the translation.
 
 = 1.4.9 =
 * Important: Tested and updated for WordPress 3.9 compatibility, with focus on the new Widget Customizer feature.
