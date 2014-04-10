@@ -385,6 +385,11 @@ function kebo_twitter_linkify( $tweets ) {
            $tweet->retweeted_status->text = preg_replace( '/@([A-Za-z0-9_\/\.]*)/', '<a href="http://www.twitter.com/$1">@$1</a>', $tweet->retweeted_status->text );
 
            /*
+            * NoFollow URLs
+            */
+           $tweet->retweeted_status->text = ( 'nofollow' == $options['kebo_twitter_nofollow_links'] ) ? wp_rel_nofollow( $tweet->retweeted_status->text ) : $tweet->retweeted_status->text;
+           
+           /*
             * Linkify text URLs
             */
            $tweet->retweeted_status->text = make_clickable( $tweet->retweeted_status->text );
@@ -410,6 +415,11 @@ function kebo_twitter_linkify( $tweets ) {
             * Turn Mentions into HTML Links
             */
            $tweet->text = preg_replace( '/@([A-Za-z0-9_\/\.]*)/', '<a href="http://www.twitter.com/$1">@$1</a>', $tweet->text );
+           
+           /*
+            * NoFollow URLs
+            */
+           $tweet->text = ( 'nofollow' == $options['kebo_twitter_nofollow_links'] ) ? wp_rel_nofollow( $tweet->text ) : $tweet->text;
            
            /*
             * Linkify text URLs
