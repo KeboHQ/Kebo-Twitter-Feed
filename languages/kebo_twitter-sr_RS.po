@@ -1,0 +1,300 @@
+# Copyright (C) 2013 Kebo - Twitter Feed
+# This file is distributed under the same license as the Kebo - Twitter Feed package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Kebo - Twitter Feed 0.9.5\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/kebo-twitter-feed\n"
+"POT-Creation-Date: 2013-09-25 15:20:18+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2013-12-16 10:15+0100\n"
+"Last-Translator: Borisa Djuraskovic <borisad@webhostinghub.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"X-Generator: Poedit 1.5.7\n"
+
+#: inc/menu.php:13 inc/menu.php:14 inc/widget.php:32
+msgid "Kebo Twitter Feed"
+msgstr "Kebo Twitter Feed"
+
+#: inc/menu.php:29
+msgid "You do not have sufficient permissions to access this page."
+msgstr "Nemate dovoljno dozvola da biste pristupili ovoj stranici."
+
+#: inc/menu.php:55
+msgid ""
+"Connection established with Twitter. You can now display your Twitter Feed "
+"on your website using a <a href=\"%s\">Widget</a>."
+msgstr ""
+"Veza uspostavljena sa Twitterom . Sada možete da prikažete vaše Twitter feed "
+"na vašem sajtu koristeći<a href=\"%s\">Widget</a>."
+
+#: inc/menu.php:71
+msgid "Connection reset to Twitter."
+msgstr "Resetuj konekciju  za Twitter ."
+
+#: inc/menu.php:83
+msgid "Twitter Feed"
+msgstr "Twitter Feed"
+
+#: inc/menu.php:99
+msgid "Twitter API - Error Log"
+msgstr "Twitter API - Greška pri ulogovanju"
+
+#: inc/menu.php:101
+msgid ""
+"Any errors received while connecting to Twitter will be displayed below."
+msgstr ""
+"Bilo koja greška primjena za vreme konektovanja sa Twitterom će biti "
+"prikazana ispod.  "
+
+#: inc/menu.php:117
+msgid "Twitter API - Error Key"
+msgstr "Twitter API - Greška sa ključem"
+
+#: inc/menu.php:119
+msgid ""
+"Below is a key of the most common types of error returned by Twitter and a "
+"short description."
+msgstr ""
+"Ispod je ključ od najčešćih vrsta grešaka koje vraća Twitter i kratak opis ."
+
+#: inc/menu.php:124 inc/menu.php:127
+msgid ""
+"There is a problem with your connection to Twitter, please disconnect and re-"
+"connect to the service."
+msgstr ""
+"Postoji problem sa vašom vezom sa Twitterom, molimo vas da isključite i "
+"ponovo povežete sa uslugom ."
+
+#: inc/menu.php:125
+msgid "Twitter has blocked our access to your account."
+msgstr "Twitter nam je bolkirao pristup vašem nalogu."
+
+#: inc/menu.php:126
+msgid ""
+"Your account has hit Twitter's limit of 180 requests per hour, we are making "
+"%d of those requests. You can edit the 'Feed Refresh Rate' in the options "
+"above to change this."
+msgstr ""
+"Vaš nalog je pogodio Twitter limit  od 180 zahteva na sat , pravimo % d od "
+"tih zahteva . Možete da izmenite \" Feed Refresh rate’ u opcijama iznad da "
+"iznad."
+
+#: inc/menu.php:128
+msgid "Twitter is currently too busy to reply."
+msgstr "Twitter je trenutno zauzet da bi odgovorio."
+
+#: inc/options.php:16
+msgid "Twitter Connection"
+msgstr "Twitter konekcija"
+
+#: inc/options.php:27
+msgid ""
+"To enable us to display your Tweets you must connect your Twitter account to "
+"our Twitter Application by clicking on the large 'Connect to Twitter' button "
+"below."
+msgstr ""
+"Da biste omogućiti da prikažete svoje tvitove možete da povežete svoj "
+"Twitter nalog sa našom Twitter aplikaciju klikom na veliko \" Konektuj se "
+"na  Tvitter ' dugme ispod ."
+
+#: inc/options.php:36
+msgid "Connect to Twitter"
+msgstr "Konektuj se sa Twitterom"
+
+#: inc/options.php:42
+msgid "Connected to Twitter"
+msgstr "Konektovano naTwitter"
+
+#: inc/options.php:44
+msgid "Connected as"
+msgstr "Konektovano kao"
+
+#: inc/options.php:46
+msgid "Disconnect Service"
+msgstr "Diskonektuj uslugu"
+
+#: inc/options.php:51
+msgid "General Options"
+msgstr "Opšte opcije"
+
+#: inc/options.php:58
+msgid "Feed Refresh Rate"
+msgstr "Feed Refresh Rate"
+
+#: inc/options.php:114
+msgid "Minutes. Should be between 1 and 30."
+msgstr "Minuti. Trebalo bi da bude izmedju 1 and 30."
+
+#: inc/options.php:115
+msgid ""
+"This controls how frequently we update the stored list of Tweets for display "
+"on your website."
+msgstr ""
+"Ovo kontroliše koliko često updatujemo listu sa Tweetovima za prikaz na "
+"vašem  website."
+
+#: inc/options.php:144
+msgid "Value supplied is outside of acceptable range 1-30."
+msgstr "Snabdevena vrednost je inad dozvoljrnog dometa  1-30."
+
+#: inc/options.php:155
+msgid "Value supplied is not a valid number."
+msgstr "Snabdevana vrednost nije validan broj."
+
+#: inc/widget.php:29
+msgid "Displays your Twitter Feed on your website."
+msgstr "Prikazuje vaš Twitter Feed na vašem website."
+
+#: inc/widget.php:116
+msgid "Title"
+msgstr "Naslov"
+
+#: inc/widget.php:121
+msgid "Style"
+msgstr "Stil"
+
+#: inc/widget.php:123
+msgid "List"
+msgstr "Lista"
+
+#: inc/widget.php:124
+msgid "Slider"
+msgstr "Slajder"
+
+#: inc/widget.php:131
+msgid "Theme"
+msgstr "Tema"
+
+#: inc/widget.php:133
+msgid "Light"
+msgstr "Svetlo"
+
+#: inc/widget.php:134
+msgid "Dark"
+msgstr "Tamno"
+
+#: inc/widget.php:140
+msgid "Number Of Tweets"
+msgstr "Broj Tweetova"
+
+#: inc/widget.php:140
+msgid "Range 1-50"
+msgstr "omet 1-50"
+
+#: inc/widget.php:144
+msgid "Show profile image?"
+msgstr "Prikaži profinu sliku?"
+
+#: inc/widget.php:148
+msgid "Show conversations?"
+msgstr "Prikaži razgovore?"
+
+#: inc/widget.php:152
+msgid "Show media? (only Lists)"
+msgstr "Prikaži media? (samo liste)"
+
+#: kebo-twitter-feed.php:82
+msgid "Settings"
+msgstr "Postavke"
+
+#: kebo-twitter-feed.php:118
+msgid "Connect to your Twitter Account"
+msgstr "Konektujte se sa vašim Twitter nalogom"
+
+#: kebo-twitter-feed.php:119
+msgid ""
+"In just a few clicks we can connect your website to your Twitter account and "
+"display your latest Tweets."
+msgstr ""
+"U samo nekoliko klikova možemo povezati vaš sajt na vaš Twitter nalog i "
+"prikazato vaše najnovije tvitove ."
+
+#: kebo-twitter-feed.php:119
+msgid "Get Started Now"
+msgstr "Počnite odmah sada"
+
+#: kebo-twitter-feed.php:303
+msgid ""
+"This update changed the way your connection to Twitter was stored by "
+"WordPress, please check the plugin is still connected to your Twitter "
+"account, <a href=\"%s\">here</a>."
+msgstr ""
+"Ovaj update je promenio način na koji vaša veza sa Twitterom je sačuvana od "
+"strane WordPress-a , molimo vas da proverite da li je plugin i dalje "
+"priključen na vaš Twitter nalog ,<a href=\"%s\"> ovde</a>."
+
+#: kebo-twitter-feed.php:332
+msgid ""
+"<strong>Kebo Twitter Feed:</strong> No connection to Twitter found, to get "
+"started connect to your Twitter account from <a href=\"%s\">this page</a>."
+msgstr ""
+"<strong>Kebo Twitter Feed:</strong>  Nijedna konekcija sa Twitter nije "
+"pronadjena, tza početak se konektujte sa vašim Twitter nalogom sa <a href="
+"\"%s\">ove stranice</a>."
+
+#: views/list.php:65 views/slider.php:68
+msgid "Time posted"
+msgstr "Vreme postovanja"
+
+#: views/list.php:65 views/slider.php:68
+msgid "Posted on "
+msgstr "Postovao na"
+
+#: views/list.php:80
+msgid "View photo"
+msgstr "Pregedaj fotografiju"
+
+#: views/list.php:80
+msgid "Hide photo"
+msgstr "Sakrij fotografiju"
+
+#: views/list.php:82 views/slider.php:82
+msgid "Reply"
+msgstr "Odgovori"
+
+#: views/list.php:83 views/slider.php:83
+msgid "Re-Tweet"
+msgstr "Re-Tweet"
+
+#: views/list.php:84 views/slider.php:84
+msgid "Favorite"
+msgstr "Omiljeni"
+
+#: views/list.php:93
+msgid "Tweet Image"
+msgstr "Tweet fotografija"
+
+#: views/list.php:108 views/list.php:120 views/slider.php:95
+#: views/slider.php:107
+msgid "Sorry, no Tweets were found."
+msgstr "Žao mi je nijedan Tweet nije pronadjen"
+
+#: views/list.php:114 views/slider.php:101
+msgid "Sorry, the Tweet data is not in the expected format."
+msgstr "Žao mi je nijedan Tweet podatak nije u ovom formatu izvoda."
+
+#. Plugin Name of the plugin/theme
+msgid "Kebo - Twitter Feed"
+msgstr "Kebo - Twitter Feed"
+
+#. Plugin URI of the plugin/theme
+msgid "http://wordpress.org/plugins/kebo-twitter-feed/"
+msgstr "http://wordpress.org/plugins/kebo-twitter-feed/"
+
+#. Description of the plugin/theme
+msgid ""
+"Connect your site to your Twitter account and display your Twitter Feed on "
+"your website effortlessly with a custom widget."
+msgstr ""
+"Konektujte vaš sajt sa vašim Twitternalogom i prikažite vaše Twitter Feed sa "
+"custom widget-om."
+
+#. Author of the plugin/theme
+msgid "Kebo"
+msgstr "Kebo"
+
+#. Author URI of the plugin/theme
+msgid "http://kebopowered.com"
+msgstr "http://kebopowered.com"
