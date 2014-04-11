@@ -1,6 +1,6 @@
 === Kebo Twitter Feed ===
 Contributors: PeterBooker
-Tags: twitter, feed, twitter feed, latest tweets, twitter api, social, widget, tweets
+Tags: twitter, feed, twitter feed, latest tweets, social, widget, tweets
 Requires at least: 3.2
 Tested up to: 3.9
 Stable tag: 1.4.10
