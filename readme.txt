@@ -101,6 +101,7 @@ We store data in an option and transient, both of which are removed when you uni
 
 = 1.4.11 =
 * Bug Fix: Remove slashes added to tweet text, caused by recent update which makes links rel="nofollow". All Tweet content should be displayed properly again.
+* Note: As we reach 100,000 downloads I just want to thank you all for using the plugin, you make it worth while.
 
 = 1.4.10 =
 * New Feature: Added the Serbian (sr_RS) language files, thanks to Borisa Djuraskovic for providing the translation.
