@@ -387,7 +387,7 @@ function kebo_twitter_linkify( $tweets ) {
            /*
             * NoFollow URLs
             */
-           $tweet->retweeted_status->text = ( 'nofollow' == $options['kebo_twitter_nofollow_links'] ) ? wp_rel_nofollow( $tweet->retweeted_status->text ) : $tweet->retweeted_status->text;
+           $tweet->retweeted_status->text = ( 'nofollow' == $options['kebo_twitter_nofollow_links'] ) ? stripslashes( wp_rel_nofollow( $tweet->retweeted_status->text ) ) : $tweet->retweeted_status->text;
            
            /*
             * Linkify text URLs
@@ -419,7 +419,7 @@ function kebo_twitter_linkify( $tweets ) {
            /*
             * NoFollow URLs
             */
-           $tweet->text = ( 'nofollow' == $options['kebo_twitter_nofollow_links'] ) ? wp_rel_nofollow( $tweet->text ) : $tweet->text;
+           $tweet->text = ( 'nofollow' == $options['kebo_twitter_nofollow_links'] ) ? stripslashes( wp_rel_nofollow( $tweet->text ) ) : $tweet->text;
            
            /*
             * Linkify text URLs

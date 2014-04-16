@@ -3,7 +3,7 @@ Contributors: PeterBooker
 Tags: twitter, feed, twitter feed, latest tweets, social, widget, tweets
 Requires at least: 3.2
 Tested up to: 3.9
-Stable tag: 1.4.10
+Stable tag: 1.4.11
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -98,6 +98,10 @@ We store data in an option and transient, both of which are removed when you uni
 5. An example of how the Widget fits into the design of a theme automatically.
 
 == Changelog ==
+
+= 1.4.11 =
+* Bug Fix: Remove slashes added to tweet text, caused by recent update which makes links rel="nofollow". All Tweet content should be displayed properly again.
+* Note: As we reach 100,000 downloads I just want to thank you all for using the plugin, you make it worth while.
 
 = 1.4.10 =
 * New Feature: Added the Serbian (sr_RS) language files, thanks to Borisa Djuraskovic for providing the translation.
