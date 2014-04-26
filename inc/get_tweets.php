@@ -255,117 +255,11 @@ function kebo_twitter_linkify( $tweets ) {
     $options = kebo_get_twitter_options();
     
     foreach ( $tweets as $tweet ) {
-
-        // TEMPORARILY COMMENTED OUT AND REPLACED WITH REGEX
+        
+        $tweet = kebo_twitter_linkify_entities( $tweet );
         
         /*
-        $hash_length = 45; // Length of HTML added to hashtags
-        $mention_length = 33; // Length of HTML added to mentions
-        $markers = array();
-         * 
-         */
-        
-        /*
-         * Linkify Hashtags
-         */
-        /*
-        if ( ! empty( $tweet->entities->hashtags ) ) {
-            
-            // One Hashtag at a time
-            foreach ( $tweet->entities->hashtags as $hashtag ) {
-                
-                // Start offset from 0
-                $offset = 0;
-                // Calculate length of hastag - end minus start
-                $length = $hashtag->indices[1] - $hashtag->indices[0];
-                
-                // If no markers, no need to offset
-                if ( ! empty( $markers ) ) {
-                    
-                    foreach ( $markers as $mark ) {
-                        
-                        // If the start point is past a previous marker, we need to adjust for the characters added.
-                        if ( $hashtag->indices[0] > $mark['point'] ) {
-                            
-                            // Include previous offsets.
-                            $offset = ( $offset + ( $mark['length'] ) );
-                            
-                        }
-                        
-                    }
-                    
-                }
-         * 
-         */
-                
-                /*
-                 * Replace hashtag text with an HTML link
-                 */
-        /*
-                $tweet->text = substr_replace( $tweet->text, '<a href="http://twitter.com/search?q=%23' . $hashtag->text . '">#' . $hashtag->text . '</a>', $hashtag->indices[0] + $offset, $length );
-
-                // Set marker so we can take into account the characters we just added.
-                $markers[] = array(
-                    'point' => $hashtag->indices[0],
-                    'length' => $hash_length + $length,
-                );
-                
-                
-            }
-            
-        }
-         * 
-         */
-        
-        /*
-         * Linkify Mentions
-         */
-        /*
-        if ( ! empty( $tweet->entities->user_mentions ) ) {
-            
-            // One Mention at a time
-            foreach ( $tweet->entities->user_mentions as $mention ) {
-                
-                $offset = 0;
-                $length = $mention->indices[1] - $mention->indices[0];
-                
-                if ( ! empty($markers) ) {
-                    
-                    foreach ( $markers as $mark ) {
-                        
-                        if ( $mention->indices[0] > $mark['point'] ) {
-                            
-                            $offset = ( $offset + ( $mark['length'] ) );
-                            
-                        }
-                        
-                    }
-                    
-                }
-         * 
-         */
-                
-                /*
-                 * Replace mention text with an HTML link
-                 */
-        /*
-                $tweet->text = substr_replace( $tweet->text, '<a href="http://twitter.com/' . $mention->screen_name . '">@' . $mention->screen_name . '</a>', $mention->indices[0] + $offset, $length );
-
-                // Set marker so we can take into account the characters we just added.
-                $markers[] = array(
-                    'point' => $mention->indices[0],
-                    'length' => $mention_length + $length,
-                );
-                
-                
-            }
-            
-        }
-         * 
-         */
-        
-        /*
-         * Check if it is the Tweet text or Re-Tweet text which we need to pre-process.
+         * Extra Link Processing ( rel attribute and target attribute )
          */
         if ( ! empty( $tweet->retweeted_status ) ) {
             
@@ -375,24 +269,9 @@ function kebo_twitter_linkify( $tweets ) {
            $tweet->retweeted_status->text = htmlspecialchars_decode( $tweet->retweeted_status->text, ENT_QUOTES );
 
            /*
-            * Turn Hasntags into HTML Links
-            */
-           $tweet->retweeted_status->text = preg_replace( '/#([A-Za-z0-9\/\.]*)/', '<a href="http://twitter.com/search?q=$1">#$1</a>', $tweet->retweeted_status->text );
-
-           /*
-            * Turn Mentions into HTML Links
-            */
-           $tweet->retweeted_status->text = preg_replace( '/@([A-Za-z0-9_\/\.]*)/', '<a href="http://www.twitter.com/$1">@$1</a>', $tweet->retweeted_status->text );
-
-           /*
             * NoFollow URLs
             */
            $tweet->retweeted_status->text = ( 'nofollow' == $options['kebo_twitter_nofollow_links'] ) ? stripslashes( wp_rel_nofollow( $tweet->retweeted_status->text ) ) : $tweet->retweeted_status->text;
-           
-           /*
-            * Linkify text URLs
-            */
-           $tweet->retweeted_status->text = make_clickable( $tweet->retweeted_status->text );
            
            /*
             * Add target="_blank" to all links
@@ -405,26 +284,11 @@ function kebo_twitter_linkify( $tweets ) {
             * Decode HTML Chars like &#039; to '
             */
            $tweet->text = htmlspecialchars_decode( $tweet->text, ENT_QUOTES );
-
-           /*
-            * Turn Hasntags into HTML Links
-            */
-           $tweet->text = preg_replace( '/#([A-Za-z0-9\/\.]*)/', '<a href="http://twitter.com/search?q=$1">#$1</a>', $tweet->text );
-
-           /*
-            * Turn Mentions into HTML Links
-            */
-           $tweet->text = preg_replace( '/@([A-Za-z0-9_\/\.]*)/', '<a href="http://www.twitter.com/$1">@$1</a>', $tweet->text );
            
            /*
             * NoFollow URLs
             */
            $tweet->text = ( 'nofollow' == $options['kebo_twitter_nofollow_links'] ) ? stripslashes( wp_rel_nofollow( $tweet->text ) ) : $tweet->text;
-           
-           /*
-            * Linkify text URLs
-            */
-           $tweet->text = make_clickable( $tweet->text );
 
            /*
             * Add target="_blank" to all links
@@ -436,6 +300,202 @@ function kebo_twitter_linkify( $tweets ) {
     }
     
     return $tweets;
+    
+}
+
+/*
+ * Linkify Tweet Entities ( #hashtags, @mentions and urls.com )
+ */
+function kebo_twitter_linkify_entities( $tweet ) {
+    
+    if ( ! is_object( $tweet ) ) {
+        return $tweet;
+    }
+    
+    $markers = array();
+    $hashtag_html_length = 45; // Length of HTML added to Hashtags
+    $mention_html_length = 33; // Length of HTML added to Mentions
+    $url_html_length = 13; // Length of HTML added to URLs
+    
+    /*
+     * Linkify Hashtags
+     */
+    if ( ! empty( $tweet->entities->hashtags ) ) {
+            
+        // One Hashtag at a time
+        foreach ( $tweet->entities->hashtags as $hashtag ) {
+                
+            // Start offset from 0
+            $offset = 0;
+            // Calculate length of hastag - end minus start
+            $length = $hashtag->indices[1] - $hashtag->indices[0];
+                
+            // If no markers, no need to offset
+            if ( ! empty( $markers ) ) {
+                    
+                foreach ( $markers as $mark ) {
+                        
+                    // If the start point is past a previous marker, we need to adjust for the characters added.
+                    if ( $hashtag->indices[0] > $mark['point'] ) {
+                        
+                        // Include previous offsets.
+                        $offset = ( $offset + ( $mark['length'] ) );
+                            
+                    }
+                        
+                }
+                    
+            }
+                
+            /*
+             * Replace hashtag text with an HTML link
+             */
+            if ( ! empty( $tweet->retweeted_status ) ) {
+                
+                $before = mb_substr( $tweet->retweeted_status->text, 0, $hashtag->indices[0] + $offset, 'UTF-8' );
+                $after = mb_substr( $tweet->retweeted_status->text, $hashtag->indices[1] + $offset, mb_strlen( $tweet->retweeted_status->text ), 'UTF-8' );
+                $tweet->retweeted_status->text = $before . '<a href="http://twitter.com/search?q=%23' . $hashtag->text . '">#' . $hashtag->text . '</a>' . $after;
+                
+            } else {
+                
+                $before = mb_substr( $tweet->text, 0, $hashtag->indices[0] + $offset, 'UTF-8' );
+                $after = mb_substr( $tweet->text, $hashtag->indices[1] + $offset, mb_strlen( $tweet->text ), 'UTF-8' );
+                $tweet->text = $before . '<a href="http://twitter.com/search?q=%23' . $hashtag->text . '">#' . $hashtag->text . '</a>' . $after;
+                
+            }
+                
+            // Set marker so we can take into account the characters we just added.
+            $markers[] = array(
+                'point' => $hashtag->indices[0],
+                'length' => $hashtag_html_length + $length,
+            );
+                
+                
+        }
+            
+    }
+    
+    /*
+     * Linkify Mentions
+     */
+    if ( ! empty( $tweet->entities->user_mentions ) ) {
+            
+        // One Hashtag at a time
+        foreach ( $tweet->entities->user_mentions as $mention ) {
+                
+            // Start offset from 0
+            $offset = 0;
+            // Calculate length of mention - end minus start
+            $length = $mention->indices[1] - $mention->indices[0];
+                
+            // If no markers, no need to offset
+            if ( ! empty( $markers ) ) {
+                    
+                foreach ( $markers as $mark ) {
+                        
+                    // If the start point is past a previous marker, we need to adjust for the characters added.
+                    if ( $mention->indices[0] > $mark['point'] ) {
+                        
+                        // Include previous offsets.
+                        $offset = ( $offset + ( $mark['length'] ) );
+                            
+                    }
+                        
+                }
+                    
+            }
+                
+            /*
+             * Replace mention text with an HTML link
+             */
+            if ( ! empty( $tweet->retweeted_status ) ) {
+                
+                $before = mb_substr( $tweet->retweeted_status->text, 0, $mention->indices[0] + $offset, 'UTF-8' );
+                $after = mb_substr( $tweet->retweeted_status->text, $mention->indices[1] + $offset, mb_strlen( $tweet->retweeted_status->text ), 'UTF-8' );
+                $tweet->retweeted_status->text = $before . '<a href="http://twitter.com/' . $mention->screen_name . '">@' . $mention->screen_name . '</a>' . $after;
+                
+            } else {
+                
+                $before = mb_substr( $tweet->text, 0, $mention->indices[0] + $offset, 'UTF-8' );
+                $after = mb_substr( $tweet->text, $mention->indices[1] + $offset, mb_strlen( $tweet->text ), 'UTF-8' );
+                $tweet->text = $before . '<a href="http://twitter.com/' . $mention->screen_name . '">@' . $mention->screen_name . '</a>' . $after;
+                
+            }
+                
+            // Set marker so we can take into account the characters we just added.
+            $markers[] = array(
+                'point' => $mention->indices[0],
+                'length' => $mention_html_length + $length,
+            );
+                
+                
+        }
+            
+    }
+    
+    /*
+     * Linkify URLs
+     */
+    if ( ! empty( $tweet->entities->urls ) ) {
+            
+        // One Hashtag at a time
+        foreach ( $tweet->entities->urls as $url ) {
+            
+            $display_url = kebo_twitter_get_display_url( $url );
+            
+            $url_html_length = 13 + ( strlen( $url->url ) - strlen( $display_url ) );
+            
+            // Start offset from 0
+            $offset = 0;
+            // Calculate length of URL
+            $length = strlen( $display_url );
+                
+            // If no markers, no need to offset
+            if ( ! empty( $markers ) ) {
+                    
+                foreach ( $markers as $mark ) {
+                        
+                    // If the start point is past a previous marker, we need to adjust for the characters added.
+                    if ( $url->indices[0] > $mark['point'] ) {
+                        
+                        // Include previous offsets.
+                        $offset = ( $offset + ( $mark['length'] ) );
+                            
+                    }
+                        
+                }
+                    
+            }
+                
+            /*
+             * Replace URL text with an HTML link
+             */
+            if ( ! empty( $tweet->retweeted_status ) ) {
+                
+                $before = mb_substr( $tweet->retweeted_status->text, 0, $url->indices[0] + $offset, 'UTF-8' );
+                $after = mb_substr( $tweet->retweeted_status->text, $url->indices[1] + $offset, mb_strlen( $tweet->retweeted_status->text ), 'UTF-8' );
+                $tweet->retweeted_status->text = $before . '<a href="' . $url->expanded_url . '">' . $display_url . '</a>' . $after;
+                
+            } else {
+                
+                $before = mb_substr( $tweet->text, 0, $url->indices[0] + $offset, 'UTF-8' );
+                $after = mb_substr( $tweet->text, $url->indices[1] + $offset, mb_strlen( $tweet->text ), 'UTF-8' );
+                $tweet->text = $before . '<a href="' . $url->expanded_url . '">' . $display_url . '</a>' . $after;
+                
+            }
+                
+            // Set marker so we can take into account the characters we just added.
+            $markers[] = array(
+                'point' => $url->indices[0],
+                'length' => $url_html_length + $length,
+            );
+                
+                
+        }
+            
+    }
+    
+    return $tweet;
     
 }
 
@@ -493,5 +553,19 @@ function kebo_twitter_maybe_nofollow() {
     $options = kebo_get_twitter_options();
     
     echo ( 'nofollow' == $options['kebo_twitter_nofollow_links'] ) ? ' rel="nofollow"' : '' ;
+    
+}
+
+/*
+ * Gets the display URL for URLs in Tweets
+ * Pass a Twitter URL Entity, returns Display URL
+ */
+function kebo_twitter_get_display_url( $url ) {
+    
+    $options = kebo_get_twitter_options();
+    
+    $display_url = $url->display_url;
+    
+    return $display_url;
     
 }
