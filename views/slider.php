@@ -117,9 +117,11 @@ $allowed_html = array(
                 </p>
 
                 <div class="kfooter">
-                    <a class="kreply" title="<?php esc_attr_e('Reply', 'kebo_twitter'); ?>" href="<?php echo esc_url( 'https://twitter.com/intent/tweet?in_reply_to=' . $tweet_id ); ?>"></a>
-                    <a class="kretweet" title="<?php esc_attr_e('Re-Tweet', 'kebo_twitter'); ?>" href="<?php echo esc_url( 'https://twitter.com/intent/retweet?tweet_id=' . $tweet_id ); ?>"></a>
-                    <a class="kfavorite" title="<?php esc_attr_e('Favorite', 'kebo_twitter'); ?>" href="<?php echo esc_url( 'https://twitter.com/intent/favorite?tweet_id=' . $tweet_id ); ?>"></a>
+                    <?php if ( true == $instance['intent'] ) : ?>
+                        <a class="kreply" title="<?php esc_attr_e('Reply', 'kebo_twitter'); ?>" href="<?php echo esc_url( 'https://twitter.com/intent/tweet?in_reply_to=' . $tweet_id ); ?>"></a>
+                        <a class="kretweet" title="<?php esc_attr_e('Re-Tweet', 'kebo_twitter'); ?>" href="<?php echo esc_url( 'https://twitter.com/intent/retweet?tweet_id=' . $tweet_id ); ?>"></a>
+                        <a class="kfavorite" title="<?php esc_attr_e('Favorite', 'kebo_twitter'); ?>" href="<?php echo esc_url( 'https://twitter.com/intent/favorite?tweet_id=' . $tweet_id ); ?>"></a>
+                    <?php endif; ?>
                 </div>
 
             </li>

@@ -120,17 +120,20 @@ $allowed_html = array(
 
                 <div class="kfooter">
                     <?php if ( isset( $tweet->entities->media ) && is_array( $tweet->entities->media ) && true == $instance['media'] ) : ?>
-                        <a class="ktogglemedia kclosed" href="#" data-id="<?php echo esc_attr( $tweet->id_str ); ?>"><span class="kshow" title="<?php esc_attr_e('View photo', 'kebo_twitter'); ?>"><?php esc_html_e('View photo', 'kebo_twitter'); ?></span><span class="khide" title="<?php esc_attr_e('Hide photo', 'kebo_twitter'); ?>"><?php esc_html_e('Hide photo', 'kebo_twitter'); ?></span></a>
+                        <a class="ktogglemedia<?php if ( false == $instance['media_visible'] ) { echo ' kclosed'; } ?>" href="#" data-id="<?php echo esc_attr( $tweet->id_str ); ?>"><span class="kshow" title="<?php esc_attr_e('View photo', 'kebo_twitter'); ?>"><?php esc_html_e('View photo', 'kebo_twitter'); ?></span><span class="khide" title="<?php esc_attr_e('Hide photo', 'kebo_twitter'); ?>"><?php esc_html_e('Hide photo', 'kebo_twitter'); ?></span></a>
                     <?php endif; ?>
-                    <a class="kreply" title="<?php esc_attr_e('Reply', 'kebo_twitter'); ?>" href="<?php echo esc_url( 'https://twitter.com/intent/tweet?in_reply_to=' . $tweet_id ); ?>"></a>
-                    <a class="kretweet" title="<?php esc_attr_e('Re-Tweet', 'kebo_twitter'); ?>" href="<?php echo esc_url( 'https://twitter.com/intent/retweet?tweet_id=' . $tweet_id ); ?>"></a>
-                    <a class="kfavorite" title="<?php esc_attr_e('Favorite', 'kebo_twitter'); ?>" href="<?php echo esc_url( 'https://twitter.com/intent/favorite?tweet_id=' . $tweet_id ); ?>"></a>
+                        
+                    <?php if ( true == $instance['intent'] ) : ?>
+                        <a class="kreply" title="<?php esc_attr_e('Reply', 'kebo_twitter'); ?>" href="<?php echo esc_url( 'https://twitter.com/intent/tweet?in_reply_to=' . $tweet_id ); ?>"></a>
+                        <a class="kretweet" title="<?php esc_attr_e('Re-Tweet', 'kebo_twitter'); ?>" href="<?php echo esc_url( 'https://twitter.com/intent/retweet?tweet_id=' . $tweet_id ); ?>"></a>
+                        <a class="kfavorite" title="<?php esc_attr_e('Favorite', 'kebo_twitter'); ?>" href="<?php echo esc_url( 'https://twitter.com/intent/favorite?tweet_id=' . $tweet_id ); ?>"></a>
+                    <?php endif; ?>
                 </div>
                 
                 <?php if ( isset( $tweet->entities->media ) && is_array( $tweet->entities->media ) && true == $instance['media'] ) : ?>
                 
                 <?php $is_media = true; ?>
-                <div id="<?php echo $tweet->id_str; ?>" class="kmedia kclosed">
+                <div id="<?php echo $tweet->id_str; ?>" class="kmedia<?php if ( false == $instance['media_visible'] ) { echo ' kclosed'; } ?>">
                     <?php foreach ( $tweet->entities->media as $media ) : ?>
                         <a href="<?php echo esc_url( $media->expanded_url ); ?>" target="_blank">
                             <img alt="<?php esc_attr_e( 'Tweet Image', 'kebo_twitter' ); ?>" src="<?php echo esc_url( ( is_ssl() ) ? $media->media_url_https : $media->media_url ); ?>" />
