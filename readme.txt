@@ -3,7 +3,7 @@ Contributors: PeterBooker
 Tags: twitter, feed, twitter feed, latest tweets, social, widget, tweets
 Requires at least: 3.2
 Tested up to: 3.9
-Stable tag: 1.4.11
+Stable tag: 1.5.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -98,6 +98,13 @@ We store data in an option and transient, both of which are removed when you uni
 5. An example of how the Widget fits into the design of a theme automatically.
 
 == Changelog ==
+
+= 1.5.0 =
+* Important: Major change to the way text is converted into links (e.g. hashtags, mentions and URLs). The plugin now uses the Twitter Entity data to find/replace these with links, which has an added bonus of being able to display the proper URL instead of the shortlink normally present.
+* New Feature: Added CSS styling fixes to combat common bad practice in themes, e.g. styling widgets using genertic identifiers and IDs like #widgets and #sidebar, which makes plugin overrides very difficult.
+* New Feature: Added an option to the Widget (and Shortcode parameter) to control the display of the Twitter Intent Links (Reply, Re-Tweet and Favourite). Displays them by default.
+* New Feature: Added an option to the Widget (and Shortcode parameter) to control whether or not Tweets with images display the image by default or have it hidden. Hidden by default.
+* Bug Fix: Media attached to Tweets should now display centered if not the full width of its container. This should improve the display for those using the Shortcode inside page content.
 
 = 1.4.11 =
 * Bug Fix: Remove slashes added to tweet text, caused by recent update which makes links rel="nofollow". All Tweet content should be displayed properly again.
@@ -297,7 +304,7 @@ This function checks the cache and refreshes the data if needed. Then returns th
 
 <?php $i = 0; ?>
 
-<?php if ( isset( $tweets[0]->created_at ) ) : ?>
+<?php if ( isset( $tweets->{0}->created_at ) ) : ?>
 
     <?php foreach ($tweets as $tweet) : ?>
 
@@ -352,14 +359,16 @@ Here is the shortcode with all the available attributes and their default values
 The available options are:
 
 `
-Title - Text
-Count - 1-50
-Style - list/slider
-Theme - light/dark
-Avatar - on/off
-Offset - 1-50
-Conversations - true/false
-Media - true/false
+title - Text
+count - 1-50
+style - list/slider
+theme - light/dark
+avatar - on/off
+offset - 1-50
+conversations - true/false
+intent - true/false
+media - true/false
+media_visible - true/false
 `
 
 == Embedded Tweets ==
