@@ -98,7 +98,7 @@ class Kebo_Twitter_Feed_Widget extends WP_Widget {
         
         // Ensure not undefined for updates
         if ( ! isset( $instance['intent'] ) )
-            $instance['intent'] = false;
+            $instance['intent'] = true;
         
         // Ensure not undefined for updates
         if ( ! isset( $instance['display'] ) )
