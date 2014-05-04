@@ -256,17 +256,27 @@ function kebo_twitter_linkify( $tweets ) {
     
     foreach ( $tweets as $tweet ) {
         
-        $tweet = kebo_twitter_linkify_entities( $tweet );
+        //$tweet = kebo_twitter_linkify_entities( $text, $entities );
         
         /*
          * Extra Link Processing ( rel attribute and target attribute )
          */
         if ( ! empty( $tweet->retweeted_status ) ) {
+           
+           /*
+            * Convert Entities into HTML Links
+            */
+           $tweet->retweeted_status->text = kebo_twitter_linkify_entities( $tweet->retweeted_status->text, $tweet->retweeted_status->entities ); 
             
            /*
             * Decode HTML Chars like &#039; to '
             */
            $tweet->retweeted_status->text = htmlspecialchars_decode( $tweet->retweeted_status->text, ENT_QUOTES );
+           
+           /*
+            * Convert any leftover text links (e.g. when images are uploaded and Twitter adds a URL but no entity)
+            */
+           $tweet->retweeted_status->text = make_clickable( $tweet->retweeted_status->text );
 
            /*
             * NoFollow URLs
@@ -279,11 +289,21 @@ function kebo_twitter_linkify( $tweets ) {
            $tweet->retweeted_status->text = links_add_target( $tweet->retweeted_status->text, '_blank', array( 'a' ) );
             
         } elseif ( ! empty( $tweet->text ) ) {
+           
+           /*
+            * Convert Entities into HTML Links
+            */
+           $tweet->text = kebo_twitter_linkify_entities( $tweet->text, $tweet->entities ); 
             
            /*
             * Decode HTML Chars like &#039; to '
             */
            $tweet->text = htmlspecialchars_decode( $tweet->text, ENT_QUOTES );
+           
+           /*
+            * Convert any leftover text links (e.g. when images are uploaded and Twitter adds a URL but no entity)
+            */
+           $tweet->text = make_clickable( $tweet->text );
            
            /*
             * NoFollow URLs
@@ -306,10 +326,10 @@ function kebo_twitter_linkify( $tweets ) {
 /*
  * Linkify Tweet Entities ( #hashtags, @mentions and urls.com )
  */
-function kebo_twitter_linkify_entities( $tweet ) {
+function kebo_twitter_linkify_entities( $text, $entities ) {
     
-    if ( ! is_object( $tweet ) ) {
-        return $tweet;
+    if ( empty( $text ) || ! is_object( $entities ) ) {
+        return $text;
     }
     
     $markers = array();
@@ -320,10 +340,10 @@ function kebo_twitter_linkify_entities( $tweet ) {
     /*
      * Linkify Hashtags
      */
-    if ( ! empty( $tweet->entities->hashtags ) ) {
+    if ( ! empty( $entities->hashtags ) ) {
             
         // One Hashtag at a time
-        foreach ( $tweet->entities->hashtags as $hashtag ) {
+        foreach ( $entities->hashtags as $hashtag ) {
                 
             // Start offset from 0
             $offset = 0;
@@ -350,19 +370,9 @@ function kebo_twitter_linkify_entities( $tweet ) {
             /*
              * Replace hashtag text with an HTML link
              */
-            if ( ! empty( $tweet->retweeted_status ) ) {
-                
-                $before = mb_substr( $tweet->retweeted_status->text, 0, $hashtag->indices[0] + $offset, 'UTF-8' );
-                $after = mb_substr( $tweet->retweeted_status->text, $hashtag->indices[1] + $offset, mb_strlen( $tweet->retweeted_status->text ), 'UTF-8' );
-                $tweet->retweeted_status->text = $before . '<a href="http://twitter.com/search?q=%23' . $hashtag->text . '">#' . $hashtag->text . '</a>' . $after;
-                
-            } else {
-                
-                $before = mb_substr( $tweet->text, 0, $hashtag->indices[0] + $offset, 'UTF-8' );
-                $after = mb_substr( $tweet->text, $hashtag->indices[1] + $offset, mb_strlen( $tweet->text ), 'UTF-8' );
-                $tweet->text = $before . '<a href="http://twitter.com/search?q=%23' . $hashtag->text . '">#' . $hashtag->text . '</a>' . $after;
-                
-            }
+            $before = mb_substr( $text, 0, $hashtag->indices[0] + $offset, 'UTF-8' );
+            $after = mb_substr( $text, $hashtag->indices[1] + $offset, mb_strlen( $text ), 'UTF-8' );
+            $text = $before . '<a href="http://twitter.com/search?q=%23' . $hashtag->text . '">#' . $hashtag->text . '</a>' . $after;
                 
             // Set marker so we can take into account the characters we just added.
             $markers[] = array(
@@ -378,10 +388,10 @@ function kebo_twitter_linkify_entities( $tweet ) {
     /*
      * Linkify Mentions
      */
-    if ( ! empty( $tweet->entities->user_mentions ) ) {
+    if ( ! empty( $entities->user_mentions ) ) {
             
         // One Hashtag at a time
-        foreach ( $tweet->entities->user_mentions as $mention ) {
+        foreach ( $entities->user_mentions as $mention ) {
                 
             // Start offset from 0
             $offset = 0;
@@ -408,19 +418,9 @@ function kebo_twitter_linkify_entities( $tweet ) {
             /*
              * Replace mention text with an HTML link
              */
-            if ( ! empty( $tweet->retweeted_status ) ) {
-                
-                $before = mb_substr( $tweet->retweeted_status->text, 0, $mention->indices[0] + $offset, 'UTF-8' );
-                $after = mb_substr( $tweet->retweeted_status->text, $mention->indices[1] + $offset, mb_strlen( $tweet->retweeted_status->text ), 'UTF-8' );
-                $tweet->retweeted_status->text = $before . '<a href="http://twitter.com/' . $mention->screen_name . '">@' . $mention->screen_name . '</a>' . $after;
-                
-            } else {
-                
-                $before = mb_substr( $tweet->text, 0, $mention->indices[0] + $offset, 'UTF-8' );
-                $after = mb_substr( $tweet->text, $mention->indices[1] + $offset, mb_strlen( $tweet->text ), 'UTF-8' );
-                $tweet->text = $before . '<a href="http://twitter.com/' . $mention->screen_name . '">@' . $mention->screen_name . '</a>' . $after;
-                
-            }
+            $before = mb_substr( $text, 0, $mention->indices[0] + $offset, 'UTF-8' );
+            $after = mb_substr( $text, $mention->indices[1] + $offset, mb_strlen( $text ), 'UTF-8' );
+            $text = $before . '<a href="http://twitter.com/' . $mention->screen_name . '">@' . $mention->screen_name . '</a>' . $after;
                 
             // Set marker so we can take into account the characters we just added.
             $markers[] = array(
@@ -436,10 +436,10 @@ function kebo_twitter_linkify_entities( $tweet ) {
     /*
      * Linkify URLs
      */
-    if ( ! empty( $tweet->entities->urls ) ) {
+    if ( ! empty( $entities->urls ) ) {
             
         // One Hashtag at a time
-        foreach ( $tweet->entities->urls as $url ) {
+        foreach ( $entities->urls as $url ) {
             
             $display_url = kebo_twitter_get_display_url( $url );
             
@@ -470,19 +470,9 @@ function kebo_twitter_linkify_entities( $tweet ) {
             /*
              * Replace URL text with an HTML link
              */
-            if ( ! empty( $tweet->retweeted_status ) ) {
-                
-                $before = mb_substr( $tweet->retweeted_status->text, 0, $url->indices[0] + $offset, 'UTF-8' );
-                $after = mb_substr( $tweet->retweeted_status->text, $url->indices[1] + $offset, mb_strlen( $tweet->retweeted_status->text ), 'UTF-8' );
-                $tweet->retweeted_status->text = $before . '<a href="' . $url->expanded_url . '">' . $display_url . '</a>' . $after;
-                
-            } else {
-                
-                $before = mb_substr( $tweet->text, 0, $url->indices[0] + $offset, 'UTF-8' );
-                $after = mb_substr( $tweet->text, $url->indices[1] + $offset, mb_strlen( $tweet->text ), 'UTF-8' );
-                $tweet->text = $before . '<a href="' . $url->expanded_url . '">' . $display_url . '</a>' . $after;
-                
-            }
+            $before = mb_substr( $text, 0, $url->indices[0] + $offset, 'UTF-8' );
+            $after = mb_substr( $text, $url->indices[1] + $offset, mb_strlen( $text ), 'UTF-8' );
+            $text = $before . '<a href="' . $url->expanded_url . '">' . $display_url . '</a>' . $after;
                 
             // Set marker so we can take into account the characters we just added.
             $markers[] = array(
@@ -495,7 +485,7 @@ function kebo_twitter_linkify_entities( $tweet ) {
             
     }
     
-    return $tweet;
+    return $text;
     
 }
 
