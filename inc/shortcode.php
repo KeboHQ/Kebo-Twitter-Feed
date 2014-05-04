@@ -26,6 +26,8 @@ class Kebo_Twitter_Shortcode {
             'offset' => false,
             'conversations' => false,
             'media' => false,
+            'media_visible' => false,
+            'intent' => true,
         ), $atts ) );
         
         // Check if a connection to Twitter exists.
