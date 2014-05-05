@@ -263,57 +263,95 @@ function kebo_twitter_linkify( $tweets ) {
          */
         if ( ! empty( $tweet->retweeted_status ) ) {
            
-           /*
-            * Convert Entities into HTML Links
-            */
-           $tweet->retweeted_status->text = kebo_twitter_linkify_entities( $tweet->retweeted_status->text, $tweet->retweeted_status->entities ); 
-            
-           /*
-            * Decode HTML Chars like &#039; to '
-            */
-           $tweet->retweeted_status->text = htmlspecialchars_decode( $tweet->retweeted_status->text, ENT_QUOTES );
+            /*
+             * Decode HTML Chars like &#039; to '
+             */
+            $tweet->retweeted_status->text = htmlspecialchars_decode( $tweet->retweeted_status->text, ENT_QUOTES ); 
            
-           /*
-            * Convert any leftover text links (e.g. when images are uploaded and Twitter adds a URL but no entity)
-            */
-           $tweet->retweeted_status->text = make_clickable( $tweet->retweeted_status->text );
+            /*
+             * Check mb_ function compatibility and fallback to regex
+             */
+            if ( function_exists( 'mb_strlen' ) ) {
+                
+                /*
+                 * Convert Entities into HTML Links
+                 */
+                $tweet->retweeted_status->text = kebo_twitter_linkify_entities( $tweet->retweeted_status->text, $tweet->retweeted_status->entities );
+                
+            } else {
+           
+                /*
+                 * Turn Hasntags into HTML Links
+                 */
+                $tweet->retweeted_status->text = preg_replace( '/#([A-Za-z0-9\/\.]*)/', '<a href="http://twitter.com/search?q=$1">#$1</a>', $tweet->retweeted_status->text );
 
-           /*
-            * NoFollow URLs
-            */
-           $tweet->retweeted_status->text = ( 'nofollow' == $options['kebo_twitter_nofollow_links'] ) ? stripslashes( wp_rel_nofollow( $tweet->retweeted_status->text ) ) : $tweet->retweeted_status->text;
-           
-           /*
-            * Add target="_blank" to all links
-            */
-           $tweet->retweeted_status->text = links_add_target( $tweet->retweeted_status->text, '_blank', array( 'a' ) );
+                /*
+     -           * Turn Mentions into HTML Links
+                 */
+                $tweet->retweeted_status->text = preg_replace( '/@([A-Za-z0-9_\/\.]*)/', '<a href="http://www.twitter.com/$1">@$1</a>', $tweet->retweeted_status->text );
+            
+            }
+
+            /*
+             * Convert any leftover text links (e.g. when images are uploaded and Twitter adds a URL but no entity)
+             */
+            $tweet->retweeted_status->text = make_clickable( $tweet->retweeted_status->text );
+
+            /*
+             * NoFollow URLs
+             */
+            $tweet->retweeted_status->text = ( 'nofollow' == $options['kebo_twitter_nofollow_links'] ) ? stripslashes( wp_rel_nofollow( $tweet->retweeted_status->text ) ) : $tweet->retweeted_status->text;
+
+            /*
+             * Add target="_blank" to all links
+             */
+            $tweet->retweeted_status->text = links_add_target( $tweet->retweeted_status->text, '_blank', array( 'a' ) );
             
         } elseif ( ! empty( $tweet->text ) ) {
            
-           /*
-            * Convert Entities into HTML Links
-            */
-           $tweet->text = kebo_twitter_linkify_entities( $tweet->text, $tweet->entities ); 
+            /*
+             * Decode HTML Chars like &#039; to '
+             */
+            $tweet->text = htmlspecialchars_decode( $tweet->text, ENT_QUOTES );
             
-           /*
-            * Decode HTML Chars like &#039; to '
-            */
-           $tweet->text = htmlspecialchars_decode( $tweet->text, ENT_QUOTES );
+            /*
+             * Check mb_ function compatibility and fallback to regex
+             */
+            if ( function_exists( 'mb_strlen' ) ) {
+                
+                /*
+                 * Convert Entities into HTML Links
+                 */
+                $tweet->text = kebo_twitter_linkify_entities( $tweet->text, $tweet->entities );
+                
+            } else {
            
-           /*
-            * Convert any leftover text links (e.g. when images are uploaded and Twitter adds a URL but no entity)
-            */
-           $tweet->text = make_clickable( $tweet->text );
-           
-           /*
-            * NoFollow URLs
-            */
-           $tweet->text = ( 'nofollow' == $options['kebo_twitter_nofollow_links'] ) ? stripslashes( wp_rel_nofollow( $tweet->text ) ) : $tweet->text;
+                /*
+                 * Turn Hasntags into HTML Links
+                 */
+                $tweet->text = preg_replace( '/#([A-Za-z0-9\/\.]*)/', '<a href="http://twitter.com/search?q=$1">#$1</a>', $tweet->text );
 
-           /*
-            * Add target="_blank" to all links
-            */
-           $tweet->text = links_add_target( $tweet->text, '_blank', array( 'a' ) );
+                /*
+     -           * Turn Mentions into HTML Links
+                 */
+                $tweet->text = preg_replace( '/@([A-Za-z0-9_\/\.]*)/', '<a href="http://www.twitter.com/$1">@$1</a>', $tweet->text );
+            
+            }
+
+            /*
+             * Convert any leftover text links (e.g. when images are uploaded and Twitter adds a URL but no entity)
+             */
+            $tweet->text = make_clickable( $tweet->text );
+
+            /*
+             * NoFollow URLs
+             */
+            $tweet->text = ( 'nofollow' == $options['kebo_twitter_nofollow_links'] ) ? stripslashes( wp_rel_nofollow( $tweet->text ) ) : $tweet->text;
+
+            /*
+             * Add target="_blank" to all links
+             */
+            $tweet->text = links_add_target( $tweet->text, '_blank', array( 'a' ) );
             
         }
         
