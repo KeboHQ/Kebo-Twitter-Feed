@@ -3,7 +3,7 @@ Contributors: PeterBooker
 Tags: twitter, feed, twitter feed, latest tweets, social, widget, tweets
 Requires at least: 3.2
 Tested up to: 3.9
-Stable tag: 1.5.0
+Stable tag: 1.5.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -98,6 +98,9 @@ We store data in an option and transient, both of which are removed when you uni
 5. An example of how the Widget fits into the design of a theme automatically.
 
 == Changelog ==
+
+= 1.5.1 =
+* Bug Fix: Fixes a Fatal PHP error caused by hosting without mb_ functions active. Now checks for this and uses old method to linkify text if not present.
 
 = 1.5.0 =
 * Important: Major change to the way text is converted into links (e.g. hashtags, mentions and URLs). The plugin now uses the Twitter Entity data to find/replace these with links, which has an added bonus of being able to display the proper URL instead of the shortlink normally present.
