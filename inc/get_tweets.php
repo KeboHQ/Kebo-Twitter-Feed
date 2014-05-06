@@ -256,17 +256,10 @@ function kebo_twitter_linkify( $tweets ) {
     
     foreach ( $tweets as $tweet ) {
         
-        //$tweet = kebo_twitter_linkify_entities( $text, $entities );
-        
         /*
          * Extra Link Processing ( rel attribute and target attribute )
          */
         if ( ! empty( $tweet->retweeted_status ) ) {
-           
-            /*
-             * Decode HTML Chars like &#039; to '
-             */
-            $tweet->retweeted_status->text = htmlspecialchars_decode( $tweet->retweeted_status->text, ENT_QUOTES ); 
            
             /*
              * Check mb_ function compatibility and fallback to regex
@@ -291,6 +284,11 @@ function kebo_twitter_linkify( $tweets ) {
                 $tweet->retweeted_status->text = preg_replace( '/@([A-Za-z0-9_\/\.]*)/', '<a href="http://www.twitter.com/$1">@$1</a>', $tweet->retweeted_status->text );
             
             }
+            
+            /*
+             * Decode HTML Chars like &#039; to '
+             */
+            $tweet->retweeted_status->text = htmlspecialchars_decode( $tweet->retweeted_status->text, ENT_QUOTES );
 
             /*
              * Convert any leftover text links (e.g. when images are uploaded and Twitter adds a URL but no entity)
@@ -308,11 +306,6 @@ function kebo_twitter_linkify( $tweets ) {
             $tweet->retweeted_status->text = links_add_target( $tweet->retweeted_status->text, '_blank', array( 'a' ) );
             
         } elseif ( ! empty( $tweet->text ) ) {
-           
-            /*
-             * Decode HTML Chars like &#039; to '
-             */
-            $tweet->text = htmlspecialchars_decode( $tweet->text, ENT_QUOTES );
             
             /*
              * Check mb_ function compatibility and fallback to regex
@@ -337,6 +330,11 @@ function kebo_twitter_linkify( $tweets ) {
                 $tweet->text = preg_replace( '/@([A-Za-z0-9_\/\.]*)/', '<a href="http://www.twitter.com/$1">@$1</a>', $tweet->text );
             
             }
+            
+            /*
+             * Decode HTML Chars like &#039; to '
+             */
+            $tweet->text = htmlspecialchars_decode( $tweet->text, ENT_QUOTES );
 
             /*
              * Convert any leftover text links (e.g. when images are uploaded and Twitter adds a URL but no entity)
