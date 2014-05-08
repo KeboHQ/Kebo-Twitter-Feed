@@ -244,6 +244,7 @@ html body ul.kebo-tweets li.ktweet {
         height: auto;
         overflow: hidden;
         margin-top: 5px;
+        text-align: center;
 }
 .kebo-tweets .ktweet .kmedia.kclosed {
         height: 0px;
@@ -251,7 +252,7 @@ html body ul.kebo-tweets li.ktweet {
 .kebo-tweets .ktweet .kmedia img {
         display: inline-block;
         vertical-align: middle;
-        width: 100%;
+        width: auto;
         height: auto;
         margin: 0 0 5px 0;
         padding: 0;
