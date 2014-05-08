@@ -66,7 +66,9 @@ class Kebo_Twitter_Shortcode {
         $instance['theme'] = $theme;
         $instance['conversations'] = $conversations;
         $instance['media'] = $media;
+        $instance['media_visible'] = $media_visible;
         $instance['display'] = $display;
+        $instance['intent'] = $intent;
         
         if ( 'on' == $avatar ) {
             
