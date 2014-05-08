@@ -101,6 +101,7 @@ We store data in an option and transient, both of which are removed when you uni
 
 = 1.5.3 =
 * Bug Fix: Shortcodes can now correctly use the intent and media_visible options now too. Fixes a problem where the intent links would never show for Shortcodes. (props chriscolden)
+* Bug Fix: Improved the display of images on Tweets shown in wide areas (like full page through the Shortcode). Properly centred and use their natural width.
 
 = 1.5.2 =
 * Bug Fix: Fixes Tweet text getting corrupted when turning entities (Hashtags, Mentions, URLs) into links caused by html special characters being encoded (more than one character) when processed.
