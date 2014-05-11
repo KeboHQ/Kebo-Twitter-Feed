@@ -276,12 +276,12 @@ function kebo_twitter_linkify( $tweets ) {
                 /*
                  * Turn Hasntags into HTML Links
                  */
-                $tweet->retweeted_status->text = preg_replace( '/#([A-Za-z0-9\/\.]*)/', '<a href="http://twitter.com/search?q=$1">#$1</a>', $tweet->retweeted_status->text );
+                $tweet->retweeted_status->text = preg_replace( '/(#.+?)(?=[\s.,:,]|$)/', '<a href="http://twitter.com/search?q=$1">$1</a>', $tweet->retweeted_status->text );
 
                 /*
      -           * Turn Mentions into HTML Links
                  */
-                $tweet->retweeted_status->text = preg_replace( '/@([A-Za-z0-9_\/\.]*)/', '<a href="http://www.twitter.com/$1">@$1</a>', $tweet->retweeted_status->text );
+                $tweet->retweeted_status->text = preg_replace( '/(@.+?)(?=[\s.,:,]|$)/', '<a href="http://www.twitter.com/$1">$1</a>', $tweet->retweeted_status->text );
             
             }
             
@@ -322,12 +322,12 @@ function kebo_twitter_linkify( $tweets ) {
                 /*
                  * Turn Hasntags into HTML Links
                  */
-                $tweet->text = preg_replace( '/#([A-Za-z0-9\/\.]*)/', '<a href="http://twitter.com/search?q=$1">#$1</a>', $tweet->text );
+                $tweet->text = preg_replace( '/(#.+?)(?=[\s.,:,]|$)/', '<a href="http://twitter.com/search?q=$1">$1</a>', $tweet->text );
 
                 /*
      -           * Turn Mentions into HTML Links
                  */
-                $tweet->text = preg_replace( '/@([A-Za-z0-9_\/\.]*)/', '<a href="http://www.twitter.com/$1">@$1</a>', $tweet->text );
+                $tweet->text = preg_replace( '/(@.+?)(?=[\s.,:,]|$)/', '<a href="http://www.twitter.com/$1">$1</a>', $tweet->text );
             
             }
             
