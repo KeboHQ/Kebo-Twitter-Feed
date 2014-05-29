@@ -426,15 +426,17 @@ function kebo_twitter_linkify_entities( $text, $entities ) {
     
     }
     
-    // Obtain a list of columns
+    // Create list of start positions
     foreach ( $custom_entities as $key => $entity ) {
         $start[ $key ]  = $entity['start'];
     }
 
-    // Sort the data with volume descending, edition ascending
-    // Add $data as the last parameter, to sort by the common key
+    // Sort the data with by start position
     array_multisort( $start, SORT_DESC, $custom_entities );
     
+    /*
+     * Process each Entity and add relevant HTML
+     */
     foreach ( $custom_entities as $entity ) {
             
         $before = mb_substr( $text, 0, $entity['start'], 'UTF-8' );
