@@ -339,7 +339,7 @@ function kebo_twitter_linkify( $tweets ) {
             /*
              * Convert any leftover text links (e.g. when images are uploaded and Twitter adds a URL but no entity)
              */
-            $tweet->text = make_clickable( $tweet->text );
+            //$tweet->text = make_clickable( $tweet->text );
 
             /*
              * NoFollow URLs
@@ -368,155 +368,88 @@ function kebo_twitter_linkify_entities( $text, $entities ) {
         return $text;
     }
     
-    $markers = array();
-    $hashtag_html_length = 45; // Length of HTML added to Hashtags
-    $mention_html_length = 33; // Length of HTML added to Mentions
-    $url_html_length = 13; // Length of HTML added to URLs
+    $custom_entities = array();
+    $key = 0;
     
-    /*
-     * Linkify Hashtags
-     */
     if ( ! empty( $entities->hashtags ) ) {
-            
-        // One Hashtag at a time
+    
         foreach ( $entities->hashtags as $hashtag ) {
-                
-            // Start offset from 0
-            $offset = 0;
-            // Calculate length of hastag - end minus start
-            $length = $hashtag->indices[1] - $hashtag->indices[0];
-                
-            // If no markers, no need to offset
-            if ( ! empty( $markers ) ) {
-                    
-                foreach ( $markers as $mark ) {
-                        
-                    // If the start point is past a previous marker, we need to adjust for the characters added.
-                    if ( $hashtag->indices[0] > $mark['point'] ) {
-                        
-                        // Include previous offsets.
-                        $offset = ( $offset + ( $mark['length'] ) );
-                            
-                    }
-                        
-                }
-                    
-            }
-                
-            /*
-             * Replace hashtag text with an HTML link
-             */
-            $before = mb_substr( $text, 0, $hashtag->indices[0] + $offset, 'UTF-8' );
-            $after = mb_substr( $text, $hashtag->indices[1] + $offset, mb_strlen( $text ), 'UTF-8' );
-            $text = $before . '<a href="http://twitter.com/search?q=%23' . $hashtag->text . '">#' . $hashtag->text . '</a>' . $after;
-                
-            // Set marker so we can take into account the characters we just added.
-            $markers[] = array(
-                'point' => $hashtag->indices[0],
-                'length' => $hashtag_html_length + $length,
+
+            $custom_entities[ $key ] = array(
+                'type' => 'hashtag',
+                'start' => $hashtag->indices[0],
+                'end' => $hashtag->indices[1],
+                'length' => $hashtag->indices[1] - $hashtag->indices[0],
+                'text' => $hashtag->text,
             );
-                
-                
+
+            $key++;
+
         }
-            
+    
     }
     
-    /*
-     * Linkify Mentions
-     */
     if ( ! empty( $entities->user_mentions ) ) {
-            
-        // One Hashtag at a time
+    
         foreach ( $entities->user_mentions as $mention ) {
-                
-            // Start offset from 0
-            $offset = 0;
-            // Calculate length of mention - end minus start
-            $length = $mention->indices[1] - $mention->indices[0];
-                
-            // If no markers, no need to offset
-            if ( ! empty( $markers ) ) {
-                    
-                foreach ( $markers as $mark ) {
-                        
-                    // If the start point is past a previous marker, we need to adjust for the characters added.
-                    if ( $mention->indices[0] > $mark['point'] ) {
-                        
-                        // Include previous offsets.
-                        $offset = ( $offset + ( $mark['length'] ) );
-                            
-                    }
-                        
-                }
-                    
-            }
-                
-            /*
-             * Replace mention text with an HTML link
-             */
-            $before = mb_substr( $text, 0, $mention->indices[0] + $offset, 'UTF-8' );
-            $after = mb_substr( $text, $mention->indices[1] + $offset, mb_strlen( $text ), 'UTF-8' );
-            $text = $before . '<a href="http://twitter.com/' . $mention->screen_name . '">@' . $mention->screen_name . '</a>' . $after;
-                
-            // Set marker so we can take into account the characters we just added.
-            $markers[] = array(
-                'point' => $mention->indices[0],
-                'length' => $mention_html_length + $length,
+
+            $custom_entities[ $key ] = array(
+                'type' => 'mention',
+                'start' => $mention->indices[0],
+                'end' => $mention->indices[1],
+                'length' => $mention->indices[1] - $mention->indices[0],
+                'screen_name' => $mention->screen_name,
             );
-                
-                
+
+            $key++;
+
         }
-            
+    
     }
     
-    /*
-     * Linkify URLs
-     */
     if ( ! empty( $entities->urls ) ) {
-            
-        // One Hashtag at a time
+    
         foreach ( $entities->urls as $url ) {
-            
-            $display_url = kebo_twitter_get_display_url( $url );
-            
-            $url_html_length = 13 + ( strlen( $url->url ) - strlen( $display_url ) );
-            
-            // Start offset from 0
-            $offset = 0;
-            // Calculate length of URL
-            $length = strlen( $display_url );
-                
-            // If no markers, no need to offset
-            if ( ! empty( $markers ) ) {
-                    
-                foreach ( $markers as $mark ) {
-                        
-                    // If the start point is past a previous marker, we need to adjust for the characters added.
-                    if ( $url->indices[0] > $mark['point'] ) {
-                        
-                        // Include previous offsets.
-                        $offset = ( $offset + ( $mark['length'] ) );
-                            
-                    }
-                        
-                }
-                    
-            }
-                
-            /*
-             * Replace URL text with an HTML link
-             */
-            $before = mb_substr( $text, 0, $url->indices[0] + $offset, 'UTF-8' );
-            $after = mb_substr( $text, $url->indices[1] + $offset, mb_strlen( $text ), 'UTF-8' );
-            $text = $before . '<a href="' . $url->expanded_url . '">' . $display_url . '</a>' . $after;
-                
-            // Set marker so we can take into account the characters we just added.
-            $markers[] = array(
-                'point' => $url->indices[0],
-                'length' => $url_html_length + $length,
+
+            $custom_entities[ $key ] = array(
+                'type' => 'url',
+                'start' => $url->indices[0],
+                'end' => $url->indices[1],
+                'url' => $url->url,
+                'display_url' => $url->display_url,
+                'expanded_url' => $url->expanded_url,
             );
-                
-                
+
+            $key++;
+
+        }
+    
+    }
+    
+    // Obtain a list of columns
+    foreach ( $custom_entities as $key => $entity ) {
+        $start[ $key ]  = $entity['start'];
+    }
+
+    // Sort the data with volume descending, edition ascending
+    // Add $data as the last parameter, to sort by the common key
+    array_multisort( $start, SORT_DESC, $custom_entities );
+    
+    foreach ( $custom_entities as $entity ) {
+            
+        $before = mb_substr( $text, 0, $entity['start'], 'UTF-8' );
+        $after = mb_substr( $text, $entity['end'], mb_strlen( $text ), 'UTF-8' );
+            
+        if ( 'hashtag' == $entity['type'] ) {
+            $text = $before . '<a href="http://twitter.com/search?q=%23' . $entity['text'] . '">#' . $entity['text'] . '</a>' . $after;
+        }
+            
+        if ( 'mention' == $entity['type'] ) {
+            $text = $before . '<a href="http://twitter.com/' . $entity['screen_name'] . '">@' . $entity['screen_name'] . '</a>' . $after;
+        }
+            
+        if ( 'url' == $entity['type'] ) {
+            $text = $before . '<a href="' . $entity['expanded_url'] . '">' . $entity['display_url'] . '</a>' . $after;
         }
             
     }
