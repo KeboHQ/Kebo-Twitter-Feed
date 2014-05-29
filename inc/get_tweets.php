@@ -441,17 +441,21 @@ function kebo_twitter_linkify_entities( $text, $entities ) {
             
         $before = mb_substr( $text, 0, $entity['start'], 'UTF-8' );
         $after = mb_substr( $text, $entity['end'], mb_strlen( $text ), 'UTF-8' );
+        
+        switch ( $entity['type'] ) {
             
-        if ( 'hashtag' == $entity['type'] ) {
-            $text = $before . '<a href="http://twitter.com/search?q=%23' . $entity['text'] . '">#' . $entity['text'] . '</a>' . $after;
-        }
+            case 'hashtag':
+                $text = $before . '<a href="http://twitter.com/search?q=%23' . $entity['text'] . '">#' . $entity['text'] . '</a>' . $after;
+                break;
             
-        if ( 'mention' == $entity['type'] ) {
-            $text = $before . '<a href="http://twitter.com/' . $entity['screen_name'] . '">@' . $entity['screen_name'] . '</a>' . $after;
-        }
+            case 'mention':
+                $text = $before . '<a href="http://twitter.com/' . $entity['screen_name'] . '">@' . $entity['screen_name'] . '</a>' . $after;
+                break;
             
-        if ( 'url' == $entity['type'] ) {
-            $text = $before . '<a href="' . $entity['expanded_url'] . '">' . $entity['display_url'] . '</a>' . $after;
+            case 'url':
+                $text = $before . '<a href="' . $entity['expanded_url'] . '">' . $entity['display_url'] . '</a>' . $after;
+                break;
+            
         }
             
     }
