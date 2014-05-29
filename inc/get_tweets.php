@@ -339,7 +339,7 @@ function kebo_twitter_linkify( $tweets ) {
             /*
              * Convert any leftover text links (e.g. when images are uploaded and Twitter adds a URL but no entity)
              */
-            //$tweet->text = make_clickable( $tweet->text );
+            $tweet->text = make_clickable( $tweet->text );
 
             /*
              * NoFollow URLs
