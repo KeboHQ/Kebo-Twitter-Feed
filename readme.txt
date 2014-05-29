@@ -380,6 +380,7 @@ The available options are:
 title - Text
 count - 1-50
 style - list/slider
+display - tweets/retweets/all
 theme - light/dark
 avatar - on/off
 offset - 1-50
