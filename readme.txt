@@ -3,7 +3,7 @@ Contributors: PeterBooker
 Tags: twitter, feed, twitter feed, latest tweets, social, widget, tweets
 Requires at least: 3.2
 Tested up to: 3.9
-Stable tag: 1.5.4
+Stable tag: 1.5.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -44,6 +44,7 @@ We make this so easy by managing all the complex oAuth requests on our own serve
 * English (British) by [Peter Booker](https://kebopowered.com).
 * Swedish by [Johanna Kitzman](https://www.facebook.com/johannakitzmanphotography).
 * Serbian by [Borisa Djuraskovic](http://www.webhostinghub.com/).
+* Spanish by [Javier Sanz](http://escueladebaileelalmacen.com/).
 
 = Rate Us / Feedback =
 
@@ -98,6 +99,10 @@ We store data in an option and transient, both of which are removed when you uni
 5. An example of how the Widget fits into the design of a theme automatically.
 
 == Changelog ==
+
+= 1.5.6 =
+* New Feature: Added the Spanish (es_ES) language files, thanks to Javier Sanz for providing the translation.
+* Bug Fix: Fixed a problem where URLs, Mentions and Hashtags were not always being correctly converted into HTML links. They should always display correctly now.
 
 = 1.5.4 =
 * Bug Fix: Fixed a bug where Hashtags where not fully turned into links when words contained characters with diacrititcs. (props fris)
