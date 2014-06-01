@@ -3,7 +3,7 @@ Contributors: PeterBooker
 Tags: twitter, feed, twitter feed, latest tweets, social, widget, tweets
 Requires at least: 3.2
 Tested up to: 3.9
-Stable tag: 1.5.6
+Stable tag: 1.5.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -99,6 +99,9 @@ We store data in an option and transient, both of which are removed when you uni
 5. An example of how the Widget fits into the design of a theme automatically.
 
 == Changelog ==
+
+= 1.5.7 =
+* Bug Fix: Fixes a bug introduced in the last update. Prevents an array_multisort() error on Tweets with just plain text.
 
 = 1.5.6 =
 * New Feature: Added the Spanish (es_ES) language files, thanks to Javier Sanz for providing the translation.
