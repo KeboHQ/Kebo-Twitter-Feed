@@ -426,6 +426,13 @@ function kebo_twitter_linkify_entities( $text, $entities ) {
     
     }
     
+    /*
+     * If no entities we can stop now
+     */
+    if ( empty( $custom_entities ) || ! is_array( $custom_entities ) ) {
+        return $text;
+    }
+    
     // Create list of start positions
     foreach ( $custom_entities as $key => $entity ) {
         $start[ $key ]  = $entity['start'];
