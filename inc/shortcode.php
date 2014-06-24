@@ -26,12 +26,16 @@ class Kebo_Twitter_Shortcode {
             'offset' => false,
             'conversations' => false,
             'media' => false,
+            'media_visible' => false,
+            'intent' => true,
         ), $atts ) );
         
         // Check if a connection to Twitter exists.
         $twitter_data = get_option( 'kebo_twitter_connection' );
-        if ( empty ( $twitter_data ) )
+        
+        if ( empty ( $twitter_data ) ) {
             return false;
+        }
         
         // Enqueue Style Sheet
         wp_enqueue_style( 'kebo-twitter-plugin' );
@@ -62,7 +66,9 @@ class Kebo_Twitter_Shortcode {
         $instance['theme'] = $theme;
         $instance['conversations'] = $conversations;
         $instance['media'] = $media;
+        $instance['media_visible'] = $media_visible;
         $instance['display'] = $display;
+        $instance['intent'] = $intent;
         
         if ( 'on' == $avatar ) {
             

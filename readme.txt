@@ -3,7 +3,7 @@ Contributors: PeterBooker
 Tags: twitter, feed, twitter feed, latest tweets, social, widget, tweets
 Requires at least: 3.2
 Tested up to: 3.9
-Stable tag: 1.4.11
+Stable tag: 1.5.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -44,6 +44,7 @@ We make this so easy by managing all the complex oAuth requests on our own serve
 * English (British) by [Peter Booker](https://kebopowered.com).
 * Swedish by [Johanna Kitzman](https://www.facebook.com/johannakitzmanphotography).
 * Serbian by [Borisa Djuraskovic](http://www.webhostinghub.com/).
+* Spanish by [Javier Sanz](http://escueladebaileelalmacen.com/).
 
 = Rate Us / Feedback =
 
@@ -98,6 +99,33 @@ We store data in an option and transient, both of which are removed when you uni
 5. An example of how the Widget fits into the design of a theme automatically.
 
 == Changelog ==
+
+= 1.5.7 =
+* Bug Fix: Fixes a bug introduced in the last update. Prevents an array_multisort() error on Tweets with just plain text.
+
+= 1.5.6 =
+* New Feature: Added the Spanish (es_ES) language files, thanks to Javier Sanz for providing the translation.
+* Bug Fix: Fixed a problem where URLs, Mentions and Hashtags were not always being correctly converted into HTML links. They should always display correctly now.
+
+= 1.5.4 =
+* Bug Fix: Fixed a bug where Hashtags where not fully turned into links when words contained characters with diacrititcs. (props fris)
+
+= 1.5.3 =
+* Bug Fix: Shortcodes can now correctly use the intent and media_visible options now too. Fixes a problem where the intent links would never show for Shortcodes. (props chriscolden)
+* Bug Fix: Improved the display of images on Tweets shown in wide areas (like full page through the Shortcode). Properly centred and use their natural width.
+
+= 1.5.2 =
+* Bug Fix: Fixes Tweet text getting corrupted when turning entities (Hashtags, Mentions, URLs) into links caused by html special characters being encoded (more than one character) when processed.
+
+= 1.5.1 =
+* Bug Fix: Fixes a Fatal PHP error caused by hosting without mb_ functions active. Now checks for this and uses old method to linkify text if not present.
+
+= 1.5.0 =
+* Important: Major change to the way text is converted into links (e.g. hashtags, mentions and URLs). The plugin now uses the Twitter Entity data to find/replace these with links, which has an added bonus of being able to display the proper URL instead of the shortlink normally present.
+* New Feature: Added CSS styling fixes to combat common bad practice in themes, e.g. styling widgets using genertic identifiers and IDs like #widgets and #sidebar, which makes plugin overrides very difficult.
+* New Feature: Added an option to the Widget (and Shortcode parameter) to control the display of the Twitter Intent Links (Reply, Re-Tweet and Favourite). Displays them by default.
+* New Feature: Added an option to the Widget (and Shortcode parameter) to control whether or not Tweets with images display the image by default or have it hidden. Hidden by default.
+* Bug Fix: Media attached to Tweets should now display centered if not the full width of its container. This should improve the display for those using the Shortcode inside page content.
 
 = 1.4.11 =
 * Bug Fix: Remove slashes added to tweet text, caused by recent update which makes links rel="nofollow". All Tweet content should be displayed properly again.
@@ -297,7 +325,7 @@ This function checks the cache and refreshes the data if needed. Then returns th
 
 <?php $i = 0; ?>
 
-<?php if ( isset( $tweets[0]->created_at ) ) : ?>
+<?php if ( isset( $tweets->{0}->created_at ) ) : ?>
 
     <?php foreach ($tweets as $tweet) : ?>
 
@@ -352,14 +380,17 @@ Here is the shortcode with all the available attributes and their default values
 The available options are:
 
 `
-Title - Text
-Count - 1-50
-Style - list/slider
-Theme - light/dark
-Avatar - on/off
-Offset - 1-50
-Conversations - true/false
-Media - true/false
+title - Text
+count - 1-50
+style - list/slider
+display - tweets/retweets/all
+theme - light/dark
+avatar - on/off
+offset - 1-50
+conversations - true/false
+intent - true/false
+media - true/false
+media_visible - true/false
 `
 
 == Embedded Tweets ==

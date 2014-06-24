@@ -255,187 +255,219 @@ function kebo_twitter_linkify( $tweets ) {
     $options = kebo_get_twitter_options();
     
     foreach ( $tweets as $tweet ) {
-
-        // TEMPORARILY COMMENTED OUT AND REPLACED WITH REGEX
         
         /*
-        $hash_length = 45; // Length of HTML added to hashtags
-        $mention_length = 33; // Length of HTML added to mentions
-        $markers = array();
-         * 
-         */
-        
-        /*
-         * Linkify Hashtags
-         */
-        /*
-        if ( ! empty( $tweet->entities->hashtags ) ) {
-            
-            // One Hashtag at a time
-            foreach ( $tweet->entities->hashtags as $hashtag ) {
-                
-                // Start offset from 0
-                $offset = 0;
-                // Calculate length of hastag - end minus start
-                $length = $hashtag->indices[1] - $hashtag->indices[0];
-                
-                // If no markers, no need to offset
-                if ( ! empty( $markers ) ) {
-                    
-                    foreach ( $markers as $mark ) {
-                        
-                        // If the start point is past a previous marker, we need to adjust for the characters added.
-                        if ( $hashtag->indices[0] > $mark['point'] ) {
-                            
-                            // Include previous offsets.
-                            $offset = ( $offset + ( $mark['length'] ) );
-                            
-                        }
-                        
-                    }
-                    
-                }
-         * 
-         */
-                
-                /*
-                 * Replace hashtag text with an HTML link
-                 */
-        /*
-                $tweet->text = substr_replace( $tweet->text, '<a href="http://twitter.com/search?q=%23' . $hashtag->text . '">#' . $hashtag->text . '</a>', $hashtag->indices[0] + $offset, $length );
-
-                // Set marker so we can take into account the characters we just added.
-                $markers[] = array(
-                    'point' => $hashtag->indices[0],
-                    'length' => $hash_length + $length,
-                );
-                
-                
-            }
-            
-        }
-         * 
-         */
-        
-        /*
-         * Linkify Mentions
-         */
-        /*
-        if ( ! empty( $tweet->entities->user_mentions ) ) {
-            
-            // One Mention at a time
-            foreach ( $tweet->entities->user_mentions as $mention ) {
-                
-                $offset = 0;
-                $length = $mention->indices[1] - $mention->indices[0];
-                
-                if ( ! empty($markers) ) {
-                    
-                    foreach ( $markers as $mark ) {
-                        
-                        if ( $mention->indices[0] > $mark['point'] ) {
-                            
-                            $offset = ( $offset + ( $mark['length'] ) );
-                            
-                        }
-                        
-                    }
-                    
-                }
-         * 
-         */
-                
-                /*
-                 * Replace mention text with an HTML link
-                 */
-        /*
-                $tweet->text = substr_replace( $tweet->text, '<a href="http://twitter.com/' . $mention->screen_name . '">@' . $mention->screen_name . '</a>', $mention->indices[0] + $offset, $length );
-
-                // Set marker so we can take into account the characters we just added.
-                $markers[] = array(
-                    'point' => $mention->indices[0],
-                    'length' => $mention_length + $length,
-                );
-                
-                
-            }
-            
-        }
-         * 
-         */
-        
-        /*
-         * Check if it is the Tweet text or Re-Tweet text which we need to pre-process.
+         * Extra Link Processing ( rel attribute and target attribute )
          */
         if ( ! empty( $tweet->retweeted_status ) ) {
+           
+            /*
+             * Check mb_ function compatibility and fallback to regex
+             */
+            if ( function_exists( 'mb_strlen' ) ) {
+                
+                /*
+                 * Convert Entities into HTML Links
+                 */
+                $tweet->retweeted_status->text = kebo_twitter_linkify_entities( $tweet->retweeted_status->text, $tweet->retweeted_status->entities );
+                
+            } else {
+           
+                /*
+                 * Turn Hasntags into HTML Links
+                 */
+                $tweet->retweeted_status->text = preg_replace( '/(#.+?)(?=[\s.,:,]|$)/', '<a href="http://twitter.com/search?q=$1">$1</a>', $tweet->retweeted_status->text );
+
+                /*
+     -           * Turn Mentions into HTML Links
+                 */
+                $tweet->retweeted_status->text = preg_replace( '/(@.+?)(?=[\s.,:,]|$)/', '<a href="http://www.twitter.com/$1">$1</a>', $tweet->retweeted_status->text );
             
-           /*
-            * Decode HTML Chars like &#039; to '
-            */
-           $tweet->retweeted_status->text = htmlspecialchars_decode( $tweet->retweeted_status->text, ENT_QUOTES );
+            }
+            
+            /*
+             * Decode HTML Chars like &#039; to '
+             */
+            $tweet->retweeted_status->text = htmlspecialchars_decode( $tweet->retweeted_status->text, ENT_QUOTES );
 
-           /*
-            * Turn Hasntags into HTML Links
-            */
-           $tweet->retweeted_status->text = preg_replace( '/#([A-Za-z0-9\/\.]*)/', '<a href="http://twitter.com/search?q=$1">#$1</a>', $tweet->retweeted_status->text );
+            /*
+             * Convert any leftover text links (e.g. when images are uploaded and Twitter adds a URL but no entity)
+             */
+            $tweet->retweeted_status->text = make_clickable( $tweet->retweeted_status->text );
 
-           /*
-            * Turn Mentions into HTML Links
-            */
-           $tweet->retweeted_status->text = preg_replace( '/@([A-Za-z0-9_\/\.]*)/', '<a href="http://www.twitter.com/$1">@$1</a>', $tweet->retweeted_status->text );
+            /*
+             * NoFollow URLs
+             */
+            $tweet->retweeted_status->text = ( 'nofollow' == $options['kebo_twitter_nofollow_links'] ) ? stripslashes( wp_rel_nofollow( $tweet->retweeted_status->text ) ) : $tweet->retweeted_status->text;
 
-           /*
-            * NoFollow URLs
-            */
-           $tweet->retweeted_status->text = ( 'nofollow' == $options['kebo_twitter_nofollow_links'] ) ? stripslashes( wp_rel_nofollow( $tweet->retweeted_status->text ) ) : $tweet->retweeted_status->text;
-           
-           /*
-            * Linkify text URLs
-            */
-           $tweet->retweeted_status->text = make_clickable( $tweet->retweeted_status->text );
-           
-           /*
-            * Add target="_blank" to all links
-            */
-           $tweet->retweeted_status->text = links_add_target( $tweet->retweeted_status->text, '_blank', array( 'a' ) );
+            /*
+             * Add target="_blank" to all links
+             */
+            $tweet->retweeted_status->text = links_add_target( $tweet->retweeted_status->text, '_blank', array( 'a' ) );
             
         } elseif ( ! empty( $tweet->text ) ) {
             
-           /*
-            * Decode HTML Chars like &#039; to '
-            */
-           $tweet->text = htmlspecialchars_decode( $tweet->text, ENT_QUOTES );
-
-           /*
-            * Turn Hasntags into HTML Links
-            */
-           $tweet->text = preg_replace( '/#([A-Za-z0-9\/\.]*)/', '<a href="http://twitter.com/search?q=$1">#$1</a>', $tweet->text );
-
-           /*
-            * Turn Mentions into HTML Links
-            */
-           $tweet->text = preg_replace( '/@([A-Za-z0-9_\/\.]*)/', '<a href="http://www.twitter.com/$1">@$1</a>', $tweet->text );
+            /*
+             * Check mb_ function compatibility and fallback to regex
+             */
+            if ( function_exists( 'mb_strlen' ) ) {
+                
+                /*
+                 * Convert Entities into HTML Links
+                 */
+                $tweet->text = kebo_twitter_linkify_entities( $tweet->text, $tweet->entities );
+                
+            } else {
            
-           /*
-            * NoFollow URLs
-            */
-           $tweet->text = ( 'nofollow' == $options['kebo_twitter_nofollow_links'] ) ? stripslashes( wp_rel_nofollow( $tweet->text ) ) : $tweet->text;
-           
-           /*
-            * Linkify text URLs
-            */
-           $tweet->text = make_clickable( $tweet->text );
+                /*
+                 * Turn Hasntags into HTML Links
+                 */
+                $tweet->text = preg_replace( '/(#.+?)(?=[\s.,:,]|$)/', '<a href="http://twitter.com/search?q=$1">$1</a>', $tweet->text );
 
-           /*
-            * Add target="_blank" to all links
-            */
-           $tweet->text = links_add_target( $tweet->text, '_blank', array( 'a' ) );
+                /*
+     -           * Turn Mentions into HTML Links
+                 */
+                $tweet->text = preg_replace( '/(@.+?)(?=[\s.,:,]|$)/', '<a href="http://www.twitter.com/$1">$1</a>', $tweet->text );
+            
+            }
+            
+            /*
+             * Decode HTML Chars like &#039; to '
+             */
+            $tweet->text = htmlspecialchars_decode( $tweet->text, ENT_QUOTES );
+
+            /*
+             * Convert any leftover text links (e.g. when images are uploaded and Twitter adds a URL but no entity)
+             */
+            $tweet->text = make_clickable( $tweet->text );
+
+            /*
+             * NoFollow URLs
+             */
+            $tweet->text = ( 'nofollow' == $options['kebo_twitter_nofollow_links'] ) ? stripslashes( wp_rel_nofollow( $tweet->text ) ) : $tweet->text;
+
+            /*
+             * Add target="_blank" to all links
+             */
+            $tweet->text = links_add_target( $tweet->text, '_blank', array( 'a' ) );
             
         }
         
     }
     
     return $tweets;
+    
+}
+
+/*
+ * Linkify Tweet Entities ( #hashtags, @mentions and urls.com )
+ */
+function kebo_twitter_linkify_entities( $text, $entities ) {
+    
+    if ( empty( $text ) || ! is_object( $entities ) ) {
+        return $text;
+    }
+    
+    $custom_entities = array();
+    $key = 0;
+    
+    if ( ! empty( $entities->hashtags ) ) {
+    
+        foreach ( $entities->hashtags as $hashtag ) {
+
+            $custom_entities[ $key ] = array(
+                'type' => 'hashtag',
+                'start' => $hashtag->indices[0],
+                'end' => $hashtag->indices[1],
+                'length' => $hashtag->indices[1] - $hashtag->indices[0],
+                'text' => $hashtag->text,
+            );
+
+            $key++;
+
+        }
+    
+    }
+    
+    if ( ! empty( $entities->user_mentions ) ) {
+    
+        foreach ( $entities->user_mentions as $mention ) {
+
+            $custom_entities[ $key ] = array(
+                'type' => 'mention',
+                'start' => $mention->indices[0],
+                'end' => $mention->indices[1],
+                'length' => $mention->indices[1] - $mention->indices[0],
+                'screen_name' => $mention->screen_name,
+            );
+
+            $key++;
+
+        }
+    
+    }
+    
+    if ( ! empty( $entities->urls ) ) {
+    
+        foreach ( $entities->urls as $url ) {
+
+            $custom_entities[ $key ] = array(
+                'type' => 'url',
+                'start' => $url->indices[0],
+                'end' => $url->indices[1],
+                'url' => $url->url,
+                'display_url' => $url->display_url,
+                'expanded_url' => $url->expanded_url,
+            );
+
+            $key++;
+
+        }
+    
+    }
+    
+    /*
+     * If no entities we can stop now
+     */
+    if ( empty( $custom_entities ) || ! is_array( $custom_entities ) ) {
+        return $text;
+    }
+    
+    // Create list of start positions
+    foreach ( $custom_entities as $key => $entity ) {
+        $start[ $key ]  = $entity['start'];
+    }
+
+    // Sort the data with by start position
+    array_multisort( $start, SORT_DESC, $custom_entities );
+    
+    /*
+     * Process each Entity and add relevant HTML
+     */
+    foreach ( $custom_entities as $entity ) {
+            
+        $before = mb_substr( $text, 0, $entity['start'], 'UTF-8' );
+        $after = mb_substr( $text, $entity['end'], mb_strlen( $text ), 'UTF-8' );
+        
+        switch ( $entity['type'] ) {
+            
+            case 'hashtag':
+                $text = $before . '<a href="http://twitter.com/search?q=%23' . $entity['text'] . '">#' . $entity['text'] . '</a>' . $after;
+                break;
+            
+            case 'mention':
+                $text = $before . '<a href="http://twitter.com/' . $entity['screen_name'] . '">@' . $entity['screen_name'] . '</a>' . $after;
+                break;
+            
+            case 'url':
+                $text = $before . '<a href="' . $entity['expanded_url'] . '">' . $entity['display_url'] . '</a>' . $after;
+                break;
+            
+        }
+            
+    }
+    
+    return $text;
     
 }
 
@@ -493,5 +525,19 @@ function kebo_twitter_maybe_nofollow() {
     $options = kebo_get_twitter_options();
     
     echo ( 'nofollow' == $options['kebo_twitter_nofollow_links'] ) ? ' rel="nofollow"' : '' ;
+    
+}
+
+/*
+ * Gets the display URL for URLs in Tweets
+ * Pass a Twitter URL Entity, returns Display URL
+ */
+function kebo_twitter_get_display_url( $url ) {
+    
+    $options = kebo_get_twitter_options();
+    
+    $display_url = $url->display_url;
+    
+    return $display_url;
     
 }

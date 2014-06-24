@@ -244,6 +244,7 @@ html body ul.kebo-tweets li.ktweet {
         height: auto;
         overflow: hidden;
         margin-top: 5px;
+        text-align: center;
 }
 .kebo-tweets .ktweet .kmedia.kclosed {
         height: 0px;
@@ -251,7 +252,7 @@ html body ul.kebo-tweets li.ktweet {
 .kebo-tweets .ktweet .kmedia img {
         display: inline-block;
         vertical-align: middle;
-        width: 100%;
+        width: auto;
         height: auto;
         margin: 0 0 5px 0;
         padding: 0;
@@ -410,4 +411,40 @@ html body ul.kebo-tweets.slider li.ktweet:first-child {
 // Fixes Themes adding <br> tags to post content (effecting shortcode html output).
 .kcontainer br {
         display: none;
+}
+
+html body ul.kebo-tweets {
+        overflow: hidden;
+        width: 100%;
+        margin: 0 !important; // only way to override themes which use #IDs for widget areas
+        padding: 0;
+        list-style: none;
+        border: none;
+        outline: none;
+        background-image: none;
+}
+html body ul.kebo-tweets li.ktweet {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        height: auto;
+        border: none;
+        outline: none;
+        background-image: none;
+}
+
+// Bad Theme Style Rules Fix
+body #sidebar ul.kebo-tweets,
+body #widgets ul.kebo-tweets {
+        margin: 0;
+        padding: 0;
+}
+body #sidebar ul.kebo-tweets li a,
+body #widgets ul.kebo-tweets li a {
+        margin: 0;
+        padding: 0;
+}
+body #sidebar ul.kebo-tweets .kfooter a,
+body #widgets ul.kebo-tweets .kfooter a {
+        display: inline-block;
 }

@@ -93,6 +93,14 @@ class Kebo_Twitter_Feed_Widget extends WP_Widget {
             $instance['media'] = false;
         
         // Ensure not undefined for updates
+        if ( ! isset( $instance['media_visible'] ) )
+            $instance['media_visible'] = false;
+        
+        // Ensure not undefined for updates
+        if ( ! isset( $instance['intent'] ) )
+            $instance['intent'] = true;
+        
+        // Ensure not undefined for updates
         if ( ! isset( $instance['display'] ) )
             $instance['display'] = 'tweets';
         
@@ -166,6 +174,10 @@ class Kebo_Twitter_Feed_Widget extends WP_Widget {
             $instance['conversations'] = false;
         if( !isset( $instance['media'] ) )
             $instance['media'] = false;
+        if( !isset( $instance['media_visible'] ) )
+            $instance['media_visible'] = false;
+        if( !isset( $instance['intent'] ) )
+            $instance['intent'] = true;
         if( !isset( $instance['display'] ) )
             $instance['display'] = 'tweets';
             
@@ -222,6 +234,14 @@ class Kebo_Twitter_Feed_Widget extends WP_Widget {
             <p><input style="width: 28px;" type="checkbox" value="true" name="<?php echo $this->get_field_name('media'); ?>" id="<?php echo $this->get_field_id('media'); ?>" <?php if ( 'true' == $instance['media'] ) { echo 'checked="checked"'; } ?>> <?php _e('Show media? (only Lists)', 'kebo_twitter'); ?> </p>
         </label>
 
+        <label for="<?php echo $this->get_field_id('media_visible'); ?>">
+            <p><input style="width: 28px;" type="checkbox" value="true" name="<?php echo $this->get_field_name('media_visible'); ?>" id="<?php echo $this->get_field_id('media_visible'); ?>" <?php if ( 'true' == $instance['media_visible'] ) { echo 'checked="checked"'; } ?>> <?php _e('Media visible on load?', 'kebo_twitter'); ?> </p>
+        </label>
+
+        <label for="<?php echo $this->get_field_id('intent'); ?>">
+            <p><input style="width: 28px;" type="checkbox" value="true" name="<?php echo $this->get_field_name('intent'); ?>" id="<?php echo $this->get_field_id('intent'); ?>" <?php if ( 'true' == $instance['intent'] ) { echo 'checked="checked"'; } ?>> <?php _e('Show Intent Links?', 'kebo_twitter'); ?> </p>
+        </label>
+
         <?php
     }
 
@@ -242,6 +262,8 @@ class Kebo_Twitter_Feed_Widget extends WP_Widget {
         $instance['avatar'] = wp_filter_nohtml_kses( $new_instance['avatar'] );
         $instance['conversations'] = wp_filter_nohtml_kses( $new_instance['conversations'] );
         $instance['media'] = wp_filter_nohtml_kses( $new_instance['media'] );
+        $instance['media_visible'] = wp_filter_nohtml_kses( $new_instance['media_visible'] );
+        $instance['intent'] = wp_filter_nohtml_kses( $new_instance['intent'] );
         $instance['display'] = wp_filter_nohtml_kses( $new_instance['display'] );
         
         // Check 'count' is numeric.
