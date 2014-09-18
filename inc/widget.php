@@ -136,7 +136,7 @@ class Kebo_Twitter_Feed_Widget extends WP_Widget {
             
         } else {
             
-            $list_template_path = locate_template( 'views/kebo-twitter-slider.php' );
+            $list_template_path = locate_template( 'views/kebo-twitter-list.php' );
             if ( '' != $list_template_path ) {
 
                 // yep, load the page template with the include function
