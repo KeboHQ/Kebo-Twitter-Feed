@@ -121,10 +121,12 @@ class Kebo_Twitter_Feed_Widget extends WP_Widget {
          */
         if ( 2 == $instance['style'] ) {
             
-            if ( '' != locate_template( 'views/kebo-twitter-slider.php' ) ) {
+            $slider_template_path = locate_template( 'views/kebo-twitter-slider.php' );
+            if ( '' != $slider_template_path ) {
                 
-                // yep, load the page template
-                get_template_part( 'views/kebo-twitter-slider' );
+                // yep, load the page template with the include function
+                // so the variables are accessible
+                include($slider_template_path);
                     
             } else {
                 
@@ -134,10 +136,12 @@ class Kebo_Twitter_Feed_Widget extends WP_Widget {
             
         } else {
             
-            if ( '' != locate_template( 'views/kebo-twitter-list.php' ) ) {
-                
-                // yep, load the page template
-                get_template_part( 'views/kebo-twitter-list' );
+            $list_template_path = locate_template( 'views/kebo-twitter-slider.php' );
+            if ( '' != $list_template_path ) {
+
+                // yep, load the page template with the include function
+                // so the variables are accessible
+                include($list_template_path);
                     
             } else {
                 
