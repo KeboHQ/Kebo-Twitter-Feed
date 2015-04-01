@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-define('KEBO_TWITTER_PLUGIN_VERSION', '1.5.7');
+define('KEBO_TWITTER_PLUGIN_VERSION', '1.5.8');
 define('KEBO_TWITTER_PLUGIN_URL', plugin_dir_url(__FILE__));
 define('KEBO_TWITTER_PLUGIN_PATH', plugin_dir_path(__FILE__));
 
