@@ -2,8 +2,8 @@
 Contributors: PeterBooker
 Tags: twitter, feed, twitter feed, latest tweets, social, widget, tweets
 Requires at least: 3.2
-Tested up to: 3.9
-Stable tag: 1.5.7
+Tested up to: 4.1.1
+Stable tag: 1.5.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -99,6 +99,10 @@ We store data in an option and transient, both of which are removed when you uni
 5. An example of how the Widget fits into the design of a theme automatically.
 
 == Changelog ==
+
+= 1.5.8 - 2015/04/01 =
+* Bug Fix: Updated the URL used to connect your Twitter account to your website. Resolves the current Twitter account connection issues, rendering the plugin inoperative.
+* Note: My sincere apologies for the extended period the plugin was not functioning, personal issues around took me away from work for an unexpectedly long period. I am back now full time and you can expect more timely updates and improvements.
 
 = 1.5.7 =
 * Bug Fix: Fixes a bug introduced in the last update. Prevents an array_multisort() error on Tweets with just plain text.
