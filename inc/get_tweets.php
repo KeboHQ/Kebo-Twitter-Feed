@@ -60,7 +60,7 @@ function kebo_twitter_get_tweets() {
     /*
      * If we have serialized data from the Transient we must decode it.
      */
-    if ( is_string( $tweets ) && ( null != json_decode( $tweets ) ) ) {
+    if ( is_string( $tweets ) && ( null != json_decode( $tweets ) ) ) { // does this json_decode use too many resources? consider a replacement.
 		
         $tweets = json_decode( $tweets, false );
 		
