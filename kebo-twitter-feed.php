@@ -3,7 +3,7 @@
  * Plugin Name: Kebo - Twitter Feed
  * Plugin URI: http://wordpress.org/plugins/kebo-twitter-feed/
  * Description: Connect your site to your Twitter account and display your Twitter Feed on your website effortlessly with a custom widget. 
- * Version: 1.5.8
+ * Version: 1.5.9
  * Author: Kebo
  * Author URI: https://www.kebo.io/
  * Text Domain: kebo_twitter
@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-define('KEBO_TWITTER_PLUGIN_VERSION', '1.5.8');
+define('KEBO_TWITTER_PLUGIN_VERSION', '1.5.9');
 define('KEBO_TWITTER_PLUGIN_URL', plugin_dir_url(__FILE__));
 define('KEBO_TWITTER_PLUGIN_PATH', plugin_dir_path(__FILE__));
 
@@ -59,12 +59,12 @@ function kebo_twitter_plugin_setup() {
 }
 add_action('plugins_loaded', 'kebo_twitter_plugin_setup', 15);
 
-if ( ! function_exists('kebo_twitter_plugin_scripts') ):
+if ( ! function_exists('kebo_twitter_scripts') ):
 
     /**
      * Enqueue plugin scripts and styles.
      */
-    function kebo_twitter_scripts() {
+    function kebo_twitter_scripts( $hook_suffix ) {
 
         // Queues the main CSS file.
         wp_register_style( 'kebo-twitter-plugin', KEBO_TWITTER_PLUGIN_URL . 'css/plugin.css', array(), KEBO_TWITTER_PLUGIN_VERSION, 'all' );
@@ -72,14 +72,14 @@ if ( ! function_exists('kebo_twitter_plugin_scripts') ):
         wp_register_script( 'responsive-slides', KEBO_TWITTER_PLUGIN_URL . 'js/responsiveslides.min.js', array( 'jquery' ), KEBO_TWITTER_PLUGIN_VERSION, false );
         
         // Enqueue Stylesheet for Admin Pages
-        if ( is_admin() ) {
-            wp_enqueue_style('kebo-twitter-plugin');
+        if ( is_admin() && 'settings_page_kebo-twitter' == $hook_suffix ) {
+            wp_enqueue_style( 'kebo-twitter-plugin' );
         }
         
         // WP 3.2 compatibility (cannot enqueue after the header).
         global $wp_version;
         if ( version_compare( $wp_version, '3.3', '<' ) ) {
-            wp_enqueue_style('kebo-twitter-plugin');
+            wp_enqueue_style( 'kebo-twitter-plugin' );
         }
         
     }
