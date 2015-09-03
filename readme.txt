@@ -2,8 +2,8 @@
 Contributors: PeterBooker
 Tags: twitter, feed, twitter feed, latest tweets, social, widget, tweets
 Requires at least: 3.2
-Tested up to: 4.1.1
-Stable tag: 1.5.8
+Tested up to: 4.3
+Stable tag: 1.5.10
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -99,6 +99,9 @@ We store data in an option and transient, both of which are removed when you uni
 5. An example of how the Widget fits into the design of a theme automatically.
 
 == Changelog ==
+
+= 1.5.10 - 2015/09/03 =
+* Bug Fix: Replace old method of initiating WP_Widget instances, to bring compatibility with WordPress 4.3 (and about time too!).
 
 = 1.5.8 - 2015/04/01 =
 * Bug Fix: Updated the URL used to connect your Twitter account to your website. Resolves the current Twitter account connection issues, rendering the plugin inoperative.
