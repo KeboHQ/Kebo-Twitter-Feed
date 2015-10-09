@@ -33,7 +33,7 @@ function kebo_twitter_options_init() {
         if ( empty ( $twitter_data ) ) :
         ?>
 
-            <a class="social-link twitter disabled" href="http://auth.kebopowered.com/twitterread/?origin=<?php echo admin_url('options-general.php?page=kebo-twitter') ?>"><?php _e('Connect to Twitter', 'kebo_twitter'); ?></a>
+            <a class="social-link twitter disabled" href="https://link.kebo.io/auth/?authclient=twitter-read&origin=<?php echo esc_url( admin_url('options-general.php?page=kebo-twitter') ); ?>"><?php _e('Connect to Twitter', 'kebo_twitter'); ?></a>
 
         <?php else : ?>
             

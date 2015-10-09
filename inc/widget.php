@@ -47,7 +47,7 @@ class Kebo_Twitter_Feed_Widget extends WP_Widget {
             'description' => __('Displays your Twitter Feed on your website.', 'kbso')
         );
 
-        $this->WP_Widget( false, __('Kebo Twitter Feed', 'kbso'), $widget_ops );
+        parent::__construct( false, __('Kebo Twitter Feed', 'kbso'), $widget_ops );
         
     }
 

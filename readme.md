@@ -1,8 +1,8 @@
-# [Kebo Twitter Feed](https://kebopowered.com/plugins/kebo-twitter-feed/)
+# [Kebo Twitter Feed](https://www.kebo.io/plugins/kebo-twitter-feed/)
 
 Kebo Twitter Feed is the most user-friendly Twitter Feed plugin for WordPress.
 
-To get started and see what is possible check out <https://kebopowered.com/docs/kebo-twitter-feed/>
+To get started and see what is possible check out <https://www.kebo.io/docs/kebo-twitter-feed/>
 
 ## Getting Started
 
