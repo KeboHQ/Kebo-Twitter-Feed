@@ -194,7 +194,7 @@ function kebo_twitter_menu_render() {
             <h4><?php _e( 'API Status', 'kebo_twitter' ); ?></h4>
             
             <div>
-                <span title="auth.kebopowered.com">23.239.13.127</span>
+                <span title="auth.kebo.io">23.239.13.127</span>
                 <img class="kloading" src="<?php echo admin_url( 'images/wpspin_light.gif' ); ?>" title="Testing API Connection">
                 <span class="ksuccess" title="<?php _e( 'Your site can successfully connect to the Kebo API.', 'kebo_twitter' ); ?>"><?php _e( 'Success', 'kebo_twitter' ); ?></span>
                 <span class="kerror" title="<?php _e( 'Your site failed to connect to the Kebo API.', 'kebo_twitter' ); ?>"><?php _e( 'Error', 'kebo_twitter' ); ?></span>
