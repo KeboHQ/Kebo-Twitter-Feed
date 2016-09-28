@@ -31,7 +31,7 @@ function kebo_twitter_api_status() {
     /**
      * Test the Kebo Twitter API
      */
-    $request_url = 'http://auth.kebopowered.com/test.php';
+    $request_url = 'http://auth.kebo.io/test.php';
     
     // Setup arguments for POST request.
     $args = array(
