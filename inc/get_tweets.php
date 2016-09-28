@@ -127,7 +127,7 @@ function kebo_twitter_external_request() {
     if ( false !== ( $twitter_data = get_option( 'kebo_twitter_connection' ) ) ) {
 
         // URL to Kebo OAuth Request App
-        $request_url = 'http://auth.kebopowered.com/request/index.php';
+        $request_url = 'http://auth.kebo.io/request/index.php';
 
         // Setup arguments for OAuth request.
         $data = array(
