@@ -272,7 +272,7 @@ msgstr "Tweet-Bild"
 #: views/list.php:108 views/list.php:120 views/slider.php:95
 #: views/slider.php:107
 msgid "Sorry, no Tweets were found."
-msgstr "Sorry, keine Teets gefunden."
+msgstr "Sorry, keine Tweets gefunden."
 
 #: views/list.php:114 views/slider.php:101
 msgid "Sorry, the Tweet data is not in the expected format."
