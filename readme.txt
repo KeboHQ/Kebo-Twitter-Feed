@@ -2,8 +2,8 @@
 Contributors: PeterBooker
 Tags: twitter, feed, twitter feed, latest tweets, social, widget, tweets
 Requires at least: 3.2
-Tested up to: 4.3
-Stable tag: 1.5.10
+Tested up to: 4.6.1
+Stable tag: 1.5.12
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -99,6 +99,13 @@ We store data in an option and transient, both of which are removed when you uni
 5. An example of how the Widget fits into the design of a theme automatically.
 
 == Changelog ==
+
+= 1.5.12 - 2016/09/28 =
+* Bug Fix: Updated Widget class constructor method, to bring compatibility with PHP7.
+* Note: Version 2.0 development is complete. Testing it in production with volunteers and will release in the next couple of weeks.
+
+= 1.5.11 - 2016/01/14 =
+* Bug Fix: Switches to a new domain for the API, which resolves the current issue of not being able to update Tweet data. Sorry for the inconvenience.
 
 = 1.5.10 - 2015/09/03 =
 * Bug Fix: Replace old method of initiating WP_Widget instances, to bring compatibility with WordPress 4.3 (and about time too!).

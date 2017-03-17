@@ -40,7 +40,7 @@ class Kebo_Twitter_Feed_Widget extends WP_Widget {
     /**
      * Register Widget Details 
      */
-    function Kebo_Twitter_Feed_Widget() {
+    public function __construct() {
 
         $widget_ops = array(
             'classname' => 'kebo_twitter_feed_widget',
