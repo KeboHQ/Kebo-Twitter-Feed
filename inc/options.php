@@ -33,7 +33,7 @@ function kebo_twitter_options_init() {
         if ( empty ( $twitter_data ) ) :
         ?>
 
-            <a class="social-link twitter disabled" href="https://link.kebo.io/auth/?authclient=twitter-read&origin=<?php echo esc_url( admin_url('options-general.php?page=kebo-twitter') ); ?>"><?php _e('Connect to Twitter', 'kebo_twitter'); ?></a>
+            <a class="social-link twitter disabled" href="https://link.kebo.io/auth/?authclient=twitter-read&origin=<?php echo esc_url( wp_nonce_url( admin_url('options-general.php?page=kebo-twitter'), 'kebo_twitter_oauth_connect' ) ); ?>"><?php _e('Connect to Twitter', 'kebo_twitter'); ?></a>
 
         <?php else : ?>
             
@@ -43,7 +43,7 @@ function kebo_twitter_options_init() {
             <p>
                 <?php _e('Connected as', 'kebo_twitter'); ?>
                 <a class="account" href="<?php echo $account_link; ?>" target="_blank">@<?php echo $twitter_data['account']; ?></a>
-                <a class="disconnect" title="<?php _e('Disconnect Service', 'kebo_twitter'); ?>" href="<?php echo admin_url('options-general.php?page=kebo-twitter&reset=true') ?>">&#10006;</a>
+                <a class="disconnect" title="<?php _e('Disconnect Service', 'kebo_twitter'); ?>" href="<?php echo esc_url( wp_nonce_url( admin_url('options-general.php?page=kebo-twitter&reset=true'), 'kebo_twitter_reset_connection' ) ) ?>">&#10006;</a>
             </p>
 
         <?php endif; ?>

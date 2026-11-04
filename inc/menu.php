@@ -30,15 +30,15 @@ function kebo_twitter_menu_render() {
         }
     
     // Collect returned OAuth2 credentials on callback and save in a transient.
-    if ( isset( $_GET['service'] ) && isset( $_GET['token'] ) ) :
+    if ( isset( $_GET['service'] ) && isset( $_GET['token'] ) && isset( $_GET['_wpnonce'] ) && wp_verify_nonce( sanitize_text_field( wp_unslash( $_GET['_wpnonce'] ) ), 'kebo_twitter_oauth_connect' ) ) :
 
             $data = array(
-                'service' => $_GET['service'],
-                'token' => $_GET['token'], // OAuth Token
-                'secret' => $_GET['secret'], // OAuth Secret
-                'account' => $_GET['account'], // Screen Name
-                'userid' => $_GET['userid'], // Twitter User ID
-                'account_link' => $_GET['account_link'], // Twitter Account Link
+                'service' => sanitize_text_field( wp_unslash( $_GET['service'] ) ),
+                'token' => sanitize_text_field( wp_unslash( $_GET['token'] ) ), // OAuth Token
+                'secret' => isset( $_GET['secret'] ) ? sanitize_text_field( wp_unslash( $_GET['secret'] ) ) : '', // OAuth Secret
+                'account' => isset( $_GET['account'] ) ? sanitize_text_field( wp_unslash( $_GET['account'] ) ) : '', // Screen Name
+                'userid' => isset( $_GET['userid'] ) ? sanitize_text_field( wp_unslash( $_GET['userid'] ) ) : '', // Twitter User ID
+                'account_link' => isset( $_GET['account_link'] ) ? esc_url_raw( wp_unslash( $_GET['account_link'] ) ) : '', // Twitter Account Link
             );
             
             // Store Website OAuth Credentials in transient, use extra long expiry as Twitter does not currently set an expiry time.
@@ -59,7 +59,7 @@ function kebo_twitter_menu_render() {
     endif;
 
     // Check for reset request, if set delete transient which will break the connection to Twitter, so the credentials will be lost.
-    if ( isset( $_GET['reset'] ) && 'true' == $_GET['reset'] ) :
+    if ( isset( $_GET['reset'] ) && 'true' == $_GET['reset'] && isset( $_GET['_wpnonce'] ) && wp_verify_nonce( sanitize_text_field( wp_unslash( $_GET['_wpnonce'] ) ), 'kebo_twitter_reset_connection' ) ) :
 
         if ( 'true' == $_GET['reset'] ) :
 
